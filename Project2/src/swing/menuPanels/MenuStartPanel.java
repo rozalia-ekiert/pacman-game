@@ -73,12 +73,20 @@ public class MenuStartPanel extends JPanel {
         switch (mouseMode) {
             case CLICK_NEW_GAME -> {
                 upperMenuButtonsPanel.new_game.setBackground(blue);
+
+                upperMenuButtonsPanel.high_scores.setBackground(pink);
+                upperMenuButtonsPanel.exit_game.setBackground(pink);
             }
             case CLICK_HIGH_SCORES -> {
                 upperMenuButtonsPanel.high_scores.setBackground(blue);
+                upperMenuButtonsPanel.new_game.setBackground(pink);
+                upperMenuButtonsPanel.exit_game.setBackground(pink);
+
             }
             case CLICK_EXIT -> {
                 upperMenuButtonsPanel.exit_game.setBackground(blue);
+                upperMenuButtonsPanel.new_game.setBackground(pink);
+                upperMenuButtonsPanel.high_scores.setBackground(pink);
             }
             case DEFAULT -> {
                 upperMenuButtonsPanel.new_game.setBackground(pink);
