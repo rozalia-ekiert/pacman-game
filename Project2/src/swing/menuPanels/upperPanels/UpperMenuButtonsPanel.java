@@ -23,18 +23,10 @@ public class UpperMenuButtonsPanel extends JPanel {
 
     public UpperMenuButtonsPanel(int width, int height, MenuStartPanel menuStartPanel) {
 
+        //==============================================================================
+
         this.setPreferredSize(new Dimension(width, height));
         this.setBackground(Color.BLACK);
-
-        this.new_game = new JButton("new game");
-        this.high_scores = new JButton("HIgH scores");
-        this.exit_game = new JButton("exIT");
-
-        ArrayList<JButton> menuButtons = new ArrayList<>();
-        menuButtons.add(new_game);
-        menuButtons.add(high_scores);
-        menuButtons.add(exit_game);
-
 
         GridLayout layout = new GridLayout(1, 3, 40, 0);
         this.setLayout(layout);
@@ -54,12 +46,22 @@ public class UpperMenuButtonsPanel extends JPanel {
             throw new RuntimeException(e);
         }
 
+        //================================================================================
+
+        this.new_game = new JButton("new game");
+        this.high_scores = new JButton("HIgH scores");
+        this.exit_game = new JButton("exIT");
+
+        ArrayList<JButton> menuButtons = new ArrayList<>();
+        menuButtons.add(new_game);
+        menuButtons.add(high_scores);
+        menuButtons.add(exit_game);
+
         for (JButton b : menuButtons) {
             b.setBackground(pink);
             b.setFont(Butterbelly);
             b.setForeground(Color.BLACK);
             this.add(b);
-
         }
 
         new_game.addMouseListener(new MouseAdapter() {
@@ -74,7 +76,6 @@ public class UpperMenuButtonsPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-//                high_scores.setBackground(blue);
                 menuStartPanel.setMouseMode(MouseMode.CLICK_HIGH_SCORES, UpperMenuButtonsPanel.this);
             }
         });
@@ -86,6 +87,8 @@ public class UpperMenuButtonsPanel extends JPanel {
                 menuStartPanel.setMouseMode(MouseMode.CLICK_EXIT, UpperMenuButtonsPanel.this);
             }
         });
+
+        //==========================================================================
 
     }
 
