@@ -7,8 +7,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class UpperMenuButtonsPanel extends JPanel {
@@ -19,9 +17,8 @@ public class UpperMenuButtonsPanel extends JPanel {
     Color pink = new Color(0xFD66C3);
     Color blue = new Color(0x00FDFE);
 
-    public Font Butterbelly;
 
-    public UpperMenuButtonsPanel(int width, int height, MenuStartPanel menuStartPanel) {
+    public UpperMenuButtonsPanel(int width, int height, MenuStartPanel menuStartPanel, Font butterbelly) {
 
         //==============================================================================
 
@@ -31,20 +28,20 @@ public class UpperMenuButtonsPanel extends JPanel {
         GridLayout layout = new GridLayout(1, 3, 40, 0);
         this.setLayout(layout);
 
-        String fontPath = "Butterbelly.otf";
-        try {
-            Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File(fontPath));
-            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            ge.registerFont(customFont);
-
-            customFont = customFont.deriveFont(Font.TRUETYPE_FONT, 24);
-            this.Butterbelly = customFont;
-
-        } catch (FontFormatException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+//        String fontPath = "Butterbelly.otf";
+//        try {
+//            Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File(fontPath));
+//            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+//            ge.registerFont(customFont);
+//
+//            customFont = customFont.deriveFont(Font.TRUETYPE_FONT, 24);
+//            this.Butterbelly = customFont;
+//
+//        } catch (FontFormatException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
 
         //================================================================================
 
@@ -59,7 +56,7 @@ public class UpperMenuButtonsPanel extends JPanel {
 
         for (JButton b : menuButtons) {
             b.setBackground(pink);
-            b.setFont(Butterbelly);
+            b.setFont(butterbelly);
             b.setForeground(Color.BLACK);
             this.add(b);
         }

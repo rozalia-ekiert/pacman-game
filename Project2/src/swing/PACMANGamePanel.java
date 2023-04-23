@@ -1,17 +1,17 @@
 package swing;
 
-import swing.gamePanels.GameoverPanel;
-import swing.gamePanels.GameplayPanel;
 import swing.menuPanels.MenuStartPanel;
-import swing.menuPanels.middlePanels.RankingPanel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 public class PACMANGamePanel extends JFrame {
 
     public int screenWidth;
     public int screenHeight;
+    public Font Butterbelly;
 
     public PACMANGamePanel(){
 
@@ -25,8 +25,24 @@ public class PACMANGamePanel extends JFrame {
         this.setResizable(true);
         this.setTitle("PACMAN GAME");
 
-        MenuStartPanel menuStartPanel = new MenuStartPanel(screenWidth, screenHeight);
+        String fontPath = "Butterbelly.otf";
+        try {
+            Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File(fontPath));
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(customFont);
+
+            customFont = customFont.deriveFont(Font.TRUETYPE_FONT, 24);
+            this.Butterbelly = customFont;
+
+        } catch (FontFormatException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        MenuStartPanel menuStartPanel = new MenuStartPanel(screenWidth, screenHeight, this.Butterbelly);
         this.add(menuStartPanel);
+
 
         this.setVisible(true);
     }

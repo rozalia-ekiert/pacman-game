@@ -18,13 +18,13 @@ public class MenuStartPanel extends JPanel {
     Color pink = new Color(0xFD66C3);
     Color blue = new Color(0x00FDFE);
 
-    public MenuStartPanel(int width, int height) {
+    public MenuStartPanel(int width, int height, Font butterbelly) {
 
 
         this.setLayout(new BoxLayout(this, 1)); // 1 = według osi Y
 
         UpperMenuHeadingPanel upperMenuHeadingPanel = new UpperMenuHeadingPanel(width, (int) (height * 0.27));
-        UpperMenuButtonsPanel upperMenuButtonsPanel = new UpperMenuButtonsPanel(width, (int) (height * 0.08), this);
+        UpperMenuButtonsPanel upperMenuButtonsPanel = new UpperMenuButtonsPanel(width, (int) (height * 0.08), this, butterbelly);
         MiddleTextPanel defaultTextPanel = new MiddleTextPanel(width, (int) (height * 0.5));
         LowerMenuPanel lowerMenuPanel = new LowerMenuPanel(width, (int) (height * 0.15));
 
