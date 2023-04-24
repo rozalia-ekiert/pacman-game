@@ -23,7 +23,10 @@ public class PACMANGamePanel extends JFrame {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setUndecorated(false);
         this.setResizable(true);
+//        this.setLocationRelativeTo(null);
         this.setTitle("PACMAN GAME");
+
+        //==================================================================================
 
         String fontPath = "Butterbelly.otf";
         try {
@@ -40,12 +43,12 @@ public class PACMANGamePanel extends JFrame {
             throw new RuntimeException(e);
         }
 
-        MenuStartPanel menuStartPanel = new MenuStartPanel(screenWidth, screenHeight, this.Butterbelly);
-        this.add(menuStartPanel);
+        //===================================================================================
 
+        MenuStartPanel menuStartPanel = new MenuStartPanel(this);
+        this.add(menuStartPanel);
 
         this.setVisible(true);
     }
-
 
 }

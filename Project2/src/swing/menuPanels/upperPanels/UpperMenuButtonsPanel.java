@@ -1,6 +1,8 @@
 package swing.menuPanels.upperPanels;
 
-import swing.MouseMode;
+
+import swing.PACMANGamePanel;
+import swing.menuPanels.MainMenuCardPanel;
 import swing.menuPanels.MenuStartPanel;
 
 import javax.swing.*;
@@ -18,30 +20,15 @@ public class UpperMenuButtonsPanel extends JPanel {
     Color blue = new Color(0x00FDFE);
 
 
-    public UpperMenuButtonsPanel(int width, int height, MenuStartPanel menuStartPanel, Font butterbelly) {
+    public UpperMenuButtonsPanel(int width, int height, MenuStartPanel menuStartPanel, PACMANGamePanel pacmanGamePanel) {
 
         //==============================================================================
 
         this.setPreferredSize(new Dimension(width, height));
         this.setBackground(Color.BLACK);
 
-        GridLayout layout = new GridLayout(1, 3, 40, 0);
+        GridLayout layout = new GridLayout(1, 3, 40, 20);
         this.setLayout(layout);
-
-//        String fontPath = "Butterbelly.otf";
-//        try {
-//            Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File(fontPath));
-//            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-//            ge.registerFont(customFont);
-//
-//            customFont = customFont.deriveFont(Font.TRUETYPE_FONT, 24);
-//            this.Butterbelly = customFont;
-//
-//        } catch (FontFormatException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
 
         //================================================================================
 
@@ -56,7 +43,7 @@ public class UpperMenuButtonsPanel extends JPanel {
 
         for (JButton b : menuButtons) {
             b.setBackground(pink);
-            b.setFont(butterbelly);
+            b.setFont(pacmanGamePanel.Butterbelly);
             b.setForeground(Color.BLACK);
             this.add(b);
         }
@@ -65,15 +52,44 @@ public class UpperMenuButtonsPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                menuStartPanel.setMouseMode(MouseMode.CLICK_NEW_GAME, UpperMenuButtonsPanel.this);
+                CardLayout cl = (CardLayout) (menuStartPanel.cardsPanel.getLayout());
+                cl.show(menuStartPanel.cardsPanel, MainMenuCardPanel.NEWGAME);
+                menuStartPanel.cardsPanel.currentCardName = MainMenuCardPanel.NEWGAME;
+                high_scores.setBackground(pink);
             }
+
+            @Override
+            public void mouseEntered(MouseEvent evt) {
+                new_game.setBackground(blue);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent evt) {
+                if (menuStartPanel.cardsPanel.currentCardName.equals(MainMenuCardPanel.NEWGAME)) return;
+                new_game.setBackground(pink);
+            }
+
         });
 
         high_scores.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                menuStartPanel.setMouseMode(MouseMode.CLICK_HIGH_SCORES, UpperMenuButtonsPanel.this);
+                CardLayout cl = (CardLayout) (menuStartPanel.cardsPanel.getLayout());
+                cl.show(menuStartPanel.cardsPanel, MainMenuCardPanel.HIGHSCORE);
+                menuStartPanel.cardsPanel.currentCardName = MainMenuCardPanel.HIGHSCORE;
+                new_game.setBackground(pink);
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent evt) {
+                high_scores.setBackground(blue);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent evt) {
+                if (menuStartPanel.cardsPanel.currentCardName.equals(MainMenuCardPanel.HIGHSCORE)) return;
+                high_scores.setBackground(pink);
             }
         });
 
@@ -81,7 +97,16 @@ public class UpperMenuButtonsPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                menuStartPanel.setMouseMode(MouseMode.CLICK_EXIT, UpperMenuButtonsPanel.this);
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent evt) {
+                exit_game.setBackground(blue);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent evt) {
+                exit_game.setBackground(pink);
             }
         });
 
