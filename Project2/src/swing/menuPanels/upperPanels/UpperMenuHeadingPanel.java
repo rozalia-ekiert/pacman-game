@@ -16,6 +16,8 @@ public class UpperMenuHeadingPanel extends JPanel {
 
         this.setPreferredSize(new Dimension(width, height));
         this.setBackground(Color.BLACK);
+        this.setMinimumSize(new Dimension(330, 180));
+
     }
 
     @Override

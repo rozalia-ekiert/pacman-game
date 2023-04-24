@@ -1,8 +1,5 @@
 package swing.menuPanels.lowerPanels;
 
-import com.sun.tools.javac.Main;
-import swing.PACMANGamePanel;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -15,6 +12,7 @@ public class LowerMenuPanel extends JPanel {
 
         this.setPreferredSize(new Dimension(lowerMenuPanelWidth, lowerMenuPanelHeight));
         this.setBackground(Color.BLACK);
+        this.setMinimumSize(new Dimension(330, 70));
 
     }
 
@@ -37,7 +35,7 @@ public class LowerMenuPanel extends JPanel {
         }
 
         // trzeba wszystko uzależnić od getWidth i getHeight - zapewni to skalowalność okienka
-        int size = getWidth()/45;
+        int size = 32;
         int heightMargin = 30;
         g.drawImage(pacmanTEST, 10, heightMargin, size, size, this);
         g.drawImage(blueTEST, 80, heightMargin, size, size, this);
