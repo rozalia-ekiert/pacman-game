@@ -8,7 +8,14 @@ import java.io.IOException;
 
 public class LowerMenuPanel extends JPanel {
 
-    public LowerMenuPanel(int lowerMenuPanelWidth, int lowerMenuPanelHeight){
+
+    static Image pacmanTEST = null;
+    static Image blueTEST = null;
+    static Image pinkTEST = null;
+    static Image greenTEST = null;
+    static Image yellowTEST = null;
+
+    public LowerMenuPanel(int lowerMenuPanelWidth, int lowerMenuPanelHeight) {
 
         this.setPreferredSize(new Dimension(lowerMenuPanelWidth, lowerMenuPanelHeight));
         this.setBackground(Color.BLACK);
@@ -19,20 +26,18 @@ public class LowerMenuPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Image pacmanTEST = null;
-        Image blueTEST = null;
-        Image pinkTEST = null;
-        Image greenTEST = null;
-        Image yellowTEST = null;
         try {
-            pacmanTEST = ImageIO.read(new File("assets/pacman_icons/pac_sredni.png"));
-            blueTEST = ImageIO.read(new File("assets/enemies_icons/blue/blue_1_right.png"));
-            pinkTEST = ImageIO.read(new File("assets/enemies_icons/pink/pink_1_right.png"));
-            greenTEST = ImageIO.read(new File("assets/enemies_icons/green/green_1_right.png"));
-            yellowTEST = ImageIO.read(new File("assets/enemies_icons/yellow/yellow_1_right.png"));
+            if (pacmanTEST == null) {
+                pacmanTEST = ImageIO.read(new File("assets/pacman_icons/pac_sredni.png"));
+                blueTEST = ImageIO.read(new File("assets/enemies_icons/blue/blue_1_right.png"));
+                pinkTEST = ImageIO.read(new File("assets/enemies_icons/pink/pink_1_right.png"));
+                greenTEST = ImageIO.read(new File("assets/enemies_icons/green/green_1_right.png"));
+                yellowTEST = ImageIO.read(new File("assets/enemies_icons/yellow/yellow_1_right.png"));
+            }
         } catch (IOException e) {
             System.out.println("Nieprawidłowe zdjęcie.");
         }
+
 
         // trzeba wszystko uzależnić od getWidth i getHeight - zapewni to skalowalność okienka
         int size = 32;

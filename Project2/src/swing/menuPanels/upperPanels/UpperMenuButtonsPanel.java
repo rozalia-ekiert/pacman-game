@@ -97,6 +97,7 @@ public class UpperMenuButtonsPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                System.exit(-1);
             }
 
             @Override

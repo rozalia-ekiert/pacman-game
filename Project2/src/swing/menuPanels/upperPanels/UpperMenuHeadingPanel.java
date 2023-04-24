@@ -11,8 +11,9 @@ public class UpperMenuHeadingPanel extends JPanel {
     Action newGame;
     Action highScores;
     Action exit;
+    static Image heading = null;
 
-    public UpperMenuHeadingPanel(int width, int height){
+    public UpperMenuHeadingPanel(int width, int height) {
 
         this.setPreferredSize(new Dimension(width, height));
         this.setBackground(Color.BLACK);
@@ -24,9 +25,11 @@ public class UpperMenuHeadingPanel extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        Image heading = null;
+
         try {
-            heading = ImageIO.read(new File("assets/heading.png"));
+            if (heading == null) {
+                heading = ImageIO.read(new File("assets/heading.png"));
+            }
         } catch (IOException e) {
             System.out.println("Nieprawidłowe zdjęcie.");
         }
