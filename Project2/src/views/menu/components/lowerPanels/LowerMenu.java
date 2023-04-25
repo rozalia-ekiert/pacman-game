@@ -1,4 +1,4 @@
-package views.menu.lowerPanels;
+package views.menu.components.lowerPanels;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

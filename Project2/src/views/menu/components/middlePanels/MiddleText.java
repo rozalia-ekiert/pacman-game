@@ -1,4 +1,4 @@
-package views.menu.middlePanels;
+package views.menu.components.middlePanels;
 
 import views.PACMANGame;
 

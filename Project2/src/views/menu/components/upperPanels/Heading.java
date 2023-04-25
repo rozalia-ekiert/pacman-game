@@ -1,4 +1,4 @@
-package views.menu.upperPanels;
+package views.menu.components.upperPanels;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

@@ -1,9 +1,9 @@
-package views.menu.upperPanels;
+package views.menu.components.upperPanels;
 
 
 import views.PACMANGame;
-import views.menu.MainMenuCardPanel;
 import views.menu.MenuStart;
+import views.menu.components.MainMenuCardPanel;
 
 import javax.swing.*;
 import java.awt.*;

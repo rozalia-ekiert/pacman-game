@@ -1,4 +1,4 @@
-package views.game;
+package views.game.components;
 
 import javax.swing.*;
 

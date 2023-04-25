@@ -1,12 +1,13 @@
 package views.menu;
 
 import views.PACMANGame;
-import views.menu.lowerPanels.LowerMenu;
-import views.menu.middlePanels.CustomizeYourGame;
-import views.menu.middlePanels.HighScores;
-import views.menu.middlePanels.MiddleText;
-import views.menu.upperPanels.Buttons;
-import views.menu.upperPanels.Heading;
+import views.menu.components.MainMenuCardPanel;
+import views.menu.components.lowerPanels.LowerMenu;
+import views.menu.components.middlePanels.CustomizeYourGame;
+import views.menu.components.middlePanels.HighScores;
+import views.menu.components.middlePanels.MiddleText;
+import views.menu.components.upperPanels.Buttons;
+import views.menu.components.upperPanels.Heading;
 
 import javax.swing.*;
 import java.awt.*;
