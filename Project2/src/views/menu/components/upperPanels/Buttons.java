@@ -1,14 +1,11 @@
 package views.menu.components.upperPanels;
 
-
+import controllers.menu.MenuButtonsMouseListener;
 import views.PACMANGame;
 import views.menu.MenuStart;
-import views.menu.components.MainMenuCardPanel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 public class Buttons extends JPanel {
@@ -16,8 +13,8 @@ public class Buttons extends JPanel {
     public JButton new_game;
     public JButton high_scores;
     public JButton exit_game;
-    Color pink = new Color(0xFD66C3);
-    Color blue = new Color(0x00FDFE);
+    public Color pink = new Color(0xFD66C3);
+    public Color blue = new Color(0x00FDFE);
 
 
     public Buttons(int width, int height, MenuStart menuStart, PACMANGame pacmanGameFrame) {
@@ -48,71 +45,22 @@ public class Buttons extends JPanel {
             this.add(b);
         }
 
-        new_game.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                CardLayout cl = (CardLayout) (menuStart.cardsPanel.getLayout());
-                cl.show(menuStart.cardsPanel, MainMenuCardPanel.NEWGAME);
-                menuStart.cardsPanel.currentCardName = MainMenuCardPanel.NEWGAME;
-                high_scores.setBackground(pink);
-            }
+        //===============================================================================
 
-            @Override
-            public void mouseEntered(MouseEvent evt) {
-                new_game.setBackground(blue);
-            }
+        MenuButtonsMouseListener menuButtonsMouseListener = new MenuButtonsMouseListener(this, menuStart);
 
-            @Override
-            public void mouseExited(MouseEvent evt) {
-                if (menuStart.cardsPanel.currentCardName.equals(MainMenuCardPanel.NEWGAME)) return;
-                new_game.setBackground(pink);
-            }
+    }
 
-        });
+    public JButton getNew_game() {
+        return new_game;
+    }
 
-        high_scores.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                CardLayout cl = (CardLayout) (menuStart.cardsPanel.getLayout());
-                cl.show(menuStart.cardsPanel, MainMenuCardPanel.HIGHSCORE);
-                menuStart.cardsPanel.currentCardName = MainMenuCardPanel.HIGHSCORE;
-                new_game.setBackground(pink);
-            }
+    public JButton getHigh_scores() {
+        return high_scores;
+    }
 
-            @Override
-            public void mouseEntered(MouseEvent evt) {
-                high_scores.setBackground(blue);
-            }
-
-            @Override
-            public void mouseExited(MouseEvent evt) {
-                if (menuStart.cardsPanel.currentCardName.equals(MainMenuCardPanel.HIGHSCORE)) return;
-                high_scores.setBackground(pink);
-            }
-        });
-
-        exit_game.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                System.exit(-1);
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent evt) {
-                exit_game.setBackground(blue);
-            }
-
-            @Override
-            public void mouseExited(MouseEvent evt) {
-                exit_game.setBackground(pink);
-            }
-        });
-
-        //==========================================================================
-
+    public JButton getExit_game() {
+        return exit_game;
     }
 
 }
