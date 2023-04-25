@@ -44,14 +44,14 @@ public class MenuButtonsMouseListener implements MouseListener {
             cl.show(this.menuStart.cardsPanel, MainMenuCardPanel.NEWGAME);
             this.menuStart.cardsPanel.currentCardName = MainMenuCardPanel.NEWGAME;
             high_scores.setBackground(pink);
-
-        } else if (e.getSource() == this.high_scores) {
+        }
+        if (e.getSource() == this.high_scores) {
             CardLayout cl = (CardLayout) (menuStart.cardsPanel.getLayout());
             cl.show(menuStart.cardsPanel, MainMenuCardPanel.HIGHSCORE);
             menuStart.cardsPanel.currentCardName = MainMenuCardPanel.HIGHSCORE;
             buttons.new_game.setBackground(pink);
-
-        } else if (e.getSource() == this.exit_game) {
+        }
+        if (e.getSource() == this.exit_game) {
             System.exit(-1);
         }
     }
@@ -60,11 +60,11 @@ public class MenuButtonsMouseListener implements MouseListener {
     public void mouseEntered(MouseEvent e) {
         if (e.getSource() == this.new_game) {
             buttons.new_game.setBackground(blue);
-
-        } else if (e.getSource() == this.high_scores) {
+        }
+        if (e.getSource() == this.high_scores) {
             buttons.high_scores.setBackground(blue);
-
-        } else if (e.getSource() == this.exit_game) {
+        }
+        if (e.getSource() == this.exit_game) {
             buttons.exit_game.setBackground(blue);
         }
     }
@@ -74,12 +74,12 @@ public class MenuButtonsMouseListener implements MouseListener {
         if (e.getSource() == this.new_game) {
             if (menuStart.cardsPanel.currentCardName.equals(MainMenuCardPanel.NEWGAME)) return;
             buttons.new_game.setBackground(pink);
-
-        } else if (e.getSource() == this.high_scores) {
+        }
+        if (e.getSource() == this.high_scores) {
             if (menuStart.cardsPanel.currentCardName.equals(MainMenuCardPanel.HIGHSCORE)) return;
             buttons.high_scores.setBackground(pink);
-
-        } else if (e.getSource() == this.exit_game) {
+        }
+        if (e.getSource() == this.exit_game) {
             buttons.exit_game.setBackground(pink);
         }
     }
