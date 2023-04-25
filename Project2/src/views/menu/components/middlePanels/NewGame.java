@@ -32,7 +32,8 @@ class CustomizeYourGame extends JPanel {
 
     public CustomizeYourGame(PACMANGame pacmanGame, int width, int height) {
 
-        Font font = new Font("Butterbelly", Font.PLAIN, 50);
+        Font font1 = new Font("Butterbelly", Font.PLAIN, 50);
+        Font font2 = new Font("Butterbelly", Font.PLAIN, 16);
 
         this.width = width;
         this.height = height;
@@ -41,18 +42,33 @@ class CustomizeYourGame extends JPanel {
         this.setLayout(new GridBagLayout());
         this.setBackground(Color.BLACK);
 
+        //------------------------------------------ wiersz 0
+        JTextArea rows = new JTextArea("rows");
+        rows.setForeground(Color.WHITE);
+        rows.setBackground(Color.BLACK);
+        rows.setFont(font2);
+        rows.setEnabled(false);
+        rows.setEditable(false);
+
+        JTextArea columns = new JTextArea("columns");
+        columns.setForeground(Color.WHITE);
+        columns.setBackground(Color.BLACK);
+        columns.setFont(font2);
+        columns.setEnabled(false);
+        columns.setEditable(false);
+
         //------------------------------------------ wiersz 1
         JTextArea windowGameSize = new JTextArea(this.windowGameSize);
         windowGameSize.setForeground(Color.WHITE);
         windowGameSize.setBackground(Color.BLACK);
-        windowGameSize.setFont(font);
+        windowGameSize.setFont(font1);
         windowGameSize.setEnabled(false);
         windowGameSize.setEditable(false);
 
         JTextField setWindowsSize1 = new JTextField();
         JTextField setWindowsSize2 = new JTextField();
 
-        int size = 60;
+        int size = 80;
         setWindowsSize1.setPreferredSize(new Dimension(size, size));
         setWindowsSize1.setMaximumSize(new Dimension(size, size));
 
@@ -63,7 +79,7 @@ class CustomizeYourGame extends JPanel {
         JTextArea yourNick = new JTextArea(this.yourNick);
         yourNick.setForeground(Color.WHITE);
         yourNick.setBackground(Color.BLACK);
-        yourNick.setFont(font);
+        yourNick.setFont(font1);
         yourNick.setEnabled(false);
         yourNick.setEditable(false);
 
@@ -83,39 +99,52 @@ class CustomizeYourGame extends JPanel {
 
         gbc.fill = GridBagConstraints.BOTH;
 
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.insets = new Insets(0, 0, 20, 40);
-        gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-        this.add(windowGameSize, gbc);
-
         gbc.gridx = 1;
         gbc.gridy = 0;
-        gbc.insets = new Insets(0, 0, 20, 30);
-        gbc.anchor = GridBagConstraints.FIRST_LINE_END;
-        this.add(setWindowsSize1, gbc);
+        gbc.insets = new Insets(0, 0, 10, 40);
+        gbc.anchor = GridBagConstraints.LINE_START;
+        this.add(rows, gbc);
+        gbc.gridx = 0;
 
         gbc.gridx = 2;
         gbc.gridy = 0;
-        gbc.insets = new Insets(0, 0, 20, 0);
-        gbc.anchor = GridBagConstraints.FIRST_LINE_END;
-        this.add(setWindowsSize2, gbc);
+        gbc.insets = new Insets(0, 0, 10, 0);
+        gbc.anchor = GridBagConstraints.LINE_START;
+        this.add(columns, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 1;
+        gbc.insets = new Insets(0, 0, 20, 40);
+        gbc.anchor = GridBagConstraints.LINE_START;
+        this.add(windowGameSize, gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.insets = new Insets(0, 0, 20, 30);
+        gbc.anchor = GridBagConstraints.LINE_END;
+        this.add(setWindowsSize1, gbc);
+
+        gbc.gridx = 2;
+        gbc.gridy = 1;
+        gbc.insets = new Insets(0, 0, 20, 0);
+        gbc.anchor = GridBagConstraints.LINE_END;
+        this.add(setWindowsSize2, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 2;
         gbc.insets = new Insets(20, 0, 20, 30);
         gbc.anchor = GridBagConstraints.LINE_START;
         this.add(yourNick, gbc);
 
         gbc.gridx = 1;
-        gbc.gridy = 1;
+        gbc.gridy = 2;
         gbc.gridwidth = 2;
         gbc.anchor = GridBagConstraints.LINE_END;
         gbc.insets = new Insets(20, 0, 20, 0);
         this.add(setYourNick, gbc);
 
         gbc.gridx = 0;
-        gbc.gridy = 2;
+        gbc.gridy = 3;
         gbc.gridwidth = 3;
         gbc.ipady = 40;
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -141,7 +170,7 @@ class Rules extends JPanel {
         this.pacmanGame = pacmanGame;
         this.width = width;
         this.height = height;
-        this.setPreferredSize(new Dimension(this.width, this.height)); // todo na koniec zmienic na preffered
+        this.setPreferredSize(new Dimension(this.width, this.height));
 
         this.setLayout(new GridBagLayout());
         this.setBackground(Color.BLACK);
@@ -159,9 +188,9 @@ class Rules extends JPanel {
 
         Graphics2D g2d = (Graphics2D) g;
 
-        GradientPaint gradient = new GradientPaint(20, 60, this.c1, getWidth() - 80, getHeight() - 120, c2);
+        GradientPaint gradient = new GradientPaint(0, 60, this.c1, getWidth() - 80, getHeight() - 120, c2);
         g2d.setPaint(gradient);
-        g2d.fillRect(20, 60, getWidth() - 80, getHeight() - 120);
+        g2d.fillRect(0, 60, getWidth() - 80, getHeight() - 120);
 
         g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
         g2d.setColor(Color.BLACK);
