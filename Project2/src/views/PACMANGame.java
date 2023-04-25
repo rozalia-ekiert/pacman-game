@@ -1,19 +1,19 @@
-package swing;
+package views;
 
-import swing.menuPanels.MenuStartPanel;
+import views.menu.MenuStart;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
-public class PACMANGamePanel extends JFrame {
+public class PACMANGame extends JFrame {
 
     public int screenWidth;
     public int screenHeight;
     public Font Butterbelly;
 
-    public PACMANGamePanel(){
+    public PACMANGame() {
 
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Dimension screenSize = toolkit.getScreenSize();
@@ -45,8 +45,8 @@ public class PACMANGamePanel extends JFrame {
 
         //===================================================================================
 
-        MenuStartPanel menuStartPanel = new MenuStartPanel(this);
-        this.add(menuStartPanel);
+        MenuStart menuStart = new MenuStart(this);
+        this.add(menuStart);
 
         this.setVisible(true);
     }

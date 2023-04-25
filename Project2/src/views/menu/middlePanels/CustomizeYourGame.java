@@ -1,15 +1,15 @@
-package swing.menuPanels.middlePanels;
+package views.menu.middlePanels;
 
-import swing.PACMANGamePanel;
+import views.PACMANGame;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class CustomizeYourGamePanel extends JPanel {
+public class CustomizeYourGame extends JPanel {
 
-    public CustomizeYourGamePanel(int width, int height, PACMANGamePanel pacmanGamePanel) {
+    public CustomizeYourGame(int width, int height, PACMANGame pacmanGameFrame) {
         this.setPreferredSize(new Dimension(width, height));
-        this.setBackground(Color.PINK);
+        this.setBackground(Color.BLACK);
 
         this.setLayout(new GridBagLayout());
 
@@ -17,9 +17,9 @@ public class CustomizeYourGamePanel extends JPanel {
         String text = "TO JEST PANEL DO PODANIA ROZMIARU GRY";
 
         JTextArea textArea = new JTextArea(text, 1, 20);
-        textArea.setForeground(Color.GREEN);
+        textArea.setForeground(Color.WHITE);
         textArea.setBackground(Color.BLACK);
-        textArea.setFont(pacmanGamePanel.Butterbelly);
+        textArea.setFont(pacmanGameFrame.Butterbelly);
 
         this.add(textArea);
     }

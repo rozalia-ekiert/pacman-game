@@ -1,13 +1,13 @@
-package swing.menuPanels.middlePanels;
+package views.menu.middlePanels;
 
-import swing.PACMANGamePanel;
+import views.PACMANGame;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class MiddleTextPanel extends JPanel {
+public class MiddleText extends JPanel {
 
-    public MiddleTextPanel(int width, int height, PACMANGamePanel pacmanGamePanel) {
+    public MiddleText(int width, int height, PACMANGame pacmanGameFrame) {
         this.setPreferredSize(new Dimension(width, height));
         this.setBackground(Color.BLACK);
 
@@ -23,7 +23,7 @@ public class MiddleTextPanel extends JPanel {
         JTextArea textArea = new JTextArea(text, 5, 20);
         textArea.setForeground(Color.WHITE);
         textArea.setBackground(Color.BLACK);
-        textArea.setFont(pacmanGamePanel.Butterbelly);
+        textArea.setFont(pacmanGameFrame.Butterbelly);
         textArea.setEnabled(false);
         textArea.setEditable(false);
 

@@ -1,4 +1,4 @@
-package swing.menuPanels.upperPanels;
+package views.menu.upperPanels;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -6,14 +6,14 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
-public class UpperMenuHeadingPanel extends JPanel {
+public class Heading extends JPanel {
 
     Action newGame;
     Action highScores;
     Action exit;
     static Image heading = null;
 
-    public UpperMenuHeadingPanel(int width, int height) {
+    public Heading(int width, int height) {
 
         this.setPreferredSize(new Dimension(width, height));
         this.setBackground(Color.BLACK);

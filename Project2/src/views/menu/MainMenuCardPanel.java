@@ -1,4 +1,4 @@
-package swing.menuPanels;
+package views.menu;
 
 import javax.swing.*;
 import java.awt.*;

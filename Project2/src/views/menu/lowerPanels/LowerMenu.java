@@ -1,4 +1,4 @@
-package swing.menuPanels.lowerPanels;
+package views.menu.lowerPanels;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -6,7 +6,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
-public class LowerMenuPanel extends JPanel {
+public class LowerMenu extends JPanel {
 
 
     static Image pacmanTEST = null;
@@ -15,7 +15,7 @@ public class LowerMenuPanel extends JPanel {
     static Image greenTEST = null;
     static Image yellowTEST = null;
 
-    public LowerMenuPanel(int lowerMenuPanelWidth, int lowerMenuPanelHeight) {
+    public LowerMenu(int lowerMenuPanelWidth, int lowerMenuPanelHeight) {
 
         this.setPreferredSize(new Dimension(lowerMenuPanelWidth, lowerMenuPanelHeight));
         this.setBackground(Color.BLACK);
@@ -26,6 +26,8 @@ public class LowerMenuPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+
+        // todo to tylko place holder bedzie to zmienione na animacje
         try {
             if (pacmanTEST == null) {
                 pacmanTEST = ImageIO.read(new File("assets/pacman_icons/pac_sredni.png"));
