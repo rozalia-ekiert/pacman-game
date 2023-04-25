@@ -1,4 +1,6 @@
 package views.game.components;
 
-public class CurrentStats {
+import javax.swing.*;
+
+public class CurrentStats extends JPanel {
 }

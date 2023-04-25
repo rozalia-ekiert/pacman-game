@@ -21,15 +21,18 @@ public class MiddleText extends JPanel {
                 "quickly became an icon of the 1980s.\n";
 
         JTextArea textArea = new JTextArea(text, 5, 20);
+
         textArea.setForeground(Color.WHITE);
         textArea.setBackground(Color.BLACK);
         textArea.setFont(pacmanGameFrame.Butterbelly);
+
         textArea.setEnabled(false);
         textArea.setEditable(false);
 
         this.add(textArea);
     }
 
+// CELEM TEJ METODY MA BYĆ SFORMATOWANIE TEKSTU TAK, ŻEBY BYŁ WYCENTROWANY
 //    public String sformatujTekst (String tekst){
 //        String[] listaSlow = tekst.split(" ");
 //        for (int i=0; i<listaSlow.length; i++){

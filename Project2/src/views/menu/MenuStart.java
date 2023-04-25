@@ -3,9 +3,9 @@ package views.menu;
 import views.PACMANGame;
 import views.menu.components.MainMenuCardPanel;
 import views.menu.components.lowerPanels.LowerMenu;
-import views.menu.components.middlePanels.CustomizeYourGame;
 import views.menu.components.middlePanels.HighScores;
 import views.menu.components.middlePanels.MiddleText;
+import views.menu.components.middlePanels.NewGame;
 import views.menu.components.upperPanels.Buttons;
 import views.menu.components.upperPanels.Heading;
 
@@ -31,7 +31,7 @@ public class MenuStart extends JPanel {
         MiddleText middleText = new MiddleText(width, (int) (height * 0.5), pacmanGameFrame);
         cardsPanel = new MainMenuCardPanel();
         cardsPanel.add(middleText, MainMenuCardPanel.TEXT);
-        cardsPanel.add(new CustomizeYourGame(width, height, pacmanGameFrame), MainMenuCardPanel.NEWGAME);
+        cardsPanel.add(new NewGame(width, height, pacmanGameFrame), MainMenuCardPanel.NEWGAME);
         cardsPanel.add(new HighScores(width, height, pacmanGameFrame), MainMenuCardPanel.HIGHSCORE);
 
         LowerMenu lowerMenu = new LowerMenu(width, (int) (height * 0.15));
