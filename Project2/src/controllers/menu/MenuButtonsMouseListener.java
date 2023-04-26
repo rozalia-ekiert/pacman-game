@@ -35,12 +35,14 @@ public class MenuButtonsMouseListener implements MouseListener {
             cl.show(this.menuStart.cardsPanel, MenuCardPanel.NEWGAME);
             this.menuStart.cardsPanel.currentCardName = MenuCardPanel.NEWGAME;
             high_scores.setBackground(GameColors.pink);
+            return;
         }
         if (e.getSource() == this.high_scores) {
             CardLayout cl = (CardLayout) (menuStart.cardsPanel.getLayout());
             cl.show(menuStart.cardsPanel, MenuCardPanel.HIGHSCORE);
             menuStart.cardsPanel.currentCardName = MenuCardPanel.HIGHSCORE;
             buttons.new_game.setBackground(GameColors.pink);
+            return;
         }
         if (e.getSource() == this.exit_game) {
             System.exit(-1);

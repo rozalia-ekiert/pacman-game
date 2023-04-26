@@ -9,7 +9,7 @@ import java.io.IOException;
 public class LowerMenu extends JPanel {
 
 
-    static Image pacmanTEST = null;
+    static Image pacmanTEST = null; //todo zmiana na volatileimage
     static Image blueTEST = null;
     static Image pinkTEST = null;
     static Image greenTEST = null;

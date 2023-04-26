@@ -159,7 +159,7 @@ public class NewGame extends JPanel {
         gbc.gridy = 0;
         gbc.gridheight = 4;
         gbc.gridwidth = 1;
-        gbc.insets = new Insets(100, 80, 100, 0); // 40 x 40
+        gbc.insets = new Insets(40, 80, 40, 0); // 40 x 40
         gbc.weightx = 0.0;
         gbc.weighty = 1.0;
         gbc.ipadx = 500;
@@ -168,8 +168,6 @@ public class NewGame extends JPanel {
 
         this.play.addMouseListener(new PlayButtonMouseListener(this, pacmanGame, game));
 
-
-//        PlayButtonMouseListener playButtonMouseListener = new PlayButtonMouseListener(this, pacmanGame, game);
     }
 }
 
@@ -186,12 +184,9 @@ class GradientText extends JPanel {
         String text4 = "molestie dolor. Vestibulum placerat metus vitae justo rutrum mollis.\n";
         String text5 = "Nam blandit rhoncus neque molestie vulputate.";
 
-        Color c1 = new Color(0xE9FDAE);
-        Color c2 = new Color(0xFDA8F7);
-
         Graphics2D g2d = (Graphics2D) g;
 
-        GradientPaint gradient = new GradientPaint(0, 0, c1, getWidth() / 2, getHeight(), c2);
+        GradientPaint gradient = new GradientPaint(0, 0, GameColors.gradient1, getWidth() / 2, getHeight(), GameColors.gradient2);
         g2d.setPaint(gradient);
         g2d.fillRect(0, 0, 550, getHeight());
 
