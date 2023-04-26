@@ -36,14 +36,14 @@ public class NewGame extends JPanel {
         rows.setForeground(Color.WHITE);
         rows.setBackground(Color.BLACK);
         rows.setFont(font2);
-        rows.setEnabled(false);
+//        rows.setEnabled(false);
         rows.setEditable(false);
 
         JTextArea columns = new JTextArea("columns");
         columns.setForeground(Color.WHITE);
         columns.setBackground(Color.BLACK);
         columns.setFont(font2);
-        columns.setEnabled(false);
+//        columns.setEnabled(false);
         columns.setEditable(false);
 
         GradientText gradientText = new GradientText();
@@ -53,7 +53,7 @@ public class NewGame extends JPanel {
         windowGameSize.setForeground(Color.WHITE);
         windowGameSize.setBackground(Color.BLACK);
         windowGameSize.setFont(font1);
-        windowGameSize.setEnabled(false);
+//        windowGameSize.setEnabled(false);
         windowGameSize.setEditable(false);
 
         JTextField setWindowsSize1 = new JTextField();
@@ -71,7 +71,7 @@ public class NewGame extends JPanel {
         yourNick.setForeground(Color.WHITE);
         yourNick.setBackground(Color.BLACK);
         yourNick.setFont(font1);
-        yourNick.setEnabled(false);
+//        yourNick.setEnabled(false);
         yourNick.setEditable(false);
 
         JTextField setYourNick = new JTextField();
@@ -86,7 +86,6 @@ public class NewGame extends JPanel {
         //-------------------------------------------------------------------------
 
         GridBagConstraints gbc = new GridBagConstraints();
-
         gbc.fill = GridBagConstraints.BOTH;
 
         gbc.gridx = 1;
