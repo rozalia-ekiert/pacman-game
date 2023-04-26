@@ -22,23 +22,13 @@ public class MiddleText extends JPanel {
 
         JLabel textLabel = new JLabel(text);
 
-        textLabel.setForeground(Color.WHITE);
+        textLabel.setForeground(Color.ORANGE); // przy formatowaniu html, metoda ta nie ma wpływu na resztę
         textLabel.setBackground(Color.BLACK);
         textLabel.setFont(pacmanGame.Butterbelly);
+
         textLabel.setEnabled(false);
 
         this.add(textLabel);
     }
 
-// CELEM TEJ METODY MA BYĆ SFORMATOWANIE TEKSTU TAK, ŻEBY BYŁ WYCENTROWANY
-//    public String sformatujTekst (String tekst){
-//        String[] listaSlow = tekst.split(" ");
-//        for (int i=0; i<listaSlow.length; i++){
-//            String obecnyWiersz = null;
-//            if ((obecnyWiersz+listaSlow[i]).length()<60){
-//                obecnyWiersz = obecnyWiersz+listaSlow[i]+' ';
-//            }
-//        }
-//        return null;
-//    }
 }

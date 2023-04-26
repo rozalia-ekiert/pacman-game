@@ -30,17 +30,21 @@ public class PACMANGame extends JFrame {
         this.setUndecorated(false);
         this.setResizable(true);
 //        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("PACMAN GAME");
+
+
+        this.setFont(Butterbelly);
 
         //==================================================================================
 
         String fontPath = "Butterbelly.otf";
         try {
-            Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File(fontPath));
+            Font customFont = Font.createFont(Font.PLAIN, new File(fontPath));
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(customFont);
 
-            customFont = customFont.deriveFont(Font.TRUETYPE_FONT, 24);
+            customFont = customFont.deriveFont(Font.PLAIN, 24);
             this.Butterbelly = customFont;
 
         } catch (FontFormatException e) {
@@ -53,7 +57,7 @@ public class PACMANGame extends JFrame {
 
         this.viewsCardPanel = new ViewCardPanel();
 
-        Game game = new Game(screenWidth, screenHeight, this);
+        Game game = new Game(this);
         MenuStart menuStart = new MenuStart(this, game);
 
         viewsCardPanel.add(menuStart, MENU_VIEW);
@@ -62,6 +66,12 @@ public class PACMANGame extends JFrame {
         this.add(viewsCardPanel);
 
         //===================================================================================
+
+//        String infoText = "<html>PRESS <font color=#FD66C3 size=+5>CTRL + SHIFT + Q</font><br>" +
+//                "TO RETURN THE MAIN MANU</html>";
+//        JLabel test = new JLabel(infoText);
+//        test.setFont(Butterbelly);
+//        this.add(test);
 
         this.setVisible(true);
     }

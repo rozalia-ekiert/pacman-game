@@ -8,12 +8,19 @@ import views.game.components.panels.GameStartScreen2;
 import views.game.components.panels.GameWindow;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class Game extends JPanel {
 
     public GameCardPanel gameCardPanel;
 
-    public Game(int width, int height, PACMANGame pacmanGame) {
+    public Game(PACMANGame pacmanGame) {
+
+        int width = pacmanGame.screenWidth;
+        int height = pacmanGame.screenHeight;
+
+        this.setBackground(Color.BLACK);
+        this.setFont(pacmanGame.Butterbelly);
 
         gameCardPanel = new GameCardPanel();
 

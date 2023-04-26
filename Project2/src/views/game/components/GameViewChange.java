@@ -21,7 +21,7 @@ public class GameViewChange {
         new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
-                Thread.sleep(3000);
+                Thread.sleep(10000);
                 CardLayout cl = (CardLayout) (game.gameCardPanel.getLayout());
                 cl.show(game.gameCardPanel, GameCardPanel.START_SCREEN_2);
                 game.gameCardPanel.currentCardName = GameCardPanel.START_SCREEN_2;
@@ -32,7 +32,7 @@ public class GameViewChange {
         new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
-                Thread.sleep(6000);
+                Thread.sleep(13000);
                 CardLayout cl = (CardLayout) (game.gameCardPanel.getLayout());
                 cl.show(game.gameCardPanel, GameCardPanel.GAME_WINDOW);
                 game.gameCardPanel.currentCardName = GameCardPanel.GAME_WINDOW;
