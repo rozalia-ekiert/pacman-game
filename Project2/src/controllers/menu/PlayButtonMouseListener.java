@@ -1,7 +1,9 @@
 package controllers.menu;
 
+import controllers.game.GameViewChange;
 import views.PACMANGame;
 import views.ViewCardPanel;
+import views.game.Game;
 import views.menu.components.middlePanels.NewGame;
 
 import javax.swing.*;
@@ -9,18 +11,20 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class StartButtonMouseListener implements MouseListener {
+public class PlayButtonMouseListener implements MouseListener {
 
     private JButton play;
     private PACMANGame pacmanGame;
     private NewGame newGame;
+    private Game game;
     private Color pink;
     private Color blue;
 
-    public StartButtonMouseListener(NewGame newGame, PACMANGame pacmanGame) {
+    public PlayButtonMouseListener(NewGame newGame, PACMANGame pacmanGame, Game game) {
 
         this.pacmanGame = pacmanGame;
         this.newGame = newGame;
+        this.game = game;
 
         this.play = newGame.play;
         this.pink = newGame.pink;
@@ -38,6 +42,7 @@ public class StartButtonMouseListener implements MouseListener {
             cl.show(this.pacmanGame.viewsCardPanel, ViewCardPanel.GAME_VIEW);
             this.pacmanGame.viewsCardPanel.currentCardName = ViewCardPanel.GAME_VIEW;
 
+            GameViewChange gameViewChange = new GameViewChange(game, pacmanGame);
         }
     }
 

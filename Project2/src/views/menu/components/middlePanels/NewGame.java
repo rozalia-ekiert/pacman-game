@@ -1,7 +1,8 @@
 package views.menu.components.middlePanels;
 
-import controllers.menu.StartButtonMouseListener;
+import controllers.menu.PlayButtonMouseListener;
 import views.PACMANGame;
+import views.game.Game;
 import views.menu.MenuStart;
 
 import javax.swing.*;
@@ -19,7 +20,7 @@ public class NewGame extends JPanel {
     private int height;
     private String yourNick = "SET YOUR NICKNAME";
 
-    public NewGame(int width, int height, PACMANGame pacmanGame, MenuStart menuStart) {
+    public NewGame(int width, int height, PACMANGame pacmanGame, MenuStart menuStart, Game game) {
 
         Font font1 = new Font("Butterbelly", Font.PLAIN, 50);
         Font font2 = new Font("Butterbelly", Font.PLAIN, 16);
@@ -167,7 +168,7 @@ public class NewGame extends JPanel {
         this.add(gradientText, gbc);
 
 
-        StartButtonMouseListener startButtonMouseListener = new StartButtonMouseListener(this, pacmanGame);
+        PlayButtonMouseListener playButtonMouseListener = new PlayButtonMouseListener(this, pacmanGame, game);
     }
 }
 

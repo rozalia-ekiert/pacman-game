@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class MiddleText extends JPanel {
 
-    public MiddleText(int width, int height, PACMANGame pacmanGameFrame) {
+    public MiddleText(int width, int height, PACMANGame pacmanGame) {
         this.setPreferredSize(new Dimension(width, height));
         this.setBackground(Color.BLACK);
 
@@ -24,7 +24,7 @@ public class MiddleText extends JPanel {
 
         textArea.setForeground(Color.WHITE);
         textArea.setBackground(Color.BLACK);
-        textArea.setFont(pacmanGameFrame.Butterbelly);
+        textArea.setFont(pacmanGame.Butterbelly);
 
         textArea.setEnabled(false);
         textArea.setEditable(false);

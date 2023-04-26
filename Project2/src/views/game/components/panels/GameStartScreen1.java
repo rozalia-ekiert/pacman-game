@@ -1,13 +1,13 @@
-package views.game.components;
+package views.game.components.panels;
 
 import views.PACMANGame;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class GameStartScreen2 extends JPanel {
+public class GameStartScreen1 extends JPanel {
 
-    public GameStartScreen2(int width, int height, PACMANGame pacmanGameFrame) {
+    public GameStartScreen1(int width, int height, PACMANGame pacmanGameFrame) {
 
         this.setPreferredSize(new Dimension(width, height));
         this.setBackground(Color.BLACK);
@@ -15,7 +15,9 @@ public class GameStartScreen2 extends JPanel {
         this.setLayout(new GridBagLayout());
 
 
-        String text = "Get ready!";
+        String text = "Oh, nice to see you, [player_name]. This game is more like .................\n" +
+                "You will see some comments on the right panel of its.\n\n" +
+                "Note: it was not meant to offense you. Have fun!";
 
         JTextArea textArea = new JTextArea(text, 7, 20);
 
