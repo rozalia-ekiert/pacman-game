@@ -1,7 +1,7 @@
 package controllers.menu;
 
 import views.menu.MenuStart;
-import views.menu.components.MainMenuCardPanel;
+import views.menu.components.MenuCardPanel;
 import views.menu.components.upperPanels.Buttons;
 
 import javax.swing.*;
@@ -41,14 +41,14 @@ public class MenuButtonsMouseListener implements MouseListener {
     public void mouseClicked(MouseEvent e) {
         if (e.getSource() == buttons.getNew_game()) {
             CardLayout cl = (CardLayout) (this.menuStart.cardsPanel.getLayout());
-            cl.show(this.menuStart.cardsPanel, MainMenuCardPanel.NEWGAME);
-            this.menuStart.cardsPanel.currentCardName = MainMenuCardPanel.NEWGAME;
+            cl.show(this.menuStart.cardsPanel, MenuCardPanel.NEWGAME);
+            this.menuStart.cardsPanel.currentCardName = MenuCardPanel.NEWGAME;
             high_scores.setBackground(pink);
         }
         if (e.getSource() == this.high_scores) {
             CardLayout cl = (CardLayout) (menuStart.cardsPanel.getLayout());
-            cl.show(menuStart.cardsPanel, MainMenuCardPanel.HIGHSCORE);
-            menuStart.cardsPanel.currentCardName = MainMenuCardPanel.HIGHSCORE;
+            cl.show(menuStart.cardsPanel, MenuCardPanel.HIGHSCORE);
+            menuStart.cardsPanel.currentCardName = MenuCardPanel.HIGHSCORE;
             buttons.new_game.setBackground(pink);
         }
         if (e.getSource() == this.exit_game) {
@@ -72,11 +72,11 @@ public class MenuButtonsMouseListener implements MouseListener {
     @Override
     public void mouseExited(MouseEvent e) {
         if (e.getSource() == this.new_game) {
-            if (menuStart.cardsPanel.currentCardName.equals(MainMenuCardPanel.NEWGAME)) return;
+            if (menuStart.cardsPanel.currentCardName.equals(MenuCardPanel.NEWGAME)) return;
             buttons.new_game.setBackground(pink);
         }
         if (e.getSource() == this.high_scores) {
-            if (menuStart.cardsPanel.currentCardName.equals(MainMenuCardPanel.HIGHSCORE)) return;
+            if (menuStart.cardsPanel.currentCardName.equals(MenuCardPanel.HIGHSCORE)) return;
             buttons.high_scores.setBackground(pink);
         }
         if (e.getSource() == this.exit_game) {

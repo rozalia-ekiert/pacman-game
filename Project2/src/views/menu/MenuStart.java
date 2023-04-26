@@ -1,7 +1,7 @@
 package views.menu;
 
 import views.PACMANGame;
-import views.menu.components.MainMenuCardPanel;
+import views.menu.components.MenuCardPanel;
 import views.menu.components.lowerPanels.LowerMenu;
 import views.menu.components.middlePanels.HighScores;
 import views.menu.components.middlePanels.MiddleText;
@@ -14,7 +14,7 @@ import java.awt.*;
 
 public class MenuStart extends JPanel {
 
-    public MainMenuCardPanel cardsPanel;
+    public MenuCardPanel cardsPanel;
     public Color pink = new Color(0xFD66C3);
     public Color blue = new Color(0x00FDFE);
 
@@ -29,10 +29,10 @@ public class MenuStart extends JPanel {
         Buttons buttons = new Buttons(width, (int) (height * 0.08), this, pacmanGameFrame);
 
         MiddleText middleText = new MiddleText(width, (int) (height * 0.5), pacmanGameFrame);
-        cardsPanel = new MainMenuCardPanel();
-        cardsPanel.add(middleText, MainMenuCardPanel.TEXT);
-        cardsPanel.add(new NewGame(width, height, pacmanGameFrame, this), MainMenuCardPanel.NEWGAME);
-        cardsPanel.add(new HighScores(width, height, pacmanGameFrame), MainMenuCardPanel.HIGHSCORE);
+        cardsPanel = new MenuCardPanel();
+        cardsPanel.add(middleText, MenuCardPanel.TEXT);
+        cardsPanel.add(new NewGame(width, height, pacmanGameFrame, this), MenuCardPanel.NEWGAME);
+        cardsPanel.add(new HighScores(width, height, pacmanGameFrame), MenuCardPanel.HIGHSCORE);
 
         LowerMenu lowerMenu = new LowerMenu(width, (int) (height * 0.15));
 

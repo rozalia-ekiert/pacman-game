@@ -1,5 +1,6 @@
 package views;
 
+import views.game.Game;
 import views.menu.MenuStart;
 
 import javax.swing.*;
@@ -8,6 +9,11 @@ import java.io.File;
 import java.io.IOException;
 
 public class PACMANGame extends JFrame {
+
+    public static final String MENU_VIEW = "0";
+    public static final String GAME_VIEW = "1";
+    public String currentCardName = MENU_VIEW;
+    public ViewCardPanel viewsCardPanel;
 
     public int screenWidth;
     public int screenHeight;
@@ -45,8 +51,17 @@ public class PACMANGame extends JFrame {
 
         //===================================================================================
 
+        this.viewsCardPanel = new ViewCardPanel();
+
         MenuStart menuStart = new MenuStart(this);
-        this.add(menuStart);
+        Game game = new Game(screenWidth, screenHeight, this);
+
+        viewsCardPanel.add(menuStart, MENU_VIEW);
+        viewsCardPanel.add(game, GAME_VIEW);
+
+        this.add(viewsCardPanel);
+
+        //===================================================================================
 
         this.setVisible(true);
     }

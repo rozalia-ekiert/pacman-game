@@ -167,7 +167,7 @@ public class NewGame extends JPanel {
         this.add(gradientText, gbc);
 
 
-        StartButtonMouseListener startButtonMouseListener = new StartButtonMouseListener(this, menuStart);
+        StartButtonMouseListener startButtonMouseListener = new StartButtonMouseListener(this, pacmanGame);
     }
 }
 

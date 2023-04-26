@@ -8,7 +8,8 @@ import java.awt.*;
 public class GameStart extends JPanel {
 
     public GameStart(int width, int height, PACMANGame pacmanGameFrame) {
-        this.setPreferredSize(new Dimension(width, height));
+
+//        this.setPreferredSize(new Dimension(width, height));
         this.setBackground(Color.BLACK);
 
         this.setLayout(new GridBagLayout());
