@@ -37,6 +37,7 @@ public class StartButtonMouseListener implements MouseListener {
             CardLayout cl = (CardLayout) (this.pacmanGame.viewsCardPanel.getLayout());
             cl.show(this.pacmanGame.viewsCardPanel, ViewCardPanel.GAME_VIEW);
             this.pacmanGame.viewsCardPanel.currentCardName = ViewCardPanel.GAME_VIEW;
+
         }
     }
 

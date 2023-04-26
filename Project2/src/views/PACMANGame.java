@@ -56,7 +56,7 @@ public class PACMANGame extends JFrame {
         MenuStart menuStart = new MenuStart(this);
         Game game = new Game(screenWidth, screenHeight, this);
 
-        viewsCardPanel.add(menuStart, MENU_VIEW);
+//        viewsCardPanel.add(menuStart, MENU_VIEW);
         viewsCardPanel.add(game, GAME_VIEW);
 
         this.add(viewsCardPanel);
