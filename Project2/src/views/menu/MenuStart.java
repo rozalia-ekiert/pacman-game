@@ -31,7 +31,7 @@ public class MenuStart extends JPanel {
         MiddleText middleText = new MiddleText(width, (int) (height * 0.5), pacmanGameFrame);
         cardsPanel = new MainMenuCardPanel();
         cardsPanel.add(middleText, MainMenuCardPanel.TEXT);
-        cardsPanel.add(new NewGame(width, height, pacmanGameFrame), MainMenuCardPanel.NEWGAME);
+        cardsPanel.add(new NewGame(width, height, pacmanGameFrame, this), MainMenuCardPanel.NEWGAME);
         cardsPanel.add(new HighScores(width, height, pacmanGameFrame), MainMenuCardPanel.HIGHSCORE);
 
         LowerMenu lowerMenu = new LowerMenu(width, (int) (height * 0.15));
