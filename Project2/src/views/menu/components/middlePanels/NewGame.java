@@ -1,6 +1,7 @@
 package views.menu.components.middlePanels;
 
 import controllers.menu.PlayButtonMouseListener;
+import views.GameColors;
 import views.PACMANGame;
 import views.game.Game;
 import views.menu.MenuStart;
@@ -13,8 +14,6 @@ public class NewGame extends JPanel {
 
     private String text;
     public JButton play;
-    public Color pink = new Color(0xFD66C3);
-    public Color blue = new Color(0x00FDFE);
     private String windowGameSize = "SET WINDOW GAME SIZE";
     private int width;
     private int height;
@@ -80,7 +79,7 @@ public class NewGame extends JPanel {
 
         //------------------------------------------ wiersz 3
         this.play = new JButton("play!");
-        play.setBackground(this.pink);
+        play.setBackground(GameColors.pink);
         play.setFont(pacmanGame.Butterbelly);
         play.setForeground(Color.BLACK);
 
@@ -167,8 +166,10 @@ public class NewGame extends JPanel {
         gbc.anchor = GridBagConstraints.FIRST_LINE_END;
         this.add(gradientText, gbc);
 
+        this.play.addMouseListener(new PlayButtonMouseListener(this, pacmanGame, game));
 
-        PlayButtonMouseListener playButtonMouseListener = new PlayButtonMouseListener(this, pacmanGame, game);
+
+//        PlayButtonMouseListener playButtonMouseListener = new PlayButtonMouseListener(this, pacmanGame, game);
     }
 }
 

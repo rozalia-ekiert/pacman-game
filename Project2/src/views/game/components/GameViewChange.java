@@ -1,8 +1,7 @@
-package controllers.game;
+package views.game.components;
 
 import views.PACMANGame;
 import views.game.Game;
-import views.game.components.GameCardPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -42,6 +41,4 @@ public class GameViewChange {
         }.execute();
 
     }
-
-
 }

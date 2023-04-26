@@ -1,5 +1,6 @@
 package controllers.menu;
 
+import views.GameColors;
 import views.menu.MenuStart;
 import views.menu.components.MenuCardPanel;
 import views.menu.components.upperPanels.Buttons;
@@ -14,15 +15,10 @@ public class MenuButtonsMouseListener implements MouseListener {
     private JButton new_game;
     private JButton high_scores;
     private JButton exit_game;
-    private Color pink;
-    private Color blue;
     private MenuStart menuStart;
     private Buttons buttons;
 
     public MenuButtonsMouseListener(Buttons buttons, MenuStart menuStart) {
-
-        this.pink = buttons.pink;
-        this.blue = buttons.blue;
 
         this.menuStart = menuStart;
         this.buttons = buttons;
@@ -30,11 +26,6 @@ public class MenuButtonsMouseListener implements MouseListener {
         this.new_game = buttons.new_game;
         this.high_scores = buttons.high_scores;
         this.exit_game = buttons.exit_game;
-
-        this.new_game.addMouseListener(this);
-        this.high_scores.addMouseListener(this);
-        this.exit_game.addMouseListener(this);
-
     }
 
     @Override
@@ -43,13 +34,13 @@ public class MenuButtonsMouseListener implements MouseListener {
             CardLayout cl = (CardLayout) (this.menuStart.cardsPanel.getLayout());
             cl.show(this.menuStart.cardsPanel, MenuCardPanel.NEWGAME);
             this.menuStart.cardsPanel.currentCardName = MenuCardPanel.NEWGAME;
-            high_scores.setBackground(pink);
+            high_scores.setBackground(GameColors.pink);
         }
         if (e.getSource() == this.high_scores) {
             CardLayout cl = (CardLayout) (menuStart.cardsPanel.getLayout());
             cl.show(menuStart.cardsPanel, MenuCardPanel.HIGHSCORE);
             menuStart.cardsPanel.currentCardName = MenuCardPanel.HIGHSCORE;
-            buttons.new_game.setBackground(pink);
+            buttons.new_game.setBackground(GameColors.pink);
         }
         if (e.getSource() == this.exit_game) {
             System.exit(-1);
@@ -59,13 +50,13 @@ public class MenuButtonsMouseListener implements MouseListener {
     @Override
     public void mouseEntered(MouseEvent e) {
         if (e.getSource() == this.new_game) {
-            buttons.new_game.setBackground(blue);
+            buttons.new_game.setBackground(GameColors.blue);
         }
         if (e.getSource() == this.high_scores) {
-            buttons.high_scores.setBackground(blue);
+            buttons.high_scores.setBackground(GameColors.blue);
         }
         if (e.getSource() == this.exit_game) {
-            buttons.exit_game.setBackground(blue);
+            buttons.exit_game.setBackground(GameColors.blue);
         }
     }
 
@@ -73,14 +64,14 @@ public class MenuButtonsMouseListener implements MouseListener {
     public void mouseExited(MouseEvent e) {
         if (e.getSource() == this.new_game) {
             if (menuStart.cardsPanel.currentCardName.equals(MenuCardPanel.NEWGAME)) return;
-            buttons.new_game.setBackground(pink);
+            buttons.new_game.setBackground(GameColors.pink);
         }
         if (e.getSource() == this.high_scores) {
             if (menuStart.cardsPanel.currentCardName.equals(MenuCardPanel.HIGHSCORE)) return;
-            buttons.high_scores.setBackground(pink);
+            buttons.high_scores.setBackground(GameColors.pink);
         }
         if (e.getSource() == this.exit_game) {
-            buttons.exit_game.setBackground(pink);
+            buttons.exit_game.setBackground(GameColors.pink);
         }
     }
 

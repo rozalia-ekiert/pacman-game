@@ -16,8 +16,6 @@ import java.awt.*;
 public class MenuStart extends JPanel {
 
     public MenuCardPanel cardsPanel;
-    public Color pink = new Color(0xFD66C3);
-    public Color blue = new Color(0x00FDFE);
 
     public MenuStart(PACMANGame pacmanGameFrame, Game game) {
 
@@ -36,7 +34,6 @@ public class MenuStart extends JPanel {
         cardsPanel.add(new HighScores(width, height, pacmanGameFrame), MenuCardPanel.HIGHSCORE);
 
         LowerMenu lowerMenu = new LowerMenu(width, (int) (height * 0.15));
-
 
         this.add(heading);
         this.add(buttons);

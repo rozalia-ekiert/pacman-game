@@ -1,6 +1,7 @@
 package views.menu.components.upperPanels;
 
 import controllers.menu.MenuButtonsMouseListener;
+import views.GameColors;
 import views.PACMANGame;
 import views.menu.MenuStart;
 
@@ -13,9 +14,6 @@ public class Buttons extends JPanel {
     public JButton new_game;
     public JButton high_scores;
     public JButton exit_game;
-    public Color pink = new Color(0xFD66C3);
-    public Color blue = new Color(0x00FDFE);
-
 
     public Buttons(int width, int height, MenuStart menuStart, PACMANGame pacmanGameFrame) {
 
@@ -39,7 +37,7 @@ public class Buttons extends JPanel {
         menuButtons.add(exit_game);
 
         for (JButton b : menuButtons) {
-            b.setBackground(pink);
+            b.setBackground(GameColors.pink);
             b.setFont(pacmanGameFrame.Butterbelly);
             b.setForeground(Color.BLACK);
             this.add(b);
@@ -47,7 +45,9 @@ public class Buttons extends JPanel {
 
         //===============================================================================
 
-        MenuButtonsMouseListener menuButtonsMouseListener = new MenuButtonsMouseListener(this, menuStart);
+        new_game.addMouseListener(new MenuButtonsMouseListener(this, menuStart));
+        high_scores.addMouseListener(new MenuButtonsMouseListener(this, menuStart));
+        exit_game.addMouseListener(new MenuButtonsMouseListener(this, menuStart));
 
     }
 
