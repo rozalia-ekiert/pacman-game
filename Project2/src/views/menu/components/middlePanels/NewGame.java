@@ -96,7 +96,7 @@ public class NewGame extends JPanel {
         gbc.insets = new Insets(40, 0, 10, 40);
         gbc.anchor = GridBagConstraints.FIRST_LINE_START;
         this.add(rows, gbc);
-        gbc.gridx = 0;
+
 
         gbc.gridx = 2;
         gbc.gridy = 0;

@@ -22,11 +22,9 @@ public class MiddleText extends JPanel {
 
         JLabel textLabel = new JLabel(text);
 
-        textLabel.setForeground(Color.ORANGE); // przy formatowaniu html, metoda ta nie ma wpływu na resztę
+        textLabel.setForeground(Color.WHITE);
         textLabel.setBackground(Color.BLACK);
         textLabel.setFont(pacmanGame.Butterbelly);
-
-        textLabel.setEnabled(false);
 
         this.add(textLabel);
     }

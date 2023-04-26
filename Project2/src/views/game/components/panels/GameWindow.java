@@ -9,29 +9,20 @@ public class GameWindow extends JPanel {
 
     public GameWindow(int width, int height, PACMANGame pacmanGame) {
 
-        CurrentStats currentStats = new CurrentStats();
-        Gameplay gameplay = new Gameplay();
-
         this.setPreferredSize(new Dimension(width, height));
         this.setBackground(Color.BLACK);
+        this.setLayout(new BoxLayout(this, 0));
 
-        this.setLayout(new GridBagLayout());
+        CurrentStats currentStats = new CurrentStats((int) (width * 0.2), height, pacmanGame);
+        Gameplay gameplay = new Gameplay((int) (width * 0.6), height, pacmanGame);
+        Comments comments = new Comments((int) (width * 0.2), height, pacmanGame);
+
+        //=======================================================
 
 
-        String text = "TO MOJ GAME WINDOW";
-
-        JTextArea textArea = new JTextArea(text, 5, 20);
-
-        textArea.setForeground(Color.WHITE);
-        textArea.setBackground(Color.BLACK);
-        textArea.setFont(pacmanGame.Butterbelly);
-
-        textArea.setEnabled(false);
-        textArea.setEditable(false);
-
-        this.add(textArea);
-
-//        this.add(currentStats);
-//        this.add(gameplay);
+        this.add(currentStats);
+        gameplay.setBorder(BorderFactory.createMatteBorder(0, 3, 0, 3, Color.WHITE));
+        this.add(gameplay);
+        this.add(comments);
     }
 }

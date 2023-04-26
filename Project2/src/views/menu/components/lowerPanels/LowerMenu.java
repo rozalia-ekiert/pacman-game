@@ -20,7 +20,6 @@ public class LowerMenu extends JPanel {
         this.setPreferredSize(new Dimension(lowerMenuPanelWidth, lowerMenuPanelHeight));
         this.setBackground(Color.BLACK);
         this.setMinimumSize(new Dimension(330, 70));
-
     }
 
     @Override
@@ -41,7 +40,7 @@ public class LowerMenu extends JPanel {
         }
 
 
-        // trzeba wszystko uzależnić od getWidth i getHeight - zapewni to skalowalność okienka
+        // todo trzeba wszystko uzależnić od getWidth i getHeight - zapewni to skalowalność okienka
         int size = 32;
         int heightMargin = 30;
         g.drawImage(pacmanTEST, 10, heightMargin, size, size, this);

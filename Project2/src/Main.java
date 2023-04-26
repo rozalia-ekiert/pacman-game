@@ -8,8 +8,8 @@ public class Main {
 
         PACMANGame graPanel = new PACMANGame();
 
-//        int a = 100;
-//        int b = 100;
+//        int a = 20;
+//        int b = 20;
 //
 //        int droga = 0;
 //        int sciana = 1;

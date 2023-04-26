@@ -24,10 +24,10 @@ public class Game extends JPanel {
 
         gameCardPanel = new GameCardPanel();
 
-        GameStartScreen1 startScreen1 = new GameStartScreen1(width, height, pacmanGame);
-        GameStartScreen2 startScreen2 = new GameStartScreen2(width, height, pacmanGame);
-        GameWindow gameWindow = new GameWindow(width, height, pacmanGame);
-        GameOver gameOver = new GameOver(width, height, pacmanGame);
+        GameStartScreen1 startScreen1 = new GameStartScreen1(pacmanGame.screenWidth, pacmanGame.screenHeight, pacmanGame);
+        GameStartScreen2 startScreen2 = new GameStartScreen2(pacmanGame.screenWidth, pacmanGame.screenHeight, pacmanGame);
+        GameWindow gameWindow = new GameWindow(pacmanGame.screenWidth, pacmanGame.screenHeight, pacmanGame);
+        GameOver gameOver = new GameOver(pacmanGame.screenWidth, pacmanGame.screenHeight, pacmanGame);
 
         gameCardPanel.add(startScreen1, GameCardPanel.START_SCREEN_1);
         gameCardPanel.add(startScreen2, GameCardPanel.START_SCREEN_2);
