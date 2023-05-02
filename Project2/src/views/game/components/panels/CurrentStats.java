@@ -1,19 +1,26 @@
 package views.game.components.panels;
 
+import controllers.game.NumberFormatter;
 import views.GameColors;
 import views.PACMANGame;
 
 import javax.swing.*;
-import javax.swing.text.JTextComponent;
 import java.awt.*;
-import java.util.ArrayList;
 
 public class CurrentStats extends JPanel {
 
     //todo
-    String highScore = "055 345";
-    String yourScore = "000 555";
-    String time = "00:34";
+    int highScore = 055345;
+    int yourScore = 555;
+    long time = 408000; // w milisekundach
+
+    JLabel highScoreArea;
+    JLabel setHighScore;
+    JLabel yourScoreArea;
+    JLabel setYourScore;
+    JLabel timeArea;
+    JLabel setTime;
+
 
     public CurrentStats(int width, int height, PACMANGame pacmanGame) {
 
@@ -24,35 +31,43 @@ public class CurrentStats extends JPanel {
 
         this.setLayout(new GridBagLayout());
 
+        Font currentButterbelly = new Font("Butterbelly", Font.PLAIN, 40);
+
         //======================================================================
 
-        JLabel highScoreArea = new JLabel("high score:");
-        JTextArea yourScoreArea = new JTextArea("your score:");
-        JTextArea timeArea = new JTextArea("time:");
-
-        JLabel setHighScore = new JLabel(highScore);
-        JTextArea setYourScore = new JTextArea(yourScore);
-        JTextArea setTime = new JTextArea(time);
-
-        ArrayList<JTextComponent> list = new ArrayList<>();
-        list.add(yourScoreArea);
-        list.add(setYourScore);
-        list.add(timeArea);
-        list.add(setTime);
-
-        for (JTextComponent j : list) {
-            j.setBackground(Color.BLACK);
-            j.setForeground(Color.WHITE);
-            j.setFont(pacmanGame.Butterbelly);
-        }
-
+        this.highScoreArea = new JLabel("high score:");
         highScoreArea.setBackground(Color.BLACK);
         highScoreArea.setForeground(GameColors.pink);
-        highScoreArea.setFont(pacmanGame.Butterbelly);
+        highScoreArea.setFont(currentButterbelly);
 
+        this.setHighScore = new JLabel(NumberFormatter.changeScoreToString(highScore));
         setHighScore.setBackground(Color.BLACK);
         setHighScore.setForeground(GameColors.pink);
-        setHighScore.setFont(pacmanGame.Butterbelly);
+        setHighScore.setFont(currentButterbelly);
+
+        //===========================================
+
+        this.yourScoreArea = new JLabel("your score:");
+        yourScoreArea.setBackground(Color.BLACK);
+        yourScoreArea.setForeground(Color.WHITE);
+        yourScoreArea.setFont(currentButterbelly);
+
+        this.setYourScore = new JLabel(NumberFormatter.changeScoreToString(yourScore));
+        setYourScore.setBackground(Color.BLACK);
+        setYourScore.setForeground(Color.WHITE);
+        setYourScore.setFont(currentButterbelly);
+
+        //===========================================
+
+        this.timeArea = new JLabel("time:");
+        timeArea.setBackground(Color.BLACK);
+        timeArea.setForeground(Color.WHITE);
+        timeArea.setFont(currentButterbelly);
+
+        this.setTime = new JLabel(NumberFormatter.changeTimeToString(time));
+        setTime.setBackground(Color.BLACK);
+        setTime.setForeground(Color.WHITE);
+        setTime.setFont(currentButterbelly);
 
         //======================================================================
 
@@ -64,48 +79,49 @@ public class CurrentStats extends JPanel {
         gbc.gridy = 0;
         gbc.gridheight = 1;
         gbc.gridwidth = 1;
-        gbc.insets = new Insets(0, 0, 10, 0);
-//        gbc.anchor = GridBagConstraints.NORTH;
+        gbc.insets = new Insets(20, 30, 10, 0);
         this.add(highScoreArea, gbc);
 
-//        gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.gridheight = 1;
         gbc.gridwidth = 1;
-        gbc.insets = new Insets(0, 0, 80, 0);
-//        gbc.anchor = GridBagConstraints.NORTH;
+        gbc.insets = new Insets(0, 30, 60, 0);
         this.add(setHighScore, gbc);
 
-//        gbc.gridx = 0;
         gbc.gridy = 2;
         gbc.gridheight = 1;
         gbc.gridwidth = 1;
-        gbc.insets = new Insets(0, 0, 10, 0);
-//        gbc.anchor = GridBagConstraints.LINE_START;
+        gbc.insets = new Insets(0, 30, 10, 0);
         this.add(yourScoreArea, gbc);
 
-//        gbc.gridx = 0;
         gbc.gridy = 3;
         gbc.gridheight = 1;
         gbc.gridwidth = 1;
-        gbc.insets = new Insets(0, 0, 40, 0);
-//        gbc.anchor = GridBagConstraints.LINE_START;
+        gbc.insets = new Insets(0, 30, 30, 0);
         this.add(setYourScore, gbc);
 
-//        gbc.gridx = 0;
         gbc.gridy = 4;
         gbc.gridheight = 1;
         gbc.gridwidth = 1;
-        gbc.insets = new Insets(0, 0, 10, 0);
-//        gbc.anchor = GridBagConstraints.LINE_START;
+        gbc.insets = new Insets(0, 30, 10, 0);
         this.add(timeArea, gbc);
 
-//        gbc.gridx = 0;
         gbc.gridy = 5;
         gbc.gridheight = 1;
         gbc.gridwidth = 1;
-        gbc.insets = new Insets(0, 0, (int) (height * 0.5), (int) (width * 0.6));
-//        gbc.anchor = GridBagConstraints.LINE_START;
+        gbc.insets = new Insets(0, 30, (int) (height * 0.5), (int) (width * 0.6));
         this.add(setTime, gbc);
     }
+
+    public void updateYourScore() { // todo
+        if (this.yourScore > this.highScore) {
+
+            this.highScoreArea.setForeground(Color.WHITE);
+            this.setHighScore.setForeground(Color.WHITE);
+
+            this.yourScoreArea.setForeground(Color.PINK);
+            this.setYourScore.setForeground(Color.PINK);
+        }
+    }
+
 }

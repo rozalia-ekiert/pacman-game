@@ -12,7 +12,11 @@ import java.awt.*;
 
 public class NewGame extends JPanel {
 
-    private String text;
+    private String text = "<html>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vitae<br>" +
+            "efficitur ligula, in viverra ipsum. Orci varius natoque penatibus et magnis dis<br>" +
+            "parturient montes, nascetur ridiculus mus. Etiam eu molestie dolor.<br>" +
+            "Vestibulum placerat metus vitae justo rutrum mollis. Nam blandit<br>" +
+            "rhoncus neque molestie vulputate.</html>";
     public JButton play;
     private String windowGameSize = "SET WINDOW GAME SIZE";
     private int width;
@@ -36,24 +40,22 @@ public class NewGame extends JPanel {
         rows.setForeground(Color.WHITE);
         rows.setBackground(Color.BLACK);
         rows.setFont(font2);
-//        rows.setEnabled(false);
         rows.setEditable(false);
 
         JTextArea columns = new JTextArea("columns");
         columns.setForeground(Color.WHITE);
         columns.setBackground(Color.BLACK);
         columns.setFont(font2);
-//        columns.setEnabled(false);
         columns.setEditable(false);
 
-        GradientText gradientText = new GradientText();
+        GradientText gradientText = new GradientText(this.text, pacmanGame);
+
 
         //------------------------------------------ wiersz 1
         JTextArea windowGameSize = new JTextArea(this.windowGameSize);
         windowGameSize.setForeground(Color.WHITE);
         windowGameSize.setBackground(Color.BLACK);
         windowGameSize.setFont(font1);
-//        windowGameSize.setEnabled(false);
         windowGameSize.setEditable(false);
 
         JTextField setWindowsSize1 = new JTextField();
@@ -71,7 +73,6 @@ public class NewGame extends JPanel {
         yourNick.setForeground(Color.WHITE);
         yourNick.setBackground(Color.BLACK);
         yourNick.setFont(font1);
-//        yourNick.setEnabled(false);
         yourNick.setEditable(false);
 
         JTextField setYourNick = new JTextField();
@@ -172,6 +173,25 @@ public class NewGame extends JPanel {
 
 
 class GradientText extends JPanel {
+
+    public GradientText(String text, PACMANGame pacmanGame) {
+
+//        this.setLayout(new GridBagLayout());
+//
+//        String rules = "RULES";
+//        JLabel rulesLabel = new JLabel(text);
+//        rulesLabel.setForeground(Color.BLACK);
+//        rulesLabel.setFont(pacmanGame.Butterbelly);
+//
+//        Font f2 = new Font("Arimo", Font.PLAIN, 14);
+//        JLabel textLabel = new JLabel(text);
+//        textLabel.setForeground(Color.BLACK);
+//        textLabel.setFont(f2);
+//
+//        this.add(rulesLabel);
+//        this.add(textLabel);
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
