@@ -69,12 +69,6 @@ public class PACMANGame extends JFrame {
 
         //===================================================================================
 
-//        String infoText = "<html>PRESS <font color=#FD66C3 size=+5>CTRL + SHIFT + Q</font><br>" +
-//                "TO RETURN THE MAIN MANU</html>";
-//        JLabel test = new JLabel(infoText);
-//        test.setFont(Butterbelly);
-//        this.add(test);
-
         this.setVisible(true);
     }
 

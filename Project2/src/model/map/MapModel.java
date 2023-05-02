@@ -1,4 +1,4 @@
-package model.Map;
+package model.map;
 
 import views.GameColors;
 
@@ -7,7 +7,8 @@ import java.awt.*;
 
 public class MapModel extends AbstractTableModel {
 
-    int rows, columns;
+    int rows;
+    int columns;
     private int[][] map;
 
 
@@ -22,6 +23,7 @@ public class MapModel extends AbstractTableModel {
         //=============================================================================
         map = new int[rows][columns];
 
+        //uzupełniam wszystkie pola
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
                 map[i][j] = 9;
@@ -43,24 +45,59 @@ public class MapModel extends AbstractTableModel {
                     continue;
                 }
 
-                //generowanie miejsca respawnu duszków
-                if ((columns % 2) == 0) {
+                // generowanie miejsca respawnu duszków
+                if ((columns % 2) == 0) { //dla parzystej ilosci kolumn
                     if (i == rows / 2 && j == columns / 2 || i == rows / 2 && j == columns / 2 - 1) {
                         map[i][j] = resprawn;
-                        continue;
+                        map[i][j - 1] = resprawn;
+                        map[i][j + 1] = resprawn;
+                        map[i][j + 2] = resprawn;
+
+                        map[i - 1][j - 2] = sciana;
+                        map[i - 1][j - 1] = sciana;
+                        map[i - 1][j + 2] = sciana;
+                        map[i - 1][j + 3] = sciana;
+
+                        map[i][j - 2] = sciana;
+                        map[i][j + 3] = sciana;
+
+                        map[i + 1][j - 2] = sciana;
+                        map[i + 1][j - 1] = sciana;
+                        map[i + 1][j] = sciana;
+                        map[i + 1][j + 1] = sciana;
+                        map[i + 1][j + 2] = sciana;
+                        map[i + 1][j + 3] = sciana;
                     }
                 } else { // dla nieparzystej ilośći kolumn
-                    if (i == rows / 2 && j == columns / 2 - 1 || i == rows / 2 && j == columns / 2 || i == rows / 2 && j == columns / 2 + 1) {
+                    if (i == rows / 2 && j == columns / 2 - 1) {
                         map[i][j] = resprawn;
-                        continue;
+                        map[i][j + 1] = resprawn;
+                        map[i][j + 2] = resprawn;
+
+                        map[i - 1][j - 1] = sciana;
+                        map[i - 1][j] = sciana;
+                        map[i - 1][j + 2] = sciana;
+                        map[i - 1][j + 3] = sciana;
+
+                        map[i][j - 1] = sciana;
+                        map[i][j + 3] = sciana;
+
+                        map[i + 1][j - 1] = sciana;
+                        map[i + 1][j] = sciana;
+                        map[i + 1][j + 1] = sciana;
+                        map[i + 1][j + 2] = sciana;
+                        map[i + 1][j + 3] = sciana;
                     }
+                    continue;
                 }
+
 //                tab[i][j] = droga;
             }
         }
 
     }
 
+    // todo renderer
     public void drawMap(Graphics g, int cellSize) {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {

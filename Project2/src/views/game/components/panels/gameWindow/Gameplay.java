@@ -17,7 +17,7 @@ public class Gameplay extends JPanel {
         int sqWidth = sqHeight;
 
         // --------------------------------------------------------------------------------
-        JPanel map = new GameplayMap(sqWidth, sqHeight, pacmanGame);
+        JPanel map = new GameplayMap(sqWidth, sqHeight);
 
         JPanel lives = new JPanel();
         lives.setBackground(Color.BLUE);
