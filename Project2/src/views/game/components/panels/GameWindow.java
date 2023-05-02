@@ -22,6 +22,10 @@ public class GameWindow extends JPanel {
 
         //=======================================================
 
+//        this.setFocusable(true);
+//        this.addKeyListener(new PacmanMovement(mapModel.pacCurrentX, mapModel.pacCurrentY));
+
+        //=======================================================
 
         this.add(currentStats);
         gameplay.setBorder(BorderFactory.createMatteBorder(0, 3, 0, 3, Color.WHITE));

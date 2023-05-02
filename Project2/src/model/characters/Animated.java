@@ -1,6 +1,6 @@
 package model.characters;
 
-import java.awt.image.VolatileImage;
+import java.awt.*;
 
 public interface Animated {
 
@@ -8,6 +8,6 @@ public interface Animated {
     //movement
     //eyes movement
 
-    VolatileImage getAnimatonFrame(long deltaT);
+    Image getAnimatonFrame(long deltaT); //todo change to volatile
 
 }

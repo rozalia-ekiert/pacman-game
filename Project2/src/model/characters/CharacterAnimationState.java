@@ -3,7 +3,9 @@ package model.characters;
 public enum CharacterAnimationState {
     //Player
     PLayerDEFAULT,
-    PLayerCHASE,
+    PLayerOPEN,
+    PlayerCLOSE,
+
     //Ghosts
     GhostsCHASE,
     GhostsSCARED

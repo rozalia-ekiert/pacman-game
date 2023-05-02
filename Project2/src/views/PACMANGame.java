@@ -69,6 +69,9 @@ public class PACMANGame extends JFrame {
 
         //===================================================================================
 
+//        this.setFocusable(true);
+//        this.addKeyListener(new PacmanMovement(MapModel.pacCurrentX, MapModel.pacCurrentY));
+
         this.setVisible(true);
     }
 

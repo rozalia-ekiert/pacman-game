@@ -1,24 +1,30 @@
 package model.map;
 
-import views.GameColors;
+import model.characters.Player;
 
 import javax.swing.table.AbstractTableModel;
 import java.awt.*;
+import java.awt.image.ImageObserver;
 
 public class MapModel extends AbstractTableModel {
 
     int rows;
     int columns;
-    private int[][] map;
+    public static int pacCurrentX;
+    public static int pacCurrentY;
+    private final int[][] map;
+    Player player = new Player();
 
 
     public MapModel(int rows, int columns) {
+
         this.rows = rows;
         this.columns = columns;
 
         int droga = 0;
         int sciana = 1;
         int resprawn = 2;
+        int pacman = 3;
 
         //=============================================================================
         map = new int[rows][columns];
@@ -32,6 +38,8 @@ public class MapModel extends AbstractTableModel {
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
+
+                if (i == rows - rows / 4 && j == columns / 2) map[i][j] = pacman;
 
                 if (map[i][j] != 9) continue;
 
@@ -98,21 +106,33 @@ public class MapModel extends AbstractTableModel {
     }
 
     // todo renderer
-    public void drawMap(Graphics g, int cellSize) {
+    public void drawMap(Graphics g, int cellSize, ImageObserver imageObserver) {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
                 if (this.getValueAt(i, j).equals(0) || this.getValueAt(i, j).equals(2)) continue;
+
+                if (this.getValueAt(i, j).equals(3)) {
+                    int x = j * cellSize + cellSize / 2;
+                    int y = i * cellSize + cellSize / 2;
+
+                    pacCurrentX = x;
+                    pacCurrentY = y;
+
+                    this.player.drawPlayer(g, cellSize, imageObserver, x - cellSize / 2, y - cellSize / 2);
+
+                }
 
                 if (this.getValueAt(i, j).equals(1)) {
 
                     int x = j * cellSize + cellSize / 2;
                     int y = i * cellSize + cellSize / 2;
 
-                    g.setColor(GameColors.blue);
+                    g.setColor(Color.BLUE);
                     g.fillOval(x - cellSize / 2, y - cellSize / 2, cellSize, cellSize);
                 }
             }
         }
+        //========================================
     }
 
     @Override
