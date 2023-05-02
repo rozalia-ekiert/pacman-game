@@ -1,4 +1,4 @@
-package controllers.game;
+package model;
 
 public class NumberFormatter {
     //utility class

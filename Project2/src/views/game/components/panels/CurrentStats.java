@@ -1,6 +1,6 @@
 package views.game.components.panels;
 
-import controllers.game.NumberFormatter;
+import model.NumberFormatter;
 import views.GameColors;
 import views.PACMANGame;
 
@@ -10,7 +10,7 @@ import java.awt.*;
 public class CurrentStats extends JPanel {
 
     //todo
-    int highScore = 055345;
+    int highScore = 55345;
     int yourScore = 555;
     long time = 408000; // w milisekundach
 

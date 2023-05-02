@@ -7,4 +7,6 @@ public class HighScoreData {
     String score;
     String time;
     String gameSize;
+
+
 }
