@@ -28,13 +28,15 @@ public class PACMANGame extends JFrame {
 
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setUndecorated(false);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setResizable(true);
 //        this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("PACMAN GAME");
 
-
         this.setFont(Butterbelly);
+
+        Container contentPane = getContentPane();
 
         //==================================================================================
 
@@ -63,7 +65,7 @@ public class PACMANGame extends JFrame {
         viewsCardPanel.add(menuStart, MENU_VIEW);
         viewsCardPanel.add(game, GAME_VIEW);
 
-        this.add(viewsCardPanel);
+        contentPane.add(viewsCardPanel);
 
         //===================================================================================
 

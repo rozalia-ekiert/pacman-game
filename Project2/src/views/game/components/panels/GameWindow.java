@@ -1,6 +1,9 @@
 package views.game.components.panels;
 
 import views.PACMANGame;
+import views.game.components.panels.gameWindow.Comments;
+import views.game.components.panels.gameWindow.CurrentStats;
+import views.game.components.panels.gameWindow.Gameplay;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,4 +1,4 @@
-package views.game.components.panels;
+package views.game.components.panels.gameWindow;
 
 import views.PACMANGame;
 
