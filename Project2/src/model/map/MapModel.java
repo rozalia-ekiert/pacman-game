@@ -125,6 +125,12 @@ public class MapModel extends AbstractTableModel {
 //        }
 //    }
 
+
+    @Override
+    public Class<?> getColumnClass(int columnIndex) {
+        return Integer.class;
+    }
+
     @Override
     public int getRowCount() {
         return rows;

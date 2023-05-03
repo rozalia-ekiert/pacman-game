@@ -1,7 +1,5 @@
 package controllers.game;
 
-import model.map.MapTable;
-
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -9,11 +7,6 @@ public class PacmanMovement implements KeyListener {
 
     int x;
     int y;
-
-    public PacmanMovement(int x, int y, MapTable mapTable) {
-//        this.x = mapTable.mapModel.getPacCurrentX();
-//        this.y = mapTable.mapModel.getPacCurrentY();
-    }
 
     @Override
     public void keyTyped(KeyEvent e) {

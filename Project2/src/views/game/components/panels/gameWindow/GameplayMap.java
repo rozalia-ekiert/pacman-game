@@ -1,18 +1,18 @@
 package views.game.components.panels.gameWindow;
 
 import model.map.MapModel;
-import model.map.MapTable;
+import model.map.WallRenderer;
 
 import javax.swing.*;
+import javax.swing.table.TableColumn;
 import java.awt.*;
 
 public class GameplayMap extends JPanel {
 
     public static int cellSize;
-    int rows = 30;
-    int columns = 31;
+    int rows = 15;
+    int columns = 15;
     int windowSize;
-    MapTable mapTable;
     MapModel mapModel;
 
 
@@ -22,25 +22,40 @@ public class GameplayMap extends JPanel {
         setCellSize();
 
         this.setBackground(Color.BLACK);
-        this.setSize(new Dimension(sqWidth, sqHeight));
 
         this.mapModel = new MapModel(rows, columns);
         JTable table = new JTable(this.mapModel);
-        table.setFillsViewportHeight(true);
-        add(table);
 
+        table.setFillsViewportHeight(true);
+        table.setDefaultRenderer(Integer.class, new WallRenderer());
+        table.setRowHeight(GameplayMap.cellSize);
+        table.setBackground(Color.BLACK);
+        setTableColumnWidth(table, GameplayMap.cellSize);
+
+        table.setShowGrid(false);
+        table.setShowVerticalLines(false);
+        table.setShowHorizontalLines(false);
+
+        add(table);
 
 //        this.addKeyListener(new PacmanMovement(mapModel.pacCurrentX, mapModel.pacCurrentY, this.mapTable));
     }
 
+    private void setTableColumnWidth(JTable table, int width) {
+        for (int i = 0; i < table.getColumnModel().getColumnCount(); i++) {
+            TableColumn column = table.getColumnModel().getColumn(i);
+            column.setPreferredWidth(width);
+            column.setMaxWidth(width);
+        }
+    }
+
     private int setCellSize() {
         if (columns <= rows) {
-            cellSize = windowSize / this.rows;
-            return cellSize;
-        } else {
-            cellSize = windowSize / this.columns;
+            cellSize = (windowSize / this.rows);
             return cellSize;
         }
+        cellSize = (windowSize) / this.columns;
+        return cellSize;
     }
 
 }
