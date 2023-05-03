@@ -10,11 +10,13 @@ public class Comments extends JPanel {
     String comment; // z pliku?
 
     public Comments(int width, int height, PACMANGame pacmanGame) {
+//        int top = 30;
+//        this.setBorder(BorderFactory.createMatteBorder(top, top, top, top, Color.BLUE));
 
         this.setPreferredSize(new Dimension(width, height));
         this.setBackground(Color.BLACK);
 
-        this.setLayout(new GridBagLayout());
+        this.setLayout(new BoxLayout(this, 0));
 
         this.comment = "be proud of yoursels [player], you just ate cute corgi's soul. was it worth it??"; //todo zmiana
         String text = "<html><center>" + comment + "</center></html>";
@@ -23,7 +25,7 @@ public class Comments extends JPanel {
         textLabel.setBackground(Color.BLACK);
         textLabel.setForeground(Color.WHITE);
         textLabel.setFont(pacmanGame.Butterbelly);
-        textLabel.setPreferredSize(new Dimension((int) (width * 0.75), height));
+//        textLabel.setPreferredSize(new Dimension((int) (width * 0.50), height));
 
         this.add(textLabel);
 

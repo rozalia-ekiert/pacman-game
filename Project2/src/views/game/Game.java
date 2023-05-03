@@ -12,13 +12,17 @@ import java.awt.*;
 
 public class Game extends JPanel {
 
-    public GameCardPanel gameCardPanel;
+    public final GameCardPanel gameCardPanel;
 
     public Game(PACMANGame pacmanGame) {
-        this.setBackground(Color.BLACK);
-        this.setFont(pacmanGame.Butterbelly);
 
-        gameCardPanel = new GameCardPanel();
+//        this.setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, Color.CYAN));
+
+        this.setBackground(Color.BLACK);
+        this.setLayout(new GridLayout(1, 1)); // 1 = według osi Y
+
+        this.setFont(pacmanGame.Butterbelly);
+        this.gameCardPanel = new GameCardPanel();
 
         GameStartScreen1 startScreen1 = new GameStartScreen1(pacmanGame.screenWidth, pacmanGame.screenHeight, pacmanGame);
         GameStartScreen2 startScreen2 = new GameStartScreen2(pacmanGame.screenWidth, pacmanGame.screenHeight, pacmanGame);
@@ -29,6 +33,7 @@ public class Game extends JPanel {
         gameCardPanel.add(startScreen2, GameCardPanel.START_SCREEN_2);
         gameCardPanel.add(gameWindow, GameCardPanel.GAME_WINDOW);
         gameCardPanel.add(gameOver, GameCardPanel.GAME_OVER);
+
 
         this.add(gameCardPanel);
     }

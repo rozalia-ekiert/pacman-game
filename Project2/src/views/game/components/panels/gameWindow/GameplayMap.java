@@ -10,16 +10,24 @@ import java.awt.*;
 public class GameplayMap extends JPanel {
 
     public static int cellSize;
-    int rows = 15;
-    int columns = 15;
+    int rows = 50;
+    int columns = 50;
     int windowSize;
     MapModel mapModel;
 
 
     public GameplayMap(int sqWidth, int sqHeight) {
-        super(new GridLayout(1, 0));
+//        super(new GridBagLayout());
+
         this.windowSize = sqWidth;
+
+        this.setPreferredSize(new Dimension(sqWidth, sqHeight));
+        this.setLayout(new GridBagLayout());
+
         setCellSize();
+
+//        int top = 30;
+//        this.setBorder(BorderFactory.createMatteBorder(top, top, top, top, Color.PINK));
 
         this.setBackground(Color.BLACK);
 
@@ -36,7 +44,13 @@ public class GameplayMap extends JPanel {
         table.setShowVerticalLines(false);
         table.setShowHorizontalLines(false);
 
-        add(table);
+        GridBagConstraints gbc = new GridBagConstraints();
+
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
+        this.add(table, gbc);
 
 //        this.addKeyListener(new PacmanMovement(mapModel.pacCurrentX, mapModel.pacCurrentY, this.mapTable));
     }
@@ -45,7 +59,7 @@ public class GameplayMap extends JPanel {
         for (int i = 0; i < table.getColumnModel().getColumnCount(); i++) {
             TableColumn column = table.getColumnModel().getColumn(i);
             column.setPreferredWidth(width);
-            column.setMaxWidth(width);
+//            column.setMaxWidth(width);
         }
     }
 

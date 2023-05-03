@@ -109,7 +109,7 @@ public class CurrentStats extends JPanel {
         gbc.gridy = 5;
         gbc.gridheight = 1;
         gbc.gridwidth = 1;
-        gbc.insets = new Insets(0, 30, (int) (height * 0.5), (int) (width * 0.6));
+        gbc.insets = new Insets(0, 30, 0, 0);
         this.add(setTime, gbc);
     }
 

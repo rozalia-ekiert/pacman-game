@@ -16,7 +16,6 @@ public class GameViewChange {
         this.game = game;
         this.pacmanGame = pacmanGame;
         this.current = game.gameCardPanel.currentCardName;
-        long now = System.currentTimeMillis();
 
         new SwingWorker() {
             @Override

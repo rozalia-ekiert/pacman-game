@@ -20,11 +20,10 @@ public class Gameplay extends JPanel {
         // --------------------------------------------------------------------------------
         JPanel map = new GameplayMap(sqWidth, sqHeight);
         int top = 30;
-        this.setBorder(BorderFactory.createMatteBorder(top, top, top, top, Color.RED));
+        this.setBorder(BorderFactory.createMatteBorder(top, top, top, top, Color.pink));
 
         // --------------------------------------------------------------------------------
 
-        GridBagConstraints gbc = new GridBagConstraints();
         this.add(map);
     }
 }

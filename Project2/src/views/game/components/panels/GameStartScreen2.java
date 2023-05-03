@@ -8,6 +8,8 @@ import java.awt.*;
 public class GameStartScreen2 extends JPanel {
 
     public GameStartScreen2(int width, int height, PACMANGame pacmanGame) {
+//        int top = 30;
+//        this.setBorder(BorderFactory.createMatteBorder(top, top, top, top, Color.RED));
 
         this.setPreferredSize(new Dimension(width, height));
         this.setBackground(Color.BLACK);
