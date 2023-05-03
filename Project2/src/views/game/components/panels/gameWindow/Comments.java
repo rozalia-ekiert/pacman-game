@@ -10,8 +10,6 @@ public class Comments extends JPanel {
     String comment; // z pliku?
 
     public Comments(int width, int height, PACMANGame pacmanGame) {
-//        int top = 30;
-//        this.setBorder(BorderFactory.createMatteBorder(top, top, top, top, Color.BLUE));
 
         this.setPreferredSize(new Dimension(width, height));
         this.setBackground(Color.BLACK);

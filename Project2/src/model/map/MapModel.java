@@ -52,23 +52,23 @@ public class MapModel extends AbstractTableModel {
                     if (i == rows / 2 && j == columns / 2) {
                         map[i][j] = resprawn;
                         map[i][j - 1] = resprawn;
+                        map[i][j - 2] = resprawn;
                         map[i][j + 1] = resprawn;
-                        map[i][j + 2] = resprawn;
 
                         map[i - 1][j - 2] = sciana;
-                        map[i - 1][j - 1] = sciana;
+                        map[i - 1][j - 3] = sciana;
+                        map[i - 1][j + 1] = sciana;
                         map[i - 1][j + 2] = sciana;
-                        map[i - 1][j + 3] = sciana;
 
-                        map[i][j - 2] = sciana;
-                        map[i][j + 3] = sciana;
+                        map[i][j - 3] = sciana;
+                        map[i][j + 2] = sciana;
 
+                        map[i + 1][j - 3] = sciana;
                         map[i + 1][j - 2] = sciana;
                         map[i + 1][j - 1] = sciana;
                         map[i + 1][j] = sciana;
                         map[i + 1][j + 1] = sciana;
                         map[i + 1][j + 2] = sciana;
-                        map[i + 1][j + 3] = sciana;
                     }
                 } else { // dla nieparzystej ilośći kolumn
                     if (i == rows / 2 && j == columns / 2 - 1) {

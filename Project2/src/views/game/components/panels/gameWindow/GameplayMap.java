@@ -10,14 +10,13 @@ import java.awt.*;
 public class GameplayMap extends JPanel {
 
     public static int cellSize;
-    int rows = 50;
-    int columns = 50;
+    int rows = 30;
+    int columns = 30;
     int windowSize;
     MapModel mapModel;
 
 
     public GameplayMap(int sqWidth, int sqHeight) {
-//        super(new GridBagLayout());
 
         this.windowSize = sqWidth;
 
@@ -25,9 +24,6 @@ public class GameplayMap extends JPanel {
         this.setLayout(new GridBagLayout());
 
         setCellSize();
-
-//        int top = 30;
-//        this.setBorder(BorderFactory.createMatteBorder(top, top, top, top, Color.PINK));
 
         this.setBackground(Color.BLACK);
 
