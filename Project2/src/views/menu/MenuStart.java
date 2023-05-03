@@ -27,11 +27,18 @@ public class MenuStart extends JPanel {
         Heading heading = new Heading(width, (int) (height * 0.27));
         Buttons buttons = new Buttons(width, (int) (height * 0.08), this, pacmanGame);
 
+//        buttons.setFocusable(true);
+
         MiddleText middleText = new MiddleText(width, (int) (height * 0.5), pacmanGame);
+        NewGame newGame = new NewGame(width, height, pacmanGame, this, game);
+        HighScores highScores = new HighScores(width, height, pacmanGame);
+
+//        newGame.setFocusable(true);
+
         cardsPanel = new MenuCardPanel();
         cardsPanel.add(middleText, MenuCardPanel.TEXT);
-        cardsPanel.add(new NewGame(width, height, pacmanGame, this, game), MenuCardPanel.NEWGAME);
-        cardsPanel.add(new HighScores(width, height, pacmanGame), MenuCardPanel.HIGHSCORE);
+        cardsPanel.add(newGame, MenuCardPanel.NEWGAME);
+        cardsPanel.add(highScores, MenuCardPanel.HIGHSCORE);
 
         LowerMenu lowerMenu = new LowerMenu(width, (int) (height * 0.15));
 

@@ -10,13 +10,15 @@ import java.awt.*;
 
 public class GameWindow extends JPanel {
 
+    public Gameplay gameplay;
+
     public GameWindow(int width, int height, PACMANGame pacmanGame) {
 
         this.setPreferredSize(new Dimension(width, height));
         this.setBackground(Color.BLACK);
 
         CurrentStats currentStats = new CurrentStats((int) (width * 0.2), height, pacmanGame);
-        Gameplay gameplay = new Gameplay((int) (width * 0.6), height, pacmanGame);
+        gameplay = new Gameplay((int) (width * 0.6), height, pacmanGame);
         Comments comments = new Comments((int) (width * 0.2), height, pacmanGame);
 
         this.setLayout(new BoxLayout(this, 0));

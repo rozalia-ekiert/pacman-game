@@ -7,6 +7,7 @@ import java.awt.*;
 
 public class Gameplay extends JPanel {
 
+    public GameplayMap map;
     public Gameplay(int width, int height, PACMANGame pacmanGame) {
 
         this.setPreferredSize(new Dimension(width, height));
@@ -14,15 +15,10 @@ public class Gameplay extends JPanel {
         this.setBackground(Color.BLACK);
         this.setLayout(new GridBagLayout());
 
-        int sqHeight = (int) (height * 0.8);
+        int sqHeight = (int) (height * 0.9);
         int sqWidth = sqHeight;
 
-        // --------------------------------------------------------------------------------
-        JPanel map = new GameplayMap(sqWidth, sqHeight);
-        int top = 30;
-        this.setBorder(BorderFactory.createMatteBorder(top, top, top, top, Color.pink));
-
-        // --------------------------------------------------------------------------------
+        map = new GameplayMap(sqWidth, sqHeight);
 
         this.add(map);
     }

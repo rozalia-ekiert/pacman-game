@@ -38,6 +38,9 @@ public class PlayButtonMouseListener implements MouseListener {
             cl.show(this.pacmanGame.viewsCardPanel, ViewCardPanel.GAME_VIEW);
             this.pacmanGame.viewsCardPanel.currentCardName = ViewCardPanel.GAME_VIEW;
 
+//            game.gameWindow.gameplay.map.mapTable.setFocusable(true);
+//            game.gameWindow.gameplay.map.mapTable.requestFocusInWindow();
+
             GameViewChange gameViewChange = new GameViewChange(game, pacmanGame);
         }
     }

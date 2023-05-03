@@ -1,15 +1,35 @@
 package model.map;
 
+import model.characters.Enemy;
+import model.characters.Player;
+
 import javax.swing.table.AbstractTableModel;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class MapModel extends AbstractTableModel {
 
     int rows;
-
     int columns;
     private final int[][] map;
-//    Player player = new Player();
+
+    public static Player player = new Player();
+    public static Enemy blueEnemy = new Enemy();
+    public static Enemy pinkEnemy = new Enemy();
+    public static Enemy greenEnemy = new Enemy();
+    public static Enemy purpleEnemy = new Enemy();
+
+    int playerX;
+    int playerY;
+
+    int droga = 0;
+    int sciana = 1;
+    int resprawn = 0;
+    int pacman = 3;
+    int blue = 4;
+    int purple = 5;
+    int green = 6;
+    int pink = 7;
 
 
     public MapModel(int rows, int columns) {
@@ -17,13 +37,17 @@ public class MapModel extends AbstractTableModel {
         this.rows = rows;
         this.columns = columns;
 
-        int droga = 0;
-        int sciana = 1;
-        int resprawn = 2;
-//        int pacman = 3;
-
         //=============================================================================
-        map = new int[rows][columns];
+        this.map = generateMap(rows, columns);
+//        setPlayerLocation(rows-rows/4, columns/2);
+        setValueAt(pacman, rows - rows / 4, columns / 2);
+
+        showModel();
+    }
+
+
+    public int[][] generateMap(int rows, int columns) {
+        int[][] map = new int[rows][columns];
 
         //uzupełniam wszystkie pola
         for (int i = 0; i < rows; i++) {
@@ -32,8 +56,6 @@ public class MapModel extends AbstractTableModel {
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
-
-//                if (i == rows - rows / 4 && j == columns / 2) map[i][j] = pacman;
 
                 if (map[i][j] != 9) continue;
 
@@ -50,10 +72,10 @@ public class MapModel extends AbstractTableModel {
                 // generowanie miejsca respawnu duszków
                 if ((columns % 2) == 0) { //dla parzystej ilosci kolumn
                     if (i == rows / 2 && j == columns / 2) {
-                        map[i][j] = resprawn;
-                        map[i][j - 1] = resprawn;
-                        map[i][j - 2] = resprawn;
-                        map[i][j + 1] = resprawn;
+                        map[i][j] = blue;
+                        map[i][j - 1] = purple;
+                        map[i][j - 2] = green;
+                        map[i][j + 1] = pink;
 
                         map[i - 1][j - 2] = sciana;
                         map[i - 1][j - 3] = sciana;
@@ -72,9 +94,10 @@ public class MapModel extends AbstractTableModel {
                     }
                 } else { // dla nieparzystej ilośći kolumn
                     if (i == rows / 2 && j == columns / 2 - 1) {
-                        map[i][j] = resprawn;
-                        map[i][j + 1] = resprawn;
-                        map[i][j + 2] = resprawn;
+                        map[i][j] = blue;
+                        map[i][j + 1] = purple;
+                        map[i][j + 2] = green;
+                        map[i - 2][j + 1] = pink;
 
                         map[i - 1][j - 1] = sciana;
                         map[i - 1][j] = sciana;
@@ -96,35 +119,17 @@ public class MapModel extends AbstractTableModel {
                 map[i][j] = droga;
             }
         }
-
+        return map;
     }
 
-//    public void drawMap(Graphics g, int cellSize, ImageObserver imageObserver) {
-//        for (int i = 0; i < rows; i++) {
-//            for (int j = 0; j < columns; j++) {
-//                if (this.getValueAt(i, j).equals(0) || this.getValueAt(i, j).equals(2)) continue;
-//
-////                if (this.getValueAt(i, j).equals(3)) {
-////                    int x = j * cellSize + cellSize / 2;
-////                    int y = i * cellSize + cellSize / 2;
-////                    setPacCurrentY(x);
-////                    setPacCurrentX(y);
-////
-////                    this.player.drawPlayer(g, cellSize, imageObserver, getPacCurrentX() - cellSize / 2, getPacCurrentY() - cellSize / 2);
-////                }
-//
-//                if (this.getValueAt(i, j).equals(1)) {
-//
-//                    int x = j * cellSize + cellSize / 2;
-//                    int y = i * cellSize + cellSize / 2;
-//
-//                    g.setColor(Color.BLUE);
-//                    g.fillOval(x - cellSize / 2, y - cellSize / 2, cellSize, cellSize);
-//                }
-//            }
-//        }
-//    }
-
+    public void showModel() {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                System.out.print(map[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
 
     @Override
     public Class<?> getColumnClass(int columnIndex) {
@@ -145,4 +150,47 @@ public class MapModel extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         return map[rowIndex][columnIndex];
     }
+
+    @Override
+    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+        this.map[rowIndex][columnIndex] = (int) aValue;
+        fireTableCellUpdated(rowIndex, columnIndex);
+        this.playerY = columnIndex;
+        this.playerX = rowIndex;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MapModel mapModel = (MapModel) o;
+        return rows == mapModel.rows && columns == mapModel.columns;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(rows, columns);
+        result = 31 * result + Arrays.hashCode(map);
+        return result;
+    }
+
+
+    public int getPlayerX() {
+        return playerX;
+    }
+
+    public void setPlayerXUstawKolumne(int playerX) {
+        setValueAt(0, getPlayerX(), getPlayerY());
+        setValueAt(3, playerX, getPlayerY());
+    }
+
+    public int getPlayerY() {
+        return playerY;
+    }
+
+    public void setPlayerYUstawRzad(int playerY) {
+        setValueAt(0, getPlayerX(), getPlayerY());
+        setValueAt(3, getPlayerX(), playerY);
+    }
+
 }

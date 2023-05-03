@@ -15,6 +15,9 @@ public class PACMANGame extends JFrame {
     public String currentCardName = MENU_VIEW;
     public ViewCardPanel viewsCardPanel;
 
+    public MenuStart menuStart;
+    public Game game;
+
     public int screenWidth;
     public int screenHeight;
     public Font Butterbelly;
@@ -58,8 +61,8 @@ public class PACMANGame extends JFrame {
 
         this.viewsCardPanel = new ViewCardPanel();
 
-        Game game = new Game(this);
-        MenuStart menuStart = new MenuStart(this, game);
+        game = new Game(this);
+        menuStart = new MenuStart(this, game);
 
         viewsCardPanel.add(menuStart, MENU_VIEW);
         viewsCardPanel.add(game, GAME_VIEW);
@@ -67,9 +70,6 @@ public class PACMANGame extends JFrame {
         contentPane.add(viewsCardPanel);
 
         //===================================================================================
-
-//        this.setFocusable(true);
-//        this.addKeyListener(new PacmanMovement(MapModel.pacCurrentX, MapModel.pacCurrentY));
 
         this.setVisible(true);
     }

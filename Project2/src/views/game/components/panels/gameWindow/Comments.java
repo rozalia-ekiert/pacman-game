@@ -16,14 +16,13 @@ public class Comments extends JPanel {
 
         this.setLayout(new BoxLayout(this, 0));
 
-        this.comment = "be proud of yoursels [player], you just ate cute corgi's soul. was it worth it??"; //todo zmiana
+        this.comment = "be proud of yourself [player], you just ate cute corgi's soul. was it worth it??"; //todo zmiana
         String text = "<html><center>" + comment + "</center></html>";
 
         JLabel textLabel = new JLabel(text);
         textLabel.setBackground(Color.BLACK);
         textLabel.setForeground(Color.WHITE);
         textLabel.setFont(pacmanGame.Butterbelly);
-//        textLabel.setPreferredSize(new Dimension((int) (width * 0.50), height));
 
         this.add(textLabel);
 
