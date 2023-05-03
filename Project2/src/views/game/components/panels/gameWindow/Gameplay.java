@@ -19,16 +19,6 @@ public class Gameplay extends JPanel {
         // --------------------------------------------------------------------------------
         JPanel map = new GameplayMap(sqWidth, sqHeight);
 
-        JPanel lives = new JPanel();
-        lives.setBackground(Color.BLUE);
-        lives.setPreferredSize(new Dimension(sqWidth, 40));
-
-        String t2 = "ja piedoleeeee";
-        JTextArea textarea2 = new JTextArea(t2, 1, 10);
-        textarea2.setForeground(Color.ORANGE);
-        textarea2.setBackground(Color.BLUE);
-        textarea2.setFont(pacmanGame.Butterbelly);
-        lives.add(textarea2);
         // --------------------------------------------------------------------------------
 
         GridBagConstraints gbc = new GridBagConstraints();

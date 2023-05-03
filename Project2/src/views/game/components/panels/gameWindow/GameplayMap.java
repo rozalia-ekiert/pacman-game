@@ -1,6 +1,5 @@
 package views.game.components.panels.gameWindow;
 
-import controllers.game.PacmanMovement;
 import model.map.MapModel;
 import model.map.MapTable;
 
@@ -9,27 +8,29 @@ import java.awt.*;
 
 public class GameplayMap extends JPanel {
 
-    public int cellSize; // = setCellSize();
+    public static int cellSize;
     int rows = 30;
     int columns = 31;
     int windowSize;
     MapTable mapTable;
-    MapModel mapModel = MapTable.mapModel;
+    MapModel mapModel;
 
 
     public GameplayMap(int sqWidth, int sqHeight) {
+        super(new GridLayout(1, 0));
         this.windowSize = sqWidth;
         setCellSize();
 
         this.setBackground(Color.BLACK);
-        this.setPreferredSize(new Dimension(sqWidth, sqHeight));
-        this.setLayout(null);
+        this.setSize(new Dimension(sqWidth, sqHeight));
 
         this.mapModel = new MapModel(rows, columns);
-        this.mapTable = new MapTable(rows, columns, this.mapModel);
+        JTable table = new JTable(this.mapModel);
+        table.setFillsViewportHeight(true);
+        add(table);
 
-        this.setFocusable(true);
-        this.addKeyListener(new PacmanMovement(mapModel.pacCurrentX, mapModel.pacCurrentY));
+
+//        this.addKeyListener(new PacmanMovement(mapModel.pacCurrentX, mapModel.pacCurrentY, this.mapTable));
     }
 
     private int setCellSize() {
@@ -40,14 +41,6 @@ public class GameplayMap extends JPanel {
             cellSize = windowSize / this.columns;
             return cellSize;
         }
-    }
-
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-
-        this.mapModel.drawMap(g, cellSize, this);
-
     }
 
 }

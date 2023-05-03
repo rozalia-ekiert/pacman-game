@@ -15,10 +15,6 @@ public class Game extends JPanel {
     public GameCardPanel gameCardPanel;
 
     public Game(PACMANGame pacmanGame) {
-
-        int width = pacmanGame.screenWidth;
-        int height = pacmanGame.screenHeight;
-
         this.setBackground(Color.BLACK);
         this.setFont(pacmanGame.Butterbelly);
 
