@@ -43,6 +43,8 @@ public class GameplayMap extends JPanel {
         mapTable.setShowGrid(false);
         mapTable.setShowVerticalLines(false);
         mapTable.setShowHorizontalLines(false);
+        mapTable.setCellSelectionEnabled(false);
+
 
         GridBagConstraints gbc = new GridBagConstraints();
 
@@ -58,7 +60,7 @@ public class GameplayMap extends JPanel {
         mapTable.addKeyListener(keyListener);
 
         mapTable.setFocusable(true);
-        mapTable.requestFocusInWindow();
+        mapTable.grabFocus();
 
         //=========================================================================
     }

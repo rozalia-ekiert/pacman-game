@@ -4,6 +4,7 @@ import model.characters.Enemy;
 import model.characters.Player;
 
 import javax.swing.table.AbstractTableModel;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class MapModel extends AbstractTableModel {
@@ -13,10 +14,13 @@ public class MapModel extends AbstractTableModel {
     private final int[][] map;
 
     public static Player player = new Player();
-    public static Enemy blueEnemy = new Enemy();
-    public static Enemy pinkEnemy = new Enemy();
-    public static Enemy greenEnemy = new Enemy();
-    public static Enemy purpleEnemy = new Enemy();
+//    public static Enemy blueEnemy = new Enemy();
+//    public static Enemy pinkEnemy = new Enemy();
+//    public static Enemy greenEnemy = new Enemy();
+//    public static Enemy purpleEnemy = new Enemy();
+
+    public static final ArrayList<Enemy> enemies = new ArrayList<>();
+
 
     int playerX;
     int playerY;
@@ -40,7 +44,10 @@ public class MapModel extends AbstractTableModel {
         this.map = generateMap(rows, columns);
         setValueAt(pacman, rows - rows / 4, columns / 2);
 
-        showModel();
+        enemies.add(new Enemy());
+        enemies.add(new Enemy());
+        enemies.add(new Enemy());
+        enemies.add(new Enemy());
     }
 
 

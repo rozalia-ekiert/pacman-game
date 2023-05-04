@@ -1,7 +1,6 @@
 package model.map;
 
 import model.characters.CharacterAnimationState;
-import model.characters.Enemy;
 import model.characters.Player;
 import views.game.components.panels.gameWindow.GameplayMap;
 
@@ -9,7 +8,8 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 
-import static model.map.MapModel.*;
+import static model.map.MapModel.enemies;
+import static model.map.MapModel.player;
 
 public class MapComponentsRenderer extends DefaultTableCellRenderer {
     public MapComponentsRenderer() {
@@ -47,7 +47,7 @@ public class MapComponentsRenderer extends DefaultTableCellRenderer {
                 @Override
                 public void paint(Graphics g) {
                     super.paint(g);
-                    g.drawImage(blueEnemy.getEnemyImage(CharacterAnimationState.GhostBLUE), 0, 0, (int) (cellSize * 0.9), (int) (cellSize * 0.9), this);
+                    g.drawImage(enemies.get(0).getEnemyImage(CharacterAnimationState.GhostBLUE), 0, 0, (int) (cellSize * 0.9), (int) (cellSize * 0.9), this);
                 }
             };
         }
@@ -57,29 +57,27 @@ public class MapComponentsRenderer extends DefaultTableCellRenderer {
                 @Override
                 public void paint(Graphics g) {
                     super.paint(g);
-                    g.drawImage(purpleEnemy.getEnemyImage(CharacterAnimationState.GhostPURPLE), 0, 0, (int) (cellSize * 0.9), (int) (cellSize * 0.9), this);
+                    g.drawImage(enemies.get(1).getEnemyImage(CharacterAnimationState.GhostPURPLE), 0, 0, (int) (cellSize * 0.9), (int) (cellSize * 0.9), this);
                 }
             };
         }
 
         if (table.getValueAt(row, column).equals(6)) {
-            Enemy enemy = new Enemy();
             return new JComponent() {
                 @Override
                 public void paint(Graphics g) {
                     super.paint(g);
-                    g.drawImage(greenEnemy.getEnemyImage(CharacterAnimationState.GhostGREEN), 0, 0, (int) (cellSize * 0.9), (int) (cellSize * 0.9), this);
+                    g.drawImage(enemies.get(2).getEnemyImage(CharacterAnimationState.GhostGREEN), 0, 0, (int) (cellSize * 0.9), (int) (cellSize * 0.9), this);
                 }
             };
         }
 
         if (table.getValueAt(row, column).equals(7)) {
-            Enemy enemy = new Enemy();
             return new JComponent() {
                 @Override
                 public void paint(Graphics g) {
                     super.paint(g);
-                    g.drawImage(pinkEnemy.getEnemyImage(CharacterAnimationState.GhostPINK), 0, 0, (int) (cellSize * 0.9), (int) (cellSize * 0.9), this);
+                    g.drawImage(enemies.get(3).getEnemyImage(CharacterAnimationState.GhostPINK), 0, 0, (int) (cellSize * 0.9), (int) (cellSize * 0.9), this);
                 }
             };
         }

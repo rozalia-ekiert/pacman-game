@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Enemy extends Character {
+    Map<CharacterAnimationState, List<Image>> animacje;    Image green = setEnemiesImages(1);
+    double speed = 80;    Image blue = setEnemiesImages(2);
 
     public Image setEnemiesImages(int a) {
 
@@ -30,7 +32,7 @@ public class Enemy extends Character {
             System.out.println("Nieprawidłowe zdjęcie.");
         }
         return null;
-    }    Image pink = setEnemiesImages(0);
+    }    Image purple = setEnemiesImages(3);
 
     public Image getEnemyImage(CharacterAnimationState characterAnimationState) {
         Image currentImg = null;
@@ -53,22 +55,23 @@ public class Enemy extends Character {
             }
         }
         return null;
-    }    Image green = setEnemiesImages(1);
-    Image blue = setEnemiesImages(2);
-    Image purple = setEnemiesImages(3);
+    }    Image pink = setEnemiesImages(0);
 
-
-    Map<CharacterAnimationState, List<Image>> animacje;
 //    Image currentState;
 
-    double speed = 80;
+
+
+
+
+
+
+
+
 
     @Override
     public Image getAnimatonFrame(long deltaT) {
         return null;
     }
-
-
 
 
 }
