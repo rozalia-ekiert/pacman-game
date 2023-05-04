@@ -5,7 +5,6 @@ import model.characters.Player;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.Arrays;
-import java.util.Objects;
 
 public class MapModel extends AbstractTableModel {
 
@@ -158,21 +157,6 @@ public class MapModel extends AbstractTableModel {
         this.playerX = rowIndex;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        MapModel mapModel = (MapModel) o;
-        return rows == mapModel.rows && columns == mapModel.columns;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = Objects.hash(rows, columns);
-        result = 31 * result + Arrays.hashCode(map);
-        return result;
-    }
-
 
     public int getPlayerX() {
         return playerX;
@@ -197,7 +181,7 @@ public class MapModel extends AbstractTableModel {
     }
 
     private boolean isWall(int playerX, int playerY) {
-        return getValueAt(playerX, playerY).equals(1);
+        return map[playerX][playerY] == 1;
     }
 
 }
