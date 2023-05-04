@@ -159,11 +159,6 @@ public class MapModel extends AbstractTableModel {
     }
 
     @Override
-    public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return !getValueAt(rowIndex, columnIndex).equals(1);
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -184,7 +179,7 @@ public class MapModel extends AbstractTableModel {
     }
 
     public void setPlayerXUstawKolumne(int playerX) {
-        if (isCellEditable(playerX, getPlayerY())) {
+        if (!isWall(playerX, getPlayerY())) {
             setValueAt(0, getPlayerX(), getPlayerY());
             setValueAt(3, playerX, getPlayerY());
         }
@@ -195,10 +190,14 @@ public class MapModel extends AbstractTableModel {
     }
 
     public void setPlayerYUstawRzad(int playerY) {
-        if (isCellEditable(getPlayerX(), playerY)) {
+        if (!isWall(getPlayerX(), playerY)) {
             setValueAt(0, getPlayerX(), getPlayerY());
             setValueAt(3, getPlayerX(), playerY);
         }
+    }
+
+    private boolean isWall(int playerX, int playerY) {
+        return getValueAt(playerX, playerY).equals(1);
     }
 
 }
