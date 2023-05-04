@@ -15,18 +15,18 @@ public class Main {
 
         PACMANGame pacmanGame = new PACMANGame();
 
-        Thread movement = new Thread(() -> {
-            long now = System.currentTimeMillis();
-//            long tick = 0;
-            while (true) {
-                if (System.currentTimeMillis() - now < 1000 / updatesPerSecond) {
-                    continue;
-                }
-//                tick++;
-                pacmanGame.game.gameWindow.repaint();
-                now = System.currentTimeMillis();
-            }
-        });
+//        Thread movement = new Thread(() -> {
+//            long now = System.currentTimeMillis();
+////            long tick = 0;
+//            while (true) {
+//                if (System.currentTimeMillis() - now < 1000 / updatesPerSecond) {
+//                    continue;
+//                }
+////                tick++;
+//                pacmanGame.game.gameWindow.repaint();
+//                now = System.currentTimeMillis();
+//            }
+//        });
 
         KeyboardFocusManager.getCurrentKeyboardFocusManager().addPropertyChangeListener("permanentFocusOwner", new PropertyChangeListener() {
             @Override

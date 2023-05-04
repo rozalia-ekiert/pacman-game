@@ -27,16 +27,16 @@ public class KeyMovement implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
-            case KeyEvent.VK_W -> {
+            case KeyEvent.VK_W, KeyEvent.VK_UP -> {
                 mapModel.setPlayerXUstawKolumne(mapModel.getPlayerX() - 1);
             }
-            case KeyEvent.VK_A -> {
+            case KeyEvent.VK_A, KeyEvent.VK_LEFT -> {
                 mapModel.setPlayerYUstawRzad(mapModel.getPlayerY() - 1);
             }
-            case KeyEvent.VK_S -> {
+            case KeyEvent.VK_S, KeyEvent.VK_DOWN -> {
                 mapModel.setPlayerXUstawKolumne(mapModel.getPlayerX() + 1);
             }
-            case KeyEvent.VK_D -> {
+            case KeyEvent.VK_D, KeyEvent.VK_RIGHT -> {
                 mapModel.setPlayerYUstawRzad(mapModel.getPlayerY() + 1);
             }
             default -> {
