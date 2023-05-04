@@ -13,10 +13,10 @@ public class GameplayMap extends JPanel {
 
     public static int cellSize;
     public JTable mapTable;
-    int rows = 26;
+    int rows = 100;
     int windowSize;
     MapModel mapModel;
-    int columns = 27;
+    int columns = 100;
 
 
     public GameplayMap(int sqWidth, int sqHeight) {
@@ -36,6 +36,7 @@ public class GameplayMap extends JPanel {
 
         mapTable.setFillsViewportHeight(true);
         mapTable.setDefaultRenderer(Integer.class, new MapComponentsRenderer());
+
         mapTable.setRowHeight(GameplayMap.cellSize);
         mapTable.setBackground(Color.BLACK);
         setTableColumnWidth(mapTable, GameplayMap.cellSize);
@@ -68,7 +69,8 @@ public class GameplayMap extends JPanel {
     private void setTableColumnWidth(JTable table, int width) {
         for (int i = 0; i < table.getColumnModel().getColumnCount(); i++) {
             TableColumn column = table.getColumnModel().getColumn(i);
-            column.setPreferredWidth(width);
+            column.setMaxWidth(width);
+            column.setMinWidth(width);
         }
     }
 
