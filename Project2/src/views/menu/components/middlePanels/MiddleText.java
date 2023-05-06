@@ -11,6 +11,8 @@ public class MiddleText extends JPanel {
         this.setPreferredSize(new Dimension(width, height));
         this.setBackground(Color.BLACK);
 
+        this.setFocusable(false);
+
         this.setLayout(new GridBagLayout());
 
         String text = "<html><center>The classic and enormously popular Pac-Manvideo game came out<br>" +

@@ -11,7 +11,7 @@ public class CurrentStats extends JPanel {
 
     //todo
     int highScore = 55345;
-    int yourScore = 555;
+    public static int yourScore = 0;
     long time = 408000; // w milisekundach
 
     JLabel highScoreArea;

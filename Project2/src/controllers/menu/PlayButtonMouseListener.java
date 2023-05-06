@@ -34,14 +34,26 @@ public class PlayButtonMouseListener implements MouseListener {
         if (e.getSource() == this.play) {
             //todo jeśli pola nie są wypełnione nie rób
 
+//            game.gameWindow.gameplay.map.mapTable.setFocusable(true);
+//            game.gameWindow.gameplay.map.mapTable.requestFocus();
+//            game.gameWindow.gameplay.map.mapTable.grabFocus();
+
+//            game.addKeyListener(new KeyMovement(game.gameWindow.gameplay.map.mapTable, game.gameWindow.gameplay.map.mapModel));
+//            game.setFocusable(true);
+//            game.requestFocusInWindow();
+
+            System.out.println(newGame.play.isFocusOwner()); //true
+
+//            newGame.play.setFocusable(false);
+//            newGame.play.setEnabled(false);
+//            newGame.play.setFocusTraversalKeysEnabled(false);
+
             CardLayout cl = (CardLayout) (this.pacmanGame.viewsCardPanel.getLayout());
             cl.show(this.pacmanGame.viewsCardPanel, ViewCardPanel.GAME_VIEW);
             this.pacmanGame.viewsCardPanel.currentCardName = ViewCardPanel.GAME_VIEW;
 
-//            game.gameWindow.gameplay.map.mapTable.setFocusable(true);
-//            game.gameWindow.gameplay.map.mapTable.requestFocusInWindow();
-
             GameViewChange gameViewChange = new GameViewChange(game, pacmanGame);
+
         }
     }
 

@@ -8,8 +8,8 @@ import java.awt.event.KeyListener;
 
 public class KeyMovement implements KeyListener {
 
-    int playerRow; //y
-    int playerColumn; //x
+    int playerRow;
+    int playerColumn;
     JTable table;
     MapModel mapModel;
 

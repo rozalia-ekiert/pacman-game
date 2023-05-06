@@ -4,14 +4,37 @@ import model.characters.CharacterAnimationState;
 import model.characters.Player;
 import views.game.components.panels.gameWindow.GameplayMap;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 import static model.map.MapModel.enemies;
 import static model.map.MapModel.player;
 
 public class MapComponentsRenderer extends DefaultTableCellRenderer {
+
+    Image cookieSmall;
+    Image cookieBig;
+
+    {
+        try {
+            cookieSmall = ImageIO.read(new File("assets/cookies/cookie_small.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    {
+        try {
+            cookieBig = ImageIO.read(new File("assets/cookies/cookie_big.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public MapComponentsRenderer() {
         super();
     }
@@ -19,6 +42,17 @@ public class MapComponentsRenderer extends DefaultTableCellRenderer {
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         int cellSize = GameplayMap.cellSize;
+
+        if (table.getValueAt(row, column).equals(0)) {
+            JComponent component = new JComponent() {
+                @Override
+                public void paint(Graphics g) {
+                    super.paint(g);
+                    g.drawImage(cookieSmall, 0, 0, cellSize, cellSize, this);
+                }
+            };
+            return component;
+        }
 
         if (table.getValueAt(row, column).equals(1)) {
             JComponent component = new JComponent() {

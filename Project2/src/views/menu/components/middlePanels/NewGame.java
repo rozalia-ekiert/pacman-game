@@ -8,6 +8,8 @@ import views.menu.MenuStart;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 
 public class NewGame extends JPanel {
@@ -37,12 +39,14 @@ public class NewGame extends JPanel {
 
         //------------------------------------------ wiersz 0
         JTextArea rows = new JTextArea("rows");
+        rows.setFocusable(false);
         rows.setForeground(Color.WHITE);
         rows.setBackground(Color.BLACK);
         rows.setFont(font2);
         rows.setEditable(false);
 
         JTextArea columns = new JTextArea("columns");
+        columns.setFocusable(false);
         columns.setForeground(Color.WHITE);
         columns.setBackground(Color.BLACK);
         columns.setFont(font2);
@@ -70,6 +74,7 @@ public class NewGame extends JPanel {
 
         //------------------------------------------ wiersz 2
         JTextArea yourNick = new JTextArea(this.yourNick);
+        yourNick.setFocusable(false);
         yourNick.setForeground(Color.WHITE);
         yourNick.setBackground(Color.BLACK);
         yourNick.setFont(font1);
@@ -167,7 +172,19 @@ public class NewGame extends JPanel {
         this.add(gradientText, gbc);
 
         this.play.addMouseListener(new PlayButtonMouseListener(this, pacmanGame, game));
+        this.play.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                super.focusGained(e);
+                System.out.println("przycisk ma focus");
+            }
 
+            @Override
+            public void focusLost(FocusEvent e) {
+                super.focusLost(e);
+                System.out.println("przycisk traci focus");
+            }
+        });
     }
 }
 

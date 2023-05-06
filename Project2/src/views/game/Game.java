@@ -19,6 +19,8 @@ public class Game extends JPanel {
 
         this.setBackground(Color.BLACK);
         this.setLayout(new GridLayout(1, 1)); // 1 = według osi Y
+        this.setFocusable(false);
+
 
         this.setFont(pacmanGame.Butterbelly);
         this.gameCardPanel = new GameCardPanel();

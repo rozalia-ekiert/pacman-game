@@ -10,7 +10,7 @@ public class GameOver extends JPanel {
     public GameOver(int width, int height, PACMANGame pacmanGameFrame) {
         this.setPreferredSize(new Dimension(width, height));
         this.setBackground(Color.BLACK);
-
+//        this.setFocusable(false);
         this.setLayout(new GridBagLayout());
 
 

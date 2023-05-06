@@ -16,16 +16,13 @@ public class GameWindow extends JPanel {
 
         this.setPreferredSize(new Dimension(width, height));
         this.setBackground(Color.BLACK);
+//        this.setFocusable(false);
 
         CurrentStats currentStats = new CurrentStats((int) (width * 0.2), height, pacmanGame);
         gameplay = new Gameplay((int) (width * 0.6), height, pacmanGame);
         Comments comments = new Comments((int) (width * 0.2), height, pacmanGame);
 
         this.setLayout(new BoxLayout(this, 0));
-        //=======================================================
-
-//        this.setFocusable(true);
-//        this.addKeyListener(new PacmanMovement(mapModel.pacCurrentX, mapModel.pacCurrentY));
 
         //=======================================================
 

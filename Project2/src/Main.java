@@ -15,7 +15,6 @@ public class Main {
 
         PACMANGame pacmanGame = new PACMANGame();
 
-
         KeyboardFocusManager.getCurrentKeyboardFocusManager().addPropertyChangeListener("permanentFocusOwner", new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {

@@ -2,6 +2,7 @@ package model.map;
 
 import model.characters.Enemy;
 import model.characters.Player;
+import views.game.components.panels.gameWindow.CurrentStats;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
@@ -48,6 +49,8 @@ public class MapModel extends AbstractTableModel {
         enemies.add(new Enemy());
         enemies.add(new Enemy());
         enemies.add(new Enemy());
+
+        showModel();
     }
 
 
@@ -96,8 +99,11 @@ public class MapModel extends AbstractTableModel {
                         map[i + 1][j] = sciana;
                         map[i + 1][j + 1] = sciana;
                         map[i + 1][j + 2] = sciana;
+                        continue;
                     }
-                } else { // dla nieparzystej ilośći kolumn
+
+                }
+                if ((columns % 2) != 0) { // dla nieparzystej ilośći kolumn
                     if (i == rows / 2 && j == columns / 2 - 1) {
                         map[i][j] = blue;
                         map[i][j + 1] = purple;
@@ -117,11 +123,18 @@ public class MapModel extends AbstractTableModel {
                         map[i + 1][j + 1] = sciana;
                         map[i + 1][j + 2] = sciana;
                         map[i + 1][j + 3] = sciana;
+                        continue;
                     }
-                    continue;
                 }
 
-                map[i][j] = droga;
+                //losowe wnętrze
+                if (i > 2 && map[i - 2][j] == 0) {
+                    if (j != 1 && j != columns - 2 && map[i - 1][j] == 0 && i != rows / 2 - 1
+                            && j != columns / 2 && j != columns / 4 && j != (columns / 4) * 3) map[i][j] = sciana;
+                }
+
+                //jak nic innego nie ma
+                if (map[i][j] == 9) map[i][j] = 0;
             }
         }
         return map;
@@ -171,7 +184,10 @@ public class MapModel extends AbstractTableModel {
 
     public void setPlayerXUstawKolumne(int playerX) {
         if (!isWall(playerX, getPlayerY())) {
-            setValueAt(0, getPlayerX(), getPlayerY());
+            if (getValueAt(getPlayerX(), getPlayerY()).equals(0)) {
+                setValueAt(9, getPlayerX(), getPlayerY());
+                CurrentStats.yourScore = +5;
+            }
             setValueAt(3, playerX, getPlayerY());
         }
     }
@@ -182,7 +198,10 @@ public class MapModel extends AbstractTableModel {
 
     public void setPlayerYUstawRzad(int playerY) {
         if (!isWall(getPlayerX(), playerY)) {
-            setValueAt(0, getPlayerX(), getPlayerY());
+            if (getValueAt(getPlayerX(), getPlayerY()).equals(0)) {
+                setValueAt(9, getPlayerX(), getPlayerY());
+                CurrentStats.yourScore = +5;
+            }
             setValueAt(3, getPlayerX(), playerY);
         }
     }

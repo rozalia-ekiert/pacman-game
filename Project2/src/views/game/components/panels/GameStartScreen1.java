@@ -11,7 +11,7 @@ public class GameStartScreen1 extends JPanel {
 
         this.setPreferredSize(new Dimension(width, height));
         this.setBackground(Color.BLACK);
-
+        this.setFocusable(false);
         this.setLayout(new GridBagLayout());
 
         //==========================================================
@@ -22,6 +22,8 @@ public class GameStartScreen1 extends JPanel {
                 "Have fun!";
 
         JTextArea introTextArea = new JTextArea(introText, 7, 20);
+        introTextArea.setFocusable(false);
+//        introTextArea.setFocusTraversalKeysEnabled(false);
         introTextArea.setBackground(Color.BLACK);
         introTextArea.setForeground(Color.WHITE);
         introTextArea.setFont(pacmanGameFrame.Butterbelly);

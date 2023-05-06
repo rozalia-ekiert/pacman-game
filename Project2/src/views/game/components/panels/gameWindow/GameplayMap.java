@@ -12,11 +12,12 @@ import java.awt.event.KeyListener;
 public class GameplayMap extends JPanel {
 
     public static int cellSize;
+    public MapModel mapModel;
+
     public JTable mapTable;
-    int rows = 100;
     int windowSize;
-    MapModel mapModel;
-    int columns = 100;
+    int rows = 27;
+    int columns = 29;
 
 
     public GameplayMap(int sqWidth, int sqHeight) {
@@ -26,6 +27,7 @@ public class GameplayMap extends JPanel {
         this.setPreferredSize(new Dimension(sqWidth, sqHeight));
         this.setLayout(new GridBagLayout());
         this.setBackground(Color.BLACK);
+//        this.setFocusable(false);
 
         setCellSize();
 
@@ -46,7 +48,6 @@ public class GameplayMap extends JPanel {
         mapTable.setShowHorizontalLines(false);
         mapTable.setCellSelectionEnabled(false);
 
-
         GridBagConstraints gbc = new GridBagConstraints();
 
         gbc.fill = GridBagConstraints.NONE;
@@ -60,8 +61,15 @@ public class GameplayMap extends JPanel {
         KeyListener keyListener = new KeyMovement(mapTable, mapModel);
         mapTable.addKeyListener(keyListener);
 
-        mapTable.setFocusable(true);
-        mapTable.grabFocus();
+//        mapTable.grabFocus();
+//        mapTable.requestFocus();
+
+//        if (!mapTable.hasFocus()) {
+//            if (!mapTable.isRequestFocusEnabled()) {
+//                mapTable.setRequestFocusEnabled(true);
+//            }
+//            mapTable.requestFocus();
+//        }
 
         //=========================================================================
     }
