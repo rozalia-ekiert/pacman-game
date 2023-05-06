@@ -1,9 +1,11 @@
 package model.map;
 
+import model.NumberFormatter;
 import model.characters.Enemy;
 import model.characters.Player;
 import views.game.components.panels.gameWindow.CurrentStats;
 
+import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,11 +17,6 @@ public class MapModel extends AbstractTableModel {
     private final int[][] map;
 
     public static Player player = new Player();
-//    public static Enemy blueEnemy = new Enemy();
-//    public static Enemy pinkEnemy = new Enemy();
-//    public static Enemy greenEnemy = new Enemy();
-//    public static Enemy purpleEnemy = new Enemy();
-
     public static final ArrayList<Enemy> enemies = new ArrayList<>();
 
 
@@ -35,6 +32,7 @@ public class MapModel extends AbstractTableModel {
     int green = 6;
     int pink = 7;
 
+//    public static int yourScore = CurrentStats.yourScore;
 
     public MapModel(int rows, int columns) {
         super();
@@ -70,7 +68,7 @@ public class MapModel extends AbstractTableModel {
                 //generowanie brzegów
                 if (i == 0 || i == rows - 1 || j == 0 || j == columns - 1) {
                     if (i == rows / 2 && j == 0 || i == rows / 2 && j == columns - 1) { // przejscie w polowie drogi
-                        map[i][j] = droga;
+                        map[i][j] = 9;
                     } else {
                         map[i][j] = sciana;
                     }
@@ -184,10 +182,15 @@ public class MapModel extends AbstractTableModel {
 
     public void setPlayerXUstawKolumne(int playerX) {
         if (!isWall(playerX, getPlayerY())) {
-            if (getValueAt(getPlayerX(), getPlayerY()).equals(0)) {
-                setValueAt(9, getPlayerX(), getPlayerY());
-                CurrentStats.yourScore = +5;
+            if (getValueAt(playerX, getPlayerY()).equals(0)) {
+                SwingUtilities.invokeLater(new Runnable() {
+                    public void run() {
+                        CurrentStats.yourScore += 5;
+                        CurrentStats.setYourScore.setText(NumberFormatter.changeScoreToString(CurrentStats.yourScore));
+                    }
+                });
             }
+            setValueAt(9, getPlayerX(), getPlayerY());
             setValueAt(3, playerX, getPlayerY());
         }
     }
@@ -198,10 +201,15 @@ public class MapModel extends AbstractTableModel {
 
     public void setPlayerYUstawRzad(int playerY) {
         if (!isWall(getPlayerX(), playerY)) {
-            if (getValueAt(getPlayerX(), getPlayerY()).equals(0)) {
-                setValueAt(9, getPlayerX(), getPlayerY());
-                CurrentStats.yourScore = +5;
+            if (getValueAt(getPlayerX(), playerY).equals(0)) {
+                SwingUtilities.invokeLater(new Runnable() {
+                    public void run() {
+                        CurrentStats.yourScore += 5;
+                        CurrentStats.setYourScore.setText(NumberFormatter.changeScoreToString(CurrentStats.yourScore));
+                    }
+                });
             }
+            setValueAt(9, getPlayerX(), getPlayerY());
             setValueAt(3, getPlayerX(), playerY);
         }
     }

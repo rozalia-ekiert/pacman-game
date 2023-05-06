@@ -17,7 +17,7 @@ public class CurrentStats extends JPanel {
     JLabel highScoreArea;
     JLabel setHighScore;
     JLabel yourScoreArea;
-    JLabel setYourScore;
+    public static JLabel setYourScore;
     JLabel timeArea;
     JLabel setTime;
 
@@ -113,8 +113,9 @@ public class CurrentStats extends JPanel {
         this.add(setTime, gbc);
     }
 
-    public void updateYourScore() { // todo
-        if (this.yourScore > this.highScore) {
+
+    public void compareYourAndHighScore() { // todo
+        if (yourScore > this.highScore) {
 
             this.highScoreArea.setForeground(Color.WHITE);
             this.setHighScore.setForeground(Color.WHITE);
@@ -123,5 +124,21 @@ public class CurrentStats extends JPanel {
             this.setYourScore.setForeground(Color.PINK);
         }
     }
+
+//    public void update(){
+//        //początek
+//                //highScore - pobierz z rankingu, jak nic nie ma to 0
+//        yourScore = 0;
+//        time = 0;
+//
+//        //co 1/10 sekundy
+//        updateYourScore();
+//
+//    }
+//
+//    public int updateYourScore(){
+//        yourScore = MapModel.yourScore;
+//        return yourScore;
+//    }
 
 }
