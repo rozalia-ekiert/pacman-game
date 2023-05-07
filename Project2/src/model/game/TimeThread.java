@@ -1,4 +1,4 @@
-package views.game.components;
+package model.game;
 
 import controllers.menu.PlayButtonMouseListener;
 import model.NumberFormatter;

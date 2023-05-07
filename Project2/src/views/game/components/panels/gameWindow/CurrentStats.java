@@ -1,9 +1,9 @@
 package views.game.components.panels.gameWindow;
 
 import model.NumberFormatter;
+import model.game.TimeThread;
 import views.GameColors;
 import views.PACMANGame;
-import views.game.components.TimeThread;
 
 import javax.swing.*;
 import java.awt.*;

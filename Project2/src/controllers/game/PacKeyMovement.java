@@ -6,14 +6,14 @@ import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class KeyMovement implements KeyListener {
+public class PacKeyMovement implements KeyListener {
 
     int playerRow;
     int playerColumn;
     JTable table;
     MapModel mapModel;
 
-    public KeyMovement(JTable table, MapModel mapModel) {
+    public PacKeyMovement(JTable table, MapModel mapModel) {
         this.table = table;
         this.mapModel = mapModel;
         this.playerColumn = mapModel.getPlayerY();

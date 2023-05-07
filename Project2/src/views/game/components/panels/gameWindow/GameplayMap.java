@@ -1,6 +1,6 @@
 package views.game.components.panels.gameWindow;
 
-import controllers.game.KeyMovement;
+import controllers.game.PacKeyMovement;
 import model.map.MapComponentsRenderer;
 import model.map.MapModel;
 import views.PACMANGame;
@@ -59,7 +59,7 @@ public class GameplayMap extends JPanel {
 
         //=========================================================================
 
-        KeyListener keyListener = new KeyMovement(mapTable, mapModel);
+        KeyListener keyListener = new PacKeyMovement(mapTable, mapModel);
         mapTable.addKeyListener(keyListener);
 
 //        mapTable.grabFocus();

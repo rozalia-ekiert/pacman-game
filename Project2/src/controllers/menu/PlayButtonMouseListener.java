@@ -1,11 +1,11 @@
 package controllers.menu;
 
+import model.game.TimeThread;
 import views.GameColors;
 import views.PACMANGame;
 import views.ViewCardPanel;
 import views.game.Game;
 import views.game.components.GameViewChange;
-import views.game.components.TimeThread;
 import views.menu.components.middlePanels.NewGame;
 
 import javax.swing.*;

@@ -116,6 +116,17 @@ public class MapComponentsRenderer extends DefaultTableCellRenderer {
             };
         }
 
+        if (table.getValueAt(row, column).equals(8)) {
+            JComponent component = new JComponent() {
+                @Override
+                public void paint(Graphics g) {
+                    super.paint(g);
+                    g.drawImage(cookieBig, 0, 0, cellSize, cellSize, this);
+                }
+            };
+            return component;
+        }
+
         return this;
     }
 

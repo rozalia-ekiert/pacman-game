@@ -26,14 +26,16 @@ public class MapModel extends AbstractTableModel {
     int playerX;
     int playerY;
 
-    int droga = 0;
-    int sciana = 1;
+    //todo pouzupelniac model slowami
+    int cookieSmll = 0;
     int resprawn = 0;
+    int sciana = 1;
     int pacman = 3;
     int blue = 4;
     int purple = 5;
     int green = 6;
     int pink = 7;
+    int cookieBig = 8;
 
 //    public static int yourScore = CurrentStats.yourScore;
 
@@ -78,6 +80,10 @@ public class MapModel extends AbstractTableModel {
                     }
                     continue;
                 }
+
+                //miejsca dużych ciasteczek
+                if (i == 2 && j == 1 || i == 2 && j == columns - 2 || i == rows - 3 && j == 1 || i == rows - 3 && j == columns - 2)
+                    map[i][j] = 8;
 
                 // generowanie miejsca respawnu duszków
                 if ((columns % 2) == 0) { //dla parzystej ilosci kolumn
@@ -139,6 +145,7 @@ public class MapModel extends AbstractTableModel {
                 if (map[i][j] == 9) map[i][j] = 0;
             }
         }
+
         return map;
     }
 
@@ -184,19 +191,20 @@ public class MapModel extends AbstractTableModel {
         return playerX;
     }
 
-    public void setPlayerXUstawKolumne(int playerX) {
-        if (!isWall(playerX, getPlayerY())) {
-            if (getValueAt(playerX, getPlayerY()).equals(0)) {
+    public void setPlayerXUstawKolumne(int X) {
+        if (!isWall(X, getPlayerY())) {
+            if (getValueAt(X, getPlayerY()).equals(0) || getValueAt(X, getPlayerY()).equals(8)) {
+                if (getValueAt(X, getPlayerY()).equals(0)) CurrentStats.yourScore += 10;
+                if (getValueAt(X, getPlayerY()).equals(8)) CurrentStats.yourScore += 50;
                 SwingUtilities.invokeLater(new Runnable() {
                     public void run() {
-                        CurrentStats.yourScore += 5;
                         CurrentStats.setYourScore.setText(NumberFormatter.changeScoreToString(CurrentStats.yourScore));
                         pacmanGame.game.gameWindow.currentStats.compareYourAndHighScore();
                     }
                 });
             }
             setValueAt(9, getPlayerX(), getPlayerY());
-            setValueAt(3, playerX, getPlayerY());
+            setValueAt(3, X, getPlayerY());
         }
     }
 
@@ -206,10 +214,11 @@ public class MapModel extends AbstractTableModel {
 
     public void setPlayerYUstawRzad(int playerY) {
         if (!isWall(getPlayerX(), playerY)) {
-            if (getValueAt(getPlayerX(), playerY).equals(0)) {
+            if (getValueAt(getPlayerX(), playerY).equals(0) || getValueAt(getPlayerX(), playerY).equals(8)) {
+                if (getValueAt(getPlayerX(), playerY).equals(0)) CurrentStats.yourScore += 10;
+                if (getValueAt(getPlayerX(), playerY).equals(8)) CurrentStats.yourScore += 50;
                 SwingUtilities.invokeLater(new Runnable() {
                     public void run() {
-                        CurrentStats.yourScore += 5;
                         CurrentStats.setYourScore.setText(NumberFormatter.changeScoreToString(CurrentStats.yourScore));
                         pacmanGame.game.gameWindow.currentStats.compareYourAndHighScore();
                     }
