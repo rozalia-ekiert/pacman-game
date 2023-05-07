@@ -28,15 +28,14 @@ public class MapModel extends AbstractTableModel {
 
     //todo pouzupelniac model slowami
     int pustePole = 19;
-    int cookieBig = 20; //8
-    int cookieSmall = 21; //0
-    int resprawn = 21; //0
-    int sciana = 0; //1
-    int pacman = 22; //3
-    int blue = 23; //4
-    int purple = 24; //5
-    int green = 25; //6
-    int pink = 26; //7
+    int cookieBig = 20;
+    int cookieSmall = 21;
+    int sciana = 0;
+    int pacman = 22;
+    int blue = 23;
+    int purple = 24;
+    int green = 25;
+    int pink = 26;
 
 
     public MapModel(int rows, int columns, PACMANGame pacmanGame) {

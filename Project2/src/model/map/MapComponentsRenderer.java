@@ -29,6 +29,8 @@ public class MapComponentsRenderer extends DefaultTableCellRenderer {
             throw new RuntimeException(e);
         }
     }
+
+    //todo petla
     Image wall2;
     Image wall3;
     Image wall4;
@@ -171,7 +173,6 @@ public class MapComponentsRenderer extends DefaultTableCellRenderer {
             throw new RuntimeException(e);
         }
     }
-
 
     public MapComponentsRenderer() {
         super();
