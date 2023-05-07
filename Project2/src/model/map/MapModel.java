@@ -3,6 +3,7 @@ package model.map;
 import model.NumberFormatter;
 import model.characters.Enemy;
 import model.characters.Player;
+import views.PACMANGame;
 import views.game.components.panels.gameWindow.CurrentStats;
 
 import javax.swing.*;
@@ -19,6 +20,8 @@ public class MapModel extends AbstractTableModel {
     public static Player player = new Player();
     public static final ArrayList<Enemy> enemies = new ArrayList<>();
 
+    public PACMANGame pacmanGame;
+
 
     int playerX;
     int playerY;
@@ -34,10 +37,11 @@ public class MapModel extends AbstractTableModel {
 
 //    public static int yourScore = CurrentStats.yourScore;
 
-    public MapModel(int rows, int columns) {
+    public MapModel(int rows, int columns, PACMANGame pacmanGame) {
         super();
         this.rows = rows;
         this.columns = columns;
+        this.pacmanGame = pacmanGame;
 
         //=============================================================================
         this.map = generateMap(rows, columns);
@@ -187,6 +191,7 @@ public class MapModel extends AbstractTableModel {
                     public void run() {
                         CurrentStats.yourScore += 5;
                         CurrentStats.setYourScore.setText(NumberFormatter.changeScoreToString(CurrentStats.yourScore));
+                        pacmanGame.game.gameWindow.currentStats.compareYourAndHighScore();
                     }
                 });
             }
@@ -206,6 +211,7 @@ public class MapModel extends AbstractTableModel {
                     public void run() {
                         CurrentStats.yourScore += 5;
                         CurrentStats.setYourScore.setText(NumberFormatter.changeScoreToString(CurrentStats.yourScore));
+                        pacmanGame.game.gameWindow.currentStats.compareYourAndHighScore();
                     }
                 });
             }

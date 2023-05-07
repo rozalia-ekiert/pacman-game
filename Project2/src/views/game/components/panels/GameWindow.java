@@ -11,6 +11,7 @@ import java.awt.*;
 public class GameWindow extends JPanel {
 
     public Gameplay gameplay;
+    public CurrentStats currentStats;
 
     public GameWindow(int width, int height, PACMANGame pacmanGame) {
 
@@ -18,7 +19,7 @@ public class GameWindow extends JPanel {
         this.setBackground(Color.BLACK);
 //        this.setFocusable(false);
 
-        CurrentStats currentStats = new CurrentStats((int) (width * 0.2), height, pacmanGame);
+        currentStats = new CurrentStats((int) (width * 0.2), height, pacmanGame);
         gameplay = new Gameplay((int) (width * 0.6), height, pacmanGame);
         Comments comments = new Comments((int) (width * 0.2), height, pacmanGame);
 

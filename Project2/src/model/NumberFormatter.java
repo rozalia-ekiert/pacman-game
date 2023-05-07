@@ -22,15 +22,15 @@ public class NumberFormatter {
         long minutes = seconds / 60;
         long finalSeconds = seconds % 60;
 
-        if (minutes > 60) return ">1 hour";
+        if (minutes >= 60) return ">1 hour";
 
         String StrMinutes = null;
         if (minutes > 9) StrMinutes = String.valueOf(minutes);
-        if (minutes < 9) StrMinutes = "0" + String.valueOf(minutes);
+        if (minutes <= 9) StrMinutes = "0" + String.valueOf(minutes);
 
         String StrSeconds = null;
         if (finalSeconds > 9) StrSeconds = String.valueOf(finalSeconds);
-        if (finalSeconds < 9) StrSeconds = "0" + String.valueOf(finalSeconds);
+        if (finalSeconds <= 9) StrSeconds = "0" + String.valueOf(finalSeconds);
 
         return StrMinutes + ":" + StrSeconds;
     }

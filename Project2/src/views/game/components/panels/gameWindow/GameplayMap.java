@@ -3,6 +3,7 @@ package views.game.components.panels.gameWindow;
 import controllers.game.KeyMovement;
 import model.map.MapComponentsRenderer;
 import model.map.MapModel;
+import views.PACMANGame;
 
 import javax.swing.*;
 import javax.swing.table.TableColumn;
@@ -16,11 +17,11 @@ public class GameplayMap extends JPanel {
 
     public JTable mapTable;
     int windowSize;
-    int rows = 27;
-    int columns = 29;
+    int rows = 39;
+    int columns = 37;
 
 
-    public GameplayMap(int sqWidth, int sqHeight) {
+    public GameplayMap(int sqWidth, int sqHeight, PACMANGame pacmanGame) {
 
 
         this.windowSize = sqWidth;
@@ -33,7 +34,7 @@ public class GameplayMap extends JPanel {
 
         //=========================================================================
 
-        this.mapModel = new MapModel(rows, columns);
+        this.mapModel = new MapModel(rows, columns, pacmanGame);
         mapTable = new JTable(this.mapModel);
 
         mapTable.setFillsViewportHeight(true);

@@ -5,6 +5,7 @@ import views.PACMANGame;
 import views.ViewCardPanel;
 import views.game.Game;
 import views.game.components.GameViewChange;
+import views.game.components.TimeThread;
 import views.menu.components.middlePanels.NewGame;
 
 import javax.swing.*;
@@ -18,6 +19,7 @@ public class PlayButtonMouseListener implements MouseListener {
     private PACMANGame pacmanGame;
     private NewGame newGame;
     private Game game;
+    public static final Object monitor = new Object();
 
 
     public PlayButtonMouseListener(NewGame newGame, PACMANGame pacmanGame, Game game) {
@@ -51,6 +53,11 @@ public class PlayButtonMouseListener implements MouseListener {
             CardLayout cl = (CardLayout) (this.pacmanGame.viewsCardPanel.getLayout());
             cl.show(this.pacmanGame.viewsCardPanel, ViewCardPanel.GAME_VIEW);
             this.pacmanGame.viewsCardPanel.currentCardName = ViewCardPanel.GAME_VIEW;
+
+            synchronized (monitor) {
+                TimeThread.isGameViewReady = true;
+                monitor.notify();
+            }
 
             GameViewChange gameViewChange = new GameViewChange(game, pacmanGame);
 

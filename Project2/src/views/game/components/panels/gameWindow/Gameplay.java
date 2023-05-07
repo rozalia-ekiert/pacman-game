@@ -18,7 +18,7 @@ public class Gameplay extends JPanel {
         int sqHeight = (int) (height * 0.9);
         int sqWidth = sqHeight;
 
-        map = new GameplayMap(sqWidth, sqHeight);
+        map = new GameplayMap(sqWidth, sqHeight, pacmanGame);
 
         this.add(map);
     }

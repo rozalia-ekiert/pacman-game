@@ -3,6 +3,7 @@ package views.game.components.panels.gameWindow;
 import model.NumberFormatter;
 import views.GameColors;
 import views.PACMANGame;
+import views.game.components.TimeThread;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,9 +11,9 @@ import java.awt.*;
 public class CurrentStats extends JPanel {
 
     //todo
-    int highScore = 55345;
+    int highScore = 110;
     public static int yourScore = 0;
-    long time = 408000; // w milisekundach
+    long time = 0; // w milisekundach
 
     JLabel highScoreArea;
     JLabel setHighScore;
@@ -21,8 +22,10 @@ public class CurrentStats extends JPanel {
     JLabel timeArea;
     JLabel setTime;
 
-
+    PACMANGame pacmanGame;
     public CurrentStats(int width, int height, PACMANGame pacmanGame) {
+
+        this.pacmanGame = pacmanGame;
 
         this.setPreferredSize(new Dimension(width, height));
         this.setBackground(Color.BLACK);
@@ -111,6 +114,14 @@ public class CurrentStats extends JPanel {
         gbc.gridwidth = 1;
         gbc.insets = new Insets(0, 30, 0, 0);
         this.add(setTime, gbc);
+
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                TimeThread timeThread = new TimeThread(setTime, pacmanGame);
+                timeThread.start();
+            }
+        });
+
     }
 
 
@@ -120,8 +131,8 @@ public class CurrentStats extends JPanel {
             this.highScoreArea.setForeground(Color.WHITE);
             this.setHighScore.setForeground(Color.WHITE);
 
-            this.yourScoreArea.setForeground(Color.PINK);
-            this.setYourScore.setForeground(Color.PINK);
+            this.yourScoreArea.setForeground(GameColors.pink);
+            this.setYourScore.setForeground(GameColors.pink);
         }
     }
 
