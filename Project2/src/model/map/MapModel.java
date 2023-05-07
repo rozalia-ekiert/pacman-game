@@ -39,8 +39,6 @@ public class MapModel extends AbstractTableModel {
     int pink = 26; //7
 
 
-//    public static int yourScore = CurrentStats.yourScore;
-
     public MapModel(int rows, int columns, PACMANGame pacmanGame) {
         super();
         this.rows = rows;
@@ -49,14 +47,13 @@ public class MapModel extends AbstractTableModel {
 
         //=============================================================================
         this.map = generateMap(rows, columns);
+        setWallNumber();
         setValueAt(pacman, rows - rows / 4, columns / 2);
 
         enemies.add(new Enemy());
         enemies.add(new Enemy());
         enemies.add(new Enemy());
         enemies.add(new Enemy());
-
-        showModel();
     }
 
 
@@ -159,6 +156,29 @@ public class MapModel extends AbstractTableModel {
             }
             System.out.println();
         }
+    } // do debuggingu
+
+    public void setWallNumber() {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                if (map[i][j] <= 15) {
+                    int counter = 0;
+                    if (i - 1 >= 0 && map[i - 1][j] <= 15) {
+                        counter += 1;
+                    }
+                    if (i + 1 < rows && map[i + 1][j] <= 15) {
+                        counter += 4;
+                    }
+                    if (j - 1 >= 0 && map[i][j - 1] <= 15) {
+                        counter += 8;
+                    }
+                    if (j + 1 < columns && map[i][j + 1] <= 15) {
+                        counter += 2;
+                    }
+                    map[i][j] = counter;
+                }
+            }
+        }
     }
 
     @Override
@@ -233,7 +253,7 @@ public class MapModel extends AbstractTableModel {
     }
 
     private boolean isWall(int playerX, int playerY) {
-        return map[playerX][playerY] == sciana;
+        return map[playerX][playerY] <= 15;
     }
 
 }

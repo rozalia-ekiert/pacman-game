@@ -17,7 +17,32 @@ import static model.map.MapModel.player;
 public class MapComponentsRenderer extends DefaultTableCellRenderer {
 
     Image cookieSmall;
+
+    Image wall1;
+
     Image cookieBig;
+
+    {
+        try {
+            cookieBig = ImageIO.read(new File("assets/cookies/cookie_big.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    Image wall2;
+    Image wall3;
+    Image wall4;
+    Image wall5;
+    Image wall6;
+    Image wall7;
+    Image wall8;
+    Image wall9;
+    Image wall10;
+    Image wall11;
+    Image wall12;
+    Image wall13;
+    Image wall14;
+    Image wall15;
 
     {
         try {
@@ -29,11 +54,124 @@ public class MapComponentsRenderer extends DefaultTableCellRenderer {
 
     {
         try {
-            cookieBig = ImageIO.read(new File("assets/cookies/cookie_big.png"));
+            wall1 = ImageIO.read(new File("assets/walls/1a.png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
+
+    {
+        try {
+            wall2 = ImageIO.read(new File("assets/walls/2a.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    {
+        try {
+            wall3 = ImageIO.read(new File("assets/walls/3a.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    {
+        try {
+            wall4 = ImageIO.read(new File("assets/walls/4a.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    {
+        try {
+            wall5 = ImageIO.read(new File("assets/walls/5a.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    {
+        try {
+            wall6 = ImageIO.read(new File("assets/walls/6a.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    {
+        try {
+            wall7 = ImageIO.read(new File("assets/walls/7a.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    {
+        try {
+            wall8 = ImageIO.read(new File("assets/walls/8a.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    {
+        try {
+            wall9 = ImageIO.read(new File("assets/walls/9a.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    {
+        try {
+            wall10 = ImageIO.read(new File("assets/walls/10a.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    {
+        try {
+            wall11 = ImageIO.read(new File("assets/walls/11a.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    {
+        try {
+            wall12 = ImageIO.read(new File("assets/walls/12a.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    {
+        try {
+            wall13 = ImageIO.read(new File("assets/walls/13a.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    {
+        try {
+            wall14 = ImageIO.read(new File("assets/walls/14a.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    {
+        try {
+            wall15 = ImageIO.read(new File("assets/walls/15a.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     public MapComponentsRenderer() {
         super();
@@ -42,6 +180,158 @@ public class MapComponentsRenderer extends DefaultTableCellRenderer {
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         int cellSize = GameplayMap.cellSize;
+
+        if (table.getValueAt(row, column).equals(1)) {
+            JComponent component = new JComponent() {
+                @Override
+                public void paint(Graphics g) {
+                    super.paint(g);
+                    g.drawImage(wall1, 0, 0, cellSize, cellSize, this);
+                }
+            };
+            return component;
+        }
+
+        if (table.getValueAt(row, column).equals(2)) {
+            JComponent component = new JComponent() {
+                @Override
+                public void paint(Graphics g) {
+                    super.paint(g);
+                    g.drawImage(wall2, 0, 0, cellSize, cellSize, this);
+                }
+            };
+            return component;
+        }
+        if (table.getValueAt(row, column).equals(3)) {
+            JComponent component = new JComponent() {
+                @Override
+                public void paint(Graphics g) {
+                    super.paint(g);
+                    g.drawImage(wall3, 0, 0, cellSize, cellSize, this);
+                }
+            };
+            return component;
+        }
+        if (table.getValueAt(row, column).equals(4)) {
+            JComponent component = new JComponent() {
+                @Override
+                public void paint(Graphics g) {
+                    super.paint(g);
+                    g.drawImage(wall4, 0, 0, cellSize, cellSize, this);
+                }
+            };
+            return component;
+        }
+        if (table.getValueAt(row, column).equals(5)) {
+            JComponent component = new JComponent() {
+                @Override
+                public void paint(Graphics g) {
+                    super.paint(g);
+                    g.drawImage(wall5, 0, 0, cellSize, cellSize, this);
+                }
+            };
+            return component;
+        }
+        if (table.getValueAt(row, column).equals(6)) {
+            JComponent component = new JComponent() {
+                @Override
+                public void paint(Graphics g) {
+                    super.paint(g);
+                    g.drawImage(wall6, 0, 0, cellSize, cellSize, this);
+                }
+            };
+            return component;
+        }
+        if (table.getValueAt(row, column).equals(7)) {
+            JComponent component = new JComponent() {
+                @Override
+                public void paint(Graphics g) {
+                    super.paint(g);
+                    g.drawImage(wall7, 0, 0, cellSize, cellSize, this);
+                }
+            };
+            return component;
+        }
+        if (table.getValueAt(row, column).equals(8)) {
+            JComponent component = new JComponent() {
+                @Override
+                public void paint(Graphics g) {
+                    super.paint(g);
+                    g.drawImage(wall8, 0, 0, cellSize, cellSize, this);
+                }
+            };
+            return component;
+        }
+        if (table.getValueAt(row, column).equals(9)) {
+            JComponent component = new JComponent() {
+                @Override
+                public void paint(Graphics g) {
+                    super.paint(g);
+                    g.drawImage(wall9, 0, 0, cellSize, cellSize, this);
+                }
+            };
+            return component;
+        }
+        if (table.getValueAt(row, column).equals(10)) {
+            JComponent component = new JComponent() {
+                @Override
+                public void paint(Graphics g) {
+                    super.paint(g);
+                    g.drawImage(wall10, 0, 0, cellSize, cellSize, this);
+                }
+            };
+            return component;
+        }
+        if (table.getValueAt(row, column).equals(11)) {
+            JComponent component = new JComponent() {
+                @Override
+                public void paint(Graphics g) {
+                    super.paint(g);
+                    g.drawImage(wall11, 0, 0, cellSize, cellSize, this);
+                }
+            };
+            return component;
+        }
+        if (table.getValueAt(row, column).equals(12)) {
+            JComponent component = new JComponent() {
+                @Override
+                public void paint(Graphics g) {
+                    super.paint(g);
+                    g.drawImage(wall12, 0, 0, cellSize, cellSize, this);
+                }
+            };
+            return component;
+        }
+        if (table.getValueAt(row, column).equals(13)) {
+            JComponent component = new JComponent() {
+                @Override
+                public void paint(Graphics g) {
+                    super.paint(g);
+                    g.drawImage(wall13, 0, 0, cellSize, cellSize, this);
+                }
+            };
+            return component;
+        }
+        if (table.getValueAt(row, column).equals(14)) {
+            JComponent component = new JComponent() {
+                @Override
+                public void paint(Graphics g) {
+                    super.paint(g);
+                    g.drawImage(wall14, 0, 0, cellSize, cellSize, this);
+                }
+            };
+            return component;
+        }
+        if (table.getValueAt(row, column).equals(15)) {
+            JComponent component = new JComponent() {
+                @Override
+                public void paint(Graphics g) {
+                    super.paint(g);
+                    g.drawImage(wall15, 0, 0, cellSize, cellSize, this);
+                }
+            };
+            return component;
+        }
 
         if (table.getValueAt(row, column).equals(20)) {
             JComponent component = new JComponent() {
@@ -129,6 +419,4 @@ public class MapComponentsRenderer extends DefaultTableCellRenderer {
 
         return this;
     }
-
-
 }
