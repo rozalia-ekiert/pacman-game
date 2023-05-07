@@ -25,6 +25,9 @@ public class NewGame extends JPanel {
     private int height;
     private String yourNick = "SET YOUR NICKNAME";
 
+    String warningFieldIsNotCorrectSize = "<html><font color=#A60909>Please set the size between 10x10 and 100x100.</font></html>";
+    String warningYourNickExists = "<html><font color=#A60909>Nick exists. Please choose new nick.</font></html>";
+
     public NewGame(int width, int height, PACMANGame pacmanGame, MenuStart menuStart, Game game) {
 
         Font font1 = new Font("Butterbelly", Font.PLAIN, 50);
@@ -38,7 +41,7 @@ public class NewGame extends JPanel {
         this.setBackground(Color.BLACK);
 
         //------------------------------------------ wiersz 0
-        JTextArea rows = new JTextArea("rows");
+        JTextArea rows = new JTextArea("rows   ");
         rows.setFocusable(false);
         rows.setForeground(Color.WHITE);
         rows.setBackground(Color.BLACK);
@@ -73,6 +76,9 @@ public class NewGame extends JPanel {
         setWindowsSize2.setMaximumSize(new Dimension(size, size));
 
         //------------------------------------------ wiersz 2
+        JLabel warningField = new JLabel("aaa");
+
+        //------------------------------------------ wiersz 3
         JTextArea yourNick = new JTextArea(this.yourNick);
         yourNick.setFocusable(false);
         yourNick.setForeground(Color.WHITE);
@@ -83,7 +89,10 @@ public class NewGame extends JPanel {
         JTextField setYourNick = new JTextField();
         setYourNick.setPreferredSize(new Dimension(150, 60));
 
-        //------------------------------------------ wiersz 3
+        //------------------------------------------ wiersz 4
+        JLabel warningNick = new JLabel("bbb");
+
+        //------------------------------------------ wiersz 5
         this.play = new JButton("play!");
         play.setBackground(GameColors.pink);
         play.setFont(pacmanGame.Butterbelly);
@@ -137,6 +146,15 @@ public class NewGame extends JPanel {
 
         gbc.gridx = 0;
         gbc.gridy = 2;
+        gbc.gridwidth = 3;
+        gbc.gridheight = 1;
+        gbc.ipady = 30;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.insets = new Insets(0, 0, 0, 0);
+        this.add(warningField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 3;
         gbc.gridheight = 1;
         gbc.gridwidth = 1;
         gbc.insets = new Insets(20, 0, 20, 30);
@@ -144,7 +162,7 @@ public class NewGame extends JPanel {
         this.add(yourNick, gbc);
 
         gbc.gridx = 1;
-        gbc.gridy = 2;
+        gbc.gridy = 3;
         gbc.gridwidth = 2;
         gbc.gridheight = 1;
         gbc.anchor = GridBagConstraints.LINE_END;
@@ -152,7 +170,16 @@ public class NewGame extends JPanel {
         this.add(setYourNick, gbc);
 
         gbc.gridx = 0;
-        gbc.gridy = 3;
+        gbc.gridy = 4;
+        gbc.gridwidth = 3;
+        gbc.gridheight = 1;
+        gbc.ipady = 30;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.insets = new Insets(0, 0, 0, 0);
+        this.add(warningNick, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 5;
         gbc.gridwidth = 3;
         gbc.gridheight = 1;
         gbc.ipady = 30;
@@ -162,7 +189,7 @@ public class NewGame extends JPanel {
 
         gbc.gridx = 3;
         gbc.gridy = 0;
-        gbc.gridheight = 4;
+        gbc.gridheight = 8; //todo zmiana na 7/8 w zależności od warning1/2
         gbc.gridwidth = 1;
         gbc.insets = new Insets(40, 80, 40, 0); // 40 x 40
         gbc.weightx = 0.0;
