@@ -76,7 +76,7 @@ public class NewGame extends JPanel {
         setWindowsSize2.setMaximumSize(new Dimension(size, size));
 
         //------------------------------------------ wiersz 2
-        JLabel warningField = new JLabel("aaa");
+        JLabel warningField = new JLabel("");
 
         //------------------------------------------ wiersz 3
         JTextArea yourNick = new JTextArea(this.yourNick);
@@ -90,7 +90,7 @@ public class NewGame extends JPanel {
         setYourNick.setPreferredSize(new Dimension(150, 60));
 
         //------------------------------------------ wiersz 4
-        JLabel warningNick = new JLabel("bbb");
+        JLabel warningNick = new JLabel("");
 
         //------------------------------------------ wiersz 5
         this.play = new JButton("play!");

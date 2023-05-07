@@ -43,7 +43,18 @@ public class MapComponentsRenderer extends DefaultTableCellRenderer {
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         int cellSize = GameplayMap.cellSize;
 
-        if (table.getValueAt(row, column).equals(0)) {
+        if (table.getValueAt(row, column).equals(20)) {
+            JComponent component = new JComponent() {
+                @Override
+                public void paint(Graphics g) {
+                    super.paint(g);
+                    g.drawImage(cookieBig, 0, 0, cellSize, cellSize, this);
+                }
+            };
+            return component;
+        }
+
+        if (table.getValueAt(row, column).equals(21)) {
             JComponent component = new JComponent() {
                 @Override
                 public void paint(Graphics g) {
@@ -54,7 +65,7 @@ public class MapComponentsRenderer extends DefaultTableCellRenderer {
             return component;
         }
 
-        if (table.getValueAt(row, column).equals(1)) {
+        if (table.getValueAt(row, column).equals(0)) {
             JComponent component = new JComponent() {
                 @Override
                 public void paint(Graphics g) {
@@ -66,7 +77,7 @@ public class MapComponentsRenderer extends DefaultTableCellRenderer {
             return component;
         }
 
-        if (table.getValueAt(row, column).equals(3)) {
+        if (table.getValueAt(row, column).equals(22)) {
             return new JComponent() {
                 @Override
                 public void paint(Graphics g) {
@@ -76,7 +87,7 @@ public class MapComponentsRenderer extends DefaultTableCellRenderer {
             };
         }
 
-        if (table.getValueAt(row, column).equals(4)) {
+        if (table.getValueAt(row, column).equals(23)) {
             return new JComponent() {
                 @Override
                 public void paint(Graphics g) {
@@ -86,7 +97,7 @@ public class MapComponentsRenderer extends DefaultTableCellRenderer {
             };
         }
 
-        if (table.getValueAt(row, column).equals(5)) {
+        if (table.getValueAt(row, column).equals(24)) {
             return new JComponent() {
                 @Override
                 public void paint(Graphics g) {
@@ -96,7 +107,7 @@ public class MapComponentsRenderer extends DefaultTableCellRenderer {
             };
         }
 
-        if (table.getValueAt(row, column).equals(6)) {
+        if (table.getValueAt(row, column).equals(25)) {
             return new JComponent() {
                 @Override
                 public void paint(Graphics g) {
@@ -106,7 +117,7 @@ public class MapComponentsRenderer extends DefaultTableCellRenderer {
             };
         }
 
-        if (table.getValueAt(row, column).equals(7)) {
+        if (table.getValueAt(row, column).equals(26)) {
             return new JComponent() {
                 @Override
                 public void paint(Graphics g) {
@@ -114,17 +125,6 @@ public class MapComponentsRenderer extends DefaultTableCellRenderer {
                     g.drawImage(enemies.get(3).getEnemyImage(CharacterAnimationState.GhostPINK), 0, 0, (int) (cellSize * 0.9), (int) (cellSize * 0.9), this);
                 }
             };
-        }
-
-        if (table.getValueAt(row, column).equals(8)) {
-            JComponent component = new JComponent() {
-                @Override
-                public void paint(Graphics g) {
-                    super.paint(g);
-                    g.drawImage(cookieBig, 0, 0, cellSize, cellSize, this);
-                }
-            };
-            return component;
         }
 
         return this;

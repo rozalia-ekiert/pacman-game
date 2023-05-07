@@ -27,15 +27,17 @@ public class MapModel extends AbstractTableModel {
     int playerY;
 
     //todo pouzupelniac model slowami
-    int cookieSmll = 0;
-    int resprawn = 0;
-    int sciana = 1;
-    int pacman = 3;
-    int blue = 4;
-    int purple = 5;
-    int green = 6;
-    int pink = 7;
-    int cookieBig = 8;
+    int pustePole = 19;
+    int cookieBig = 20; //8
+    int cookieSmall = 21; //0
+    int resprawn = 21; //0
+    int sciana = 0; //1
+    int pacman = 22; //3
+    int blue = 23; //4
+    int purple = 24; //5
+    int green = 25; //6
+    int pink = 26; //7
+
 
 //    public static int yourScore = CurrentStats.yourScore;
 
@@ -63,18 +65,18 @@ public class MapModel extends AbstractTableModel {
 
         //uzupełniam wszystkie pola
         for (int i = 0; i < rows; i++) {
-            Arrays.fill(map[i], 9);
+            Arrays.fill(map[i], 19);
         }
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
 
-                if (map[i][j] != 9) continue;
+                if (map[i][j] != 19) continue;
 
                 //generowanie brzegów
                 if (i == 0 || i == rows - 1 || j == 0 || j == columns - 1) {
                     if (i == rows / 2 && j == 0 || i == rows / 2 && j == columns - 1) { // przejscie w polowie drogi
-                        map[i][j] = 9;
+                        map[i][j] = 19;
                     } else {
                         map[i][j] = sciana;
                     }
@@ -83,7 +85,7 @@ public class MapModel extends AbstractTableModel {
 
                 //miejsca dużych ciasteczek
                 if (i == 2 && j == 1 || i == 2 && j == columns - 2 || i == rows - 3 && j == 1 || i == rows - 3 && j == columns - 2)
-                    map[i][j] = 8;
+                    map[i][j] = cookieBig;
 
                 // generowanie miejsca respawnu duszków
                 if ((columns % 2) == 0) { //dla parzystej ilosci kolumn
@@ -136,13 +138,14 @@ public class MapModel extends AbstractTableModel {
                 }
 
                 //losowe wnętrze
-                if (i > 2 && map[i - 2][j] == 0) {
-                    if (j != 1 && j != columns - 2 && map[i - 1][j] == 0 && i != rows / 2 - 1
-                            && j != columns / 2 && j != columns / 4 && j != (columns / 4) * 3) map[i][j] = sciana;
+                if (i > 2 && map[i - 2][j] == cookieSmall || i > 2 && map[i - 2][j] == pustePole) {
+                    if (j != 1 && j != columns - 2 && (map[i - 1][j] == cookieSmall || map[i - 1][j] == pustePole)
+                            && i != rows / 2 - 1 && j != columns / 2
+                            && j != columns / 4 && j != (columns / 4) * 3) map[i][j] = sciana;
                 }
 
-                //jak nic innego nie ma
-                if (map[i][j] == 9) map[i][j] = 0;
+                //jak nic innego nie ma to cookie small
+                if (map[i][j] == pustePole) map[i][j] = cookieSmall;
             }
         }
 
@@ -193,9 +196,9 @@ public class MapModel extends AbstractTableModel {
 
     public void setPlayerXUstawKolumne(int X) {
         if (!isWall(X, getPlayerY())) {
-            if (getValueAt(X, getPlayerY()).equals(0) || getValueAt(X, getPlayerY()).equals(8)) {
-                if (getValueAt(X, getPlayerY()).equals(0)) CurrentStats.yourScore += 10;
-                if (getValueAt(X, getPlayerY()).equals(8)) CurrentStats.yourScore += 50;
+            if (getValueAt(X, getPlayerY()).equals(cookieSmall) || getValueAt(X, getPlayerY()).equals(cookieBig)) {
+                if (getValueAt(X, getPlayerY()).equals(cookieSmall)) CurrentStats.yourScore += 10;
+                if (getValueAt(X, getPlayerY()).equals(cookieBig)) CurrentStats.yourScore += 50;
                 SwingUtilities.invokeLater(new Runnable() {
                     public void run() {
                         CurrentStats.setYourScore.setText(NumberFormatter.changeScoreToString(CurrentStats.yourScore));
@@ -203,8 +206,8 @@ public class MapModel extends AbstractTableModel {
                     }
                 });
             }
-            setValueAt(9, getPlayerX(), getPlayerY());
-            setValueAt(3, X, getPlayerY());
+            setValueAt(pustePole, getPlayerX(), getPlayerY());
+            setValueAt(pacman, X, getPlayerY());
         }
     }
 
@@ -214,9 +217,9 @@ public class MapModel extends AbstractTableModel {
 
     public void setPlayerYUstawRzad(int playerY) {
         if (!isWall(getPlayerX(), playerY)) {
-            if (getValueAt(getPlayerX(), playerY).equals(0) || getValueAt(getPlayerX(), playerY).equals(8)) {
-                if (getValueAt(getPlayerX(), playerY).equals(0)) CurrentStats.yourScore += 10;
-                if (getValueAt(getPlayerX(), playerY).equals(8)) CurrentStats.yourScore += 50;
+            if (getValueAt(getPlayerX(), playerY).equals(cookieSmall) || getValueAt(getPlayerX(), playerY).equals(cookieBig)) {
+                if (getValueAt(getPlayerX(), playerY).equals(cookieSmall)) CurrentStats.yourScore += 10;
+                if (getValueAt(getPlayerX(), playerY).equals(cookieBig)) CurrentStats.yourScore += 50;
                 SwingUtilities.invokeLater(new Runnable() {
                     public void run() {
                         CurrentStats.setYourScore.setText(NumberFormatter.changeScoreToString(CurrentStats.yourScore));
@@ -224,13 +227,13 @@ public class MapModel extends AbstractTableModel {
                     }
                 });
             }
-            setValueAt(9, getPlayerX(), getPlayerY());
-            setValueAt(3, getPlayerX(), playerY);
+            setValueAt(pustePole, getPlayerX(), getPlayerY());
+            setValueAt(pacman, getPlayerX(), playerY);
         }
     }
 
     private boolean isWall(int playerX, int playerY) {
-        return map[playerX][playerY] == 1;
+        return map[playerX][playerY] == sciana;
     }
 
 }
