@@ -7,6 +7,8 @@ import views.game.Game;
 import views.menu.MenuStart;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -25,8 +27,19 @@ public class NewGame extends JPanel {
     private int height;
     private String yourNick = "SET YOUR NICKNAME";
 
-    String warningFieldIsNotCorrectSize = "<html><font color=#A60909>Please set the size between 10x10 and 100x100.</font></html>";
-    String warningYourNickExists = "<html><font color=#A60909>Nick exists. Please choose new nick.</font></html>";
+    public static final String warningFieldIsNotCorrectSize = "<html><font color=#A60909>Please set the size between 10x10 and 100x100.</font></html>";
+    public static final String warningYourNickExists = "<html><font color=#A60909>Nick exists. Please choose new nick.</font></html>";
+
+    public static JLabel warningField;
+    public static JLabel warningNick;
+
+
+    public static boolean isValue1Valid = false;
+    public static boolean isValue2Valid = false;
+    public static boolean isNickValid = false;
+
+    public int setRows;
+    public int setColumns;
 
     public NewGame(int width, int height, PACMANGame pacmanGame, MenuStart menuStart, Game game) {
 
@@ -57,6 +70,8 @@ public class NewGame extends JPanel {
 
         GradientText gradientText = new GradientText(this.text, pacmanGame);
 
+        //------------------------------------------ wiersz 2
+        warningField = new JLabel("");
 
         //------------------------------------------ wiersz 1
         JTextArea windowGameSize = new JTextArea(this.windowGameSize);
@@ -65,18 +80,63 @@ public class NewGame extends JPanel {
         windowGameSize.setFont(font1);
         windowGameSize.setEditable(false);
 
-        JTextField setWindowsSize1 = new JTextField();
-        JTextField setWindowsSize2 = new JTextField();
+        JTextField setWindowSize1 = new JTextField();
+        JTextField setWindowSize2 = new JTextField();
 
         int size = 80;
-        setWindowsSize1.setPreferredSize(new Dimension(size, size));
-        setWindowsSize1.setMaximumSize(new Dimension(size, size));
+        setWindowSize1.setPreferredSize(new Dimension(size, size));
+        setWindowSize1.setMaximumSize(new Dimension(size, size));
 
-        setWindowsSize2.setPreferredSize(new Dimension(size, size));
-        setWindowsSize2.setMaximumSize(new Dimension(size, size));
+        setWindowSize2.setPreferredSize(new Dimension(size, size));
+        setWindowSize2.setMaximumSize(new Dimension(size, size));
 
-        //------------------------------------------ wiersz 2
-        JLabel warningField = new JLabel("");
+        setWindowSize1.getDocument().addDocumentListener(new DocumentListener() {
+            public void insertUpdate(DocumentEvent e) {
+                updateButton();
+            }
+
+            public void removeUpdate(DocumentEvent e) {
+                updateButton();
+            }
+
+            public void changedUpdate(DocumentEvent e) {
+                updateButton();
+            }
+
+            private void updateButton() {
+                String text = setWindowSize1.getText();
+                if (text.matches("\\d+") && Integer.parseInt(text) >= 10 && Integer.parseInt(text) <= 100) {
+                    isValue1Valid = true;
+                } else {
+                    isValue1Valid = false;
+                }
+            }
+        });
+
+        setWindowSize2.getDocument().addDocumentListener(new DocumentListener() {
+            public void insertUpdate(DocumentEvent e) {
+                updateButton();
+            }
+
+            public void removeUpdate(DocumentEvent e) {
+                updateButton();
+            }
+
+            public void changedUpdate(DocumentEvent e) {
+                updateButton();
+            }
+
+            private void updateButton() {
+                String text = setWindowSize2.getText();
+                if (text.matches("\\d+") && Integer.parseInt(text) >= 10 && Integer.parseInt(text) <= 100) {
+                    isValue2Valid = true;
+                } else {
+                    isValue2Valid = false;
+                }
+            }
+        });
+        //------------------------------------------ wiersz 4
+        warningNick = new JLabel("");
 
         //------------------------------------------ wiersz 3
         JTextArea yourNick = new JTextArea(this.yourNick);
@@ -89,14 +149,35 @@ public class NewGame extends JPanel {
         JTextField setYourNick = new JTextField();
         setYourNick.setPreferredSize(new Dimension(150, 60));
 
-        //------------------------------------------ wiersz 4
-        JLabel warningNick = new JLabel("");
+        setYourNick.getDocument().addDocumentListener(new DocumentListener() {
+            public void insertUpdate(DocumentEvent e) {
+                updateButton();
+            }
+
+            public void removeUpdate(DocumentEvent e) {
+                updateButton();
+            }
+
+            public void changedUpdate(DocumentEvent e) {
+                updateButton();
+            }
+
+            private void updateButton() {
+                String text = setYourNick.getText();
+                if (text != null) {
+                    isNickValid = true;
+                } else {
+                    isNickValid = false;
+                }
+            }
+        });
 
         //------------------------------------------ wiersz 5
         this.play = new JButton("play!");
         play.setBackground(GameColors.pink);
         play.setFont(pacmanGame.Butterbelly);
         play.setForeground(Color.BLACK);
+//        play.setEnabled(isValue1Valid&&isValue2Valid&&isNickValid);
 
         //-------------------------------------------------------------------------
 
@@ -134,7 +215,7 @@ public class NewGame extends JPanel {
         gbc.gridwidth = 1;
         gbc.insets = new Insets(0, 0, 20, 30);
         gbc.anchor = GridBagConstraints.LINE_END;
-        this.add(setWindowsSize1, gbc);
+        this.add(setWindowSize1, gbc);
 
         gbc.gridx = 2;
         gbc.gridy = 1;
@@ -142,7 +223,7 @@ public class NewGame extends JPanel {
         gbc.gridwidth = 1;
         gbc.insets = new Insets(0, 0, 20, 0);
         gbc.anchor = GridBagConstraints.LINE_END;
-        this.add(setWindowsSize2, gbc);
+        this.add(setWindowSize2, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 2;

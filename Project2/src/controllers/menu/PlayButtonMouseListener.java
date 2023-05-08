@@ -36,6 +36,14 @@ public class PlayButtonMouseListener implements MouseListener {
         if (e.getSource() == this.play) {
             //todo jeśli pola nie są wypełnione nie rób
 
+            if (!NewGame.isValue1Valid || !NewGame.isValue2Valid) {
+                NewGame.warningField.setText(NewGame.warningFieldIsNotCorrectSize);
+            }
+            if (!NewGame.isNickValid) {
+                NewGame.warningNick.setText(NewGame.warningYourNickExists);
+            }
+
+            if (NewGame.isValue1Valid && NewGame.isValue2Valid && NewGame.isNickValid) {
 //            game.gameWindow.gameplay.map.mapTable.setFocusable(true);
 //            game.gameWindow.gameplay.map.mapTable.requestFocus();
 //            game.gameWindow.gameplay.map.mapTable.grabFocus();
@@ -44,22 +52,23 @@ public class PlayButtonMouseListener implements MouseListener {
 //            game.setFocusable(true);
 //            game.requestFocusInWindow();
 
-            System.out.println(newGame.play.isFocusOwner()); //true
+                System.out.println(newGame.play.isFocusOwner()); //true
 
 //            newGame.play.setFocusable(false);
 //            newGame.play.setEnabled(false);
 //            newGame.play.setFocusTraversalKeysEnabled(false);
 
-            CardLayout cl = (CardLayout) (this.pacmanGame.viewsCardPanel.getLayout());
-            cl.show(this.pacmanGame.viewsCardPanel, ViewCardPanel.GAME_VIEW);
-            this.pacmanGame.viewsCardPanel.currentCardName = ViewCardPanel.GAME_VIEW;
+                CardLayout cl = (CardLayout) (this.pacmanGame.viewsCardPanel.getLayout());
+                cl.show(this.pacmanGame.viewsCardPanel, ViewCardPanel.GAME_VIEW);
+                this.pacmanGame.viewsCardPanel.currentCardName = ViewCardPanel.GAME_VIEW;
 
-            synchronized (monitor) {
-                TimeThread.isGameViewReady = true;
-                monitor.notify();
+                synchronized (monitor) {
+                    TimeThread.isGameViewReady = true;
+                    monitor.notify();
+                }
+
+                GameViewChange gameViewChange = new GameViewChange(game, pacmanGame);
             }
-
-            GameViewChange gameViewChange = new GameViewChange(game, pacmanGame);
 
         }
     }

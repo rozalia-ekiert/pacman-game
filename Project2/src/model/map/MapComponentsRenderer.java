@@ -183,181 +183,164 @@ public class MapComponentsRenderer extends DefaultTableCellRenderer {
         int cellSize = GameplayMap.cellSize;
 
         if (table.getValueAt(row, column).equals(1)) {
-            JComponent component = new JComponent() {
+            return new JComponent() {
                 @Override
                 public void paint(Graphics g) {
                     super.paint(g);
                     g.drawImage(wall1, 0, 0, cellSize, cellSize, this);
                 }
             };
-            return component;
         }
 
         if (table.getValueAt(row, column).equals(2)) {
-            JComponent component = new JComponent() {
+            return new JComponent() {
                 @Override
                 public void paint(Graphics g) {
                     super.paint(g);
                     g.drawImage(wall2, 0, 0, cellSize, cellSize, this);
                 }
             };
-            return component;
         }
         if (table.getValueAt(row, column).equals(3)) {
-            JComponent component = new JComponent() {
+            return new JComponent() {
                 @Override
                 public void paint(Graphics g) {
                     super.paint(g);
                     g.drawImage(wall3, 0, 0, cellSize, cellSize, this);
                 }
             };
-            return component;
         }
         if (table.getValueAt(row, column).equals(4)) {
-            JComponent component = new JComponent() {
+            return new JComponent() {
                 @Override
                 public void paint(Graphics g) {
                     super.paint(g);
                     g.drawImage(wall4, 0, 0, cellSize, cellSize, this);
                 }
             };
-            return component;
         }
         if (table.getValueAt(row, column).equals(5)) {
-            JComponent component = new JComponent() {
+            return new JComponent() {
                 @Override
                 public void paint(Graphics g) {
                     super.paint(g);
                     g.drawImage(wall5, 0, 0, cellSize, cellSize, this);
                 }
             };
-            return component;
         }
         if (table.getValueAt(row, column).equals(6)) {
-            JComponent component = new JComponent() {
+            return new JComponent() {
                 @Override
                 public void paint(Graphics g) {
                     super.paint(g);
                     g.drawImage(wall6, 0, 0, cellSize, cellSize, this);
                 }
             };
-            return component;
         }
         if (table.getValueAt(row, column).equals(7)) {
-            JComponent component = new JComponent() {
+            return new JComponent() {
                 @Override
                 public void paint(Graphics g) {
                     super.paint(g);
                     g.drawImage(wall7, 0, 0, cellSize, cellSize, this);
                 }
             };
-            return component;
         }
         if (table.getValueAt(row, column).equals(8)) {
-            JComponent component = new JComponent() {
+            return new JComponent() {
                 @Override
                 public void paint(Graphics g) {
                     super.paint(g);
                     g.drawImage(wall8, 0, 0, cellSize, cellSize, this);
                 }
             };
-            return component;
         }
         if (table.getValueAt(row, column).equals(9)) {
-            JComponent component = new JComponent() {
+            return new JComponent() {
                 @Override
                 public void paint(Graphics g) {
                     super.paint(g);
                     g.drawImage(wall9, 0, 0, cellSize, cellSize, this);
                 }
             };
-            return component;
         }
         if (table.getValueAt(row, column).equals(10)) {
-            JComponent component = new JComponent() {
+            return new JComponent() {
                 @Override
                 public void paint(Graphics g) {
                     super.paint(g);
                     g.drawImage(wall10, 0, 0, cellSize, cellSize, this);
                 }
             };
-            return component;
         }
         if (table.getValueAt(row, column).equals(11)) {
-            JComponent component = new JComponent() {
+            return new JComponent() {
                 @Override
                 public void paint(Graphics g) {
                     super.paint(g);
                     g.drawImage(wall11, 0, 0, cellSize, cellSize, this);
                 }
             };
-            return component;
         }
         if (table.getValueAt(row, column).equals(12)) {
-            JComponent component = new JComponent() {
+            return new JComponent() {
                 @Override
                 public void paint(Graphics g) {
                     super.paint(g);
                     g.drawImage(wall12, 0, 0, cellSize, cellSize, this);
                 }
             };
-            return component;
         }
         if (table.getValueAt(row, column).equals(13)) {
-            JComponent component = new JComponent() {
+            return new JComponent() {
                 @Override
                 public void paint(Graphics g) {
                     super.paint(g);
                     g.drawImage(wall13, 0, 0, cellSize, cellSize, this);
                 }
             };
-            return component;
         }
         if (table.getValueAt(row, column).equals(14)) {
-            JComponent component = new JComponent() {
+            return new JComponent() {
                 @Override
                 public void paint(Graphics g) {
                     super.paint(g);
                     g.drawImage(wall14, 0, 0, cellSize, cellSize, this);
                 }
             };
-            return component;
         }
         if (table.getValueAt(row, column).equals(15)) {
-            JComponent component = new JComponent() {
+            return new JComponent() {
                 @Override
                 public void paint(Graphics g) {
                     super.paint(g);
                     g.drawImage(wall15, 0, 0, cellSize, cellSize, this);
                 }
             };
-            return component;
         }
 
         if (table.getValueAt(row, column).equals(20)) {
-            JComponent component = new JComponent() {
+            return new JComponent() {
                 @Override
                 public void paint(Graphics g) {
                     super.paint(g);
                     g.drawImage(cookieBig, 0, 0, cellSize, cellSize, this);
                 }
             };
-            return component;
         }
 
         if (table.getValueAt(row, column).equals(21)) {
-            JComponent component = new JComponent() {
+            return new JComponent() {
                 @Override
                 public void paint(Graphics g) {
                     super.paint(g);
                     g.drawImage(cookieSmall, 0, 0, cellSize, cellSize, this);
                 }
             };
-            return component;
         }
 
         if (table.getValueAt(row, column).equals(0)) {
-            JComponent component = new JComponent() {
+            return new JComponent() {
                 @Override
                 public void paint(Graphics g) {
                     super.paint(g);
@@ -365,7 +348,6 @@ public class MapComponentsRenderer extends DefaultTableCellRenderer {
                     g.fillOval(0, 0, cellSize, cellSize);
                 }
             };
-            return component;
         }
 
         if (table.getValueAt(row, column).equals(22)) {
