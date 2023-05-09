@@ -38,7 +38,7 @@ public class MapModel extends AbstractTableModel {
     int green = 25;
     int pink = 26;
 
-    Timer timer = new Timer(2000, e -> {
+    Timer messageTimer = new Timer(2500, e -> {
         Gameplay.message.setText(Gameplay.messageDefault);
     });
 
@@ -79,7 +79,7 @@ public class MapModel extends AbstractTableModel {
                         setValueAt(pacman, rows - rows / 4, columns / 2);
                         pacmanGame.repaint();
                         Gameplay.message.setText(Gameplay.messageCookiesEaten);
-                        timer.start();
+                        messageTimer.start();
 
 //                        try {
 //                            Thread.sleep(1000);

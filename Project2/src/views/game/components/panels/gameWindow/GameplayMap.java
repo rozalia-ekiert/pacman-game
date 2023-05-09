@@ -17,8 +17,8 @@ public class GameplayMap extends JPanel {
 
     public JTable mapTable;
     int windowSize;
-    int rows = 10;
-    int columns = 10;
+    int rows = 11;
+    int columns = 11;
 
 
     public GameplayMap(int sqWidth, int sqHeight, PACMANGame pacmanGame) {
