@@ -28,7 +28,7 @@ public class NewGame extends JPanel {
     private String yourNick = "SET YOUR NICKNAME";
 
     public static final String warningFieldIsNotCorrectSize = "<html><font color=#A60909>Please set the size between 10x10 and 100x100.</font></html>";
-    public static final String warningYourNickExists = "<html><font color=#A60909>Nick exists. Please choose new nick.</font></html>";
+    public static final String warningYourNickExists = "<html><font color=#A60909>Nick is blank or already exists. Please choose new nick.</font></html>";
 
     public static JLabel warningField;
     public static JLabel warningNick;

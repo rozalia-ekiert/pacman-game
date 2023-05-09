@@ -28,7 +28,7 @@ public class TimeThread extends Thread {
                 }
                 startTime = System.currentTimeMillis();  //todo zmiana razem z czasem wyświetlania screen1 i 2
                 while (isGameViewReady) {
-                    long currentTime = System.currentTimeMillis();
+                    long currentTime = System.currentTimeMillis() - 1000;
                     long gameTime = (currentTime - startTime);
                     timeLabel.setText(NumberFormatter.changeTimeToString(gameTime));
                     try {

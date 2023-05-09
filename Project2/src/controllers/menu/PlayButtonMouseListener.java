@@ -38,9 +38,15 @@ public class PlayButtonMouseListener implements MouseListener {
 
             if (!NewGame.isValue1Valid || !NewGame.isValue2Valid) {
                 NewGame.warningField.setText(NewGame.warningFieldIsNotCorrectSize);
+                if (NewGame.isNickValid) {
+                    NewGame.warningNick.setText("");
+                }
             }
             if (!NewGame.isNickValid) {
                 NewGame.warningNick.setText(NewGame.warningYourNickExists);
+                if (NewGame.isValue1Valid && NewGame.isValue2Valid) {
+                    NewGame.warningField.setText("");
+                }
             }
 
             if (NewGame.isValue1Valid && NewGame.isValue2Valid && NewGame.isNickValid) {

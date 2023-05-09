@@ -17,9 +17,6 @@ import static model.map.MapModel.player;
 public class MapComponentsRenderer extends DefaultTableCellRenderer {
 
     Image cookieSmall;
-
-    Image wall1;
-
     Image cookieBig;
 
     {
@@ -31,6 +28,16 @@ public class MapComponentsRenderer extends DefaultTableCellRenderer {
     }
 
     //todo petla
+    Image wall0;
+    Image wall1;
+
+    {
+        try {
+            cookieSmall = ImageIO.read(new File("assets/cookies/cookie_small.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
     Image wall2;
     Image wall3;
     Image wall4;
@@ -48,7 +55,7 @@ public class MapComponentsRenderer extends DefaultTableCellRenderer {
 
     {
         try {
-            cookieSmall = ImageIO.read(new File("assets/cookies/cookie_small.png"));
+            wall0 = ImageIO.read(new File("assets/walls/0a.png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -181,6 +188,17 @@ public class MapComponentsRenderer extends DefaultTableCellRenderer {
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         int cellSize = GameplayMap.cellSize;
+
+        if (table.getValueAt(row, column).equals(0)) {
+            return new JComponent() {
+                @Override
+                public void paint(Graphics g) {
+                    super.paint(g);
+                    g.setColor(Color.BLUE);
+                    g.drawImage(wall0, 0, 0, cellSize, cellSize, this);
+                }
+            };
+        }
 
         if (table.getValueAt(row, column).equals(1)) {
             return new JComponent() {
@@ -335,17 +353,6 @@ public class MapComponentsRenderer extends DefaultTableCellRenderer {
                 public void paint(Graphics g) {
                     super.paint(g);
                     g.drawImage(cookieSmall, 0, 0, cellSize, cellSize, this);
-                }
-            };
-        }
-
-        if (table.getValueAt(row, column).equals(0)) {
-            return new JComponent() {
-                @Override
-                public void paint(Graphics g) {
-                    super.paint(g);
-                    g.setColor(Color.BLUE);
-                    g.fillOval(0, 0, cellSize, cellSize);
                 }
             };
         }

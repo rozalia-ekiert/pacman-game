@@ -1,5 +1,6 @@
 package model.map;
 
+import model.MapGenerator;
 import model.NumberFormatter;
 import model.characters.Enemy;
 import model.characters.Player;
@@ -9,18 +10,19 @@ import views.game.components.panels.gameWindow.CurrentStats;
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class MapModel extends AbstractTableModel {
 
     int rows;
     int columns;
-    private final int[][] map;
+    public static final Object mapMonitor = new Object();
+    public static int cookiesCounter = 0;
 
     public static Player player = new Player();
     public static final ArrayList<Enemy> enemies = new ArrayList<>();
 
     public PACMANGame pacmanGame;
+    public int[][] map;
 
 
     int playerX;
@@ -45,107 +47,44 @@ public class MapModel extends AbstractTableModel {
         this.pacmanGame = pacmanGame;
 
         //=============================================================================
-        this.map = generateMap(rows, columns);
-        setWallNumber();
+
+//        Thread repaintMap = new Thread(){
+//            @Override
+//            public void run() {
+//                while (true) {
+//                    if (cookiesCounter == 0) {
+//                        SwingUtilities.invokeLater(new Runnable() {
+//                            public void run() {
+//                                JLabel message = new JLabel();
+//                                message.setText("N<html><font color=#E9FDAE>o more cookies! Good job!</html></font>");
+//                                message.setLayout(new GridBagLayout());
+//                                message.setFont(pacmanGame.Butterbelly);
+//                            }
+//                        });
+//                        try {
+//                            Thread.sleep(2000); // pauza na 2 sekundy
+//                        } catch (InterruptedException e) {
+//                            e.printStackTrace();
+//                        }
+//                        map = generateMap(rows, columns); // przerysowanie mapy
+//                        break;
+//                    }
+//                    try {
+//                        Thread.sleep(1000); // pauza na 1 sekundę
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//        };
+
+        this.map = MapGenerator.generateMap(rows, columns);
         setValueAt(pacman, rows - rows / 4, columns / 2);
 
         enemies.add(new Enemy());
         enemies.add(new Enemy());
         enemies.add(new Enemy());
         enemies.add(new Enemy());
-    }
-
-
-    public int[][] generateMap(int rows, int columns) {
-        int[][] map = new int[rows][columns];
-
-        //uzupełniam wszystkie pola
-        for (int i = 0; i < rows; i++) {
-            Arrays.fill(map[i], 19);
-        }
-
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
-
-                if (map[i][j] != 19) continue;
-
-                //generowanie brzegów
-                if (i == 0 || i == rows - 1 || j == 0 || j == columns - 1) {
-                    if (i == rows / 2 && j == 0 || i == rows / 2 && j == columns - 1) { // przejscie w polowie drogi
-                        map[i][j] = 19;
-                    } else {
-                        map[i][j] = sciana;
-                    }
-                    continue;
-                }
-
-                //miejsca dużych ciasteczek
-                if (i == 2 && j == 1 || i == 2 && j == columns - 2 || i == rows - 3 && j == 1 || i == rows - 3 && j == columns - 2)
-                    map[i][j] = cookieBig;
-
-                // generowanie miejsca respawnu duszków
-                if ((columns % 2) == 0) { //dla parzystej ilosci kolumn
-                    if (i == rows / 2 && j == columns / 2) {
-                        map[i][j] = blue;
-                        map[i][j - 1] = purple;
-                        map[i][j - 2] = green;
-                        map[i][j + 1] = pink;
-
-                        map[i - 1][j - 2] = sciana;
-                        map[i - 1][j - 3] = sciana;
-                        map[i - 1][j + 1] = sciana;
-                        map[i - 1][j + 2] = sciana;
-
-                        map[i][j - 3] = sciana;
-                        map[i][j + 2] = sciana;
-
-                        map[i + 1][j - 3] = sciana;
-                        map[i + 1][j - 2] = sciana;
-                        map[i + 1][j - 1] = sciana;
-                        map[i + 1][j] = sciana;
-                        map[i + 1][j + 1] = sciana;
-                        map[i + 1][j + 2] = sciana;
-                        continue;
-                    }
-
-                }
-                if ((columns % 2) != 0) { // dla nieparzystej ilośći kolumn
-                    if (i == rows / 2 && j == columns / 2 - 1) {
-                        map[i][j] = blue;
-                        map[i][j + 1] = purple;
-                        map[i][j + 2] = green;
-                        map[i - 2][j + 1] = pink;
-
-                        map[i - 1][j - 1] = sciana;
-                        map[i - 1][j] = sciana;
-                        map[i - 1][j + 2] = sciana;
-                        map[i - 1][j + 3] = sciana;
-
-                        map[i][j - 1] = sciana;
-                        map[i][j + 3] = sciana;
-
-                        map[i + 1][j - 1] = sciana;
-                        map[i + 1][j] = sciana;
-                        map[i + 1][j + 1] = sciana;
-                        map[i + 1][j + 2] = sciana;
-                        map[i + 1][j + 3] = sciana;
-                        continue;
-                    }
-                }
-
-                //losowe wnętrze
-                if (i > 2 && map[i - 2][j] == cookieSmall || i > 2 && map[i - 2][j] == pustePole) {
-                    if (j != 1 && j != columns - 2 && (map[i - 1][j] == cookieSmall || map[i - 1][j] == pustePole)
-                            && i != rows / 2 - 1 && j != columns / 2
-                            && j != columns / 4 && j != (columns / 4) * 3) map[i][j] = sciana;
-                }
-
-                //jak nic innego nie ma to cookie small
-                if (map[i][j] == pustePole) map[i][j] = cookieSmall;
-            }
-        }
-
-        return map;
     }
 
     public void showModel() {
@@ -156,29 +95,6 @@ public class MapModel extends AbstractTableModel {
             System.out.println();
         }
     } // do debuggingu
-
-    public void setWallNumber() {
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
-                if (map[i][j] <= 15) {
-                    int counter = 0;
-                    if (i - 1 >= 0 && map[i - 1][j] <= 15) {
-                        counter += 1;
-                    }
-                    if (i + 1 < rows && map[i + 1][j] <= 15) {
-                        counter += 4;
-                    }
-                    if (j - 1 >= 0 && map[i][j - 1] <= 15) {
-                        counter += 8;
-                    }
-                    if (j + 1 < columns && map[i][j + 1] <= 15) {
-                        counter += 2;
-                    }
-                    map[i][j] = counter;
-                }
-            }
-        }
-    }
 
     @Override
     public Class<?> getColumnClass(int columnIndex) {
@@ -218,6 +134,7 @@ public class MapModel extends AbstractTableModel {
             if (getValueAt(X, getPlayerY()).equals(cookieSmall) || getValueAt(X, getPlayerY()).equals(cookieBig)) {
                 if (getValueAt(X, getPlayerY()).equals(cookieSmall)) CurrentStats.yourScore += 10;
                 if (getValueAt(X, getPlayerY()).equals(cookieBig)) CurrentStats.yourScore += 50;
+                cookiesCounter--;
                 SwingUtilities.invokeLater(new Runnable() {
                     public void run() {
                         CurrentStats.setYourScore.setText(NumberFormatter.changeScoreToString(CurrentStats.yourScore));
@@ -239,6 +156,7 @@ public class MapModel extends AbstractTableModel {
             if (getValueAt(getPlayerX(), playerY).equals(cookieSmall) || getValueAt(getPlayerX(), playerY).equals(cookieBig)) {
                 if (getValueAt(getPlayerX(), playerY).equals(cookieSmall)) CurrentStats.yourScore += 10;
                 if (getValueAt(getPlayerX(), playerY).equals(cookieBig)) CurrentStats.yourScore += 50;
+                cookiesCounter--;
                 SwingUtilities.invokeLater(new Runnable() {
                     public void run() {
                         CurrentStats.setYourScore.setText(NumberFormatter.changeScoreToString(CurrentStats.yourScore));
