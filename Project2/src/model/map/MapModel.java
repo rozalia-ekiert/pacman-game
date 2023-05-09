@@ -1,11 +1,11 @@
 package model.map;
 
-import model.MapGenerator;
 import model.NumberFormatter;
 import model.characters.Enemy;
 import model.characters.Player;
 import views.PACMANGame;
 import views.game.components.panels.gameWindow.CurrentStats;
+import views.game.components.panels.gameWindow.Gameplay;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
@@ -13,9 +13,8 @@ import java.util.ArrayList;
 
 public class MapModel extends AbstractTableModel {
 
-    int rows;
-    int columns;
-    public static final Object mapMonitor = new Object();
+    public static int rows;
+    public static int columns;
     public static int cookiesCounter = 0;
 
     public static Player player = new Player();
@@ -24,11 +23,11 @@ public class MapModel extends AbstractTableModel {
     public PACMANGame pacmanGame;
     public int[][] map;
 
-
-    int playerX;
-    int playerY;
+    static int playerX;
+    static int playerY;
 
     //todo pouzupelniac model slowami
+
     int pustePole = 19;
     int cookieBig = 20;
     int cookieSmall = 21;
@@ -39,6 +38,9 @@ public class MapModel extends AbstractTableModel {
     int green = 25;
     int pink = 26;
 
+    Timer timer = new Timer(2000, e -> {
+        Gameplay.message.setText(Gameplay.messageDefault);
+    });
 
     public MapModel(int rows, int columns, PACMANGame pacmanGame) {
         super();
@@ -46,45 +48,13 @@ public class MapModel extends AbstractTableModel {
         this.columns = columns;
         this.pacmanGame = pacmanGame;
 
-        //=============================================================================
-
-//        Thread repaintMap = new Thread(){
-//            @Override
-//            public void run() {
-//                while (true) {
-//                    if (cookiesCounter == 0) {
-//                        SwingUtilities.invokeLater(new Runnable() {
-//                            public void run() {
-//                                JLabel message = new JLabel();
-//                                message.setText("N<html><font color=#E9FDAE>o more cookies! Good job!</html></font>");
-//                                message.setLayout(new GridBagLayout());
-//                                message.setFont(pacmanGame.Butterbelly);
-//                            }
-//                        });
-//                        try {
-//                            Thread.sleep(2000); // pauza na 2 sekundy
-//                        } catch (InterruptedException e) {
-//                            e.printStackTrace();
-//                        }
-//                        map = generateMap(rows, columns); // przerysowanie mapy
-//                        break;
-//                    }
-//                    try {
-//                        Thread.sleep(1000); // pauza na 1 sekundę
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//        };
+        enemies.add(new Enemy());
+        enemies.add(new Enemy());
+        enemies.add(new Enemy());
+        enemies.add(new Enemy());
 
         this.map = MapGenerator.generateMap(rows, columns);
         setValueAt(pacman, rows - rows / 4, columns / 2);
-
-        enemies.add(new Enemy());
-        enemies.add(new Enemy());
-        enemies.add(new Enemy());
-        enemies.add(new Enemy());
     }
 
     public void showModel() {
@@ -95,6 +65,32 @@ public class MapModel extends AbstractTableModel {
             System.out.println();
         }
     } // do debuggingu
+
+    public synchronized void eatCookie() {
+        cookiesCounter--;
+        if (cookiesCounter == 0) {
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+
+                    while (MapModel.cookiesCounter == 0) {
+
+                        map = MapGenerator.generateMap(MapModel.rows, MapModel.columns);
+                        setValueAt(pacman, rows - rows / 4, columns / 2);
+                        pacmanGame.repaint();
+                        Gameplay.message.setText(Gameplay.messageCookiesEaten);
+                        timer.start();
+
+//                        try {
+//                            Thread.sleep(1000);
+//                        } catch (InterruptedException e) {
+//                            e.printStackTrace();
+//                        }
+                    }
+                }
+            });
+        }
+    }
 
     @Override
     public Class<?> getColumnClass(int columnIndex) {
@@ -134,7 +130,7 @@ public class MapModel extends AbstractTableModel {
             if (getValueAt(X, getPlayerY()).equals(cookieSmall) || getValueAt(X, getPlayerY()).equals(cookieBig)) {
                 if (getValueAt(X, getPlayerY()).equals(cookieSmall)) CurrentStats.yourScore += 10;
                 if (getValueAt(X, getPlayerY()).equals(cookieBig)) CurrentStats.yourScore += 50;
-                cookiesCounter--;
+                eatCookie();
                 SwingUtilities.invokeLater(new Runnable() {
                     public void run() {
                         CurrentStats.setYourScore.setText(NumberFormatter.changeScoreToString(CurrentStats.yourScore));
@@ -156,7 +152,7 @@ public class MapModel extends AbstractTableModel {
             if (getValueAt(getPlayerX(), playerY).equals(cookieSmall) || getValueAt(getPlayerX(), playerY).equals(cookieBig)) {
                 if (getValueAt(getPlayerX(), playerY).equals(cookieSmall)) CurrentStats.yourScore += 10;
                 if (getValueAt(getPlayerX(), playerY).equals(cookieBig)) CurrentStats.yourScore += 50;
-                cookiesCounter--;
+                eatCookie();
                 SwingUtilities.invokeLater(new Runnable() {
                     public void run() {
                         CurrentStats.setYourScore.setText(NumberFormatter.changeScoreToString(CurrentStats.yourScore));

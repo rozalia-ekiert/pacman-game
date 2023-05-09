@@ -1,6 +1,4 @@
-package model;
-
-import model.map.MapModel;
+package model.map;
 
 import java.util.Arrays;
 
@@ -8,6 +6,7 @@ public class MapGenerator {
     //utility class
 
     static int sciana = 0;
+    static int pustePoleStale = 18;
     static int pustePole = 19;
     static int cookieBig = 20;
     static int cookieSmall = 21;
@@ -15,35 +14,37 @@ public class MapGenerator {
     static int purple = 24;
     static int green = 25;
     static int pink = 26;
-    int pacman = 22;
+    static int pacman = 22;
 
     public static int[][] generateMap(int rows, int columns) {
         int[][] map = new int[rows][columns];
 
         //uzupełniam wszystkie pola
         for (int i = 0; i < rows; i++) {
-            Arrays.fill(map[i], 19);
+            Arrays.fill(map[i], pustePole);
         }
+
+        //miejsca dużych ciasteczek
+        map[2][1] = cookieBig;
+        map[2][columns - 2] = cookieBig;
+        map[rows - 3][1] = cookieBig;
+        map[rows - 3][columns - 2] = cookieBig;
+        MapModel.cookiesCounter = MapModel.cookiesCounter + 4;
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
 
-                if (map[i][j] != 19) continue;
+                if (map[i][j] != pustePole) continue;
+
 
                 //generowanie brzegów
                 if (i == 0 || i == rows - 1 || j == 0 || j == columns - 1) {
                     if (i == rows / 2 && j == 0 || i == rows / 2 && j == columns - 1) { // przejscie w polowie drogi
-                        map[i][j] = 19;
+                        map[i][j] = pustePoleStale;
                     } else {
                         map[i][j] = sciana;
                     }
                     continue;
-                }
-
-                //miejsca dużych ciasteczek
-                if (i == 2 && j == 1 || i == 2 && j == columns - 2 || i == rows - 3 && j == 1 || i == rows - 3 && j == columns - 2) {
-                    map[i][j] = cookieBig;
-                    MapModel.cookiesCounter++;
                 }
 
                 // generowanie miejsca respawnu duszków
@@ -97,15 +98,20 @@ public class MapGenerator {
                 }
 
                 //losowe wnętrze
-                if (i > 2 && map[i - 2][j] == cookieSmall || i > 2 && map[i - 2][j] == pustePole) {
-                    if (j != 1 && j != columns - 2 && (map[i - 1][j] == cookieSmall || map[i - 1][j] == pustePole)
-                            && i != rows / 2 - 1 && j != columns / 2
+                if (i > 2 && map[i - 2][j] == pustePole) {
+                    if (j != 1 && j != columns - 2 && map[i - 1][j] == pustePole && i != rows / 2 - 1 && j != columns / 2
                             && j != columns / 4 && j != (columns / 4) * 3) map[i][j] = sciana;
                 }
+            }
+        }
 
-                //jak nic innego nie ma to cookie small
-                if (map[i][j] == pustePole) map[i][j] = cookieSmall;
-                MapModel.cookiesCounter++;
+        //uzupełniam puste pola ciasteczkami
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                if (map[i][j] == pustePole) {
+                    map[i][j] = cookieSmall;
+                    MapModel.cookiesCounter++;
+                }
             }
         }
 
@@ -131,6 +137,7 @@ public class MapGenerator {
             }
         }
 
+        MapModel.cookiesCounter = MapModel.cookiesCounter - 1; //odejmuję wartość, gdzie ustawię pacmana
         return map;
     }
 

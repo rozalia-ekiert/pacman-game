@@ -17,8 +17,8 @@ public class GameplayMap extends JPanel {
 
     public JTable mapTable;
     int windowSize;
-    int rows = 15;
-    int columns = 13;
+    int rows = 10;
+    int columns = 10;
 
 
     public GameplayMap(int sqWidth, int sqHeight, PACMANGame pacmanGame) {
@@ -49,13 +49,7 @@ public class GameplayMap extends JPanel {
         mapTable.setShowHorizontalLines(false);
         mapTable.setCellSelectionEnabled(false);
 
-        GridBagConstraints gbc = new GridBagConstraints();
-
-        gbc.fill = GridBagConstraints.NONE;
-        gbc.anchor = GridBagConstraints.CENTER;
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        this.add(mapTable, gbc);
+        this.add(mapTable);
 
         //=========================================================================
 
