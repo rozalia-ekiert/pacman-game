@@ -6,6 +6,8 @@ import views.PACMANGame;
 import views.ViewCardPanel;
 import views.game.Game;
 import views.game.components.GameViewChange;
+import views.game.components.panels.gameWindow.Gameplay;
+import views.game.components.panels.gameWindow.GameplayMap;
 import views.menu.components.middlePanels.NewGame;
 
 import javax.swing.*;
@@ -39,13 +41,13 @@ public class PlayButtonMouseListener implements MouseListener {
             if (!NewGame.isValue1Valid || !NewGame.isValue2Valid) {
                 NewGame.warningField.setText(NewGame.warningFieldIsNotCorrectSize);
                 if (NewGame.isNickValid) {
-                    NewGame.warningNick.setText("");
+                    NewGame.warningNick.setText(NewGame.warningFieldIsNotCorrectSizeDefaut);
                 }
             }
             if (!NewGame.isNickValid) {
                 NewGame.warningNick.setText(NewGame.warningYourNickExists);
                 if (NewGame.isValue1Valid && NewGame.isValue2Valid) {
-                    NewGame.warningField.setText("");
+                    NewGame.warningField.setText(NewGame.warningYourNickExistsDefault);
                 }
             }
 
@@ -63,6 +65,23 @@ public class PlayButtonMouseListener implements MouseListener {
 //            newGame.play.setFocusable(false);
 //            newGame.play.setEnabled(false);
 //            newGame.play.setFocusTraversalKeysEnabled(false);
+
+//                if (GameplayMap.columns <= GameplayMap.rows) {
+//                    GameplayMap.cellSize = (GameplayMap.windowSize / GameplayMap.rows);
+//                } else {
+//                    GameplayMap.cellSize = (GameplayMap.windowSize) / GameplayMap.columns;
+//                }
+
+                GridBagConstraints gbc = new GridBagConstraints();
+                gbc.gridx = 0;
+                gbc.gridy = 1;
+                gbc.gridwidth = 1;
+                gbc.gridheight = 1;
+                gbc.anchor = GridBagConstraints.CENTER;
+
+                Gameplay.map = new GameplayMap(Gameplay.sqWidth, Gameplay.sqHeight, pacmanGame);
+                ;
+                game.gameWindow.gameplay.add(Gameplay.map, gbc);
 
                 CardLayout cl = (CardLayout) (this.pacmanGame.viewsCardPanel.getLayout());
                 cl.show(this.pacmanGame.viewsCardPanel, ViewCardPanel.GAME_VIEW);

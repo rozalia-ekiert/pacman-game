@@ -13,7 +13,8 @@ public class CurrentStats extends JPanel {
     //todo
     int highScore = 110;
     public static int yourScore = 0;
-    long time = 0; // w milisekundach
+    public static int lives = 5;
+    long time = 0;
 
     JLabel highScoreArea;
     JLabel setHighScore;
@@ -21,8 +22,10 @@ public class CurrentStats extends JPanel {
     public static JLabel setYourScore;
     JLabel timeArea;
     JLabel setTime;
+    JTable livesTable;
 
     PACMANGame pacmanGame;
+
     public CurrentStats(int width, int height, PACMANGame pacmanGame) {
 
         this.pacmanGame = pacmanGame;
@@ -115,15 +118,14 @@ public class CurrentStats extends JPanel {
         gbc.insets = new Insets(0, 30, 0, 0);
         this.add(setTime, gbc);
 
+
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 TimeThread timeThread = new TimeThread(setTime, pacmanGame);
                 timeThread.start();
             }
         });
-
     }
-
 
     public void compareYourAndHighScore() { // todo
         if (yourScore > this.highScore) {
@@ -136,20 +138,5 @@ public class CurrentStats extends JPanel {
         }
     }
 
-//    public void update(){
-//        //początek
-//                //highScore - pobierz z rankingu, jak nic nie ma to 0
-//        yourScore = 0;
-//        time = 0;
-//
-//        //co 1/10 sekundy
-//        updateYourScore();
-//
-//    }
-//
-//    public int updateYourScore(){
-//        yourScore = MapModel.yourScore;
-//        return yourScore;
-//    }
 
 }

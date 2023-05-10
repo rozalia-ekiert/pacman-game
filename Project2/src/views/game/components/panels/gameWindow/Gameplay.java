@@ -7,8 +7,11 @@ import java.awt.*;
 
 public class Gameplay extends JPanel {
 
-    public GameplayMap map;
+    public static GameplayMap map;
     public static JLabel message;
+
+    public static int sqHeight;
+    public static int sqWidth;
 
     public static String messageDefault = "<html><center><font size=6 color=black>No more cookies!<br>Good job!</br></center></html></font>";
     public static String messageCookiesEaten = "<html><center><font size=6 color=#E9FDAE>No more cookies!<br>Good job!</br></center></html></font>";
@@ -20,8 +23,8 @@ public class Gameplay extends JPanel {
         this.setBackground(Color.BLACK);
         this.setLayout(new GridBagLayout());
 
-        int sqHeight = (int) (height * 0.85);
-        int sqWidth = sqHeight;
+        sqHeight = (int) (height * 0.85);
+        sqWidth = sqHeight;
 
         //-------------------------------------------------------------------------
 
@@ -40,15 +43,6 @@ public class Gameplay extends JPanel {
 
         this.add(message, gbc);
 
-        map = new GameplayMap(sqWidth, sqHeight, pacmanGame);
-
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.gridwidth = 1;
-        gbc.gridheight = 1;
-        gbc.anchor = GridBagConstraints.CENTER;
-
-        this.add(map, gbc);
 
     }
 }

@@ -38,7 +38,7 @@ public class MapModel extends AbstractTableModel {
     int green = 25;
     int pink = 26;
 
-    Timer messageTimer = new Timer(2500, e -> {
+    Timer messageTimer = new Timer(3000, e -> {
         Gameplay.message.setText(Gameplay.messageDefault);
     });
 

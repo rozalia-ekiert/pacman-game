@@ -30,6 +30,9 @@ public class NewGame extends JPanel {
     public static final String warningFieldIsNotCorrectSize = "<html><font color=#A60909>Please set the size between 10x10 and 100x100.</font></html>";
     public static final String warningYourNickExists = "<html><font color=#A60909>Nick is blank or already exists. Please choose new nick.</font></html>";
 
+    public static final String warningFieldIsNotCorrectSizeDefaut = "<html><font color=black>Please set the size between 10x10 and 100x100.</font></html>";
+    public static final String warningYourNickExistsDefault = "<html><font color=black>Nick is blank or already exists. Please choose new nick.</font></html>";
+
     public static JLabel warningField;
     public static JLabel warningNick;
 
@@ -38,8 +41,8 @@ public class NewGame extends JPanel {
     public static boolean isValue2Valid = false;
     public static boolean isNickValid = false;
 
-    public int setRows;
-    public int setColumns;
+    public static int setRows;
+    public static int setColumns;
 
     public NewGame(int width, int height, PACMANGame pacmanGame, MenuStart menuStart, Game game) {
 
@@ -71,7 +74,7 @@ public class NewGame extends JPanel {
         GradientText gradientText = new GradientText(this.text, pacmanGame);
 
         //------------------------------------------ wiersz 2
-        warningField = new JLabel("");
+        warningField = new JLabel(warningFieldIsNotCorrectSizeDefaut);
 
         //------------------------------------------ wiersz 1
         JTextArea windowGameSize = new JTextArea(this.windowGameSize);
@@ -106,6 +109,7 @@ public class NewGame extends JPanel {
             private void updateButton() {
                 String text = setWindowSize1.getText();
                 if (text.matches("\\d+") && Integer.parseInt(text) >= 10 && Integer.parseInt(text) <= 100) {
+                    setRows = Integer.parseInt(text);
                     isValue1Valid = true;
                 } else {
                     isValue1Valid = false;
@@ -130,13 +134,14 @@ public class NewGame extends JPanel {
                 String text = setWindowSize2.getText();
                 if (text.matches("\\d+") && Integer.parseInt(text) >= 10 && Integer.parseInt(text) <= 100) {
                     isValue2Valid = true;
+                    setColumns = Integer.parseInt(text);
                 } else {
                     isValue2Valid = false;
                 }
             }
         });
         //------------------------------------------ wiersz 4
-        warningNick = new JLabel("");
+        warningNick = new JLabel(warningYourNickExistsDefault);
 
         //------------------------------------------ wiersz 3
         JTextArea yourNick = new JTextArea(this.yourNick);
