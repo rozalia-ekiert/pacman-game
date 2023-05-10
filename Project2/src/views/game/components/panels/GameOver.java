@@ -7,24 +7,20 @@ import java.awt.*;
 
 public class GameOver extends JPanel {
 
-    public GameOver(int width, int height, PACMANGame pacmanGameFrame) {
+    public GameOver(int width, int height, PACMANGame pacmanGame) {
+
         this.setPreferredSize(new Dimension(width, height));
         this.setBackground(Color.BLACK);
-//        this.setFocusable(false);
         this.setLayout(new GridBagLayout());
 
+        String text = "<html><center>GAME OVER</center></html>";
+        JLabel textLabel = new JLabel(text);
 
-        String text = "GAME OVER";
+        textLabel.setFocusable(false);
+        textLabel.setBackground(Color.BLACK);
+        textLabel.setForeground(Color.WHITE);
+        textLabel.setFont(pacmanGame.Butterbelly);
 
-        JTextArea textArea = new JTextArea(text, 1, 20);
-
-        textArea.setForeground(Color.WHITE);
-        textArea.setBackground(Color.BLACK);
-        textArea.setFont(pacmanGameFrame.Butterbelly);
-
-        textArea.setEnabled(false);
-        textArea.setEditable(false);
-
-        this.add(textArea);
+        this.add(textLabel);
     }
 }

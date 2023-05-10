@@ -14,10 +14,10 @@ import java.util.Arrays;
 
 public class CurrentStats extends JPanel {
 
-    //todo
-    int highScore = 110;
+    public static int livesNumber = 5;
     public static int yourScore = 0;
-    public static int livesNumber = 7;
+    //todo
+    int highScore = 1110;
     long time = 0;
 
     JLabel highScoreArea;

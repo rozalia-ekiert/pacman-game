@@ -4,11 +4,13 @@ import model.NumberFormatter;
 import model.characters.Enemy;
 import model.characters.Player;
 import views.PACMANGame;
+import views.game.components.GameCardPanel;
 import views.game.components.panels.gameWindow.CurrentStats;
 import views.game.components.panels.gameWindow.Gameplay;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
+import java.awt.*;
 import java.util.ArrayList;
 
 public class MapModel extends AbstractTableModel {
@@ -57,7 +59,7 @@ public class MapModel extends AbstractTableModel {
         setValueAt(pacman, rows - rows / 4, columns / 2);
     }
 
-    public void showModel() {
+    private void showModel() {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
                 System.out.print(map[i][j] + " ");
@@ -66,7 +68,7 @@ public class MapModel extends AbstractTableModel {
         }
     } // do debuggingu
 
-    public void eatCookie() {
+    private void eatCookie() {
         cookiesCounter--;
         if (cookiesCounter == 0) {
             SwingUtilities.invokeLater(new Runnable() {
@@ -86,7 +88,7 @@ public class MapModel extends AbstractTableModel {
         }
     }
 
-    public synchronized void eatenByGhosts() {
+    private synchronized void eatenByGhosts() {
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -97,24 +99,34 @@ public class MapModel extends AbstractTableModel {
                 Gameplay.message.setText(Gameplay.messageEatenByGhosts);
                 messageTimer.start();
 
-                int counter = CurrentStats.livesNumber;
+                removeLife();
 
-                for (int i = 0; i < CurrentStats.livesRows; i++) {
-                    for (int j = 0; j < 5; j++) {
-                        counter--;
-                        CurrentStats.livesTable.getColumnModel().getColumn(j).setPreferredWidth(CurrentStats.lifeCellSize);
-                        CurrentStats.livesTable.getColumnModel().getColumn(j).setCellRenderer(CurrentStats.mapComponentsRenderer);
-                        if (counter >= 0) {
-                            CurrentStats.livesTable.setValueAt(33, i, j);
-                        } else {
-                            CurrentStats.livesTable.setValueAt(100, i, j);
-                        }
-                    }
+                if (CurrentStats.livesNumber == 0) {
+                    CardLayout cl = (CardLayout) (pacmanGame.game.gameCardPanel.getLayout());
+                    cl.show(pacmanGame.game.gameCardPanel, GameCardPanel.GAME_OVER);
+                    pacmanGame.game.gameCardPanel.currentCardName = GameCardPanel.GAME_OVER;
                 }
-                CurrentStats.model.fireTableDataChanged();
             }
 
         });
+    }
+
+    private void removeLife() {
+        int counter = CurrentStats.livesNumber;
+
+        for (int i = 0; i < CurrentStats.livesRows; i++) {
+            for (int j = 0; j < 5; j++) {
+                counter--;
+                CurrentStats.livesTable.getColumnModel().getColumn(j).setPreferredWidth(CurrentStats.lifeCellSize);
+                CurrentStats.livesTable.getColumnModel().getColumn(j).setCellRenderer(CurrentStats.mapComponentsRenderer);
+                if (counter >= 0) {
+                    CurrentStats.livesTable.setValueAt(33, i, j);
+                } else {
+                    CurrentStats.livesTable.setValueAt(100, i, j);
+                }
+            }
+        }
+        CurrentStats.model.fireTableDataChanged();
     }
 
     @Override
