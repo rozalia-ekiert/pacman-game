@@ -66,7 +66,7 @@ public class MapModel extends AbstractTableModel {
         }
     } // do debuggingu
 
-    public synchronized void eatCookie() {
+    public void eatCookie() {
         cookiesCounter--;
         if (cookiesCounter == 0) {
             SwingUtilities.invokeLater(new Runnable() {
@@ -80,16 +80,40 @@ public class MapModel extends AbstractTableModel {
                         pacmanGame.repaint();
                         Gameplay.message.setText(Gameplay.messageCookiesEaten);
                         messageTimer.start();
-
-//                        try {
-//                            Thread.sleep(1000);
-//                        } catch (InterruptedException e) {
-//                            e.printStackTrace();
-//                        }
                     }
                 }
             });
         }
+    }
+
+    public synchronized void eatenByGhosts() {
+
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                CurrentStats.livesNumber--;
+                setValueAt(pacman, rows - rows / 4, columns / 2);
+                Gameplay.message.setText(Gameplay.messageEatenByGhosts);
+                messageTimer.start();
+
+                int counter = CurrentStats.livesNumber;
+
+                for (int i = 0; i < CurrentStats.livesRows; i++) {
+                    for (int j = 0; j < 5; j++) {
+                        counter--;
+                        CurrentStats.livesTable.getColumnModel().getColumn(j).setPreferredWidth(CurrentStats.lifeCellSize);
+                        CurrentStats.livesTable.getColumnModel().getColumn(j).setCellRenderer(CurrentStats.mapComponentsRenderer);
+                        if (counter >= 0) {
+                            CurrentStats.livesTable.setValueAt(33, i, j);
+                        } else {
+                            CurrentStats.livesTable.setValueAt(100, i, j);
+                        }
+                    }
+                }
+                CurrentStats.model.fireTableDataChanged();
+            }
+
+        });
     }
 
     @Override
@@ -126,6 +150,14 @@ public class MapModel extends AbstractTableModel {
     }
 
     public void setPlayerXUstawKolumne(int X) {
+
+        if (getValueAt(X, getPlayerY()).equals(23) || getValueAt(X, getPlayerY()).equals(24)
+                || getValueAt(X, getPlayerY()).equals(25) || getValueAt(X, getPlayerY()).equals(26)) {
+            setValueAt(pustePole, getPlayerX(), getPlayerY());
+            eatenByGhosts();
+            return;
+        }
+
         if (!isWall(X, getPlayerY())) {
             if (getValueAt(X, getPlayerY()).equals(cookieSmall) || getValueAt(X, getPlayerY()).equals(cookieBig)) {
                 if (getValueAt(X, getPlayerY()).equals(cookieSmall)) CurrentStats.yourScore += 10;
@@ -147,11 +179,17 @@ public class MapModel extends AbstractTableModel {
         return playerY;
     }
 
-    public void setPlayerYUstawRzad(int playerY) {
-        if (!isWall(getPlayerX(), playerY)) {
-            if (getValueAt(getPlayerX(), playerY).equals(cookieSmall) || getValueAt(getPlayerX(), playerY).equals(cookieBig)) {
-                if (getValueAt(getPlayerX(), playerY).equals(cookieSmall)) CurrentStats.yourScore += 10;
-                if (getValueAt(getPlayerX(), playerY).equals(cookieBig)) CurrentStats.yourScore += 50;
+    public void setPlayerYUstawRzad(int Y) {
+        if (getValueAt(getPlayerX(), Y).equals(23) || getValueAt(getPlayerX(), Y).equals(24)
+                || getValueAt(getPlayerX(), Y).equals(25) || getValueAt(getPlayerX(), Y).equals(26)) {
+            setValueAt(pustePole, getPlayerX(), getPlayerY());
+            eatenByGhosts();
+            return;
+        }
+        if (!isWall(getPlayerX(), Y)) {
+            if (getValueAt(getPlayerX(), Y).equals(cookieSmall) || getValueAt(getPlayerX(), Y).equals(cookieBig)) {
+                if (getValueAt(getPlayerX(), Y).equals(cookieSmall)) CurrentStats.yourScore += 10;
+                if (getValueAt(getPlayerX(), Y).equals(cookieBig)) CurrentStats.yourScore += 50;
                 eatCookie();
                 SwingUtilities.invokeLater(new Runnable() {
                     public void run() {
@@ -161,7 +199,7 @@ public class MapModel extends AbstractTableModel {
                 });
             }
             setValueAt(pustePole, getPlayerX(), getPlayerY());
-            setValueAt(pacman, getPlayerX(), playerY);
+            setValueAt(pacman, getPlayerX(), Y);
         }
     }
 

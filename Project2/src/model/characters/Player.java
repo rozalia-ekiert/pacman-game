@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class Player extends Character {
 
-    public static CharacterAnimationState currentState = CharacterAnimationState.PlayerCLOSE;
+    public static CharacterAnimationState currentState = CharacterAnimationState.PLayerDEFAULT;
     Image pacmanDefault = setPlayerImages(0);
 
     public Image setPlayerImages(int a) {

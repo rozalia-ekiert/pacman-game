@@ -17,10 +17,10 @@ import java.awt.event.MouseListener;
 
 public class PlayButtonMouseListener implements MouseListener {
 
-    private JButton play;
-    private PACMANGame pacmanGame;
-    private NewGame newGame;
-    private Game game;
+    private final JButton play;
+    private final PACMANGame pacmanGame;
+    private final NewGame newGame;
+    private final Game game;
     public static final Object monitor = new Object();
 
 
@@ -80,7 +80,7 @@ public class PlayButtonMouseListener implements MouseListener {
                 gbc.anchor = GridBagConstraints.CENTER;
 
                 Gameplay.map = new GameplayMap(Gameplay.sqWidth, Gameplay.sqHeight, pacmanGame);
-                ;
+
                 game.gameWindow.gameplay.add(Gameplay.map, gbc);
 
                 CardLayout cl = (CardLayout) (this.pacmanGame.viewsCardPanel.getLayout());

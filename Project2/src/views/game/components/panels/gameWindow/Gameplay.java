@@ -14,7 +14,8 @@ public class Gameplay extends JPanel {
     public static int sqWidth;
 
     public static String messageDefault = "<html><center><font size=6 color=black>No more cookies!<br>Good job!</br></center></html></font>";
-    public static String messageCookiesEaten = "<html><center><font size=6 color=#E9FDAE>No more cookies!<br>Good job!</br></center></html></font>";
+    public static String messageCookiesEaten = "<html><center><font size=6 color=#E9FDAE>No more cookies!<br>Good job!</center></html></font>";
+    public static String messageEatenByGhosts = "<html><center><font size=6 color=#E9FDAE>You were eaten by the ghosts!<br>Be careful!</br></center></html></font>";
 
     public Gameplay(int width, int height, PACMANGame pacmanGame) {
 
