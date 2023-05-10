@@ -93,6 +93,7 @@ public class MapModel extends AbstractTableModel {
             public void run() {
                 CurrentStats.livesNumber--;
                 setValueAt(pacman, rows - rows / 4, columns / 2);
+
                 Gameplay.message.setText(Gameplay.messageEatenByGhosts);
                 messageTimer.start();
 
