@@ -12,6 +12,7 @@ public class GameOver extends JPanel {
         this.setPreferredSize(new Dimension(width, height));
         this.setBackground(Color.BLACK);
         this.setLayout(new GridBagLayout());
+        this.setFocusable(true);
 
         String text = "<html><center>GAME OVER</center></html>";
         JLabel textLabel = new JLabel(text);

@@ -11,6 +11,7 @@ public class Gameplay extends JPanel {
 
         this.setPreferredSize(new Dimension(width, height));
         this.setBackground(Color.BLACK);
+        this.setFocusable(true);
 
         this.setLayout(new GridBagLayout());
 

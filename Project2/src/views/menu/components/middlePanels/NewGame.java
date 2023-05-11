@@ -43,6 +43,9 @@ public class NewGame extends JPanel {
     public static int setRows;
     public static int setColumns;
     public static String setYourNick;
+    public static JTextField setWindowSize1;
+    public static JTextField setWindowSize2;
+    public static JTextField setYourNickField;
 
     public NewGame(int width, int height, PACMANGame pacmanGame, MenuStart menuStart, Game game) {
 
@@ -83,8 +86,8 @@ public class NewGame extends JPanel {
         windowGameSize.setFont(font1);
         windowGameSize.setEditable(false);
 
-        JTextField setWindowSize1 = new JTextField();
-        JTextField setWindowSize2 = new JTextField();
+        setWindowSize1 = new JTextField();
+        setWindowSize2 = new JTextField();
 
         int size = 80;
         setWindowSize1.setPreferredSize(new Dimension(size, size));
@@ -95,18 +98,18 @@ public class NewGame extends JPanel {
 
         setWindowSize1.getDocument().addDocumentListener(new DocumentListener() {
             public void insertUpdate(DocumentEvent e) {
-                updateButton();
+                updateValue();
             }
 
             public void removeUpdate(DocumentEvent e) {
-                updateButton();
+                updateValue();
             }
 
             public void changedUpdate(DocumentEvent e) {
-                updateButton();
+                updateValue();
             }
 
-            private void updateButton() {
+            private void updateValue() {
                 String text = setWindowSize1.getText();
                 if (text.matches("\\d+") && Integer.parseInt(text) >= 10 && Integer.parseInt(text) <= 100) {
                     setRows = Integer.parseInt(text);
@@ -151,7 +154,7 @@ public class NewGame extends JPanel {
         yourNick.setFont(font1);
         yourNick.setEditable(false);
 
-        JTextField setYourNickField = new JTextField();
+        setYourNickField = new JTextField();
         setYourNickField.setPreferredSize(new Dimension(150, 60));
 
         setYourNickField.getDocument().addDocumentListener(new DocumentListener() {

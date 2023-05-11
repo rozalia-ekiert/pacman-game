@@ -1,44 +1,52 @@
 package model.game;
 
-import controllers.menu.PlayButtonMouseListener;
 import model.NumberFormatter;
 import views.PACMANGame;
 
 import javax.swing.*;
 
 public class TimeThread extends Thread {
-    private static final Object monitor = PlayButtonMouseListener.monitor;
+    private static Object monitor;
     public static boolean isGameViewReady = false;
     PACMANGame pacmanGame;
     private JLabel timeLabel;
     private long startTime;
 
-    public TimeThread(JLabel timeLabel, PACMANGame pacmanGame) {
+    public TimeThread(JLabel timeLabel, PACMANGame pacmanGame, Object monitor) {
         this.timeLabel = timeLabel;
         this.pacmanGame = pacmanGame;
+        this.monitor = monitor;
     }
 
-    public void run() {
+    public synchronized void run() {
         synchronized (monitor) {
+
             while (!isGameViewReady) {
                 try {
+                    System.out.println("czeka");
                     monitor.wait();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+
                 startTime = System.currentTimeMillis();  //todo zmiana razem z czasem wyświetlania screen1 i 2
                 while (isGameViewReady) {
                     long currentTime = System.currentTimeMillis() - 1000;
                     long gameTime = (currentTime - startTime);
+                    System.out.println(gameTime);
                     timeLabel.setText(NumberFormatter.changeTimeToString(gameTime));
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                    if (!Thread.currentThread().isInterrupted()) {
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            Thread.currentThread().interrupt();
+                            return;
+                        }
                     }
-                    isGameViewReady = false;
                 }
+
             }
+
         }
     }
 }

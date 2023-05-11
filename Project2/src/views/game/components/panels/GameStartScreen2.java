@@ -11,7 +11,7 @@ public class GameStartScreen2 extends JPanel {
 
         this.setPreferredSize(new Dimension(width, height));
         this.setBackground(Color.BLACK);
-        this.setFocusable(false);
+        this.setFocusable(true);
         this.setLayout(new GridBagLayout());
 
         String text = "<html><center>Get ready!</center></html>";

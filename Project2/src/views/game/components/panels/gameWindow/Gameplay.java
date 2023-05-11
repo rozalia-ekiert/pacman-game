@@ -17,7 +17,7 @@ public class Gameplay extends JPanel {
     public static String messageCookiesEaten = "<html><center><font size=6 color=#E9FDAE>No more cookies!<br>Good job!</center></html></font>";
     public static String messageEatenByGhosts = "<html><center><font size=6 color=#E9FDAE>You were eaten by the ghosts!<br>Be careful!</br></center></html></font>";
 
-    public Gameplay(int width, int height, PACMANGame pacmanGame) {
+    public Gameplay(int width, int height, PACMANGame pacmanGame, int setRows, int setColumns) {
 
         this.setPreferredSize(new Dimension(width, height));
 //        this.setFocusable(false);
@@ -44,7 +44,7 @@ public class Gameplay extends JPanel {
 
         this.add(message, gbc);
 
-        map = new GameplayMap(sqWidth, sqHeight, pacmanGame);
+        map = new GameplayMap(sqWidth, sqHeight, pacmanGame, setRows, setColumns);
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.gridwidth = 1;

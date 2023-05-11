@@ -1,5 +1,6 @@
 package views.game.components.panels.gameWindow;
 
+import controllers.menu.PlayButtonMouseListener;
 import model.NumberFormatter;
 import model.game.TimeThread;
 import model.map.MapComponentsRenderer;
@@ -25,7 +26,7 @@ public class CurrentStats extends JPanel {
     private final JLabel yourScoreArea;
     public static JLabel setYourScore;
     private final JLabel timeArea;
-    JLabel setTime;
+    public static JLabel setTime;
     public static JTable livesTable;
     public static DefaultTableCellRenderer mapComponentsRenderer;
     public static DefaultTableModel model;
@@ -34,6 +35,7 @@ public class CurrentStats extends JPanel {
     PACMANGame pacmanGame;
     public static int lifeCellSize;
     JLabel livesArea;
+    public static TimeThread timeThread;
 
     public CurrentStats(int width, int height, PACMANGame pacmanGame) {
 
@@ -190,13 +192,12 @@ public class CurrentStats extends JPanel {
         gbc.insets = new Insets(0, sideMargin, 20, sideMargin);
         this.add(livesTable, gbc);
 
-
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                TimeThread timeThread = new TimeThread(setTime, pacmanGame);
-                timeThread.start();
-            }
-        });
+//        SwingUtilities.invokeLater(new Runnable() {
+//            public void run() {
+        timeThread = new TimeThread(setTime, pacmanGame, PlayButtonMouseListener.monitor);
+        timeThread.start();
+//            }
+//        });
     }
 
     public void compareYourAndHighScore() { // todo

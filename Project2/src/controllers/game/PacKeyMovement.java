@@ -1,13 +1,14 @@
 package controllers.game;
 
+import model.game.TimeThread;
 import model.map.MapModel;
 import views.GameColors;
 import views.PACMANGame;
 import views.ViewCardPanel;
 import views.game.components.GameCardPanel;
+import views.game.components.panels.gameWindow.CurrentStats;
 import views.menu.MenuStart;
 import views.menu.components.MenuCardPanel;
-import views.menu.components.middlePanels.NewGame;
 import views.menu.components.upperPanels.Buttons;
 
 import javax.swing.*;
@@ -22,7 +23,6 @@ public class PacKeyMovement implements KeyListener {
     JTable table;
     MapModel mapModel;
     PACMANGame pacmanGame;
-    BackToMenuShortCut backToMenuShortCut;
 
     public PacKeyMovement(JTable table, MapModel mapModel, PACMANGame pacmanGame) {
         this.table = table;
@@ -30,7 +30,6 @@ public class PacKeyMovement implements KeyListener {
         this.playerColumn = mapModel.getPlayerY();
         this.playerRow = mapModel.getPlayerX();
         this.pacmanGame = pacmanGame;
-//        this.backToMenuShortCut = new BackToMenuShortCut(pacmanGame);
 
     }
 
@@ -45,21 +44,30 @@ public class PacKeyMovement implements KeyListener {
         if (e.getKeyCode() == KeyEvent.VK_Q && e.isControlDown() && e.isShiftDown()) {
             System.out.println("Pressed Ctrl + Shift + Q");
 
-            CardLayout cl = (CardLayout) (pacmanGame.viewsCardPanel.getLayout());
-            cl.show(pacmanGame.viewsCardPanel, pacmanGame.viewsCardPanel.currentCardName);
-            pacmanGame.viewsCardPanel.currentCardName = ViewCardPanel.MENU_VIEW;
+            new SwingWorker() {
+                @Override
+                protected Object doInBackground() throws Exception {
+                    CurrentStats.timeThread.interrupt();
+                    TimeThread.isGameViewReady = false;
 
-            CardLayout cl2 = (CardLayout) (MenuStart.cardsPanel.getLayout());
-            MenuStart.cardsPanel.currentCardName = MenuCardPanel.TEXT;
-            Buttons.new_game.setBackground(GameColors.pink);
-            Buttons.high_scores.setBackground(GameColors.pink);
-            cl2.show(MenuStart.cardsPanel, MenuCardPanel.TEXT);
+                    CardLayout cl = (CardLayout) (pacmanGame.viewsCardPanel.getLayout());
+                    cl.show(pacmanGame.viewsCardPanel, pacmanGame.viewsCardPanel.currentCardName);
+                    pacmanGame.viewsCardPanel.currentCardName = ViewCardPanel.MENU_VIEW;
 
-            GameCardPanel.currentCardName = GameCardPanel.START_SCREEN_1;
+                    CardLayout cl2 = (CardLayout) (MenuStart.cardsPanel.getLayout());
+                    MenuStart.cardsPanel.currentCardName = MenuCardPanel.TEXT;
+                    Buttons.new_game.setBackground(GameColors.pink);
+                    Buttons.high_scores.setBackground(GameColors.pink);
+                    cl2.show(MenuStart.cardsPanel, MenuCardPanel.TEXT);
 
-            NewGame.setRows = 0;
-            NewGame.setColumns = 0;
-            NewGame.setYourNick = null;
+                    GameCardPanel.currentCardName = GameCardPanel.START_SCREEN_1;
+
+                    CurrentStats.livesNumber = 5;
+                    CurrentStats.yourScore = 0;
+
+                    return null;
+                }
+            }.execute();
         }
 
         switch (e.getKeyCode()) {

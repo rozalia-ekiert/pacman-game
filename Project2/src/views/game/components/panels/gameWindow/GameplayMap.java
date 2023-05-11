@@ -4,7 +4,6 @@ import controllers.game.PacKeyMovement;
 import model.map.MapComponentsRenderer;
 import model.map.MapModel;
 import views.PACMANGame;
-import views.menu.components.middlePanels.NewGame;
 
 import javax.swing.*;
 import javax.swing.table.TableColumn;
@@ -19,13 +18,15 @@ public class GameplayMap extends JPanel {
     public JTable mapTable;
     public static int windowSize;
 
-    public static int rows = NewGame.setRows;
-    public static int columns = NewGame.setColumns;
+    public static int rows;
+    public static int columns;
 
-    public GameplayMap(int sqWidth, int sqHeight, PACMANGame pacmanGame) {
+    public GameplayMap(int sqWidth, int sqHeight, PACMANGame pacmanGame, int setRows, int setColumns) {
 
+        rows = setRows;
+        columns = setColumns;
 
-        this.windowSize = sqWidth;
+        windowSize = sqWidth;
         this.setPreferredSize(new Dimension(sqWidth, sqHeight));
         this.setLayout(new GridBagLayout());
         this.setBackground(Color.BLACK);

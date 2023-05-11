@@ -3,6 +3,7 @@ package model.map;
 import model.NumberFormatter;
 import model.characters.Enemy;
 import model.characters.Player;
+import model.game.TimeThread;
 import views.PACMANGame;
 import views.game.components.GameCardPanel;
 import views.game.components.panels.gameWindow.CurrentStats;
@@ -114,6 +115,12 @@ public class MapModel extends AbstractTableModel {
                     CardLayout cl = (CardLayout) (pacmanGame.game.gameCardPanel.getLayout());
                     cl.show(pacmanGame.game.gameCardPanel, GameCardPanel.GAME_OVER);
                     pacmanGame.game.gameCardPanel.currentCardName = GameCardPanel.GAME_OVER;
+
+                    CurrentStats.timeThread.interrupt();
+                    TimeThread.isGameViewReady = false;
+
+                    CurrentStats.livesNumber = 5;
+                    CurrentStats.yourScore = 0;
                 }
             }
 

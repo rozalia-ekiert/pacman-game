@@ -13,14 +13,14 @@ public class GameWindow extends JPanel {
     public Gameplay gameplay;
     public CurrentStats currentStats;
 
-    public GameWindow(int width, int height, PACMANGame pacmanGame) {
+    public GameWindow(int width, int height, PACMANGame pacmanGame, int setRows, int setColumns) {
 
         this.setPreferredSize(new Dimension(width, height));
         this.setBackground(Color.BLACK);
-//        this.setFocusable(false);
+        this.setFocusable(true);
 
         currentStats = new CurrentStats((int) (width * 0.2), height, pacmanGame);
-        gameplay = new Gameplay((int) (width * 0.6), height, pacmanGame);
+        gameplay = new Gameplay((int) (width * 0.6), height, pacmanGame, setRows, setColumns);
         Comments comments = new Comments((int) (width * 0.2), height, pacmanGame);
 
         this.setLayout(new BoxLayout(this, 0));

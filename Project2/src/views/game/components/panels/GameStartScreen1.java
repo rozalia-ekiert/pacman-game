@@ -11,7 +11,7 @@ public class GameStartScreen1 extends JPanel {
 
         this.setPreferredSize(new Dimension(width, height));
         this.setBackground(Color.BLACK);
-        this.setFocusable(false);
+        this.setFocusable(true);
         this.setLayout(new GridBagLayout());
 
         //==========================================================
