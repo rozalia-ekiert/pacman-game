@@ -20,11 +20,11 @@ public class CurrentStats extends JPanel {
     int highScore = 1110;
     long time = 0;
 
-    JLabel highScoreArea;
-    JLabel setHighScore;
-    JLabel yourScoreArea;
+    public static JLabel setHighScore;
+    private final JLabel highScoreArea;
+    private final JLabel yourScoreArea;
     public static JLabel setYourScore;
-    JLabel timeArea;
+    private final JLabel timeArea;
     JLabel setTime;
     public static JTable livesTable;
     public static DefaultTableCellRenderer mapComponentsRenderer;
@@ -37,8 +37,8 @@ public class CurrentStats extends JPanel {
 
     public CurrentStats(int width, int height, PACMANGame pacmanGame) {
 
-        this.width = width;
-        this.lifeCellSize = (width - 60) / 5;
+        CurrentStats.width = width;
+        lifeCellSize = (width - 60) / 5;
         this.pacmanGame = pacmanGame;
 
         this.setPreferredSize(new Dimension(width, height));
@@ -57,7 +57,7 @@ public class CurrentStats extends JPanel {
         highScoreArea.setForeground(GameColors.pink);
         highScoreArea.setFont(currentButterbelly);
 
-        this.setHighScore = new JLabel(NumberFormatter.changeScoreToString(highScore));
+        setHighScore = new JLabel(NumberFormatter.changeScoreToString(highScore));
         setHighScore.setBackground(Color.BLACK);
         setHighScore.setForeground(GameColors.pink);
         setHighScore.setFont(currentButterbelly);
@@ -69,7 +69,7 @@ public class CurrentStats extends JPanel {
         yourScoreArea.setForeground(Color.WHITE);
         yourScoreArea.setFont(currentButterbelly);
 
-        this.setYourScore = new JLabel(NumberFormatter.changeScoreToString(yourScore));
+        setYourScore = new JLabel(NumberFormatter.changeScoreToString(yourScore));
         setYourScore.setBackground(Color.BLACK);
         setYourScore.setForeground(Color.WHITE);
         setYourScore.setFont(currentButterbelly);
@@ -98,7 +98,7 @@ public class CurrentStats extends JPanel {
 
         Object[][] livesArr = new Object[livesRows][livesNumber];
         for (int i = 0; i < livesRows; i++) {
-            Arrays.fill(livesArr[i], "icon");
+            Arrays.fill(livesArr[i], "image");
         }
         String[] columnNames = new String[5];
         Arrays.fill(columnNames, "");
@@ -203,10 +203,10 @@ public class CurrentStats extends JPanel {
         if (yourScore > this.highScore) {
 
             this.highScoreArea.setForeground(Color.WHITE);
-            this.setHighScore.setForeground(Color.WHITE);
+            setHighScore.setForeground(Color.WHITE);
 
             this.yourScoreArea.setForeground(GameColors.pink);
-            this.setYourScore.setForeground(GameColors.pink);
+            setYourScore.setForeground(GameColors.pink);
         }
     }
 

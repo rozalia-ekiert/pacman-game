@@ -36,13 +36,13 @@ public class NewGame extends JPanel {
     public static JLabel warningField;
     public static JLabel warningNick;
 
-
     public static boolean isValue1Valid = false;
     public static boolean isValue2Valid = false;
     public static boolean isNickValid = false;
 
     public static int setRows;
     public static int setColumns;
+    public static String setYourNick;
 
     public NewGame(int width, int height, PACMANGame pacmanGame, MenuStart menuStart, Game game) {
 
@@ -151,10 +151,10 @@ public class NewGame extends JPanel {
         yourNick.setFont(font1);
         yourNick.setEditable(false);
 
-        JTextField setYourNick = new JTextField();
-        setYourNick.setPreferredSize(new Dimension(150, 60));
+        JTextField setYourNickField = new JTextField();
+        setYourNickField.setPreferredSize(new Dimension(150, 60));
 
-        setYourNick.getDocument().addDocumentListener(new DocumentListener() {
+        setYourNickField.getDocument().addDocumentListener(new DocumentListener() {
             public void insertUpdate(DocumentEvent e) {
                 updateButton();
             }
@@ -168,7 +168,7 @@ public class NewGame extends JPanel {
             }
 
             private void updateButton() {
-                String text = setYourNick.getText();
+                setYourNick = setYourNickField.getText();
                 if (text != null) {
                     isNickValid = true;
                 } else {
@@ -253,7 +253,7 @@ public class NewGame extends JPanel {
         gbc.gridheight = 1;
         gbc.anchor = GridBagConstraints.LINE_END;
         gbc.insets = new Insets(20, 0, 20, 0);
-        this.add(setYourNick, gbc);
+        this.add(setYourNickField, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 4;

@@ -8,10 +8,14 @@ import views.game.Game;
 import views.game.components.GameViewChange;
 import views.game.components.panels.gameWindow.Gameplay;
 import views.game.components.panels.gameWindow.GameplayMap;
+import views.menu.components.MenuCardPanel;
 import views.menu.components.middlePanels.NewGame;
+import views.menu.components.upperPanels.Buttons;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -52,25 +56,8 @@ public class PlayButtonMouseListener implements MouseListener {
             }
 
             if (NewGame.isValue1Valid && NewGame.isValue2Valid && NewGame.isNickValid) {
-//            game.gameWindow.gameplay.map.mapTable.setFocusable(true);
-//            game.gameWindow.gameplay.map.mapTable.requestFocus();
-//            game.gameWindow.gameplay.map.mapTable.grabFocus();
-
-//            game.addKeyListener(new KeyMovement(game.gameWindow.gameplay.map.mapTable, game.gameWindow.gameplay.map.mapModel));
-//            game.setFocusable(true);
-//            game.requestFocusInWindow();
 
                 System.out.println(newGame.play.isFocusOwner()); //true
-
-//            newGame.play.setFocusable(false);
-//            newGame.play.setEnabled(false);
-//            newGame.play.setFocusTraversalKeysEnabled(false);
-
-//                if (GameplayMap.columns <= GameplayMap.rows) {
-//                    GameplayMap.cellSize = (GameplayMap.windowSize / GameplayMap.rows);
-//                } else {
-//                    GameplayMap.cellSize = (GameplayMap.windowSize) / GameplayMap.columns;
-//                }
 
                 GridBagConstraints gbc = new GridBagConstraints();
                 gbc.gridx = 0;
@@ -80,18 +67,37 @@ public class PlayButtonMouseListener implements MouseListener {
                 gbc.anchor = GridBagConstraints.CENTER;
 
                 Gameplay.map = new GameplayMap(Gameplay.sqWidth, Gameplay.sqHeight, pacmanGame);
-
                 game.gameWindow.gameplay.add(Gameplay.map, gbc);
 
-                CardLayout cl = (CardLayout) (this.pacmanGame.viewsCardPanel.getLayout());
-                cl.show(this.pacmanGame.viewsCardPanel, ViewCardPanel.GAME_VIEW);
+                //===============================================================================
+                CardLayout c1 = (CardLayout) (PACMANGame.menuStart.cardsPanel.getLayout());
+                c1.show(PACMANGame.menuStart.cardsPanel, MenuCardPanel.TEXT);
+                PACMANGame.menuStart.cardsPanel.currentCardName = MenuCardPanel.TEXT;
+                Buttons.new_game.setBackground(GameColors.pink);
+                Buttons.high_scores.setBackground(GameColors.pink);
+                //===============================================================================
+                CardLayout c2 = (CardLayout) (this.pacmanGame.viewsCardPanel.getLayout());
+                c2.show(this.pacmanGame.viewsCardPanel, ViewCardPanel.GAME_VIEW);
                 this.pacmanGame.viewsCardPanel.currentCardName = ViewCardPanel.GAME_VIEW;
+                //===============================================================================
+                game.addKeyListener(new KeyAdapter() {
+                    @Override
+                    public void keyPressed(KeyEvent e) {
+                        if (e.getKeyCode() == KeyEvent.VK_Q && e.isControlDown() && e.isShiftDown()) {
+                            System.out.println("Pressed Ctrl + Shift + Q");
 
+                            CardLayout cl = (CardLayout) (pacmanGame.viewsCardPanel.getLayout());
+                            cl.show(pacmanGame.viewsCardPanel, ViewCardPanel.MENU_VIEW);
+                            pacmanGame.viewsCardPanel.currentCardName = ViewCardPanel.MENU_VIEW;
+                        }
+                    }
+                });
+                //===============================================================================
                 synchronized (monitor) {
                     TimeThread.isGameViewReady = true;
                     monitor.notify();
                 }
-
+                //===============================================================================
                 GameViewChange gameViewChange = new GameViewChange(game, pacmanGame);
             }
 

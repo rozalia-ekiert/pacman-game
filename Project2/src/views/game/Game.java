@@ -15,12 +15,13 @@ public class Game extends JPanel {
     public GameWindow gameWindow;
     public final GameCardPanel gameCardPanel;
 
+    PACMANGame pacmanGame;
+
     public Game(PACMANGame pacmanGame) {
+        this.pacmanGame = pacmanGame;
 
         this.setBackground(Color.BLACK);
-        this.setLayout(new GridLayout(1, 1)); // 1 = według osi Y
-        this.setFocusable(false);
-
+        this.setLayout(new GridLayout(1, 1));
 
         this.setFont(pacmanGame.Butterbelly);
         this.gameCardPanel = new GameCardPanel();
@@ -36,6 +37,20 @@ public class Game extends JPanel {
         gameCardPanel.add(gameOver, GameCardPanel.GAME_OVER);
 
         this.add(gameCardPanel);
+
+        this.setFocusable(true);
+//        this.addKeyListener(new KeyAdapter() {
+//            @Override
+//            public void keyPressed(KeyEvent e) {
+//                if (e.getKeyCode() == KeyEvent.VK_Q && e.isControlDown() && e.isShiftDown()) {
+//                    System.out.println("Pressed Ctrl + Shift + Q");
+//
+//                    CardLayout cl = (CardLayout) (pacmanGame.viewsCardPanel.getLayout());
+//                    cl.show(pacmanGame.viewsCardPanel, ViewCardPanel.MENU_VIEW);
+//                    pacmanGame.viewsCardPanel.currentCardName = ViewCardPanel.MENU_VIEW;
+//                }
+//            }
+//        });
     }
 
 }

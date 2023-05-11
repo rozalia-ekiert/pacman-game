@@ -11,9 +11,9 @@ import java.util.ArrayList;
 
 public class Buttons extends JPanel {
 
-    public JButton new_game;
-    public JButton high_scores;
-    public JButton exit_game;
+    public static JButton new_game;
+    public static JButton high_scores;
+    public static JButton exit_game;
 
     public Buttons(int width, int height, MenuStart menuStart, PACMANGame pacmanGameFrame) {
 
