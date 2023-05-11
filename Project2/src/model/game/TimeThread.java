@@ -36,6 +36,7 @@ public class TimeThread extends Thread {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
+                    isGameViewReady = false;
                 }
             }
         }

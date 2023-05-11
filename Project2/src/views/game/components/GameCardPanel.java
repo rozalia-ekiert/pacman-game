@@ -10,7 +10,7 @@ public class GameCardPanel extends JPanel {
     public static final String GAME_WINDOW = "2";
     public static final String GAME_OVER = "3";
 
-    public String currentCardName = START_SCREEN_1;
+    public static String currentCardName = START_SCREEN_1;
 
 
     public GameCardPanel() {

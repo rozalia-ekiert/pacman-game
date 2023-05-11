@@ -29,7 +29,6 @@ public class GameplayMap extends JPanel {
         this.setPreferredSize(new Dimension(sqWidth, sqHeight));
         this.setLayout(new GridBagLayout());
         this.setBackground(Color.BLACK);
-//        this.setFocusable(false);
 
         setCellSize();
 
@@ -54,7 +53,7 @@ public class GameplayMap extends JPanel {
 
         //=========================================================================
 
-        KeyListener keyListener = new PacKeyMovement(mapTable, mapModel);
+        KeyListener keyListener = new PacKeyMovement(mapTable, mapModel, pacmanGame);
         mapTable.addKeyListener(keyListener);
 
 //        mapTable.grabFocus();

@@ -15,7 +15,7 @@ public class GameViewChange {
     public GameViewChange(Game game, PACMANGame pacmanGame) {
         this.game = game;
         this.pacmanGame = pacmanGame;
-        this.current = game.gameCardPanel.currentCardName;
+        this.current = GameCardPanel.START_SCREEN_1;
 
         new SwingWorker() {
             @Override
@@ -23,7 +23,7 @@ public class GameViewChange {
                 Thread.sleep(500);
                 CardLayout cl = (CardLayout) (game.gameCardPanel.getLayout());
                 cl.show(game.gameCardPanel, GameCardPanel.START_SCREEN_2);
-                game.gameCardPanel.currentCardName = GameCardPanel.START_SCREEN_2;
+                GameCardPanel.currentCardName = GameCardPanel.START_SCREEN_2;
                 return null;
             }
         }.execute();
@@ -34,7 +34,7 @@ public class GameViewChange {
                 Thread.sleep(1000);
                 CardLayout cl = (CardLayout) (game.gameCardPanel.getLayout());
                 cl.show(game.gameCardPanel, GameCardPanel.GAME_WINDOW);
-                game.gameCardPanel.currentCardName = GameCardPanel.GAME_WINDOW;
+                GameCardPanel.currentCardName = GameCardPanel.GAME_WINDOW;
                 return null;
             }
         }.execute();

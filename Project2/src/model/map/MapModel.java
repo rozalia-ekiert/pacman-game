@@ -44,6 +44,15 @@ public class MapModel extends AbstractTableModel {
         Gameplay.message.setText(Gameplay.messageDefault);
     });
 
+//    Thread messageTimer = new Thread(() -> {
+//        try {
+//            Thread.sleep(3000);
+//            Gameplay.message.setText(Gameplay.messageDefault);
+//        } catch (InterruptedException ex) {
+//            System.out.println("Message timer problem");
+//        }
+//    });
+
     public MapModel(int rows, int columns, PACMANGame pacmanGame) {
         super();
         this.rows = rows;

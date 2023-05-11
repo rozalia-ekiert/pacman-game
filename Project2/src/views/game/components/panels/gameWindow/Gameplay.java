@@ -44,6 +44,14 @@ public class Gameplay extends JPanel {
 
         this.add(message, gbc);
 
+        map = new GameplayMap(sqWidth, sqHeight, pacmanGame);
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        gbc.anchor = GridBagConstraints.CENTER;
+        this.add(Gameplay.map, gbc);
+
 
     }
 }

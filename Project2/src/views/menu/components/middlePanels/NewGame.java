@@ -182,7 +182,6 @@ public class NewGame extends JPanel {
         play.setBackground(GameColors.pink);
         play.setFont(pacmanGame.Butterbelly);
         play.setForeground(Color.BLACK);
-//        play.setEnabled(isValue1Valid&&isValue2Valid&&isNickValid);
 
         //-------------------------------------------------------------------------
 
@@ -196,7 +195,6 @@ public class NewGame extends JPanel {
         gbc.insets = new Insets(40, 0, 10, 40);
         gbc.anchor = GridBagConstraints.FIRST_LINE_START;
         this.add(rows, gbc);
-
 
         gbc.gridx = 2;
         gbc.gridy = 0;
