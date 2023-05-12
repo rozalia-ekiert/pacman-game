@@ -23,7 +23,6 @@ public class TimeThread extends Thread {
 
             while (!isGameViewReady) {
                 try {
-                    System.out.println("czeka");
                     monitor.wait();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
