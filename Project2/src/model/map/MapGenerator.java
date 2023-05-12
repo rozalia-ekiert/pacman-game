@@ -1,6 +1,7 @@
 package model.map;
 
 import java.util.Arrays;
+import java.util.Random;
 
 public class MapGenerator {
     //utility class
@@ -101,6 +102,20 @@ public class MapGenerator {
                 if (i > 2 && map[i - 2][j] == pustePole) {
                     if (j != 1 && j != columns - 2 && map[i - 1][j] == pustePole && i != rows / 2 - 1 && j != columns / 2
                             && j != columns / 4 && j != (columns / 4) * 3) map[i][j] = sciana;
+                }
+            }
+        }
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                if (i >= 1 && j >= 1 && i <= rows - 2 && j <= columns - 2
+                        && map[i - 1][j - 1] == sciana && map[i - 1][j] == sciana && map[i - 1][j + 1] == sciana
+                        && map[i][j - 1] != sciana && map[i][j + 1] != sciana && map[i + 1][j] != sciana && map[i + 1][j - 1] != sciana && map[i + 1][j + 1] != sciana) {
+                    Random rand = new Random();
+                    int random = rand.nextInt(10);
+                    if (random > 5) {
+                        map[i][j] = sciana;
+                    }
                 }
             }
         }

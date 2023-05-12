@@ -112,9 +112,9 @@ public class MapModel extends AbstractTableModel {
                 removeLife();
 
                 if (CurrentStats.livesNumber == 0) {
-                    CardLayout cl = (CardLayout) (pacmanGame.game.gameCardPanel.getLayout());
-                    cl.show(pacmanGame.game.gameCardPanel, GameCardPanel.GAME_OVER);
-                    pacmanGame.game.gameCardPanel.currentCardName = GameCardPanel.GAME_OVER;
+                    CardLayout cl = (CardLayout) (PACMANGame.game.gameCardPanel.getLayout());
+                    cl.show(PACMANGame.game.gameCardPanel, GameCardPanel.GAME_OVER);
+                    GameCardPanel.currentCardName = GameCardPanel.GAME_OVER;
 
                     CurrentStats.timeThread.interrupt();
                     TimeThread.isGameViewReady = false;
