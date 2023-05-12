@@ -33,7 +33,6 @@ public class TimeThread extends Thread {
                 while (isGameViewReady) {
                     long currentTime = System.currentTimeMillis() - 1000;
                     long gameTime = (currentTime - startTime);
-                    System.out.println(gameTime);
                     timeLabel.setText(NumberFormatter.changeTimeToString(gameTime));
                     if (!Thread.currentThread().isInterrupted()) {
                         try {

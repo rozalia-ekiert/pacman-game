@@ -8,7 +8,6 @@ import views.game.components.GameCardPanel;
 import views.game.components.panels.gameWindow.CurrentStats;
 import views.menu.MenuStart;
 import views.menu.components.MenuCardPanel;
-import views.menu.components.middlePanels.NewGame;
 import views.menu.components.upperPanels.Buttons;
 
 import java.awt.*;
@@ -37,8 +36,8 @@ public class BackToMenuShortCut implements KeyListener {
             TimeThread.isGameViewReady = false;
 
             CardLayout cl = (CardLayout) (pacmanGame.viewsCardPanel.getLayout());
-            cl.show(pacmanGame.viewsCardPanel, pacmanGame.viewsCardPanel.currentCardName);
             pacmanGame.viewsCardPanel.currentCardName = ViewCardPanel.MENU_VIEW;
+            cl.show(pacmanGame.viewsCardPanel, pacmanGame.viewsCardPanel.currentCardName);
 
             CardLayout cl2 = (CardLayout) (MenuStart.cardsPanel.getLayout());
             MenuStart.cardsPanel.currentCardName = MenuCardPanel.TEXT;
@@ -48,9 +47,8 @@ public class BackToMenuShortCut implements KeyListener {
 
             GameCardPanel.currentCardName = GameCardPanel.START_SCREEN_1;
 
-            NewGame.setRows = 0;
-            NewGame.setColumns = 0;
-            NewGame.setYourNick = null;
+            CurrentStats.livesNumber = 5;
+            CurrentStats.yourScore = 0;
         }
     }
 

@@ -36,5 +36,4 @@ public class Game extends JPanel {
 
         this.add(gameCardPanel);
     }
-
 }
