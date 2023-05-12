@@ -1,21 +1,21 @@
 package model.game;
 
+import controllers.menu.PlayButtonMouseListener;
 import model.NumberFormatter;
 import views.PACMANGame;
 
 import javax.swing.*;
 
 public class TimeThread extends Thread {
-    private static Object monitor;
+    private static final Object monitor = PlayButtonMouseListener.monitor;
     public static boolean isGameViewReady = false;
     PACMANGame pacmanGame;
     private JLabel timeLabel;
     private long startTime;
 
-    public TimeThread(JLabel timeLabel, PACMANGame pacmanGame, Object monitor) {
+    public TimeThread(JLabel timeLabel, PACMANGame pacmanGame) {
         this.timeLabel = timeLabel;
         this.pacmanGame = pacmanGame;
-        this.monitor = monitor;
     }
 
     public synchronized void run() {
@@ -44,9 +44,7 @@ public class TimeThread extends Thread {
                         }
                     }
                 }
-
             }
-
         }
     }
 }

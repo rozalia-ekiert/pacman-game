@@ -1,6 +1,5 @@
 package views.game.components.panels.gameWindow;
 
-import controllers.menu.PlayButtonMouseListener;
 import model.NumberFormatter;
 import model.game.TimeThread;
 import model.map.MapComponentsRenderer;
@@ -89,11 +88,18 @@ public class CurrentStats extends JPanel {
         setTime.setFont(currentButterbelly);
 
         //===========================================
+        setLivesTable(currentButterbelly);
+        setLayout();
+
+        timeThread = new TimeThread(setTime, pacmanGame);
+        timeThread.start();
+    }
+
+    private void setLivesTable(Font currentButterbelly) {
         this.livesArea = new JLabel("lives:");
         livesArea.setBackground(Color.BLACK);
         livesArea.setForeground(Color.WHITE);
         livesArea.setFont(currentButterbelly);
-
 
         livesRows = livesNumber / 5;
         if (livesNumber % 5 != 0) livesRows += 1;
@@ -105,12 +111,12 @@ public class CurrentStats extends JPanel {
         String[] columnNames = new String[5];
         Arrays.fill(columnNames, "");
 
-        model = new DefaultTableModel(livesArr, columnNames);
-
-        livesTable = new JTable(model);
         mapComponentsRenderer = new MapComponentsRenderer();
         mapComponentsRenderer.setHorizontalAlignment(DefaultTableCellRenderer.RIGHT);
 
+        model = new DefaultTableModel(livesArr, columnNames);
+
+        livesTable = new JTable(model);
         livesTable.setRowHeight(lifeCellSize);
         livesTable.setBackground(Color.black);
 
@@ -118,10 +124,9 @@ public class CurrentStats extends JPanel {
         livesTable.setShowVerticalLines(false);
         livesTable.setShowHorizontalLines(false);
         livesTable.setCellSelectionEnabled(false);
+
         int finalLivesRows = livesRows;
-
         int counter = livesNumber;
-
         for (int i = 0; i < finalLivesRows; i++) {
             for (int j = 0; j < 5; j++) {
                 counter--;
@@ -134,9 +139,9 @@ public class CurrentStats extends JPanel {
                 }
             }
         }
+    }
 
-        //========================================================================
-
+    private void setLayout() {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.anchor = GridBagConstraints.NORTH;
@@ -191,16 +196,9 @@ public class CurrentStats extends JPanel {
         gbc.gridwidth = 1;
         gbc.insets = new Insets(0, sideMargin, 20, sideMargin);
         this.add(livesTable, gbc);
-
-//        SwingUtilities.invokeLater(new Runnable() {
-//            public void run() {
-        timeThread = new TimeThread(setTime, pacmanGame, PlayButtonMouseListener.monitor);
-        timeThread.start();
-//            }
-//        });
     }
 
-    public void compareYourAndHighScore() { // todo
+    public void compareYourAndHighScore() {
         if (yourScore > this.highScore) {
 
             this.highScoreArea.setForeground(Color.WHITE);

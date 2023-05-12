@@ -91,8 +91,8 @@ public class PlayButtonMouseListener implements MouseListener {
                             TimeThread.isGameViewReady = false;
 
                             CardLayout cl = (CardLayout) (pacmanGame.viewsCardPanel.getLayout());
-                            cl.show(pacmanGame.viewsCardPanel, pacmanGame.viewsCardPanel.currentCardName);
                             pacmanGame.viewsCardPanel.currentCardName = ViewCardPanel.MENU_VIEW;
+                            cl.show(pacmanGame.viewsCardPanel, pacmanGame.viewsCardPanel.currentCardName);
 
                             CardLayout cl2 = (CardLayout) (MenuStart.cardsPanel.getLayout());
                             MenuStart.cardsPanel.currentCardName = MenuCardPanel.TEXT;

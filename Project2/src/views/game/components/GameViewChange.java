@@ -24,20 +24,14 @@ public class GameViewChange {
                 CardLayout cl = (CardLayout) (game.gameCardPanel.getLayout());
                 cl.show(game.gameCardPanel, GameCardPanel.START_SCREEN_2);
                 GameCardPanel.currentCardName = GameCardPanel.START_SCREEN_2;
-                return null;
-            }
-        }.execute();
 
-        new SwingWorker() {
-            @Override
-            protected Object doInBackground() throws Exception {
-                Thread.sleep(1000);
-                CardLayout cl = (CardLayout) (game.gameCardPanel.getLayout());
+                Thread.sleep(500);
                 cl.show(game.gameCardPanel, GameCardPanel.GAME_WINDOW);
                 GameCardPanel.currentCardName = GameCardPanel.GAME_WINDOW;
                 return null;
             }
         }.execute();
+
 
     }
 }

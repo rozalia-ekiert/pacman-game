@@ -5,6 +5,7 @@ import model.characters.Enemy;
 import model.characters.Player;
 import model.game.TimeThread;
 import views.PACMANGame;
+import views.game.Game;
 import views.game.components.GameCardPanel;
 import views.game.components.panels.gameWindow.CurrentStats;
 import views.game.components.panels.gameWindow.Gameplay;
@@ -81,50 +82,34 @@ public class MapModel extends AbstractTableModel {
     private void eatCookie() {
         cookiesCounter--;
         if (cookiesCounter == 0) {
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-
-                    while (MapModel.cookiesCounter == 0) {
-
-                        map = MapGenerator.generateMap(MapModel.rows, MapModel.columns);
-                        setValueAt(pacman, rows - rows / 4, columns / 2);
-                        pacmanGame.repaint();
-                        Gameplay.message.setText(Gameplay.messageCookiesEaten);
-                        messageTimer.start();
-                    }
-                }
-            });
+            map = MapGenerator.generateMap(MapModel.rows, MapModel.columns);
+            setValueAt(pacman, rows - rows / 4, columns / 2);
+            pacmanGame.repaint();
+            Gameplay.message.setText(Gameplay.messageCookiesEaten);
+            messageTimer.start();
         }
     }
 
     private synchronized void eatenByGhosts() {
+        CurrentStats.livesNumber--;
+        setValueAt(pacman, rows - rows / 4, columns / 2);
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                CurrentStats.livesNumber--;
-                setValueAt(pacman, rows - rows / 4, columns / 2);
+        Gameplay.message.setText(Gameplay.messageEatenByGhosts);
+        messageTimer.start();
 
-                Gameplay.message.setText(Gameplay.messageEatenByGhosts);
-                messageTimer.start();
+        removeLife();
 
-                removeLife();
+        if (CurrentStats.livesNumber == 0) {
+            CardLayout cl = (CardLayout) (PACMANGame.game.gameCardPanel.getLayout());
+            cl.show(PACMANGame.game.gameCardPanel, GameCardPanel.GAME_OVER);
+            GameCardPanel.currentCardName = GameCardPanel.GAME_OVER;
 
-                if (CurrentStats.livesNumber == 0) {
-                    CardLayout cl = (CardLayout) (PACMANGame.game.gameCardPanel.getLayout());
-                    cl.show(PACMANGame.game.gameCardPanel, GameCardPanel.GAME_OVER);
-                    GameCardPanel.currentCardName = GameCardPanel.GAME_OVER;
+            CurrentStats.timeThread.interrupt();
+            TimeThread.isGameViewReady = false;
 
-                    CurrentStats.timeThread.interrupt();
-                    TimeThread.isGameViewReady = false;
-
-                    CurrentStats.livesNumber = 5;
-                    CurrentStats.yourScore = 0;
-                }
-            }
-
-        });
+            CurrentStats.livesNumber = 5;
+            CurrentStats.yourScore = 0;
+        }
     }
 
     private void removeLife() {
@@ -169,8 +154,8 @@ public class MapModel extends AbstractTableModel {
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
         this.map[rowIndex][columnIndex] = (int) aValue;
         fireTableCellUpdated(rowIndex, columnIndex);
-        this.playerY = columnIndex;
-        this.playerX = rowIndex;
+        playerY = columnIndex;
+        playerX = rowIndex;
     }
 
 
@@ -180,28 +165,24 @@ public class MapModel extends AbstractTableModel {
 
     public void setPlayerXUstawKolumne(int X) {
 
-        if (getValueAt(X, getPlayerY()).equals(23) || getValueAt(X, getPlayerY()).equals(24)
-                || getValueAt(X, getPlayerY()).equals(25) || getValueAt(X, getPlayerY()).equals(26)) {
+        if (getValueAt(X, getPlayerY()).equals(blue) || getValueAt(X, getPlayerY()).equals(pink) || getValueAt(X, getPlayerY()).equals(green) || getValueAt(X, getPlayerY()).equals(purple)) {
             setValueAt(pustePole, getPlayerX(), getPlayerY());
             eatenByGhosts();
             return;
         }
 
-        if (!isWall(X, getPlayerY())) {
-            if (getValueAt(X, getPlayerY()).equals(cookieSmall) || getValueAt(X, getPlayerY()).equals(cookieBig)) {
-                if (getValueAt(X, getPlayerY()).equals(cookieSmall)) CurrentStats.yourScore += 10;
-                if (getValueAt(X, getPlayerY()).equals(cookieBig)) CurrentStats.yourScore += 50;
-                eatCookie();
-                SwingUtilities.invokeLater(new Runnable() {
-                    public void run() {
-                        CurrentStats.setYourScore.setText(NumberFormatter.changeScoreToString(CurrentStats.yourScore));
-                        pacmanGame.game.gameWindow.currentStats.compareYourAndHighScore();
-                    }
-                });
-            }
-            setValueAt(pustePole, getPlayerX(), getPlayerY());
-            setValueAt(pacman, X, getPlayerY());
+        if (isWall(X, getPlayerY())) return;
+        if (getValueAt(X, getPlayerY()).equals(cookieSmall) || getValueAt(X, getPlayerY()).equals(cookieBig)) {
+            if (getValueAt(X, getPlayerY()).equals(cookieSmall)) CurrentStats.yourScore += 10;
+            if (getValueAt(X, getPlayerY()).equals(cookieBig)) CurrentStats.yourScore += 50;
+            eatCookie();
         }
+        CurrentStats.setYourScore.setText(NumberFormatter.changeScoreToString(CurrentStats.yourScore));
+        Game.gameWindow.currentStats.compareYourAndHighScore();
+
+        setValueAt(pustePole, getPlayerX(), getPlayerY());
+        setValueAt(pacman, X, getPlayerY());
+
     }
 
     public int getPlayerY() {
@@ -209,27 +190,21 @@ public class MapModel extends AbstractTableModel {
     }
 
     public void setPlayerYUstawRzad(int Y) {
-        if (getValueAt(getPlayerX(), Y).equals(23) || getValueAt(getPlayerX(), Y).equals(24)
-                || getValueAt(getPlayerX(), Y).equals(25) || getValueAt(getPlayerX(), Y).equals(26)) {
+        if (getValueAt(getPlayerX(), Y).equals(blue) || getValueAt(getPlayerX(), Y).equals(pink) || getValueAt(getPlayerX(), Y).equals(purple) || getValueAt(getPlayerX(), Y).equals(green)) {
             setValueAt(pustePole, getPlayerX(), getPlayerY());
             eatenByGhosts();
             return;
         }
-        if (!isWall(getPlayerX(), Y)) {
-            if (getValueAt(getPlayerX(), Y).equals(cookieSmall) || getValueAt(getPlayerX(), Y).equals(cookieBig)) {
-                if (getValueAt(getPlayerX(), Y).equals(cookieSmall)) CurrentStats.yourScore += 10;
-                if (getValueAt(getPlayerX(), Y).equals(cookieBig)) CurrentStats.yourScore += 50;
-                eatCookie();
-                SwingUtilities.invokeLater(new Runnable() {
-                    public void run() {
-                        CurrentStats.setYourScore.setText(NumberFormatter.changeScoreToString(CurrentStats.yourScore));
-                        pacmanGame.game.gameWindow.currentStats.compareYourAndHighScore();
-                    }
-                });
-            }
-            setValueAt(pustePole, getPlayerX(), getPlayerY());
-            setValueAt(pacman, getPlayerX(), Y);
+        if (isWall(getPlayerX(), Y)) return;
+        if (getValueAt(getPlayerX(), Y).equals(cookieSmall) || getValueAt(getPlayerX(), Y).equals(cookieBig)) {
+            if (getValueAt(getPlayerX(), Y).equals(cookieSmall)) CurrentStats.yourScore += 10;
+            if (getValueAt(getPlayerX(), Y).equals(cookieBig)) CurrentStats.yourScore += 50;
+            eatCookie();
+            CurrentStats.setYourScore.setText(NumberFormatter.changeScoreToString(CurrentStats.yourScore));
+            Game.gameWindow.currentStats.compareYourAndHighScore();
         }
+        setValueAt(pustePole, getPlayerX(), getPlayerY());
+        setValueAt(pacman, getPlayerX(), Y);
     }
 
     private boolean isWall(int playerX, int playerY) {

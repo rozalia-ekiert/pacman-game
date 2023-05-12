@@ -39,35 +39,26 @@ public class PacKeyMovement implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-//        //todo cos trzeba z tym zrobic
         if (e.getKeyCode() == KeyEvent.VK_Q && e.isControlDown() && e.isShiftDown()) {
             System.out.println("Pressed Ctrl + Shift + Q");
 
-            new SwingWorker() {
-                @Override
-                protected Object doInBackground() {
-                    CurrentStats.timeThread.interrupt();
-                    TimeThread.isGameViewReady = false;
+            CurrentStats.timeThread.interrupt();
+            TimeThread.isGameViewReady = false;
 
-                    CardLayout cl = (CardLayout) (pacmanGame.viewsCardPanel.getLayout());
-                    pacmanGame.viewsCardPanel.currentCardName = ViewCardPanel.MENU_VIEW;
+            CardLayout cl = (CardLayout) (pacmanGame.viewsCardPanel.getLayout());
+            pacmanGame.viewsCardPanel.currentCardName = ViewCardPanel.MENU_VIEW;
+            cl.show(pacmanGame.viewsCardPanel, pacmanGame.viewsCardPanel.currentCardName);
 
-                    cl.show(pacmanGame.viewsCardPanel, pacmanGame.viewsCardPanel.currentCardName);
+            CardLayout cl2 = (CardLayout) (MenuStart.cardsPanel.getLayout());
+            MenuStart.cardsPanel.currentCardName = MenuCardPanel.TEXT;
+            Buttons.new_game.setBackground(GameColors.pink);
+            Buttons.high_scores.setBackground(GameColors.pink);
+            cl2.show(MenuStart.cardsPanel, MenuCardPanel.TEXT);
 
-                    CardLayout cl2 = (CardLayout) (MenuStart.cardsPanel.getLayout());
-                    MenuStart.cardsPanel.currentCardName = MenuCardPanel.TEXT;
-                    Buttons.new_game.setBackground(GameColors.pink);
-                    Buttons.high_scores.setBackground(GameColors.pink);
-                    cl2.show(MenuStart.cardsPanel, MenuCardPanel.TEXT);
+            GameCardPanel.currentCardName = GameCardPanel.START_SCREEN_1;
 
-                    GameCardPanel.currentCardName = GameCardPanel.START_SCREEN_1;
-
-                    CurrentStats.livesNumber = 5;
-                    CurrentStats.yourScore = 0;
-
-                    return null;
-                }
-            }.execute();
+            CurrentStats.livesNumber = 5;
+            CurrentStats.yourScore = 0;
         }
 
         switch (e.getKeyCode()) {
