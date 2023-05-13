@@ -17,25 +17,28 @@ public class PACMANGame extends JFrame {
     public static MenuStart menuStart;
     public static Game game;
 
-    public int screenWidth;
-    public int screenHeight;
+    public static int screenWidth;
+    public static int screenHeight;
+    public static Dimension screenSize;
     public Font Butterbelly;
 
     public PACMANGame() {
 
         Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Dimension screenSize = toolkit.getScreenSize();
+        this.screenSize = toolkit.getScreenSize();
         this.screenWidth = screenSize.width;
         this.screenHeight = screenSize.height;
 
+        this.setMinimumSize(new Dimension(1000, 500));
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setUndecorated(false);
         this.setResizable(true);
 //        this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("PACMAN GAME");
-
         this.setFont(Butterbelly);
+
+        this.setLayout(new BorderLayout());
 
         Container contentPane = getContentPane();
 
@@ -71,6 +74,7 @@ public class PACMANGame extends JFrame {
         //===================================================================================
 
         this.setVisible(true);
-    }
 
+
+    }
 }

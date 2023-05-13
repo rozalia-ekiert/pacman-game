@@ -33,16 +33,16 @@ public class Gameplay extends JPanel {
 
         message = new JLabel();
         message.setText(messageDefault);
-        message.setSize(new Dimension(sqWidth, (int) (height * 0.15)));
+        message.setSize(new Dimension(getSize().width, (int) (height * 0.15)));
         message.setFont(pacmanGame.Butterbelly);
 
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = 1;
         gbc.gridheight = 1;
-        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.anchor = GridBagConstraints.NORTH;
 
-        this.add(message, gbc);
+//        this.add(message, gbc);
 
         map = new GameplayMap(sqWidth, sqHeight, pacmanGame, setRows, setColumns);
         gbc.gridx = 0;

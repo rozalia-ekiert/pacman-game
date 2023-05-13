@@ -17,6 +17,9 @@ public class Game extends JPanel {
     PACMANGame pacmanGame;
 
     public Game(PACMANGame pacmanGame) {
+        this.setBorder(BorderFactory.createMatteBorder(3, 3, 3, 3, Color.blue));
+
+
         this.pacmanGame = pacmanGame;
         this.setFocusable(true);
 
@@ -35,5 +38,7 @@ public class Game extends JPanel {
         gameCardPanel.add(gameOver, GameCardPanel.GAME_OVER);
 
         this.add(gameCardPanel);
+
+
     }
 }

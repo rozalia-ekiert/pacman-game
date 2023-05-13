@@ -55,7 +55,7 @@ public class PlayButtonMouseListener implements MouseListener {
 
                 System.out.println(newGame.play.isFocusOwner());
 
-                Game.gameWindow = new GameWindow(pacmanGame.screenWidth, pacmanGame.screenHeight, pacmanGame, NewGame.setRows, NewGame.setColumns);
+                Game.gameWindow = new GameWindow(PACMANGame.screenWidth, PACMANGame.screenHeight, pacmanGame, NewGame.setRows, NewGame.setColumns);
                 game.gameCardPanel.add(Game.gameWindow, GameCardPanel.GAME_WINDOW);
                 CardLayout cl1 = (CardLayout) (game.gameCardPanel.getLayout());
                 cl1.show(game.gameCardPanel, GameCardPanel.currentCardName);

@@ -62,6 +62,7 @@ public class MapModel extends AbstractTableModel {
         this.columns = columns;
         this.pacmanGame = pacmanGame;
 
+
         enemies.add(new Enemy());
         enemies.add(new Enemy());
         enemies.add(new Enemy());

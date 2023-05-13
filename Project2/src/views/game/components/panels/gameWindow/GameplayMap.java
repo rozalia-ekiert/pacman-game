@@ -12,50 +12,46 @@ import java.awt.event.KeyListener;
 
 public class GameplayMap extends JPanel {
 
-    public static int cellSize;
     public MapModel mapModel;
 
-    public JTable mapTable;
+    public static JTable mapTable;
     public static int windowSize;
+    public Dimension dimension;
 
     public static int rows;
     public static int columns;
 
     public GameplayMap(int sqWidth, int sqHeight, PACMANGame pacmanGame, int setRows, int setColumns) {
-
+        this.setBorder(BorderFactory.createMatteBorder(3, 3, 3, 3, Color.green));
         rows = setRows;
         columns = setColumns;
 
         windowSize = sqWidth;
-        this.setPreferredSize(new Dimension(sqWidth, sqHeight));
+        this.dimension = new Dimension(windowSize, windowSize);
         this.setLayout(new GridBagLayout());
         this.setBackground(Color.BLACK);
-
-        setCellSize();
-
         //=========================================================================
 
         this.mapModel = new MapModel(rows, columns, pacmanGame);
         mapTable = new JTable(this.mapModel);
 
-        mapTable.setFillsViewportHeight(true);
+        mapTable.setFillsViewportHeight(false);
         mapTable.setDefaultRenderer(Integer.class, new MapComponentsRenderer());
-
-        mapTable.setRowHeight(GameplayMap.cellSize);
         mapTable.setBackground(Color.BLACK);
-        setTableColumnWidth(mapTable, GameplayMap.cellSize);
-
         mapTable.setShowGrid(false);
         mapTable.setShowVerticalLines(false);
         mapTable.setShowHorizontalLines(false);
         mapTable.setCellSelectionEnabled(false);
-
+        mapTable.setRowHeight(getCellSize());
+        mapTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        setTableColumnWidth(mapTable, getCellSize());
         this.add(mapTable);
 
         //=========================================================================
 
         KeyListener keyListener = new PacKeyMovement(mapTable, mapModel, pacmanGame);
         mapTable.addKeyListener(keyListener);
+
 
 //        mapTable.grabFocus();
 //        mapTable.requestFocus();
@@ -70,7 +66,7 @@ public class GameplayMap extends JPanel {
         //=========================================================================
     }
 
-    private void setTableColumnWidth(JTable table, int width) {
+    public static void setTableColumnWidth(JTable table, int width) {
         for (int i = 0; i < table.getColumnModel().getColumnCount(); i++) {
             TableColumn column = table.getColumnModel().getColumn(i);
             column.setMaxWidth(width);
@@ -78,12 +74,10 @@ public class GameplayMap extends JPanel {
         }
     }
 
-    private void setCellSize() {
+    public static int getCellSize() {
         if (columns <= rows) {
-            cellSize = (windowSize / this.rows);
-            return;
+            return (windowSize / rows);
         }
-        cellSize = (windowSize) / this.columns;
+        return (windowSize) / columns;
     }
-
 }

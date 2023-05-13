@@ -22,8 +22,6 @@ public class CurrentStats extends JPanel {
 
 
     public CurrentStats(int width, int height, PACMANGame pacmanGame) {
-
-        this.setPreferredSize(new Dimension(width, height));
         this.setBackground(Color.BLACK);
         this.setForeground(Color.WHITE);
         this.setFont(pacmanGame.Butterbelly);

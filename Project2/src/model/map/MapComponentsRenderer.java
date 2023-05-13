@@ -3,7 +3,6 @@ package model.map;
 import model.characters.CharacterAnimationState;
 import model.characters.Player;
 import views.game.components.panels.gameWindow.CurrentStats;
-import views.game.components.panels.gameWindow.GameplayMap;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -14,8 +13,10 @@ import java.io.IOException;
 
 import static model.map.MapModel.enemies;
 import static model.map.MapModel.player;
+import static views.game.components.panels.gameWindow.GameplayMap.getCellSize;
 
 public class MapComponentsRenderer extends DefaultTableCellRenderer {
+
 
     Image cookieSmall;
 
@@ -174,8 +175,8 @@ public class MapComponentsRenderer extends DefaultTableCellRenderer {
 
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-        int cellSize = GameplayMap.cellSize;
 
+        int cellSize = getCellSize();
         if (table.getValueAt(row, column).equals(0)) {
             return new JComponent() {
                 @Override
