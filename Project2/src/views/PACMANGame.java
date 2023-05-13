@@ -30,7 +30,7 @@ public class PACMANGame extends JFrame {
         this.screenWidth = screenSize.width;
         this.screenHeight = screenSize.height;
 
-        this.setMinimumSize(new Dimension(1000, 500));
+        this.setMinimumSize(new Dimension(1280, 720));
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setUndecorated(false);
         this.setResizable(true);

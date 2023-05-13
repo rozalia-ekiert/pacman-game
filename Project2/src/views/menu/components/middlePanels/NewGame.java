@@ -54,7 +54,7 @@ public class NewGame extends JPanel {
 
         this.width = width;
         this.height = height;
-        this.setPreferredSize(new Dimension(this.width, this.height));
+//        this.setPreferredSize(new Dimension(this.width, this.height));
 
         this.setLayout(new GridBagLayout());
         this.setBackground(Color.BLACK);
@@ -90,12 +90,6 @@ public class NewGame extends JPanel {
         setWindowSize2 = new JTextField();
 
         int size = 80;
-        setWindowSize1.setPreferredSize(new Dimension(size, size));
-        setWindowSize1.setMaximumSize(new Dimension(size, size));
-
-        setWindowSize2.setPreferredSize(new Dimension(size, size));
-        setWindowSize2.setMaximumSize(new Dimension(size, size));
-
         setWindowSize1.getDocument().addDocumentListener(new DocumentListener() {
             public void insertUpdate(DocumentEvent e) {
                 updateValue();
@@ -155,7 +149,6 @@ public class NewGame extends JPanel {
         yourNick.setEditable(false);
 
         setYourNickField = new JTextField();
-        setYourNickField.setPreferredSize(new Dimension(150, 60));
 
         setYourNickField.getDocument().addDocumentListener(new DocumentListener() {
             public void insertUpdate(DocumentEvent e) {
@@ -195,7 +188,7 @@ public class NewGame extends JPanel {
         gbc.gridy = 0;
         gbc.gridheight = 1;
         gbc.gridwidth = 1;
-        gbc.insets = new Insets(40, 0, 10, 40);
+        gbc.insets = new Insets(20, 0, 10, 40);
         gbc.anchor = GridBagConstraints.FIRST_LINE_START;
         this.add(rows, gbc);
 
@@ -203,7 +196,7 @@ public class NewGame extends JPanel {
         gbc.gridy = 0;
         gbc.gridheight = 1;
         gbc.gridwidth = 1;
-        gbc.insets = new Insets(40, 0, 10, 0);
+        gbc.insets = new Insets(20, 0, 10, 0);
         gbc.anchor = GridBagConstraints.FIRST_LINE_START;
         this.add(columns, gbc);
 
@@ -211,7 +204,7 @@ public class NewGame extends JPanel {
         gbc.gridy = 1;
         gbc.gridheight = 1;
         gbc.gridwidth = 1;
-        gbc.insets = new Insets(0, 0, 20, 40);
+        gbc.insets = new Insets(0, 0, 0, 40);
         gbc.anchor = GridBagConstraints.LINE_START;
         this.add(windowGameSize, gbc);
 
@@ -219,7 +212,7 @@ public class NewGame extends JPanel {
         gbc.gridy = 1;
         gbc.gridheight = 1;
         gbc.gridwidth = 1;
-        gbc.insets = new Insets(0, 0, 20, 30);
+        gbc.insets = new Insets(0, 0, 0, 30);
         gbc.anchor = GridBagConstraints.LINE_END;
         this.add(setWindowSize1, gbc);
 
@@ -227,7 +220,7 @@ public class NewGame extends JPanel {
         gbc.gridy = 1;
         gbc.gridheight = 1;
         gbc.gridwidth = 1;
-        gbc.insets = new Insets(0, 0, 20, 0);
+        gbc.insets = new Insets(0, 0, 0, 0);
         gbc.anchor = GridBagConstraints.LINE_END;
         this.add(setWindowSize2, gbc);
 
@@ -244,7 +237,7 @@ public class NewGame extends JPanel {
         gbc.gridy = 3;
         gbc.gridheight = 1;
         gbc.gridwidth = 1;
-        gbc.insets = new Insets(20, 0, 20, 30);
+        gbc.insets = new Insets(10, 0, 0, 30);
         gbc.anchor = GridBagConstraints.LINE_START;
         this.add(yourNick, gbc);
 
@@ -253,7 +246,7 @@ public class NewGame extends JPanel {
         gbc.gridwidth = 2;
         gbc.gridheight = 1;
         gbc.anchor = GridBagConstraints.LINE_END;
-        gbc.insets = new Insets(20, 0, 20, 0);
+        gbc.insets = new Insets(10, 0, 0, 0);
         this.add(setYourNickField, gbc);
 
         gbc.gridx = 0;
@@ -271,14 +264,14 @@ public class NewGame extends JPanel {
         gbc.gridheight = 1;
         gbc.ipady = 30;
         gbc.anchor = GridBagConstraints.WEST;
-        gbc.insets = new Insets(40, 0, 40, 0);
+        gbc.insets = new Insets(0, 0, 20, 0);
         this.add(play, gbc);
 
         gbc.gridx = 3;
         gbc.gridy = 0;
-        gbc.gridheight = 8; //todo zmiana na 7/8 w zależności od warning1/2
+        gbc.gridheight = 8;
         gbc.gridwidth = 1;
-        gbc.insets = new Insets(40, 80, 40, 0); // 40 x 40
+        gbc.insets = new Insets(20, 80, 20, 0); // 40 x 40
         gbc.weightx = 0.0;
         gbc.weighty = 1.0;
         gbc.ipadx = 500;
