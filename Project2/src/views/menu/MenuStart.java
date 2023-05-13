@@ -26,12 +26,16 @@ public class MenuStart extends JPanel {
 
         this.setLayout(new BoxLayout(this, 1)); // 1 = według osi Y
 
-        Heading heading = new Heading(width, (int) (height * 0.27));
-        Buttons buttons = new Buttons(width, (int) (height * 0.08), this, pacmanGame);
+        int headingHeight = (int) (height * 0.27);
+        int buttonsHeight = (int) (height * 0.08);
+        int middleHeight = height - headingHeight - buttonsHeight;
 
-        MiddleText middleText = new MiddleText(width, (int) (height * 0.5), pacmanGame);
-        NewGame newGame = new NewGame(width, height, pacmanGame, this, game);
-        HighScores highScores = new HighScores(width, height, pacmanGame);
+        Heading heading = new Heading(width, headingHeight);
+        Buttons buttons = new Buttons(width, buttonsHeight, this, pacmanGame);
+
+        NewGame newGame = new NewGame(width, middleHeight, pacmanGame, this, game);
+        HighScores highScores = new HighScores(width, middleHeight, pacmanGame);
+        MiddleText middleText = new MiddleText(width, middleHeight, pacmanGame);
 
         cardsPanel.add(middleText, MenuCardPanel.TEXT);
         cardsPanel.add(newGame, MenuCardPanel.NEWGAME);

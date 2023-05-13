@@ -8,7 +8,7 @@ import java.awt.*;
 public class MiddleText extends JPanel {
 
     public MiddleText(int width, int height, PACMANGame pacmanGame) {
-        this.setPreferredSize(new Dimension(width, height));
+//        this.setPreferredSize(new Dimension(width, height));
         this.setBackground(Color.BLACK);
 
         this.setFocusable(false);

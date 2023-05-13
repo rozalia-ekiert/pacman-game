@@ -16,10 +16,10 @@ public class LowerMenu extends JPanel {
     static Image yellowTEST = null;
 
     public LowerMenu(int lowerMenuPanelWidth, int lowerMenuPanelHeight) {
-
-        this.setPreferredSize(new Dimension(lowerMenuPanelWidth, lowerMenuPanelHeight));
+//        this.setPreferredSize(new Dimension(lowerMenuPanelWidth, lowerMenuPanelHeight));
         this.setBackground(Color.BLACK);
         this.setMinimumSize(new Dimension(330, 70));
+
     }
 
     @Override
