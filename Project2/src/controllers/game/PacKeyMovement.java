@@ -62,7 +62,9 @@ public class PacKeyMovement implements KeyListener {
         }
 
         switch (e.getKeyCode()) {
-            case KeyEvent.VK_W, KeyEvent.VK_UP -> mapModel.setPlayerXUstawKolumne(mapModel.getPlayerX() - 1);
+            case KeyEvent.VK_W, KeyEvent.VK_UP -> {
+                mapModel.setPlayerXUstawKolumne(mapModel.getPlayerX() - 1);
+            }
 
             case KeyEvent.VK_A, KeyEvent.VK_LEFT -> {
                 if (mapModel.getPlayerY() - 1 < 0) {
@@ -72,7 +74,9 @@ public class PacKeyMovement implements KeyListener {
                 mapModel.setPlayerYUstawRzad(mapModel.getPlayerY() - 1);
             }
 
-            case KeyEvent.VK_S, KeyEvent.VK_DOWN -> mapModel.setPlayerXUstawKolumne(mapModel.getPlayerX() + 1);
+            case KeyEvent.VK_S, KeyEvent.VK_DOWN -> {
+                mapModel.setPlayerXUstawKolumne(mapModel.getPlayerX() + 1);
+            }
 
             case KeyEvent.VK_D, KeyEvent.VK_RIGHT -> {
                 if (mapModel.getPlayerY() + 1 > mapModel.getColumnCount() - 1) {

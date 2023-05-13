@@ -19,8 +19,7 @@ public class MapModel extends AbstractTableModel {
 
     public static int rows;
     public static int columns;
-    public static int cookiesCounter = 0;
-
+    public static int cookiesCounter;
     public static Player player = new Player();
     public static final ArrayList<Enemy> enemies = new ArrayList<>();
 
@@ -41,6 +40,8 @@ public class MapModel extends AbstractTableModel {
     int purple = 24;
     int green = 25;
     int pink = 26;
+
+    boolean isThisNewMap = false;
 
     Timer messageTimer = new Timer(3000, e -> {
         Gameplay.message.setText(Gameplay.messageDefault);
@@ -84,6 +85,7 @@ public class MapModel extends AbstractTableModel {
         if (cookiesCounter == 0) {
             map = MapGenerator.generateMap(MapModel.rows, MapModel.columns);
             setValueAt(pacman, rows - rows / 4, columns / 2);
+            isThisNewMap = true;
             pacmanGame.repaint();
             Gameplay.message.setText(Gameplay.messageCookiesEaten);
             messageTimer.start();
@@ -176,10 +178,13 @@ public class MapModel extends AbstractTableModel {
             if (getValueAt(X, getPlayerY()).equals(cookieSmall)) CurrentStats.yourScore += 10;
             if (getValueAt(X, getPlayerY()).equals(cookieBig)) CurrentStats.yourScore += 50;
             eatCookie();
+            CurrentStats.setYourScore.setText(NumberFormatter.changeScoreToString(CurrentStats.yourScore));
+            Game.gameWindow.currentStats.compareYourAndHighScore();
+            if (isThisNewMap) {
+                isThisNewMap = false;
+                return;
+            }
         }
-        CurrentStats.setYourScore.setText(NumberFormatter.changeScoreToString(CurrentStats.yourScore));
-        Game.gameWindow.currentStats.compareYourAndHighScore();
-
         setValueAt(pustePole, getPlayerX(), getPlayerY());
         setValueAt(pacman, X, getPlayerY());
 
@@ -202,6 +207,10 @@ public class MapModel extends AbstractTableModel {
             eatCookie();
             CurrentStats.setYourScore.setText(NumberFormatter.changeScoreToString(CurrentStats.yourScore));
             Game.gameWindow.currentStats.compareYourAndHighScore();
+            if (isThisNewMap) {
+                isThisNewMap = false;
+                return;
+            }
         }
         setValueAt(pustePole, getPlayerX(), getPlayerY());
         setValueAt(pacman, getPlayerX(), Y);
