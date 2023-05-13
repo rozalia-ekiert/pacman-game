@@ -12,9 +12,8 @@ import views.menu.components.upperPanels.Buttons;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
-public class BackToMenuShortCut implements KeyListener {
+public class BackToMenuShortCut implements KeyEventDispatcher {
 
     PACMANGame pacmanGame;
 
@@ -22,14 +21,11 @@ public class BackToMenuShortCut implements KeyListener {
         this.pacmanGame = pacmanGame;
     }
 
-    @Override
-    public void keyTyped(KeyEvent e) {
-
-    }
 
     @Override
-    public void keyPressed(KeyEvent e) {
+    public boolean dispatchKeyEvent(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_Q && e.isControlDown() && e.isShiftDown()) {
+            if (CurrentStats.timeThread == null) return false;
             System.out.println("Pressed Ctrl + Shift + Q");
 
             CurrentStats.timeThread.interrupt();
@@ -49,11 +45,8 @@ public class BackToMenuShortCut implements KeyListener {
 
             CurrentStats.livesNumber = 5;
             CurrentStats.yourScore = 0;
+            return true;
         }
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-
+        return false;
     }
 }

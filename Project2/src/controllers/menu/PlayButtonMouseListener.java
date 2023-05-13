@@ -1,6 +1,5 @@
 package controllers.menu;
 
-import controllers.game.BackToMenuShortCut;
 import model.game.TimeThread;
 import views.GameColors;
 import views.PACMANGame;
@@ -75,7 +74,6 @@ public class PlayButtonMouseListener implements MouseListener {
 
                 //===============================================================================
 
-                game.addKeyListener(new BackToMenuShortCut(pacmanGame));
 
 
                 //===============================================================================

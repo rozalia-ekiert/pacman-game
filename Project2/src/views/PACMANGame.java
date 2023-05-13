@@ -1,5 +1,6 @@
 package views;
 
+import controllers.game.BackToMenuShortCut;
 import views.game.Game;
 import views.menu.MenuStart;
 
@@ -72,6 +73,8 @@ public class PACMANGame extends JFrame {
         contentPane.add(viewsCardPanel);
 
         //===================================================================================
+
+        KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new BackToMenuShortCut(this));
 
         this.setVisible(true);
 
