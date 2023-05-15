@@ -1,5 +1,6 @@
 package views.game.components;
 
+import model.game.GameThread;
 import views.PACMANGame;
 import views.game.Game;
 
@@ -20,7 +21,7 @@ public class GameViewChange {
         new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
-                Thread.sleep(500);
+                Thread.sleep(5000);
                 CardLayout cl = (CardLayout) (game.gameCardPanel.getLayout());
                 cl.show(game.gameCardPanel, GameCardPanel.START_SCREEN_2);
                 GameCardPanel.currentCardName = GameCardPanel.START_SCREEN_2;
@@ -28,6 +29,7 @@ public class GameViewChange {
                 Thread.sleep(500);
                 cl.show(game.gameCardPanel, GameCardPanel.GAME_WINDOW);
                 GameCardPanel.currentCardName = GameCardPanel.GAME_WINDOW;
+                GameThread.isGameViewReady.set(true);
                 return null;
             }
         }.execute();

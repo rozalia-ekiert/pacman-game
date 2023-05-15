@@ -1,6 +1,5 @@
 package controllers.menu;
 
-import model.game.GameThread;
 import views.GameColors;
 import views.PACMANGame;
 import views.ViewCardPanel;
@@ -67,13 +66,6 @@ public class PlayButtonMouseListener implements MouseListener {
                 CardLayout cl = (CardLayout) (this.pacmanGame.viewsCardPanel.getLayout());
                 cl.show(this.pacmanGame.viewsCardPanel, ViewCardPanel.GAME_VIEW);
                 this.pacmanGame.viewsCardPanel.currentCardName = ViewCardPanel.GAME_VIEW;
-
-                //===============================================================================
-
-                synchronized (monitor) {
-                    GameThread.isGameViewReady = true;
-                    monitor.notify();
-                }
 
                 //===============================================================================
 

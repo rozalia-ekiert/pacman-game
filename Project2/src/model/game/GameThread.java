@@ -1,47 +1,41 @@
 package model.game;
 
-import controllers.menu.PlayButtonMouseListener;
 import model.NumberFormatter;
 import views.PACMANGame;
 
 import javax.swing.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class GameThread extends Thread {
-    private static final Object monitor = PlayButtonMouseListener.monitor;
-    public static boolean isGameViewReady = false;
+    public static final AtomicBoolean isGameViewReady = new AtomicBoolean(false);
     PACMANGame pacmanGame;
     private final JLabel timeLabel;
+    final int updatesPerSecond = 60;
 
     public GameThread(JLabel timeLabel, PACMANGame pacmanGame) {
         this.timeLabel = timeLabel;
         this.pacmanGame = pacmanGame;
     }
 
-    public synchronized void run() {
-        synchronized (monitor) {
 
-            while (!isGameViewReady) {
-                try {
-                    monitor.wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+    public void run() {
+        {
+            long now = System.currentTimeMillis();
+            long tick = 0;
+            while (true) {
+                if (System.currentTimeMillis() - now < 1000 / updatesPerSecond || !isGameViewReady.get()) {
+                    continue;
                 }
-
-                long startTime = System.currentTimeMillis();  //todo zmiana razem z czasem wyświetlania screen1 i 2
-                while (isGameViewReady) {
-                    long currentTime = System.currentTimeMillis() - 1000;
-                    long gameTime = (currentTime - startTime);
-                    timeLabel.setText(NumberFormatter.changeTimeToString(gameTime));
-                    if (!Thread.currentThread().isInterrupted()) {
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e) {
-                            Thread.currentThread().interrupt();
-                            return;
-                        }
-                    }
-                }
+                tick++;
+                update(System.currentTimeMillis() - now, tick);
+                now = System.currentTimeMillis();
             }
+
         }
     }
+
+    private void update(long l, long tick) {
+        timeLabel.setText(NumberFormatter.changeTimeToString(tick * 1000 / updatesPerSecond));
+    }
+
 }

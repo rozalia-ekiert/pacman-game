@@ -108,7 +108,7 @@ public class MapGenerator {
         return map;
     }
 
-    static void spawnEnemies(MapModel map) {
+    public static void spawnEnemies(MapModel map) {
         for (Enemy e : enemies) {
             int mapCode = e.getMapCode();
             int spawnLocationClumn = e.getSpawnLocationClumn();

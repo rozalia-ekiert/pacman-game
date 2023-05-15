@@ -82,8 +82,7 @@ public class Player extends Character implements mapTile {
             cl.show(PACMANGame.game.gameCardPanel, GameCardPanel.GAME_OVER);
             GameCardPanel.currentCardName = GameCardPanel.GAME_OVER;
 
-            CurrentStats.timeThread.interrupt();
-            GameThread.isGameViewReady = false;
+            GameThread.isGameViewReady.set(false);
 
             CurrentStats.livesNumber = 5;
             CurrentStats.yourScore = 0;
@@ -145,6 +144,7 @@ public class Player extends Character implements mapTile {
         if (cookiesCounter == 0) {
             mapModel.map = MapGenerator.generateMap();
             mapModel.setValueAt(getMapCode(), rows - rows / 4, columns / 2);
+            spawnEnemies(mapModel);
             isThisNewMap = true;
             mapModel.pacmanGame.repaint();
             Gameplay.message.setText(Gameplay.messageCookiesEaten);
