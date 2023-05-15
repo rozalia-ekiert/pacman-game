@@ -21,7 +21,7 @@ public class MapModel extends AbstractTableModel {
     public static int columns;
     public static int cookiesCounter;
     public static Player player = new Player();
-    public static final ArrayList<Enemy> enemies = new ArrayList<>();
+    public static ArrayList<Enemy> enemies = new ArrayList<>();
 
     public PACMANGame pacmanGame;
     public int[][] map;
@@ -110,7 +110,7 @@ public class MapModel extends AbstractTableModel {
                 CurrentStats.livesTable.getColumnModel().getColumn(j).setPreferredWidth(CurrentStats.lifeCellSize);
                 CurrentStats.livesTable.getColumnModel().getColumn(j).setCellRenderer(CurrentStats.mapComponentsRenderer);
                 if (counter >= 0) {
-                    CurrentStats.livesTable.setValueAt(22, i, j);
+                    CurrentStats.livesTable.setValueAt(33, i, j);
                 } else {
                     CurrentStats.livesTable.setValueAt(19, i, j);
                 }

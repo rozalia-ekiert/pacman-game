@@ -3,6 +3,7 @@ package model.map;
 import model.characters.Colors;
 import model.characters.Enemy;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -20,6 +21,7 @@ public class MapGenerator {
 
     public static int[][] generateMap() {
         int[][] map = new int[rows][columns];
+        enemies = new ArrayList<Enemy>();
 
         //uzupełniam wszystkie pola
         for (int i = 0; i < rows; i++) {
