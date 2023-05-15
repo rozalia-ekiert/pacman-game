@@ -43,6 +43,13 @@ public class GameThread extends Thread {
         for (Enemy enemy : enemies) {
             enemy.updateAI();
         }
+
+        spawnBonuses();
+
+    }
+
+    private void spawnBonuses() {
+
     }
 
 }
