@@ -4,12 +4,10 @@ import model.characters.Enemy;
 import model.map.MapModel;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Random;
 
 public class EnemiesMovement {
 
-    public static HashMap<Integer, int[]> ghostsLocalization;
     ArrayList<Enemy> enemies;
     MapModel mapModel;
 

@@ -57,4 +57,8 @@ public class Enemy extends Character implements mapTile {
     public Image getImage() {
         return this.image;
     }
+
+    public void updateAI() {
+
+    }
 }

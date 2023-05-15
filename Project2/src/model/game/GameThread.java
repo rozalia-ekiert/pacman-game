@@ -1,10 +1,13 @@
 package model.game;
 
 import model.NumberFormatter;
+import model.characters.Enemy;
 import views.PACMANGame;
 
 import javax.swing.*;
 import java.util.concurrent.atomic.AtomicBoolean;
+
+import static model.map.MapModel.enemies;
 
 public class GameThread extends Thread {
     public static final AtomicBoolean isGameViewReady = new AtomicBoolean(false);
@@ -36,6 +39,10 @@ public class GameThread extends Thread {
 
     private void update(long l, long tick) {
         timeLabel.setText(NumberFormatter.changeTimeToString(tick * 1000 / updatesPerSecond));
+        // update duszków
+        for (Enemy enemy : enemies) {
+            enemy.updateAI();
+        }
     }
 
 }
