@@ -7,6 +7,8 @@ import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import static model.map.MapModel.player;
+
 public class PacKeyMovement implements KeyListener {
 
     int playerRow;
@@ -18,8 +20,6 @@ public class PacKeyMovement implements KeyListener {
     public PacKeyMovement(JTable table, MapModel mapModel, PACMANGame pacmanGame) {
         this.table = table;
         this.mapModel = mapModel;
-        this.playerColumn = mapModel.getPlayerY();
-        this.playerRow = mapModel.getPlayerX();
         this.pacmanGame = pacmanGame;
 
     }
@@ -32,27 +32,27 @@ public class PacKeyMovement implements KeyListener {
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_W, KeyEvent.VK_UP -> {
-                mapModel.setPlayerXUstawKolumne(mapModel.getPlayerX() - 1);
+                player.setPlayerXUstawKolumne(player.getCurrentRow() - 1);
             }
 
             case KeyEvent.VK_A, KeyEvent.VK_LEFT -> {
-                if (mapModel.getPlayerY() - 1 < 0) {
-                    mapModel.setPlayerYUstawRzad(mapModel.getColumnCount() - 1);
+                if (player.getCurrentColumn() - 1 < 0) {
+                    player.setPlayerYUstawRzad(mapModel.getColumnCount() - 1);
                     return;
                 }
-                mapModel.setPlayerYUstawRzad(mapModel.getPlayerY() - 1);
+                player.setPlayerYUstawRzad(player.getCurrentColumn() - 1);
             }
 
             case KeyEvent.VK_S, KeyEvent.VK_DOWN -> {
-                mapModel.setPlayerXUstawKolumne(mapModel.getPlayerX() + 1);
+                player.setPlayerXUstawKolumne(player.getCurrentRow() + 1);
             }
 
             case KeyEvent.VK_D, KeyEvent.VK_RIGHT -> {
-                if (mapModel.getPlayerY() + 1 > mapModel.getColumnCount() - 1) {
-                    mapModel.setPlayerYUstawRzad(0);
+                if (player.getCurrentColumn() + 1 > mapModel.getColumnCount() - 1) {
+                    player.setPlayerYUstawRzad(0);
                     return;
                 }
-                mapModel.setPlayerYUstawRzad(mapModel.getPlayerY() + 1);
+                player.setPlayerYUstawRzad(player.getCurrentColumn() + 1);
             }
         }
     }

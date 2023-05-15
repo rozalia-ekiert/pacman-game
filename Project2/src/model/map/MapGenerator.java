@@ -13,10 +13,10 @@ public class MapGenerator {
     //utility class
 
     static int sciana = 0;
-    static int pustePoleStale = 18;
-    static int pustePole = 19;
-    static int cookieBig = 20;
-    static int cookieSmall = 21;
+    public static final int pustePole = 19;
+    public static final int cookieSmall = 21;
+    static final int pustePoleStale = 18;
+    public static int cookieBig = 20;
 //    public static HashMap<Integer, int[]> ghostsLocalization;
 
     public static int[][] generateMap() {
