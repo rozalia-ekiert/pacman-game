@@ -1,7 +1,7 @@
 package views.game.components.panels.gameWindow;
 
 import model.NumberFormatter;
-import model.game.TimeThread;
+import model.game.GameThread;
 import model.map.MapComponentsRenderer;
 import views.GameColors;
 import views.PACMANGame;
@@ -34,7 +34,7 @@ public class CurrentStats extends JPanel {
     PACMANGame pacmanGame;
     public static int lifeCellSize;
     JLabel livesArea;
-    public static TimeThread timeThread;
+    public static GameThread timeThread;
 
     public CurrentStats(int width, int height, PACMANGame pacmanGame) {
 
@@ -91,7 +91,7 @@ public class CurrentStats extends JPanel {
         setLivesTable(currentButterbelly);
         setLayout();
 
-        timeThread = new TimeThread(setTime, pacmanGame);
+        timeThread = new GameThread(setTime, pacmanGame);
         timeThread.start();
     }
 

@@ -2,7 +2,7 @@ package model.characters;
 
 import model.DrawableObjects;
 import model.NumberFormatter;
-import model.game.TimeThread;
+import model.game.GameThread;
 import model.map.MapGenerator;
 import model.map.MapModel;
 import views.PACMANGame;
@@ -83,7 +83,7 @@ public class Player extends Character implements mapTile {
             GameCardPanel.currentCardName = GameCardPanel.GAME_OVER;
 
             CurrentStats.timeThread.interrupt();
-            TimeThread.isGameViewReady = false;
+            GameThread.isGameViewReady = false;
 
             CurrentStats.livesNumber = 5;
             CurrentStats.yourScore = 0;

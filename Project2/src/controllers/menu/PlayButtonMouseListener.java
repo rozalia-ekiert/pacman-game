@@ -1,6 +1,6 @@
 package controllers.menu;
 
-import model.game.TimeThread;
+import model.game.GameThread;
 import views.GameColors;
 import views.PACMANGame;
 import views.ViewCardPanel;
@@ -71,7 +71,7 @@ public class PlayButtonMouseListener implements MouseListener {
                 //===============================================================================
 
                 synchronized (monitor) {
-                    TimeThread.isGameViewReady = true;
+                    GameThread.isGameViewReady = true;
                     monitor.notify();
                 }
 

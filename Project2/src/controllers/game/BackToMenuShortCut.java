@@ -1,6 +1,6 @@
 package controllers.game;
 
-import model.game.TimeThread;
+import model.game.GameThread;
 import views.GameColors;
 import views.PACMANGame;
 import views.ViewCardPanel;
@@ -29,7 +29,7 @@ public class BackToMenuShortCut implements KeyEventDispatcher {
             System.out.println("Pressed Ctrl + Shift + Q");
 
             CurrentStats.timeThread.interrupt();
-            TimeThread.isGameViewReady = false;
+            GameThread.isGameViewReady = false;
 
             CardLayout cl = (CardLayout) (pacmanGame.viewsCardPanel.getLayout());
             pacmanGame.viewsCardPanel.currentCardName = ViewCardPanel.MENU_VIEW;

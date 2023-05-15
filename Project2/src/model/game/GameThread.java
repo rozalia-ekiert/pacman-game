@@ -6,14 +6,13 @@ import views.PACMANGame;
 
 import javax.swing.*;
 
-public class TimeThread extends Thread {
+public class GameThread extends Thread {
     private static final Object monitor = PlayButtonMouseListener.monitor;
     public static boolean isGameViewReady = false;
     PACMANGame pacmanGame;
-    private JLabel timeLabel;
-    private long startTime;
+    private final JLabel timeLabel;
 
-    public TimeThread(JLabel timeLabel, PACMANGame pacmanGame) {
+    public GameThread(JLabel timeLabel, PACMANGame pacmanGame) {
         this.timeLabel = timeLabel;
         this.pacmanGame = pacmanGame;
     }
@@ -28,7 +27,7 @@ public class TimeThread extends Thread {
                     e.printStackTrace();
                 }
 
-                startTime = System.currentTimeMillis();  //todo zmiana razem z czasem wyświetlania screen1 i 2
+                long startTime = System.currentTimeMillis();  //todo zmiana razem z czasem wyświetlania screen1 i 2
                 while (isGameViewReady) {
                     long currentTime = System.currentTimeMillis() - 1000;
                     long gameTime = (currentTime - startTime);
