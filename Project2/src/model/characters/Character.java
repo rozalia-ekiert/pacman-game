@@ -54,4 +54,9 @@ public abstract class Character implements Animated {
     }
 
     public abstract int getMapCode();
+
+    public abstract void moveHorizontally(int X);
+
+    public abstract void moveVertically(int Y);
+
 }

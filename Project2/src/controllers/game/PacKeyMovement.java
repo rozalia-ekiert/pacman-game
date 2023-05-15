@@ -32,27 +32,27 @@ public class PacKeyMovement implements KeyListener {
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_W, KeyEvent.VK_UP -> {
-                player.setPlayerXUstawKolumne(player.getCurrentRow() - 1);
+                player.moveHorizontally(player.getCurrentRow() - 1);
             }
 
             case KeyEvent.VK_A, KeyEvent.VK_LEFT -> {
                 if (player.getCurrentColumn() - 1 < 0) {
-                    player.setPlayerYUstawRzad(mapModel.getColumnCount() - 1);
+                    player.moveVertically(mapModel.getColumnCount() - 1);
                     return;
                 }
-                player.setPlayerYUstawRzad(player.getCurrentColumn() - 1);
+                player.moveVertically(player.getCurrentColumn() - 1);
             }
 
             case KeyEvent.VK_S, KeyEvent.VK_DOWN -> {
-                player.setPlayerXUstawKolumne(player.getCurrentRow() + 1);
+                player.moveHorizontally(player.getCurrentRow() + 1);
             }
 
             case KeyEvent.VK_D, KeyEvent.VK_RIGHT -> {
                 if (player.getCurrentColumn() + 1 > mapModel.getColumnCount() - 1) {
-                    player.setPlayerYUstawRzad(0);
+                    player.moveVertically(0);
                     return;
                 }
-                player.setPlayerYUstawRzad(player.getCurrentColumn() + 1);
+                player.moveVertically(player.getCurrentColumn() + 1);
             }
         }
     }

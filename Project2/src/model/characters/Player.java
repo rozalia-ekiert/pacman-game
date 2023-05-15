@@ -42,7 +42,7 @@ public class Player extends Character implements mapTile {
     }
 
 
-    public void setPlayerXUstawKolumne(int X) {
+    public void moveHorizontally(int X) {
         for (Enemy e : enemies) {
             if (mapModel.getValueAt(X, getCurrentColumn()).equals(e.getMapCode())) {
                 mapModel.setValueAt(pustePole, getCurrentRow(), getCurrentColumn());
@@ -68,7 +68,7 @@ public class Player extends Character implements mapTile {
     }
 
 
-    private synchronized void eatenByGhosts() {
+    private void eatenByGhosts() {
         CurrentStats.livesNumber--;
         mapModel.setValueAt(getMapCode(), rows - rows / 4, columns / 2);
 
@@ -114,7 +114,7 @@ public class Player extends Character implements mapTile {
         CurrentStats.model.fireTableDataChanged();
     }
 
-    public void setPlayerYUstawRzad(int Y) {
+    public void moveVertically(int Y) {
         for (Enemy e : enemies) {
             if (mapModel.getValueAt(getCurrentRow(), Y).equals(e.getMapCode())) {
                 mapModel.setValueAt(pustePole, getCurrentRow(), getCurrentColumn());

@@ -44,6 +44,16 @@ public class Enemy extends Character implements mapTile {
     }
 
     @Override
+    public void moveHorizontally(int X) {
+
+    }
+
+    @Override
+    public void moveVertically(int Y) {
+
+    }
+
+    @Override
     public Image getImage() {
         return this.image;
     }
