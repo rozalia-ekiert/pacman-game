@@ -1,7 +1,6 @@
 package model.map;
 
 import model.DrawableObjects;
-import model.characters.Player;
 import views.game.components.panels.gameWindow.CurrentStats;
 
 import javax.imageio.ImageIO;
@@ -11,7 +10,6 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
-import static model.map.MapModel.player;
 import static views.game.components.panels.gameWindow.GameplayMap.getCellSize;
 
 public class MapComponentsRenderer extends DefaultTableCellRenderer {
@@ -44,15 +42,7 @@ public class MapComponentsRenderer extends DefaultTableCellRenderer {
         int cellSize = getCellSize();
 
 
-        if (table.getValueAt(row, column).equals(22)) {
-            return new JComponent() {
-                @Override
-                public void paint(Graphics g) {
-                    super.paint(g);
-                    g.drawImage(player.getPlayerImage(Player.currentState), 0, 0, (int) (cellSize * 0.9), (int) (cellSize * 0.9), this);
-                }
-            };
-        }
+
 
 
         if (table.getValueAt(row, column).equals(33)) { // tabela z życiami
@@ -61,7 +51,7 @@ public class MapComponentsRenderer extends DefaultTableCellRenderer {
                 public void paint(Graphics g) {
                     super.paint(g);
                     int currentCellSize = CurrentStats.lifeCellSize;
-                    g.drawImage(player.getPlayerImage(Player.currentState), 0, 0, (int) (currentCellSize * 0.9), (int) (currentCellSize * 0.9), this);
+                    g.drawImage(getImagebasedOnCellValue(22), 0, 0, (int) (currentCellSize * 0.9), (int) (currentCellSize * 0.9), this);
                 }
             };
         }

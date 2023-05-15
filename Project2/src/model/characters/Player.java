@@ -1,5 +1,6 @@
 package model.characters;
 
+import model.DrawableObjects;
 import model.NumberFormatter;
 import model.game.TimeThread;
 import model.map.MapGenerator;
@@ -14,68 +15,32 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 import static model.map.MapGenerator.*;
 import static model.map.MapModel.*;
 
-public class Player extends Character {
+public class Player extends Character implements mapTile {
 
     public static CharacterAnimationState currentState = CharacterAnimationState.PLayerDEFAULT;
     private final MapModel mapModel;
-    Image pacmanDefault = setPlayerImages(0);
-    Map<CharacterAnimationState, List<Image>> playerState;    Image pacmanClosed = setPlayerImages(2);
-
 
     public Player(MapModel mapModel) {
         this.mapModel = mapModel;
-    }
-
-    public Image setPlayerImages(int a) {
-
         try {
-            pacmanDefault = ImageIO.read(new File("assets/pacman_icons/pac_sredni.png"));
-            pacmanOpened = ImageIO.read(new File("assets/pacman_icons/pac_otwarty.png"));
-            pacmanClosed = ImageIO.read(new File("assets/pacman_icons/pac_caly.png"));
+            this.image = ImageIO.read(new File("assets/pacman_icons/pac_sredni.png"));
 
-            ArrayList<Image> imgs = new ArrayList<>();
-            imgs.add(pacmanDefault);
-            imgs.add(pacmanOpened);
-            imgs.add(pacmanClosed);
-
-            return imgs.get(a);
-
+            DrawableObjects.addDrawable(getMapCode(), this);
         } catch (IOException e) {
-            System.out.println("Nieprawidłowe zdjęcie.");
+            throw new RuntimeException(e);
         }
-        return null;
+
     }
 
     @Override
     public int getMapCode() {
         return 22;
-    }    Image pacmanOpened = setPlayerImages(1);
-
-    public Image getPlayerImage(CharacterAnimationState currentState) {
-        Image currentImg = null;
-        switch (currentState) {
-            case PLayerDEFAULT -> {
-                currentImg = this.pacmanDefault;
-                return currentImg;
-            }
-            case PLayerOPEN -> {
-                currentImg = pacmanOpened;
-                return currentImg;
-            }
-            case PlayerCLOSE -> {
-                currentImg = pacmanClosed;
-                return currentImg;
-            }
-        }
-        return null;
     }
+
 
     public void setPlayerXUstawKolumne(int X) {
         for (Enemy e : enemies) {
@@ -103,8 +68,6 @@ public class Player extends Character {
     }
 
 
-    double speed = 80;
-
     private synchronized void eatenByGhosts() {
         CurrentStats.livesNumber--;
         mapModel.setValueAt(getMapCode(), rows - rows / 4, columns / 2);
@@ -128,7 +91,7 @@ public class Player extends Character {
     }
 
 
-    @Override
+    @Override //TODO do zrobienia albo wyjebania
     public Image getAnimatonFrame(long deltaT) {
         return null;
     }
@@ -192,7 +155,8 @@ public class Player extends Character {
         }
     }
 
-
-
-
+    @Override
+    public Image getImage() {
+        return this.image;
+    }
 }
