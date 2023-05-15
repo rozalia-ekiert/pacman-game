@@ -22,10 +22,10 @@ import static model.map.MapModel.*;
 public class Player extends Character implements mapTile {
 
     public static CharacterAnimationState currentState = CharacterAnimationState.PLayerDEFAULT;
-    private final MapModel mapModel;
+
 
     public Player(MapModel mapModel) {
-        this.mapModel = mapModel;
+        super(mapModel);
         try {
             this.image = ImageIO.read(new File("assets/pacman_icons/pac_sredni.png"));
 
@@ -139,9 +139,6 @@ public class Player extends Character implements mapTile {
         mapModel.setValueAt(getMapCode(), getCurrentRow(), Y);
     }
 
-    private boolean isWall(int playerX, int playerY) {
-        return mapModel.map[playerX][playerY] <= 15;
-    }
 
     private void eatCookie() {
         cookiesCounter--;

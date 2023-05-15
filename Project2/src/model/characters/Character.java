@@ -1,11 +1,14 @@
 package model.characters;
 
+import model.map.MapModel;
+
 import java.awt.*;
 import java.util.List;
 import java.util.Map;
 
 public abstract class Character implements Animated {
 
+    protected MapModel mapModel;
     protected int spawnLocationRow;
     protected int spawnLocationClumn;
     protected int currentRow;
@@ -14,8 +17,12 @@ public abstract class Character implements Animated {
     Image image;
     double speed;
 
-    public Character() {
+    public Character(MapModel mapModel) {
+        this.mapModel = mapModel;
+    }
 
+    public void setMapModel(MapModel mapModel) {
+        this.mapModel = mapModel;
     }
 
     public int getCurrentRow() {
@@ -32,6 +39,10 @@ public abstract class Character implements Animated {
 
     public void setCurrentColumn(int currentColumn) {
         this.currentColumn = currentColumn;
+    }
+
+    protected boolean isWall(int playerX, int playerY) {
+        return mapModel.map[playerX][playerY] <= 15;
     }
 
     public int getSpawnLocationRow() {

@@ -103,17 +103,18 @@ public class MapGenerator {
             }
         }
 
-        spawnEnemies(map);
+
         MapModel.cookiesCounter = MapModel.cookiesCounter - 5; //odejmuję wartość, gdzie ustawię pacmana i duszki
         return map;
     }
 
-    private static void spawnEnemies(int[][] map) {
+    static void spawnEnemies(MapModel map) {
         for (Enemy e : enemies) {
             int mapCode = e.getMapCode();
             int spawnLocationClumn = e.getSpawnLocationClumn();
             int spawnLocationRow = e.getSpawnLocationRow();
-            map[spawnLocationRow][spawnLocationClumn] = mapCode;
+            map.map[spawnLocationRow][spawnLocationClumn] = mapCode;
+            e.setMapModel(map);
         }
     }
 

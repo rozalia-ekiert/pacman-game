@@ -4,18 +4,16 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
 
 import static model.DrawableObjects.addDrawable;
 
 public class Enemy extends Character implements mapTile {
     public final Colors color;
-    Map<CharacterAnimationState, List<Image>> animacje;
 
     private Image image;
 
     public Enemy(int row, int column, Colors color) {
+        super(null);
         this.spawnLocationRow = row;
         this.spawnLocationClumn = column;
         this.color = color;

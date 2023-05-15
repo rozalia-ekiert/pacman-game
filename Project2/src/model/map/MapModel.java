@@ -9,6 +9,8 @@ import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 
+import static model.map.MapGenerator.spawnEnemies;
+
 public class MapModel extends AbstractTableModel {
 
     public static int rows;
@@ -38,7 +40,7 @@ public class MapModel extends AbstractTableModel {
         this.map = MapGenerator.generateMap();
         player = new Player(this);
         setValueAt(pacman, rows - rows / 4, columns / 2);
-
+        spawnEnemies(this);
         showModel();
     }
 
@@ -77,5 +79,6 @@ public class MapModel extends AbstractTableModel {
         fireTableCellUpdated(rowIndex, columnIndex);
         player.setCurrentColumn(columnIndex);
         player.setCurrentRow(rowIndex);
+        System.out.println("Pacman position: " + columnIndex + "," + rowIndex);
     }
 }
