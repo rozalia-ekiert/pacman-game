@@ -52,6 +52,9 @@ public class PlayButtonMouseListener implements MouseListener {
 
             if (NewGame.isValue1Valid && NewGame.isValue2Valid && NewGame.isNickValid) {
 
+                NewGame.warningField.setText(NewGame.warningFieldIsNotCorrectSizeDefaut);
+                NewGame.warningNick.setText(NewGame.warningYourNickExistsDefault);
+
                 System.out.println(newGame.play.isFocusOwner());
 
                 Game.gameWindow = new GameWindow(PACMANGame.screenWidth, PACMANGame.screenHeight, pacmanGame, NewGame.setRows, NewGame.setColumns);
@@ -71,10 +74,6 @@ public class PlayButtonMouseListener implements MouseListener {
                     TimeThread.isGameViewReady = true;
                     monitor.notify();
                 }
-
-                //===============================================================================
-
-
 
                 //===============================================================================
 

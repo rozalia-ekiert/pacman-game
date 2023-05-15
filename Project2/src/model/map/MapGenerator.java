@@ -1,7 +1,12 @@
 package model.map;
 
+import model.characters.Colors;
+import model.characters.Enemy;
+
 import java.util.Arrays;
 import java.util.Random;
+
+import static model.map.MapModel.*;
 
 public class MapGenerator {
     //utility class
@@ -11,13 +16,9 @@ public class MapGenerator {
     static int pustePole = 19;
     static int cookieBig = 20;
     static int cookieSmall = 21;
-    static int blue = 23;
-    static int purple = 24;
-    static int green = 25;
-    static int pink = 26;
-    static int pacman = 22;
+//    public static HashMap<Integer, int[]> ghostsLocalization;
 
-    public static int[][] generateMap(int rows, int columns) {
+    public static int[][] generateMap() {
         int[][] map = new int[rows][columns];
 
         //uzupełniam wszystkie pola
@@ -49,68 +50,20 @@ public class MapGenerator {
                 }
 
                 // generowanie miejsca respawnu duszków
-                if ((columns % 2) == 0) { //dla parzystej ilosci kolumn
-                    if (i == rows / 2 && j == columns / 2) {
-                        map[i][j] = blue;
-                        map[i][j - 1] = purple;
-                        map[i][j - 2] = green;
-                        map[i][j + 1] = pink;
 
-                        map[i - 1][j - 2] = sciana;
-                        map[i - 1][j - 3] = sciana;
-                        map[i - 1][j + 1] = sciana;
-                        map[i - 1][j + 2] = sciana;
-
-                        map[i][j - 3] = sciana;
-                        map[i][j + 2] = sciana;
-
-                        map[i + 1][j - 3] = sciana;
-                        map[i + 1][j - 2] = sciana;
-                        map[i + 1][j - 1] = sciana;
-                        map[i + 1][j] = sciana;
-                        map[i + 1][j + 1] = sciana;
-                        map[i + 1][j + 2] = sciana;
-                        continue;
-                    }
-
-                }
-                if ((columns % 2) != 0) { // dla nieparzystej ilośći kolumn
-                    if (i == rows / 2 && j == columns / 2 - 1) {
-                        map[i][j] = blue;
-                        map[i][j + 1] = purple;
-                        map[i][j + 2] = green;
-                        map[i - 2][j + 1] = pink;
-
-                        map[i - 1][j - 1] = sciana;
-                        map[i - 1][j] = sciana;
-                        map[i - 1][j + 2] = sciana;
-                        map[i - 1][j + 3] = sciana;
-
-                        map[i][j - 1] = sciana;
-                        map[i][j + 3] = sciana;
-
-                        map[i + 1][j - 1] = sciana;
-                        map[i + 1][j] = sciana;
-                        map[i + 1][j + 1] = sciana;
-                        map[i + 1][j + 2] = sciana;
-                        map[i + 1][j + 3] = sciana;
-                        continue;
-                    }
-                }
+                if (enemiesRespawn(rows, columns, map, i, j)) continue;
 
                 //losowe wnętrze
                 if (i > 2 && map[i - 2][j] == pustePole) {
-                    if (j != 1 && j != columns - 2 && map[i - 1][j] == pustePole && i != rows / 2 - 1 && j != columns / 2
-                            && j != columns / 4 && j != (columns / 4) * 3) map[i][j] = sciana;
+                    if (j != 1 && j != columns - 2 && map[i - 1][j] == pustePole && i != rows / 2 - 1 && j != columns / 2 && j != columns / 4 && j != (columns / 4) * 3)
+                        map[i][j] = sciana;
                 }
             }
         }
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
-                if (i >= 1 && j >= 1 && i <= rows - 2 && j <= columns - 2
-                        && map[i - 1][j - 1] == sciana && map[i - 1][j] == sciana && map[i - 1][j + 1] == sciana
-                        && map[i][j - 1] != sciana && map[i][j + 1] != sciana && map[i + 1][j] != sciana && map[i + 1][j - 1] != sciana && map[i + 1][j + 1] != sciana) {
+                if (i >= 1 && j >= 1 && i <= rows - 2 && j <= columns - 2 && map[i - 1][j - 1] == sciana && map[i - 1][j] == sciana && map[i - 1][j + 1] == sciana && map[i][j - 1] != sciana && map[i][j + 1] != sciana && map[i + 1][j] != sciana && map[i + 1][j - 1] != sciana && map[i + 1][j + 1] != sciana) {
                     Random rand = new Random();
                     int random = rand.nextInt(10);
                     if (random > 5) {
@@ -120,19 +73,15 @@ public class MapGenerator {
             }
         }
 
-        //uzupełniam puste pola ciasteczkami
+
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
+                //uzupełniam puste pola ciasteczkami
                 if (map[i][j] == pustePole) {
                     map[i][j] = cookieSmall;
                     MapModel.cookiesCounter++;
                 }
-            }
-        }
-
-        //setWallsNumbers
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
+                //setWallsNumbers
                 if (map[i][j] <= 15) {
                     int counter = 0;
                     if (i - 1 >= 0 && map[i - 1][j] <= 15) {
@@ -152,8 +101,73 @@ public class MapGenerator {
             }
         }
 
-        MapModel.cookiesCounter = MapModel.cookiesCounter - 1; //odejmuję wartość, gdzie ustawię pacmana
+        spawnEnemies(map);
+        MapModel.cookiesCounter = MapModel.cookiesCounter - 5; //odejmuję wartość, gdzie ustawię pacmana i duszki
         return map;
+    }
+
+    private static void spawnEnemies(int[][] map) {
+        for (Enemy e : enemies) {
+            int mapCode = e.getMapCode();
+            int spawnLocationClumn = e.getSpawnLocationClumn();
+            int spawnLocationRow = e.getSpawnLocationRow();
+            map[spawnLocationRow][spawnLocationClumn] = mapCode;
+        }
+    }
+
+
+    private static boolean enemiesRespawn(int rows, int columns, int[][] map, int i, int j) {
+        if ((columns % 2) != 0) { // dla nieparzystej ilośći kolumn
+            if (i == rows / 2 && j == columns / 2 - 1) {
+                enemies.add(new Enemy(i, j, Colors.BLUE));
+                enemies.add(new Enemy(i, j + 1, Colors.PURPLE));
+                enemies.add(new Enemy(i, j + 2, Colors.GREEN));
+                enemies.add(new Enemy(i - 2, j + 1, Colors.PINK));
+
+                map[i - 1][j - 1] = sciana;
+                map[i - 1][j] = sciana;
+                map[i - 1][j + 2] = sciana;
+                map[i - 1][j + 3] = sciana;
+
+                map[i][j - 1] = sciana;
+                map[i][j + 3] = sciana;
+
+                map[i + 1][j - 1] = sciana;
+                map[i + 1][j] = sciana;
+                map[i + 1][j + 1] = sciana;
+                map[i + 1][j + 2] = sciana;
+                map[i + 1][j + 3] = sciana;
+
+                return true;
+            }
+        }
+        if ((columns % 2) == 0) { //dla parzystej ilosci kolumn
+            if (i == rows / 2 && j == columns / 2) {
+
+                enemies.add(new Enemy(i, j, Colors.BLUE));
+                enemies.add(new Enemy(i, j - 1, Colors.PURPLE));
+                enemies.add(new Enemy(i, j - 2, Colors.GREEN));
+                enemies.add(new Enemy(i, j + 1, Colors.PINK));
+
+                map[i - 1][j - 2] = sciana;
+                map[i - 1][j - 3] = sciana;
+                map[i - 1][j + 1] = sciana;
+                map[i - 1][j + 2] = sciana;
+
+                map[i][j - 3] = sciana;
+                map[i][j + 2] = sciana;
+
+                map[i + 1][j - 3] = sciana;
+                map[i + 1][j - 2] = sciana;
+                map[i + 1][j - 1] = sciana;
+                map[i + 1][j] = sciana;
+                map[i + 1][j + 1] = sciana;
+                map[i + 1][j + 2] = sciana;
+
+                return true;
+            }
+        }
+        return false;
     }
 
 }

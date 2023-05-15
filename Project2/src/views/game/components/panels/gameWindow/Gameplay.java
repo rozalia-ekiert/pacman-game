@@ -19,7 +19,6 @@ public class Gameplay extends JPanel {
 
     public Gameplay(int width, int height, PACMANGame pacmanGame, int setRows, int setColumns) {
 
-//        this.setFocusable(false);
         this.setBackground(Color.BLACK);
         this.setLayout(new GridBagLayout());
 

@@ -10,6 +10,8 @@ import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
+import static model.map.MapModel.columns;
+import static model.map.MapModel.rows;
 import static views.game.components.panels.gameWindow.GameplayMap.*;
 
 public class GameWindow extends JPanel {
@@ -33,6 +35,8 @@ public class GameWindow extends JPanel {
         gameplay.setBorder(BorderFactory.createMatteBorder(0, 3, 0, 3, Color.WHITE));
         this.add(gameplay);
         this.add(comments);
+
+        Gameplay.map.mapTable.requestFocus();
 
         this.addComponentListener(new ComponentAdapter() {
             @Override

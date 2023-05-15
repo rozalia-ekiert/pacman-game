@@ -2,10 +2,6 @@
 
 import views.PACMANGame;
 
-import java.awt.*;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-
 public class Main {
 
     final static int updatesPerSecond = 10;
@@ -15,13 +11,13 @@ public class Main {
 
         PACMANGame pacmanGame = new PACMANGame();
 
-
-        KeyboardFocusManager.getCurrentKeyboardFocusManager().addPropertyChangeListener("permanentFocusOwner", new PropertyChangeListener() {
-            @Override
-            public void propertyChange(PropertyChangeEvent evt) {
-                System.out.println("Current focus: " + evt.getNewValue());
-            }
-        });
+//
+//        KeyboardFocusManager.getCurrentKeyboardFocusManager().addPropertyChangeListener("permanentFocusOwner", new PropertyChangeListener() {
+//            @Override
+//            public void propertyChange(PropertyChangeEvent evt) {
+//                System.out.println("Current focus: " + evt.getNewValue());
+//            }
+//        });
 
     }
 }

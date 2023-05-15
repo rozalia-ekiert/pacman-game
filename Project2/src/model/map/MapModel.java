@@ -40,51 +40,37 @@ public class MapModel extends AbstractTableModel {
     int purple = 24;
     int green = 25;
     int pink = 26;
-
     boolean isThisNewMap = false;
 
     Timer messageTimer = new Timer(3000, e -> {
         Gameplay.message.setText(Gameplay.messageDefault);
     });
 
-//    Thread messageTimer = new Thread(() -> {
-//        try {
-//            Thread.sleep(3000);
-//            Gameplay.message.setText(Gameplay.messageDefault);
-//        } catch (InterruptedException ex) {
-//            System.out.println("Message timer problem");
-//        }
-//    });
 
     public MapModel(int rows, int columns, PACMANGame pacmanGame) {
         super();
-        this.rows = rows;
-        this.columns = columns;
+        MapModel.rows = rows;
+        MapModel.columns = columns;
         this.pacmanGame = pacmanGame;
 
-
-        enemies.add(new Enemy());
-        enemies.add(new Enemy());
-        enemies.add(new Enemy());
-        enemies.add(new Enemy());
-
-        this.map = MapGenerator.generateMap(rows, columns);
+        this.map = MapGenerator.generateMap();
         setValueAt(pacman, rows - rows / 4, columns / 2);
+        showModel();
     }
 
-    private void showModel() {
+    private void showModel() { // do debuggingu
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
                 System.out.print(map[i][j] + " ");
             }
             System.out.println();
         }
-    } // do debuggingu
+    }
 
     private void eatCookie() {
         cookiesCounter--;
         if (cookiesCounter == 0) {
-            map = MapGenerator.generateMap(MapModel.rows, MapModel.columns);
+            map = MapGenerator.generateMap();
             setValueAt(pacman, rows - rows / 4, columns / 2);
             isThisNewMap = true;
             pacmanGame.repaint();
@@ -124,9 +110,9 @@ public class MapModel extends AbstractTableModel {
                 CurrentStats.livesTable.getColumnModel().getColumn(j).setPreferredWidth(CurrentStats.lifeCellSize);
                 CurrentStats.livesTable.getColumnModel().getColumn(j).setCellRenderer(CurrentStats.mapComponentsRenderer);
                 if (counter >= 0) {
-                    CurrentStats.livesTable.setValueAt(33, i, j);
+                    CurrentStats.livesTable.setValueAt(22, i, j);
                 } else {
-                    CurrentStats.livesTable.setValueAt(100, i, j);
+                    CurrentStats.livesTable.setValueAt(19, i, j);
                 }
             }
         }
@@ -168,12 +154,19 @@ public class MapModel extends AbstractTableModel {
 
     public void setPlayerXUstawKolumne(int X) {
 
-        if (getValueAt(X, getPlayerY()).equals(blue) || getValueAt(X, getPlayerY()).equals(pink) || getValueAt(X, getPlayerY()).equals(green) || getValueAt(X, getPlayerY()).equals(purple)) {
-            setValueAt(pustePole, getPlayerX(), getPlayerY());
-            eatenByGhosts();
-            return;
-        }
+//        if (getValueAt(X, getPlayerY()).equals(blue) || getValueAt(X, getPlayerY()).equals(pink) || getValueAt(X, getPlayerY()).equals(green) || getValueAt(X, getPlayerY()).equals(purple)) {
+//            setValueAt(pustePole, getPlayerX(), getPlayerY());
+//            eatenByGhosts();
+//            return;
+//        }
 
+        for (Enemy e : enemies) {
+            if (getValueAt(X, getPlayerY()).equals(e.getMapCode())) {
+                setValueAt(pustePole, getPlayerX(), getPlayerY());
+                eatenByGhosts();
+                return;
+            }
+        }
         if (isWall(X, getPlayerY())) return;
         if (getValueAt(X, getPlayerY()).equals(cookieSmall) || getValueAt(X, getPlayerY()).equals(cookieBig)) {
             if (getValueAt(X, getPlayerY()).equals(cookieSmall)) CurrentStats.yourScore += 10;
@@ -196,11 +189,18 @@ public class MapModel extends AbstractTableModel {
     }
 
     public void setPlayerYUstawRzad(int Y) {
-        if (getValueAt(getPlayerX(), Y).equals(blue) || getValueAt(getPlayerX(), Y).equals(pink) || getValueAt(getPlayerX(), Y).equals(purple) || getValueAt(getPlayerX(), Y).equals(green)) {
-            setValueAt(pustePole, getPlayerX(), getPlayerY());
-            eatenByGhosts();
-            return;
+        for (Enemy e : enemies) {
+            if (getValueAt(getPlayerX(), Y).equals(e.getMapCode())) {
+                setValueAt(pustePole, getPlayerX(), getPlayerY());
+                eatenByGhosts();
+                return;
+            }
         }
+//        if (getValueAt(getPlayerX(), Y).equals(blue) || getValueAt(getPlayerX(), Y).equals(pink) || getValueAt(getPlayerX(), Y).equals(purple) || getValueAt(getPlayerX(), Y).equals(green)) {
+//            setValueAt(pustePole, getPlayerX(), getPlayerY());
+//            eatenByGhosts();
+//            return;
+//        }
         if (isWall(getPlayerX(), Y)) return;
         if (getValueAt(getPlayerX(), Y).equals(cookieSmall) || getValueAt(getPlayerX(), Y).equals(cookieBig)) {
             if (getValueAt(getPlayerX(), Y).equals(cookieSmall)) CurrentStats.yourScore += 10;

@@ -8,7 +8,12 @@ import views.PACMANGame;
 import javax.swing.*;
 import javax.swing.table.TableColumn;
 import java.awt.*;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.KeyListener;
+
+import static model.map.MapModel.columns;
+import static model.map.MapModel.rows;
 
 public class GameplayMap extends JPanel {
 
@@ -18,13 +23,10 @@ public class GameplayMap extends JPanel {
     public static int windowSize;
     public Dimension dimension;
 
-    public static int rows;
-    public static int columns;
 
     public GameplayMap(int sqWidth, int sqHeight, PACMANGame pacmanGame, int setRows, int setColumns) {
         this.setBorder(BorderFactory.createMatteBorder(3, 3, 3, 3, Color.green));
-        rows = setRows;
-        columns = setColumns;
+
 
         windowSize = sqWidth;
         this.dimension = new Dimension(windowSize, windowSize);
@@ -32,7 +34,7 @@ public class GameplayMap extends JPanel {
         this.setBackground(Color.BLACK);
         //=========================================================================
 
-        this.mapModel = new MapModel(rows, columns, pacmanGame);
+        this.mapModel = new MapModel(setRows, setColumns, pacmanGame);
         mapTable = new JTable(this.mapModel);
 
         mapTable.setFillsViewportHeight(false);
@@ -54,7 +56,16 @@ public class GameplayMap extends JPanel {
 
 
 //        mapTable.grabFocus();
-//        mapTable.requestFocus();
+//        mapTable.requestFocusInWindow();
+//        SwingUtilities.invokeLater((()-> mapTable.grabFocus()));
+
+        mapTable.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                super.focusGained(e);
+                mapTable.requestFocusInWindow();
+            }
+        });
 
 //        if (!mapTable.hasFocus()) {
 //            if (!mapTable.isRequestFocusEnabled()) {

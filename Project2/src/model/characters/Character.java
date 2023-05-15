@@ -6,13 +6,23 @@ import java.util.Map;
 
 public abstract class Character implements Animated {
 
+    protected int spawnLocationRow;
+    protected int spawnLocationClumn;
     Map<CharacterAnimationState, List<Image>> animacje;
-    Image currentState;
+    Image image;
     double speed;
 
     public Character() {
 
     }
 
+    public int getSpawnLocationRow() {
+        return spawnLocationRow;
+    }
 
+    public int getSpawnLocationClumn() {
+        return spawnLocationClumn;
+    }
+
+    public abstract int getMapCode();
 }

@@ -50,6 +50,11 @@ public class Player extends Character {
             }
         }
         return null;
+    }
+
+    @Override
+    public int getMapCode() {
+        return 0;
     }    Image pacmanClosed = setPlayerImages(2);
 
 
@@ -59,6 +64,8 @@ public class Player extends Character {
 
     public Player() {
     }
+
+
 
     @Override
     public Image getAnimatonFrame(long deltaT) {

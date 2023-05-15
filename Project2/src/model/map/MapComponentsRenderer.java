@@ -1,6 +1,6 @@
 package model.map;
 
-import model.characters.CharacterAnimationState;
+import model.DrawableObjects;
 import model.characters.Player;
 import views.game.components.panels.gameWindow.CurrentStats;
 
@@ -19,24 +19,7 @@ public class MapComponentsRenderer extends DefaultTableCellRenderer {
 
 
     Image cookieSmall;
-
-    {
-        try {
-            cookieSmall = ImageIO.read(new File("assets/cookies/cookie_small.png"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     Image cookieBig;
-
-    {
-        try {
-            cookieBig = ImageIO.read(new File("assets/cookies/cookie_big.png"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     //todo petla
     Image wall0;
@@ -58,111 +41,24 @@ public class MapComponentsRenderer extends DefaultTableCellRenderer {
 
     {
         try {
+            cookieBig = ImageIO.read(new File("assets/cookies/cookie_big.png"));
+            cookieSmall = ImageIO.read(new File("assets/cookies/cookie_small.png"));
+
             wall0 = ImageIO.read(new File("assets/walls/0a.png"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    {
-        try {
             wall1 = ImageIO.read(new File("assets/walls/1a.png"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    {
-        try {
             wall2 = ImageIO.read(new File("assets/walls/2a.png"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    {
-        try {
             wall3 = ImageIO.read(new File("assets/walls/3a.png"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    {
-        try {
             wall4 = ImageIO.read(new File("assets/walls/4a.png"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    {
-        try {
             wall5 = ImageIO.read(new File("assets/walls/5a.png"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    {
-        try {
             wall6 = ImageIO.read(new File("assets/walls/6a.png"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    {
-        try {
             wall7 = ImageIO.read(new File("assets/walls/7a.png"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    {
-        try {
             wall8 = ImageIO.read(new File("assets/walls/8a.png"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    {
-        try {
             wall9 = ImageIO.read(new File("assets/walls/9a.png"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    {
-        try {
             wall10 = ImageIO.read(new File("assets/walls/10a.png"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    {
-        try {
             wall11 = ImageIO.read(new File("assets/walls/11a.png"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    {
-        try {
             wall12 = ImageIO.read(new File("assets/walls/12a.png"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    {
-        try {
             wall13 = ImageIO.read(new File("assets/walls/13a.png"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    {
-        try {
             wall14 = ImageIO.read(new File("assets/walls/14a.png"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    {
-        try {
             wall15 = ImageIO.read(new File("assets/walls/15a.png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -175,7 +71,7 @@ public class MapComponentsRenderer extends DefaultTableCellRenderer {
 
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-
+        if (table.getValueAt(row, column).equals(18) || table.getValueAt(row, column).equals(19)) return this;
         int cellSize = getCellSize();
         if (table.getValueAt(row, column).equals(0)) {
             return new JComponent() {
@@ -355,22 +251,13 @@ public class MapComponentsRenderer extends DefaultTableCellRenderer {
             };
         }
 
-        if (table.getValueAt(row, column).equals(23)) {
-            return new JComponent() {
-                @Override
-                public void paint(Graphics g) {
-                    super.paint(g);
-                    g.drawImage(enemies.get(0).getEnemyImage(CharacterAnimationState.GhostBLUE), 0, 0, (int) (cellSize * 0.9), (int) (cellSize * 0.9), this);
-                }
-            };
-        }
 
         if (table.getValueAt(row, column).equals(24)) {
             return new JComponent() {
                 @Override
                 public void paint(Graphics g) {
                     super.paint(g);
-                    g.drawImage(enemies.get(1).getEnemyImage(CharacterAnimationState.GhostPURPLE), 0, 0, (int) (cellSize * 0.9), (int) (cellSize * 0.9), this);
+                    g.drawImage(enemies.get(1).getImage(), 0, 0, (int) (cellSize * 0.9), (int) (cellSize * 0.9), this);
                 }
             };
         }
@@ -380,7 +267,7 @@ public class MapComponentsRenderer extends DefaultTableCellRenderer {
                 @Override
                 public void paint(Graphics g) {
                     super.paint(g);
-                    g.drawImage(enemies.get(2).getEnemyImage(CharacterAnimationState.GhostGREEN), 0, 0, (int) (cellSize * 0.9), (int) (cellSize * 0.9), this);
+                    g.drawImage(enemies.get(2).getImage(), 0, 0, (int) (cellSize * 0.9), (int) (cellSize * 0.9), this);
                 }
             };
         }
@@ -390,12 +277,12 @@ public class MapComponentsRenderer extends DefaultTableCellRenderer {
                 @Override
                 public void paint(Graphics g) {
                     super.paint(g);
-                    g.drawImage(enemies.get(3).getEnemyImage(CharacterAnimationState.GhostPINK), 0, 0, (int) (cellSize * 0.9), (int) (cellSize * 0.9), this);
+                    g.drawImage(enemies.get(3).getImage(), 0, 0, (int) (cellSize * 0.9), (int) (cellSize * 0.9), this);
                 }
             };
         }
 
-        if (table.getValueAt(row, column).equals(33)) {
+        if (table.getValueAt(row, column).equals(33)) { // tabela z życiami
             return new JComponent() {
                 @Override
                 public void paint(Graphics g) {
@@ -406,6 +293,22 @@ public class MapComponentsRenderer extends DefaultTableCellRenderer {
             };
         }
 
-        return this;
+        return new JComponent() {
+            @Override
+            public void paint(Graphics g) {
+                super.paint(g);
+                g.drawImage(getImagebasedOnCellValue((Integer) table.getValueAt(row, column)), 0, 0, (int) (cellSize * 0.9), (int) (cellSize * 0.9), null);
+            }
+        };
+
+    }
+
+    private Image getImagebasedOnCellValue(int valueAt) {
+        try {
+            return DrawableObjects.getDrawable(valueAt).getImage();
+        } catch (Exception e) {
+            System.out.println("nie znaleziono obrazka dla: " + valueAt);
+        }
+        return null;
     }
 }
