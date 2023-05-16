@@ -2,7 +2,7 @@ package model.characters;
 
 import java.awt.*;
 
-public interface mapTile {
+public interface MapTile {
 
     Image getImage();
 }

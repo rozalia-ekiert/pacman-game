@@ -8,7 +8,7 @@ import java.util.Random;
 
 import static model.DrawableObjects.addDrawable;
 
-public class Enemy extends Character implements mapTile {
+public class Enemy extends Character implements MapTile {
     public final Colors color;
 
     private Image image;

@@ -23,46 +23,35 @@ public class MapGenerator {
         int[][] map = new int[rows][columns];
         enemies = new ArrayList<Enemy>();
 
-        //uzupełniam wszystkie pola
-        for (int i = 0; i < rows; i++) {
-            Arrays.fill(map[i], pustePole);
-        }
-
-        //miejsca dużych ciasteczek
-        map[2][1] = cookieBig;
-        map[2][columns - 2] = cookieBig;
-        map[rows - 3][1] = cookieBig;
-        map[rows - 3][columns - 2] = cookieBig;
-        MapModel.cookiesCounter = MapModel.cookiesCounter + 4;
+        fillAllBlank(map); //uzupełniam wszystkie pola
+        setBigCookies(map); //miejsca dużych ciasteczek
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
 
                 if (map[i][j] != pustePole) continue;
+                if (generateOuterWalls(map, i, j)) continue; //generowanie brzegów
+                if (enemiesRespawn(rows, columns, map, i, j)) continue; // generowanie miejsca respawnu duszków
 
-
-                //generowanie brzegów
-                if (i == 0 || i == rows - 1 || j == 0 || j == columns - 1) {
-                    if (i == rows / 2 && j == 0 || i == rows / 2 && j == columns - 1) { // przejscie w polowie drogi
-                        map[i][j] = pustePoleStale;
-                    } else {
-                        map[i][j] = sciana;
-                    }
-                    continue;
-                }
-
-                // generowanie miejsca respawnu duszków
-
-                if (enemiesRespawn(rows, columns, map, i, j)) continue;
-
-                //losowe wnętrze
-                if (i > 2 && map[i - 2][j] == pustePole) {
-                    if (j != 1 && j != columns - 2 && map[i - 1][j] == pustePole && i != rows / 2 - 1 && j != columns / 2 && j != columns / 4 && j != (columns / 4) * 3)
-                        map[i][j] = sciana;
-                }
+                generateLabyrinth(map, i, j); //generuję wnętrze
             }
         }
 
+        setRandomBranches(map);
+        setCookiesAndWallsNumbers(map);
+
+        MapModel.cookiesCounter = MapModel.cookiesCounter - 1; //odejmuję wartość, gdzie ustawię pacmana
+        return map;
+    }
+
+    private static void generateLabyrinth(int[][] map, int i, int j) {
+        if (i > 2 && map[i - 2][j] == pustePole) {
+            if (j != 1 && j != columns - 2 && map[i - 1][j] == pustePole && i != rows / 2 - 1 && j != columns / 2 && j != columns / 4 && j != (columns / 4) * 3)
+                map[i][j] = sciana;
+        }
+    }
+
+    private static void setRandomBranches(int[][] map) {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
                 if (i >= 1 && j >= 1 && i <= rows - 2 && j <= columns - 2 && map[i - 1][j - 1] == sciana && map[i - 1][j] == sciana && map[i - 1][j + 1] == sciana && map[i][j - 1] != sciana && map[i][j + 1] != sciana && map[i + 1][j] != sciana && map[i + 1][j - 1] != sciana && map[i + 1][j + 1] != sciana) {
@@ -74,8 +63,9 @@ public class MapGenerator {
                 }
             }
         }
+    }
 
-
+    private static void setCookiesAndWallsNumbers(int[][] map) {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
                 //uzupełniam puste pola ciasteczkami
@@ -102,10 +92,32 @@ public class MapGenerator {
                 }
             }
         }
+    }
 
+    private static boolean generateOuterWalls(int[][] map, int i, int j) {
+        if (i == 0 || i == rows - 1 || j == 0 || j == columns - 1) {
+            if (i == rows / 2 && j == 0 || i == rows / 2 && j == columns - 1) { // przejscie w polowie drogi
+                map[i][j] = pustePoleStale;
+            } else {
+                map[i][j] = sciana;
+            }
+            return true;
+        }
+        return false;
+    }
 
-        MapModel.cookiesCounter = MapModel.cookiesCounter - 1; //odejmuję wartość, gdzie ustawię pacmana
-        return map;
+    private static void setBigCookies(int[][] map) {
+        map[2][1] = cookieBig;
+        map[2][columns - 2] = cookieBig;
+        map[rows - 3][1] = cookieBig;
+        map[rows - 3][columns - 2] = cookieBig;
+        MapModel.cookiesCounter = MapModel.cookiesCounter + 4;
+    }
+
+    private static void fillAllBlank(int[][] map) {
+        for (int i = 0; i < rows; i++) {
+            Arrays.fill(map[i], pustePole);
+        }
     }
 
     public static void spawnEnemies(MapModel map) {

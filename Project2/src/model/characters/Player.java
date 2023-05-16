@@ -19,7 +19,7 @@ import java.io.IOException;
 import static model.map.MapGenerator.*;
 import static model.map.MapModel.*;
 
-public class Player extends Character implements mapTile {
+public class Player extends Character implements MapTile {
 
     public static CharacterAnimationState currentState = CharacterAnimationState.PLayerDEFAULT;
 

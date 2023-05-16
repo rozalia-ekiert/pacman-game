@@ -1,10 +1,10 @@
 package model.map;
 
-import model.characters.mapTile;
+import model.characters.MapTile;
 
 import java.awt.*;
 
-public class Wall implements mapTile {
+public class Wall implements MapTile {
 
 
     private final Image image;
