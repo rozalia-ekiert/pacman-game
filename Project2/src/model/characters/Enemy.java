@@ -4,6 +4,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 
 import static model.DrawableObjects.addDrawable;
 
@@ -45,12 +46,10 @@ public class Enemy extends Character implements mapTile {
 
     @Override
     public void moveHorizontally(int X) {
-
     }
 
     @Override
     public void moveVertically(int Y) {
-
     }
 
     @Override
@@ -59,6 +58,16 @@ public class Enemy extends Character implements mapTile {
     }
 
     public void updateAI() {
+    }
 
+    private int setDestination() {
+        Random random = new Random();
+        random.nextInt(4);
+
+        return 0;
+    }
+
+    private int checkDestinations() {
+        return 0;
     }
 }

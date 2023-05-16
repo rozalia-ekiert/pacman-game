@@ -45,6 +45,10 @@ public abstract class Character implements Animated {
         return mapModel.map[playerX][playerY] <= 15;
     }
 
+    protected boolean isGate(int playerX, int playerY) {
+        return mapModel.map[playerX][playerY] == 16;
+    }
+
     public int getSpawnLocationRow() {
         return spawnLocationRow;
     }

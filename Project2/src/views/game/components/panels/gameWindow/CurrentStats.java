@@ -135,7 +135,7 @@ public class CurrentStats extends JPanel {
                 if (counter >= 0) {
                     livesTable.setValueAt(33, i, j);
                 } else {
-                    livesTable.setValueAt(100, i, j);
+                    livesTable.setValueAt(19, i, j);
                 }
             }
         }
@@ -152,19 +152,19 @@ public class CurrentStats extends JPanel {
         gbc.gridy = 0;
         gbc.gridheight = 1;
         gbc.gridwidth = 1;
-        gbc.insets = new Insets(20, sideMargin, 10, sideMargin);
+        gbc.insets = new Insets(20, sideMargin, 5, sideMargin);
         this.add(highScoreArea, gbc);
 
         gbc.gridy = 1;
         gbc.gridheight = 1;
         gbc.gridwidth = 1;
-        gbc.insets = new Insets(0, sideMargin, 90, sideMargin);
+        gbc.insets = new Insets(0, sideMargin, 50, sideMargin);
         this.add(setHighScore, gbc);
 
         gbc.gridy = 2;
         gbc.gridheight = 1;
         gbc.gridwidth = 1;
-        gbc.insets = new Insets(0, sideMargin, 10, sideMargin);
+        gbc.insets = new Insets(0, sideMargin, 5, sideMargin);
         this.add(yourScoreArea, gbc);
 
         gbc.gridy = 3;
@@ -176,7 +176,7 @@ public class CurrentStats extends JPanel {
         gbc.gridy = 4;
         gbc.gridheight = 1;
         gbc.gridwidth = 1;
-        gbc.insets = new Insets(0, sideMargin, 10, sideMargin);
+        gbc.insets = new Insets(0, sideMargin, 5, sideMargin);
         this.add(timeArea, gbc);
 
         gbc.gridy = 5;
@@ -188,7 +188,7 @@ public class CurrentStats extends JPanel {
         gbc.gridy = 6;
         gbc.gridheight = 1;
         gbc.gridwidth = 1;
-        gbc.insets = new Insets(90, sideMargin, 10, sideMargin);
+        gbc.insets = new Insets(50, sideMargin, 10, sideMargin);
         this.add(livesArea, gbc);
 
         gbc.gridy = 7;

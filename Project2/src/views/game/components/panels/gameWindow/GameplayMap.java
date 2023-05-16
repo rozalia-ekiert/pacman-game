@@ -3,6 +3,7 @@ package views.game.components.panels.gameWindow;
 import controllers.game.PacKeyMovement;
 import model.map.MapComponentsRenderer;
 import model.map.MapModel;
+import views.GameColors;
 import views.PACMANGame;
 
 import javax.swing.*;
@@ -25,7 +26,7 @@ public class GameplayMap extends JPanel {
 
 
     public GameplayMap(int sqWidth, int sqHeight, PACMANGame pacmanGame, int setRows, int setColumns) {
-        this.setBorder(BorderFactory.createMatteBorder(3, 3, 3, 3, Color.green));
+        this.setBorder(BorderFactory.createMatteBorder(3, 3, 3, 3, GameColors.pink));
 
 
         windowSize = sqWidth;

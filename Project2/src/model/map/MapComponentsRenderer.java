@@ -14,12 +14,11 @@ import static views.game.components.panels.gameWindow.GameplayMap.getCellSize;
 
 public class MapComponentsRenderer extends DefaultTableCellRenderer {
 
-
-
     {
         try {
             DrawableObjects.addDrawable(21, new Wall(ImageIO.read(new File("assets/cookies/cookie_small.png"))));
             DrawableObjects.addDrawable(20, new Wall(ImageIO.read(new File("assets/cookies/cookie_big.png"))));
+            DrawableObjects.addDrawable(16, new Wall(ImageIO.read(new File("assets/gate.png"))));
 
             File dir = new File("assets/walls");
             File[] directoryListing = dir.listFiles();
@@ -41,17 +40,13 @@ public class MapComponentsRenderer extends DefaultTableCellRenderer {
         if (table.getValueAt(row, column).equals(18) || table.getValueAt(row, column).equals(19)) return this;
         int cellSize = getCellSize();
 
-
-
-
-
         if (table.getValueAt(row, column).equals(33)) { // tabela z życiami
             return new JComponent() {
                 @Override
                 public void paint(Graphics g) {
                     super.paint(g);
                     int currentCellSize = CurrentStats.lifeCellSize;
-                    g.drawImage(getImagebasedOnCellValue(22), 0, 0, (int) (currentCellSize * 0.9), (int) (currentCellSize * 0.9), this);
+                    g.drawImage(getImagebasedOnCellValue(22), 0, 0, (int) (currentCellSize * 0.8), (int) (currentCellSize * 0.8), this);
                 }
             };
         }

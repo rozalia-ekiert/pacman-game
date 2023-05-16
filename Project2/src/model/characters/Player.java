@@ -50,7 +50,7 @@ public class Player extends Character implements mapTile {
                 return;
             }
         }
-        if (isWall(X, getCurrentColumn())) return;
+        if (isWall(X, getCurrentColumn()) || isGate(X, getCurrentColumn())) return;
         if (mapModel.getValueAt(X, getCurrentColumn()).equals(cookieSmall) || mapModel.getValueAt(X, getCurrentColumn()).equals(cookieBig)) {
             if (mapModel.getValueAt(X, getCurrentColumn()).equals(cookieSmall)) CurrentStats.yourScore += 10;
             if (mapModel.getValueAt(X, getCurrentColumn()).equals(cookieBig)) CurrentStats.yourScore += 50;

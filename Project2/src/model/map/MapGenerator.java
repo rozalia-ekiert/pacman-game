@@ -13,11 +13,11 @@ public class MapGenerator {
     //utility class
 
     static int sciana = 0;
-    public static final int pustePole = 19;
-    public static final int cookieSmall = 21;
     static final int pustePoleStale = 18;
+    public static final int pustePole = 19;
     public static int cookieBig = 20;
-//    public static HashMap<Integer, int[]> ghostsLocalization;
+    public static final int cookieSmall = 21;
+    public static int gate = 16;
 
     public static int[][] generateMap() {
         int[][] map = new int[rows][columns];
@@ -104,7 +104,7 @@ public class MapGenerator {
         }
 
 
-        MapModel.cookiesCounter = MapModel.cookiesCounter - 5; //odejmuję wartość, gdzie ustawię pacmana i duszki
+        MapModel.cookiesCounter = MapModel.cookiesCounter - 1; //odejmuję wartość, gdzie ustawię pacmana
         return map;
     }
 
@@ -127,10 +127,18 @@ public class MapGenerator {
                 enemies.add(new Enemy(i, j + 2, Colors.GREEN));
                 enemies.add(new Enemy(i - 2, j + 1, Colors.PINK));
 
+                //miejsce dla duszków
+                map[i][j] = pustePoleStale;
+                map[i][j + 1] = pustePoleStale;
+                map[i][j + 2] = pustePoleStale;
+                map[i - 2][j + 1] = pustePoleStale;
+
                 map[i - 1][j - 1] = sciana;
                 map[i - 1][j] = sciana;
                 map[i - 1][j + 2] = sciana;
                 map[i - 1][j + 3] = sciana;
+
+                map[i - 1][j + 1] = gate;
 
                 map[i][j - 1] = sciana;
                 map[i][j + 3] = sciana;
@@ -152,10 +160,19 @@ public class MapGenerator {
                 enemies.add(new Enemy(i, j - 2, Colors.GREEN));
                 enemies.add(new Enemy(i, j + 1, Colors.PINK));
 
+                //miejsce dla duszów
+                map[i][j] = pustePoleStale;
+                map[i][j - 1] = pustePoleStale;
+                map[i][j - 2] = pustePoleStale;
+                map[i][j + 1] = pustePoleStale;
+
                 map[i - 1][j - 2] = sciana;
                 map[i - 1][j - 3] = sciana;
                 map[i - 1][j + 1] = sciana;
                 map[i - 1][j + 2] = sciana;
+
+                map[i - 1][j - 1] = gate;
+                map[i - 1][j] = gate;
 
                 map[i][j - 3] = sciana;
                 map[i][j + 2] = sciana;
