@@ -1,4 +1,4 @@
-package model.characters;
+package model.characters.components;
 
 public enum GhostChasingState {
     GhostsCHASE,

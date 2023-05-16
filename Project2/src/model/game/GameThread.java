@@ -10,16 +10,16 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import static model.map.MapModel.enemies;
 
 public class GameThread extends Thread {
+
     public static final AtomicBoolean isGameViewReady = new AtomicBoolean(false);
     PACMANGame pacmanGame;
     private final JLabel timeLabel;
-    final int updatesPerSecond = 60;
+    final int updatesPerSecond = 2;
 
     public GameThread(JLabel timeLabel, PACMANGame pacmanGame) {
         this.timeLabel = timeLabel;
         this.pacmanGame = pacmanGame;
     }
-
 
     public void run() {
         {
@@ -33,19 +33,18 @@ public class GameThread extends Thread {
                 update(System.currentTimeMillis() - now, tick);
                 now = System.currentTimeMillis();
             }
-
         }
     }
 
     private void update(long l, long tick) {
         timeLabel.setText(NumberFormatter.changeTimeToString(tick * 1000 / updatesPerSecond));
-        // update duszków
+        int counter = 0;
         for (Enemy enemy : enemies) {
-            enemy.updateAI();
+            counter++;
+            enemy.updateAI(enemy);
+            if (counter == 4) return;
         }
-
-        spawnBonuses();
-
+//        spawnBonuses();
     }
 
     private void spawnBonuses() {

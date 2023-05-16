@@ -47,6 +47,10 @@ public class MapModel extends AbstractTableModel {
     private void showModel() { // do debuggingu
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
+                if (map[i][j] < 10) {
+                    System.out.print("0" + map[i][j] + " ");
+                    continue;
+                }
                 System.out.print(map[i][j] + " ");
             }
             System.out.println();
@@ -77,8 +81,9 @@ public class MapModel extends AbstractTableModel {
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
         this.map[rowIndex][columnIndex] = (int) aValue;
         fireTableCellUpdated(rowIndex, columnIndex);
-        player.setCurrentColumn(columnIndex);
-        player.setCurrentRow(rowIndex);
-        System.out.println("Pacman position: " + columnIndex + "," + rowIndex);
+        if (aValue.equals(22)) {
+            player.setCurrentColumn(columnIndex);
+            player.setCurrentRow(rowIndex);
+        }
     }
 }

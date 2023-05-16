@@ -1,7 +1,7 @@
 package model.map;
 
-import model.characters.Colors;
 import model.characters.Enemy;
+import model.characters.components.GhostsColors;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,10 +17,12 @@ public class MapGenerator {
     public static final int pustePole = 19;
     public static int cookieBig = 20;
     public static final int cookieSmall = 21;
+    public static int pacman = 22;
     public static int gate = 16;
 
     public static int[][] generateMap() {
         int[][] map = new int[rows][columns];
+
         enemies = null;
         enemies = new ArrayList<Enemy>();
 
@@ -131,14 +133,13 @@ public class MapGenerator {
         }
     }
 
-
     private static boolean enemiesRespawn(int rows, int columns, int[][] map, int i, int j) {
         if ((columns % 2) != 0) { // dla nieparzystej ilośći kolumn
             if (i == rows / 2 && j == columns / 2 - 1) {
-                enemies.add(new Enemy(i, j, Colors.BLUE));
-                enemies.add(new Enemy(i, j + 1, Colors.PURPLE));
-                enemies.add(new Enemy(i, j + 2, Colors.GREEN));
-                enemies.add(new Enemy(i - 2, j + 1, Colors.PINK));
+                enemies.add(new Enemy(i, j, GhostsColors.PINK, 40));
+                enemies.add(new Enemy(i, j + 1, GhostsColors.GREEN, 41));
+                enemies.add(new Enemy(i, j + 2, GhostsColors.BLUE, 42));
+                enemies.add(new Enemy(i - 2, j + 1, GhostsColors.PURPLE, 43));
 
                 //miejsce dla duszków
                 map[i][j] = pustePoleStale;
@@ -168,10 +169,10 @@ public class MapGenerator {
         if ((columns % 2) == 0) { //dla parzystej ilosci kolumn
             if (i == rows / 2 && j == columns / 2) {
 
-                enemies.add(new Enemy(i, j, Colors.BLUE));
-                enemies.add(new Enemy(i, j - 1, Colors.PURPLE));
-                enemies.add(new Enemy(i, j - 2, Colors.GREEN));
-                enemies.add(new Enemy(i, j + 1, Colors.PINK));
+                enemies.add(new Enemy(i, j, GhostsColors.PINK, 40));
+                enemies.add(new Enemy(i, j - 1, GhostsColors.GREEN, 41));
+                enemies.add(new Enemy(i, j - 2, GhostsColors.BLUE, 42));
+                enemies.add(new Enemy(i, j + 1, GhostsColors.PURPLE, 43));
 
                 //miejsce dla duszów
                 map[i][j] = pustePoleStale;

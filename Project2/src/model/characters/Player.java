@@ -2,6 +2,8 @@ package model.characters;
 
 import model.DrawableObjects;
 import model.NumberFormatter;
+import model.characters.components.CharacterAnimationState;
+import model.characters.components.MapTile;
 import model.game.GameThread;
 import model.map.MapGenerator;
 import model.map.MapModel;
@@ -23,7 +25,6 @@ public class Player extends Character implements MapTile {
 
     public static CharacterAnimationState currentState = CharacterAnimationState.PLayerDEFAULT;
 
-
     public Player(MapModel mapModel) {
         super(mapModel);
         try {
@@ -33,7 +34,6 @@ public class Player extends Character implements MapTile {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     @Override
@@ -67,7 +67,6 @@ public class Player extends Character implements MapTile {
 
     }
 
-
     private void eatenByGhosts() {
         CurrentStats.livesNumber--;
         mapModel.setValueAt(getMapCode(), rows - rows / 4, columns / 2);
@@ -88,7 +87,6 @@ public class Player extends Character implements MapTile {
             CurrentStats.yourScore = 0;
         }
     }
-
 
     @Override //TODO do zrobienia albo wyjebania
     public Image getAnimatonFrame(long deltaT) {
@@ -137,7 +135,6 @@ public class Player extends Character implements MapTile {
         mapModel.setValueAt(pustePole, getCurrentRow(), getCurrentColumn());
         mapModel.setValueAt(getMapCode(), getCurrentRow(), Y);
     }
-
 
     private void eatCookie() {
         cookiesCounter--;

@@ -1,4 +1,4 @@
-package model.characters;
+package model.characters.components;
 
 import java.awt.*;
 

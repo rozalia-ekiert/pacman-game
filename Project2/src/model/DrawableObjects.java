@@ -1,6 +1,6 @@
 package model;
 
-import model.characters.MapTile;
+import model.characters.components.MapTile;
 
 import java.util.HashMap;
 

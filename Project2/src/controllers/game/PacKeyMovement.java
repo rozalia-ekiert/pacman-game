@@ -20,8 +20,6 @@ import static model.map.MapModel.player;
 
 public class PacKeyMovement implements KeyListener {
 
-    int playerRow;
-    int playerColumn;
     JTable table;
     MapModel mapModel;
     PACMANGame pacmanGame;
@@ -30,7 +28,6 @@ public class PacKeyMovement implements KeyListener {
         this.table = table;
         this.mapModel = mapModel;
         this.pacmanGame = pacmanGame;
-
     }
 
     @Override
@@ -38,7 +35,7 @@ public class PacKeyMovement implements KeyListener {
     }
 
     @Override
-    public void keyPressed(KeyEvent e) {
+    public void keyPressed(KeyEvent e) { //todo funkcja na reset statystyk
 
         if (e.getKeyCode() == KeyEvent.VK_Q && e.isControlDown() && e.isShiftDown()) {
             if (CurrentStats.timeThread == null) return;

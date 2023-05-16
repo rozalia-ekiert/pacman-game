@@ -1,5 +1,7 @@
 package model.characters;
 
+import model.characters.components.Animated;
+import model.characters.components.CharacterAnimationState;
 import model.map.MapModel;
 
 import java.awt.*;
