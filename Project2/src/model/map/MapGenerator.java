@@ -21,6 +21,7 @@ public class MapGenerator {
 
     public static int[][] generateMap() {
         int[][] map = new int[rows][columns];
+        enemies = null;
         enemies = new ArrayList<Enemy>();
 
         fillAllBlank(map); //uzupełniam wszystkie pola
