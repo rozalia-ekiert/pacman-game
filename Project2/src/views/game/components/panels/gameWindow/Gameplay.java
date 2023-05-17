@@ -13,9 +13,9 @@ public class Gameplay extends JPanel {
     public static int sqHeight;
     public static int sqWidth;
 
-    public static String messageDefault = "<html><center><font size=6 color=black>No more cookies!<br>Good job!</br></center></html></font>";
-    public static String messageCookiesEaten = "<html><center><font size=6 color=#E9FDAE>No more cookies!<br>Good job!</center></html></font>";
-    public static String messageEatenByGhosts = "<html><center><font size=6 color=#E9FDAE>You were eaten by the ghosts!<br>Be careful!</br></center></html></font>";
+//    public static String messageDefault = "<html><center><font size=6 color=black>No more cookies!<br>Good job!</br></center></html></font>";
+//    public static String messageCookiesEaten = "<html><center><font size=6 color=#E9FDAE>No more cookies!<br>Good job!</center></html></font>";
+//    public static String messageEatenByGhosts = "<html><center><font size=6 color=#E9FDAE>You were eaten by the ghosts!<br>Be careful!</br></center></html></font>";
 
     public Gameplay(int width, int height, PACMANGame pacmanGame, int setRows, int setColumns) {
 
@@ -28,18 +28,18 @@ public class Gameplay extends JPanel {
         //-------------------------------------------------------------------------
 
         GridBagConstraints gbc = new GridBagConstraints();
-
-        message = new JLabel();
-        message.setText(messageDefault);
-        message.setSize(new Dimension(getSize().width, (int) (height * 0.15)));
-        message.setFont(pacmanGame.Butterbelly);
-
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.gridwidth = 1;
-        gbc.gridheight = 1;
-        gbc.anchor = GridBagConstraints.NORTH;
-
+//
+//        message = new JLabel();
+//        message.setText(messageDefault);
+//        message.setSize(new Dimension(getSize().width, (int) (height * 0.15)));
+//        message.setFont(pacmanGame.Butterbelly);
+//
+//        gbc.gridx = 0;
+//        gbc.gridy = 0;
+//        gbc.gridwidth = 1;
+//        gbc.gridheight = 1;
+//        gbc.anchor = GridBagConstraints.NORTH;
+//
 //        this.add(message, gbc);
 
         map = new GameplayMap(sqWidth, sqHeight, pacmanGame, setRows, setColumns);

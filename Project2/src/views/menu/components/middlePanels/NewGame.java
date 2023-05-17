@@ -54,7 +54,6 @@ public class NewGame extends JPanel {
 
         this.width = width;
         this.height = height;
-//        this.setPreferredSize(new Dimension(this.width, this.height));
 
         this.setLayout(new GridBagLayout());
         this.setBackground(Color.BLACK);

@@ -3,7 +3,7 @@ package model.map;
 import model.characters.Enemy;
 import model.characters.Player;
 import views.PACMANGame;
-import views.game.components.panels.gameWindow.Gameplay;
+import views.game.components.panels.gameWindow.Comments;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
@@ -27,7 +27,7 @@ public class MapModel extends AbstractTableModel {
     public static boolean isThisNewMap = false;
 
     public static Timer messageTimer = new Timer(3000, e -> {
-        Gameplay.message.setText(Gameplay.messageDefault);
+        Comments.message.setText(Comments.messageDefault);
     });
 
 

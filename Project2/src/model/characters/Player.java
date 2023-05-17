@@ -10,8 +10,8 @@ import model.map.MapModel;
 import views.PACMANGame;
 import views.game.Game;
 import views.game.components.GameCardPanel;
+import views.game.components.panels.gameWindow.Comments;
 import views.game.components.panels.gameWindow.CurrentStats;
-import views.game.components.panels.gameWindow.Gameplay;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -72,7 +72,7 @@ public class Player extends Character implements MapTile {
         mapModel.setValueAt(pustePole, getCurrentRow(), getCurrentColumn());
         mapModel.setValueAt(getMapCode(), rows - rows / 4, columns / 2);
 
-        Gameplay.message.setText(Gameplay.messageEatenByGhosts);
+        Comments.message.setText(Comments.messageEatenByGhosts);
         messageTimer.start();
 
         removeLife();
@@ -145,7 +145,7 @@ public class Player extends Character implements MapTile {
             spawnEnemies(mapModel);
             isThisNewMap = true;
             mapModel.pacmanGame.repaint();
-            Gameplay.message.setText(Gameplay.messageCookiesEaten);
+            Comments.message.setText(Comments.messageCookiesEaten);
             messageTimer.start();
         }
     }
