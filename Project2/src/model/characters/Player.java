@@ -13,6 +13,7 @@ import views.game.components.GameCardPanel;
 import views.game.components.panels.EndGameViewChange;
 import views.game.components.panels.gameWindow.Comments;
 import views.game.components.panels.gameWindow.CurrentStats;
+import views.menu.components.middlePanels.NewGame;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -52,25 +53,19 @@ public class Player extends Character implements MapTile {
         }
     }
 
-    protected void eatenByGhosts() {
-        CurrentStats.livesNumber--;
-        mapModel.setValueAt(pustePole, getCurrentRow(), getCurrentColumn());
-        mapModel.setValueAt(getMapCode(), rows - rows / 4, columns / 2);
+    private static void resetStats() {
+        EndGameViewChange endGameViewChange = new EndGameViewChange();
+        GameCardPanel.currentCardName = GameCardPanel.START_SCREEN_1;
+        GameThread.isGameViewReady.set(false);
 
-        Comments.message.setText(Comments.messageEatenByGhosts);
-        messageTimer.start();
+        //position - wylicze w rankingu
+        String nickname = NewGame.setYourNick;
+        String yourFinalScore = NumberFormatter.changeScoreToString(CurrentStats.yourScore);
+        String finalTime = CurrentStats.setTime.getText();
 
-        removeLife();
-
-        if (CurrentStats.livesNumber == 0) {
-
-            EndGameViewChange endGameViewChange = new EndGameViewChange();
-            GameCardPanel.currentCardName = GameCardPanel.START_SCREEN_1;
-            GameThread.isGameViewReady.set(false);
-
-            CurrentStats.livesNumber = 5;
-            CurrentStats.yourScore = 0;
-        }
+        CurrentStats.livesNumber = 5;
+        CurrentStats.yourScore = 0;
+        enemies = null;
     }
 
     @Override //TODO do zrobienia albo wyjebania
@@ -210,5 +205,21 @@ public class Player extends Character implements MapTile {
     @Override
     public Image getImage() {
         return this.image;
+    }
+
+    protected void eatenByGhosts() {
+        CurrentStats.livesNumber--;
+        mapModel.setValueAt(pustePole, getCurrentRow(), getCurrentColumn());
+        mapModel.setValueAt(getMapCode(), rows - rows / 4, columns / 2);
+
+        Comments.message.setText(Comments.messageEatenByGhosts);
+        messageTimer.start();
+
+        removeLife();
+
+        if (CurrentStats.livesNumber == 0) {
+
+            resetStats();
+        }
     }
 }

@@ -2,7 +2,7 @@ package model.highScore;
 
 public class HighScoreData {
 
-    int number;
+    int position;
     String nickname;
     String score;
     String time;

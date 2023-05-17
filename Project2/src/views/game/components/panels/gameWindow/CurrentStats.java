@@ -18,13 +18,13 @@ public class CurrentStats extends JPanel {
     public static int yourScore = 0;
     //todo
     int highScore = 1110;
-    long time = 0;
+    public static long time = 0;
 
     public static JLabel setHighScore;
     private final JLabel highScoreArea;
     private final JLabel yourScoreArea;
     public static JLabel setYourScore;
-    private final JLabel timeArea;
+    private final JLabel timeLabel;
     public static JLabel setTime;
     public static JTable livesTable;
     public static DefaultTableCellRenderer mapComponentsRenderer;
@@ -77,10 +77,10 @@ public class CurrentStats extends JPanel {
 
         //===========================================
 
-        this.timeArea = new JLabel("time:");
-        timeArea.setBackground(Color.BLACK);
-        timeArea.setForeground(Color.WHITE);
-        timeArea.setFont(currentButterbelly);
+        this.timeLabel = new JLabel("time:");
+        timeLabel.setBackground(Color.BLACK);
+        timeLabel.setForeground(Color.WHITE);
+        timeLabel.setFont(currentButterbelly);
 
         this.setTime = new JLabel(NumberFormatter.changeTimeToString(time));
         setTime.setBackground(Color.BLACK);
@@ -177,7 +177,7 @@ public class CurrentStats extends JPanel {
         gbc.gridheight = 1;
         gbc.gridwidth = 1;
         gbc.insets = new Insets(0, sideMargin, 5, sideMargin);
-        this.add(timeArea, gbc);
+        this.add(timeLabel, gbc);
 
         gbc.gridy = 5;
         gbc.gridheight = 1;

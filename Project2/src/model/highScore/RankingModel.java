@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class RankingModel extends AbstractListModel {
 
     private ArrayList<HighScoreData> entries;
-    private String[] columnNames = {"NUMBER", "NICKNAME", "SCORE", "TIME"};
+    private String[] columnNames = {"POSITION", "NICKNAME", "SCORE", "TIME"};
 
     public RankingModel() {
         entries = new ArrayList<>();
