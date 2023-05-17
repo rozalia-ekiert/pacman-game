@@ -1,12 +1,9 @@
 package model.characters;
 
 import model.characters.components.Animated;
-import model.characters.components.CharacterAnimationState;
 import model.map.MapModel;
 
 import java.awt.*;
-import java.util.List;
-import java.util.Map;
 
 public abstract class Character implements Animated {
 
@@ -15,7 +12,6 @@ public abstract class Character implements Animated {
     protected int spawnLocationColumn;
     protected int currentRow;
     protected int currentColumn;
-    Map<CharacterAnimationState, List<Image>> animacje;
     Image image;
     double speed;
 

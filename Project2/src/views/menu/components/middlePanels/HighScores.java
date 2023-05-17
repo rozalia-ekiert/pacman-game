@@ -8,13 +8,15 @@ import java.awt.*;
 
 public class HighScores extends JPanel {
 
+    public static JList ranking;
+
     public HighScores(int width, int height, PACMANGame pacmanGameFrame) {
-//        this.setPreferredSize(new Dimension(width, height));
         this.setBackground(Color.BLACK);
-
         Font currentButterbelly = new Font("Butterbelly", Font.PLAIN, 40);
-
         this.setLayout(new GridBagLayout());
+
+        ranking = new JList<>();
+
     }
 
     @Override

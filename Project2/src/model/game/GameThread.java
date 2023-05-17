@@ -18,6 +18,7 @@ public class GameThread extends Thread {
     final int updatesPerSecond = 2;
     final int animationUpdatePerSecond = 6;
     int pacCounter = 0;
+    boolean isReady = true;
 
     public GameThread(JLabel timeLabel, PACMANGame pacmanGame) {
         this.timeLabel = timeLabel;
@@ -29,7 +30,7 @@ public class GameThread extends Thread {
             long now1 = System.currentTimeMillis();
             long now2 = System.currentTimeMillis();
             long tick = 0;
-            while (true) {
+            while (isReady) {
                 if (System.currentTimeMillis() - now2 < 1000 / animationUpdatePerSecond || !isGameViewReady.get()) {
                     continue;
                 }

@@ -1,4 +1,4 @@
-package model.updateStats;
+package model.highScore;
 
 public class HighScoreData {
 

@@ -41,7 +41,7 @@ public class MenuStart extends JPanel {
         cardsPanel.add(newGame, MenuCardPanel.NEWGAME);
         cardsPanel.add(highScores, MenuCardPanel.HIGHSCORE);
 
-        LowerMenu lowerMenu = new LowerMenu(width, (int) (height * 0.15));
+        LowerMenu lowerMenu = new LowerMenu();
 
         this.add(heading);
         this.add(buttons);

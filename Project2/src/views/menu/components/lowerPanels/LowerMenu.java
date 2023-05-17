@@ -15,8 +15,7 @@ public class LowerMenu extends JPanel {
     static Image greenTEST = null;
     static Image yellowTEST = null;
 
-    public LowerMenu(int lowerMenuPanelWidth, int lowerMenuPanelHeight) {
-//        this.setPreferredSize(new Dimension(lowerMenuPanelWidth, lowerMenuPanelHeight));
+    public LowerMenu() {
         this.setBackground(Color.BLACK);
         this.setMinimumSize(new Dimension(330, 70));
 
@@ -29,7 +28,7 @@ public class LowerMenu extends JPanel {
         // todo to tylko place holder bedzie to zmienione na animacje
         try {
             if (pacmanTEST == null) {
-                pacmanTEST = ImageIO.read(new File("assets/pacman_icons/pac_sredni.png"));
+                pacmanTEST = ImageIO.read(new File("assets/pacman_icons/pac_right/pac_sredni.png"));
                 blueTEST = ImageIO.read(new File("assets/enemies_icons/blue/blue_1_right.png"));
                 pinkTEST = ImageIO.read(new File("assets/enemies_icons/pink/pink_1_right.png"));
                 greenTEST = ImageIO.read(new File("assets/enemies_icons/green/green_1_right.png"));
@@ -39,14 +38,14 @@ public class LowerMenu extends JPanel {
             System.out.println("Nieprawidłowe zdjęcie.");
         }
 
-
-        // todo trzeba wszystko uzależnić od getWidth i getHeight - zapewni to skalowalność okienka
         int size = 32;
-        int heightMargin = 30;
-        g.drawImage(pacmanTEST, 10, heightMargin, size, size, this);
-        g.drawImage(blueTEST, 80, heightMargin, size, size, this);
-        g.drawImage(pinkTEST, 150, heightMargin, size, size, this);
-        g.drawImage(greenTEST, 220, heightMargin, size, size, this);
-        g.drawImage(yellowTEST, 290, heightMargin, size, size, this);
+        int heightMargin = 20;
+        int x = getWidth() / 3;
+
+        g.drawImage(pacmanTEST, x, heightMargin, size, size, this);
+        g.drawImage(blueTEST, x + 80, heightMargin, size, size, this);
+        g.drawImage(pinkTEST, x + 80 * 2, heightMargin, size, size, this);
+        g.drawImage(greenTEST, x + 80 * 3, heightMargin, size, size, this);
+        g.drawImage(yellowTEST, x + 80 * 4, heightMargin, size, size, this);
     }
 }
