@@ -6,6 +6,7 @@ import model.characters.components.Destination;
 import model.characters.components.GhostChasingState;
 import model.characters.components.MapTile;
 import model.game.GameThread;
+import model.highScore.RankingEntry;
 import model.map.MapGenerator;
 import model.map.MapModel;
 import views.game.Game;
@@ -13,6 +14,7 @@ import views.game.components.GameCardPanel;
 import views.game.components.panels.EndGameViewChange;
 import views.game.components.panels.gameWindow.Comments;
 import views.game.components.panels.gameWindow.CurrentStats;
+import views.menu.components.middlePanels.HighScores;
 import views.menu.components.middlePanels.NewGame;
 
 import javax.imageio.ImageIO;
@@ -51,21 +53,6 @@ public class Player extends Character implements MapTile {
             enemy.ghostChasingState = GhostChasingState.GhostsSCARED;
             enemy.currentColorCode = 38;
         }
-    }
-
-    private static void resetStats() {
-        EndGameViewChange endGameViewChange = new EndGameViewChange();
-        GameCardPanel.currentCardName = GameCardPanel.START_SCREEN_1;
-        GameThread.isGameViewReady.set(false);
-
-        //position - wylicze w rankingu
-        String nickname = NewGame.setYourNick;
-        String yourFinalScore = NumberFormatter.changeScoreToString(CurrentStats.yourScore);
-        String finalTime = CurrentStats.setTime.getText();
-
-        CurrentStats.livesNumber = 5;
-        CurrentStats.yourScore = 0;
-        enemies = null;
     }
 
     @Override //TODO do zrobienia albo wyjebania
@@ -221,5 +208,25 @@ public class Player extends Character implements MapTile {
 
             resetStats();
         }
+    }
+
+    private static void resetStats() {
+        EndGameViewChange endGameViewChange = new EndGameViewChange();
+        GameCardPanel.currentCardName = GameCardPanel.START_SCREEN_1;
+        GameThread.isGameViewReady.set(false);
+
+        //position - wylicze w rankingu
+        String nickname = NewGame.setYourNick;
+        int yourFinalScore = CurrentStats.yourScore;
+        String finalTime = CurrentStats.setTime.getText();
+
+        RankingEntry entry = new RankingEntry(nickname, yourFinalScore, finalTime);
+        HighScores.rankingModel.addEntryWithSorting(entry);
+        HighScores.rankingModel.saveToFile();
+        HighScores.rankingModel.loadFromFile();
+
+        CurrentStats.livesNumber = 5;
+        CurrentStats.yourScore = 0;
+        enemies = null;
     }
 }

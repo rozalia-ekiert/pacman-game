@@ -6,9 +6,11 @@ import views.PACMANGame;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 
 public class HighScores extends JPanel {
 
+    public static RankingModel rankingModel;
     public static JList ranking;
 
     public HighScores(int width, int height, PACMANGame pacmanGameFrame) {
@@ -16,9 +18,14 @@ public class HighScores extends JPanel {
         Font currentButterbelly = new Font("Butterbelly", Font.PLAIN, 30);
         this.setLayout(new GridBagLayout());
 
-        RankingModel rankingModel = new RankingModel();
-        ranking = new JList<>(rankingModel);
+        rankingModel = new RankingModel();
+        File file = new File("Project2/ranking.txt");
+        if (file.length() != 0) {
+            rankingModel.loadFromFile();
+        }
 
+        ranking = new JList(rankingModel);
+        this.add(ranking);
     }
 
     @Override
