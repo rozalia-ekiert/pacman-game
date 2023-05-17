@@ -48,8 +48,8 @@ public class RankingModel extends AbstractListModel implements Serializable {
             fw = new FileWriter(rankingFile);
 
             for (int i = 0; i < entries.size(); i++) {
-                int position = i++;
-                fw.write(position + " " + entries.get(i).score + " " + entries.get(i).nickname + " " + entries.get(i).time + " ");
+                int position = i + 1;
+                fw.write(position + " " + entries.get(i).score + " " + entries.get(i).nickname + " " + entries.get(i).time + "\n");
             }
             fw.flush();
             fw.close();

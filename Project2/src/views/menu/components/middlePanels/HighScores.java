@@ -18,6 +18,10 @@ public class HighScores extends JPanel {
         Font currentButterbelly = new Font("Butterbelly", Font.PLAIN, 30);
         this.setLayout(new GridBagLayout());
 
+        String rankingText = "position --------- score -------- nickname --------- time";
+        JLabel rankingTextLabel = new JLabel(rankingText);
+        rankingTextLabel.setFont(currentButterbelly);
+
         rankingModel = new RankingModel();
         File file = new File("Project2/ranking.txt");
         if (file.length() != 0) {
@@ -28,9 +32,15 @@ public class HighScores extends JPanel {
         ranking.setFont(currentButterbelly);
         JScrollPane scrollPane = new JScrollPane(ranking);
 
-//        entriesArea.setBackground(new GradientPaint(0, GameColors.gradient1, 0, GameColors.gradient2));
 
-        this.add(scrollPane);
+        GridBagConstraints gbc = new GridBagConstraints();
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        this.add(rankingTextLabel, gbc);
+
+        gbc.gridy = 1;
+        this.add(scrollPane, gbc);
     }
 
     @Override
