@@ -42,15 +42,15 @@ public class RankingModel extends AbstractListModel implements Serializable {
     }
 
     public void saveToFile() {
-        FileWriter fw = null;
+        FileWriter fw;
         try {
-            fw = new FileWriter(new File(rankingFile));
+            fw = new FileWriter(rankingFile);
 
             for (int i = 0; i < entries.size(); i++) {
-                fw.write((i + 1) + ". " + entries.get(i).score + " " + entries.get(i).nickname +
-                        " " + entries.get(i).time + "\n");
+                fw.write((i + 1) + ". " + entries.get(i).score + " " + entries.get(i).nickname + " " + entries.get(i).time + "\n");
             }
-
+            fw.flush();
+            fw.close();
         } catch (IOException e) {
             System.out.println("Błąd podczas zapisywania rankingu do pliku: " + rankingFile);
             e.printStackTrace();
@@ -70,13 +70,13 @@ public class RankingModel extends AbstractListModel implements Serializable {
                 String nickname = tab[2];
                 String time = tab[3];
                 addEntryWithSorting(new RankingEntry(nickname, score, time));
+                line = br.readLine();
             }
 
             for (RankingEntry entry : entries) {
-                System.out.println(entry.nickname + ' ' +
-                        NumberFormatter.changeScoreToString(entry.score) + ' ' + entry.time);
+                System.out.println(entry.nickname + ' ' + NumberFormatter.changeScoreToString(entry.score) + ' ' + entry.time);
             }
-
+            fr.close();
         } catch (IOException e) {
             System.out.println("Błąd podczas wczytywania rankingu z pliku: " + rankingFile);
             e.printStackTrace();
