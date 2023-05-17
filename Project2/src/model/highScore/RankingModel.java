@@ -5,14 +5,14 @@ import model.NumberFormatter;
 import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class RankingModel extends AbstractListModel implements Serializable {
 
     public static final String rankingFile = "Project2/ranking.txt";
-    public static List<RankingEntry> entries;
+    public List<RankingEntry> entries;
     private final String[] columnNames = {"POSITION", "NICKNAME", "SCORE", "TIME"};
 
     public RankingModel() {
@@ -27,7 +27,8 @@ public class RankingModel extends AbstractListModel implements Serializable {
     public void addEntryWithSorting(RankingEntry entry) {
         entries.add(entry);
 
-        Collections.sort(entries, Comparator.comparingInt(RankingEntry::getScore).reversed());
+        entries.sort(Comparator.comparingInt(RankingEntry::getScore).reversed());
+        entries = entries.stream().distinct().collect(Collectors.toList());
         fireContentsChanged(this, 0, entries.size() - 1);
     }
 
@@ -43,6 +44,8 @@ public class RankingModel extends AbstractListModel implements Serializable {
 
     public void saveToFile() {
         FileWriter fw;
+        entries.sort(Comparator.comparingInt(RankingEntry::getScore).reversed());
+        entries = entries.stream().distinct().collect(Collectors.toList());
         try {
             fw = new FileWriter(rankingFile);
 

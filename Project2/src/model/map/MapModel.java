@@ -41,7 +41,7 @@ public class MapModel extends AbstractTableModel {
         player = new Player(this);
         setValueAt(pacman, rows - rows / 4, columns / 2);
         spawnEnemies(this);
-        showModel();
+//        showModel();
     }
 
     public static void showModel() { // do debuggingu

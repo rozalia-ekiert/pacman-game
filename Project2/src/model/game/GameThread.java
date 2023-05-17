@@ -2,7 +2,6 @@ package model.game;
 
 import model.NumberFormatter;
 import model.characters.Enemy;
-import model.map.MapModel;
 import views.PACMANGame;
 
 import javax.swing.*;
@@ -58,8 +57,8 @@ public class GameThread extends Thread {
                 enemy.spawnBonuses();
             }
         }
-        System.out.println();
-        MapModel.showModel();
+//        System.out.println();
+//        MapModel.showModel();
     }
 
     private void animationUpdate() {

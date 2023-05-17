@@ -176,17 +176,24 @@ public class Player extends Character implements MapTile {
         mapModel.setValueAt(player.getMapCode(), X, player.getCurrentColumn());
     }
 
-    private void eatCookie() {
-        cookiesCounter--;
-        if (cookiesCounter == 0) {
-            mapModel.map = MapGenerator.generateMap();
-            mapModel.setValueAt(getMapCode(), rows - rows / 4, columns / 2);
-//            spawnEnemies(mapModel);
-            isThisNewMap = true;
-            mapModel.pacmanGame.repaint();
-            Comments.message.setText(Comments.messageCookiesEaten);
-            messageTimer.start();
-        }
+    private static void resetStats() {
+        EndGameViewChange endGameViewChange = new EndGameViewChange();
+        GameCardPanel.currentCardName = GameCardPanel.START_SCREEN_1;
+        GameThread.isGameViewReady.set(false);
+
+        //position - wylicze w rankingu
+        String nickname = NewGame.setYourNick;
+        int yourFinalScore = CurrentStats.yourScore;
+        String finalTime = CurrentStats.setTime.getText();
+
+        RankingEntry entry = new RankingEntry(nickname, yourFinalScore, finalTime);
+        HighScores.rankingModel.addEntryWithSorting(entry);
+        HighScores.rankingModel.saveToFile();
+
+
+        CurrentStats.livesNumber = 5;
+        CurrentStats.yourScore = 0;
+        enemies = null;
     }
 
     @Override
@@ -210,23 +217,17 @@ public class Player extends Character implements MapTile {
         }
     }
 
-    private static void resetStats() {
-        EndGameViewChange endGameViewChange = new EndGameViewChange();
-        GameCardPanel.currentCardName = GameCardPanel.START_SCREEN_1;
-        GameThread.isGameViewReady.set(false);
-
-        //position - wylicze w rankingu
-        String nickname = NewGame.setYourNick;
-        int yourFinalScore = CurrentStats.yourScore;
-        String finalTime = CurrentStats.setTime.getText();
-
-        RankingEntry entry = new RankingEntry(nickname, yourFinalScore, finalTime);
-        HighScores.rankingModel.addEntryWithSorting(entry);
-        HighScores.rankingModel.saveToFile();
-        HighScores.rankingModel.loadFromFile();
-
-        CurrentStats.livesNumber = 5;
-        CurrentStats.yourScore = 0;
-        enemies = null;
+    private void eatCookie() {
+        cookiesCounter--;
+        System.out.println("cookiesCounter: " + cookiesCounter);
+        if (cookiesCounter == 0) {
+            map = MapGenerator.generateMap();
+            mapModel.setValueAt(getMapCode(), rows - rows / 4, columns / 2);
+            spawnEnemies(mapModel);
+            isThisNewMap = true;
+            mapModel.pacmanGame.repaint();
+            Comments.message.setText(Comments.messageCookiesEaten);
+            messageTimer.start();
+        }
     }
 }

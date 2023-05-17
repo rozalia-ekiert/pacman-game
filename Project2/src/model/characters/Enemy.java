@@ -96,6 +96,7 @@ public class Enemy extends Character implements MapTile {
     }
 
     public void updateEnemyAnimation(Enemy e) {
+        if (mapModel == null) return;
         switch (e.currentColorCode) {
             case 38 -> {
                 e.currentColorCode = 39;
@@ -264,7 +265,7 @@ public class Enemy extends Character implements MapTile {
     private ArrayList<Integer> checkDestinations(Enemy e) {
         ArrayList<Integer> destinations = new ArrayList<>();
         int[] currentOptions = new int[4];
-
+        if (mapModel == null) return destinations;
         int currentValueUp = (int) mapModel.getValueAt(e.currentRow - 1, e.currentColumn); //0
         int currentValueDown = (int) mapModel.getValueAt(e.currentRow + 1, e.currentColumn); //1
         int currentValueRight = (int) mapModel.getValueAt(e.currentRow, e.currentColumn + 1); //2
