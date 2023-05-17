@@ -7,13 +7,13 @@ import views.game.Game;
 import javax.swing.*;
 import java.awt.*;
 
-public class GameViewChange {
+public class StartGameViewChange {
 
     Game game;
     PACMANGame pacmanGame;
     String current;
 
-    public GameViewChange(Game game, PACMANGame pacmanGame) {
+    public StartGameViewChange(Game game, PACMANGame pacmanGame) {
         this.game = game;
         this.pacmanGame = pacmanGame;
         this.current = GameCardPanel.START_SCREEN_1;

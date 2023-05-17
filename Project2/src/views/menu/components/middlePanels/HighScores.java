@@ -1,5 +1,6 @@
 package views.menu.components.middlePanels;
 
+import model.highScore.RankingModel;
 import views.GameColors;
 import views.PACMANGame;
 
@@ -12,10 +13,11 @@ public class HighScores extends JPanel {
 
     public HighScores(int width, int height, PACMANGame pacmanGameFrame) {
         this.setBackground(Color.BLACK);
-        Font currentButterbelly = new Font("Butterbelly", Font.PLAIN, 40);
+        Font currentButterbelly = new Font("Butterbelly", Font.PLAIN, 30);
         this.setLayout(new GridBagLayout());
 
-        ranking = new JList<>();
+        RankingModel rankingModel = new RankingModel();
+        ranking = new JList<>(rankingModel);
 
     }
 

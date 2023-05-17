@@ -8,9 +8,9 @@ import model.characters.components.MapTile;
 import model.game.GameThread;
 import model.map.MapGenerator;
 import model.map.MapModel;
-import views.PACMANGame;
 import views.game.Game;
 import views.game.components.GameCardPanel;
+import views.game.components.panels.EndGameViewChange;
 import views.game.components.panels.gameWindow.Comments;
 import views.game.components.panels.gameWindow.CurrentStats;
 
@@ -63,10 +63,9 @@ public class Player extends Character implements MapTile {
         removeLife();
 
         if (CurrentStats.livesNumber == 0) {
-            CardLayout cl = (CardLayout) (PACMANGame.game.gameCardPanel.getLayout());
-            cl.show(PACMANGame.game.gameCardPanel, GameCardPanel.GAME_OVER);
-            GameCardPanel.currentCardName = GameCardPanel.GAME_OVER;
 
+            EndGameViewChange endGameViewChange = new EndGameViewChange();
+            GameCardPanel.currentCardName = GameCardPanel.START_SCREEN_1;
             GameThread.isGameViewReady.set(false);
 
             CurrentStats.livesNumber = 5;

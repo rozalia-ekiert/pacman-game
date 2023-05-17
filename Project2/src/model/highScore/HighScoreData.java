@@ -6,7 +6,5 @@ public class HighScoreData {
     String nickname;
     String score;
     String time;
-    String gameSize;
-
 
 }

@@ -5,7 +5,7 @@ import views.PACMANGame;
 import views.ViewCardPanel;
 import views.game.Game;
 import views.game.components.GameCardPanel;
-import views.game.components.GameViewChange;
+import views.game.components.StartGameViewChange;
 import views.game.components.panels.GameWindow;
 import views.menu.components.middlePanels.NewGame;
 
@@ -63,13 +63,13 @@ public class PlayButtonMouseListener implements MouseListener {
 
                 //===============================================================================
 
-                CardLayout cl = (CardLayout) (this.pacmanGame.viewsCardPanel.getLayout());
-                cl.show(this.pacmanGame.viewsCardPanel, ViewCardPanel.GAME_VIEW);
-                this.pacmanGame.viewsCardPanel.currentCardName = ViewCardPanel.GAME_VIEW;
+                CardLayout cl = (CardLayout) (PACMANGame.viewsCardPanel.getLayout());
+                cl.show(PACMANGame.viewsCardPanel, ViewCardPanel.GAME_VIEW);
+                PACMANGame.viewsCardPanel.currentCardName = ViewCardPanel.GAME_VIEW;
 
                 //===============================================================================
 
-                GameViewChange gameViewChange = new GameViewChange(game, pacmanGame);
+                StartGameViewChange startGameViewChange = new StartGameViewChange(game, pacmanGame);
             }
         }
     }

@@ -55,11 +55,6 @@ public class GameplayMap extends JPanel {
         KeyListener keyListener = new PacKeyMovement(mapTable, mapModel, pacmanGame);
         mapTable.addKeyListener(keyListener);
 
-
-//        mapTable.grabFocus();
-//        mapTable.requestFocusInWindow();
-//        SwingUtilities.invokeLater((()-> mapTable.grabFocus()));
-
         mapTable.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
@@ -67,13 +62,6 @@ public class GameplayMap extends JPanel {
                 mapTable.requestFocusInWindow();
             }
         });
-
-//        if (!mapTable.hasFocus()) {
-//            if (!mapTable.isRequestFocusEnabled()) {
-//                mapTable.setRequestFocusEnabled(true);
-//            }
-//            mapTable.requestFocus();
-//        }
 
         //=========================================================================
     }

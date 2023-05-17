@@ -14,7 +14,7 @@ public class PACMANGame extends JFrame {
     public static final String MENU_VIEW = "0";
     public static final String GAME_VIEW = "1";
     public String currentCardName = MENU_VIEW;
-    public ViewCardPanel viewsCardPanel;
+    public static ViewCardPanel viewsCardPanel;
     public static MenuStart menuStart;
     public static Game game;
 
