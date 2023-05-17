@@ -23,9 +23,14 @@ public class HighScores extends JPanel {
         if (file.length() != 0) {
             rankingModel.loadFromFile();
         }
-
         ranking = new JList(rankingModel);
         this.add(ranking);
+        ranking.setFont(currentButterbelly);
+        JScrollPane scrollPane = new JScrollPane(ranking);
+
+//        entriesArea.setBackground(new GradientPaint(0, GameColors.gradient1, 0, GameColors.gradient2));
+
+        this.add(scrollPane);
     }
 
     @Override

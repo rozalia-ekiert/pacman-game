@@ -14,7 +14,7 @@ import java.util.Arrays;
 
 public class CurrentStats extends JPanel {
 
-    public static int livesNumber = 1;
+    public static int livesNumber = 5;
     public static int yourScore = 0;
     int highScore = 1110;
     public static long time = 0;

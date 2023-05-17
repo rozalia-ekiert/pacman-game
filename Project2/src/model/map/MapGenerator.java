@@ -12,13 +12,13 @@ import static model.map.MapModel.*;
 public class MapGenerator {
     //utility class
 
-    static int sciana = 0;
-    public static int gate = 16;
-    static final int pustePoleStale = 18;
+    public static final int sciana = 0;
+    public static final int gate = 16;
+    public static final int pustePoleStale = 18;
     public static final int pustePole = 19;
-    public static int cookieBig = 20;
+    public static final int cookieBig = 20;
     public static final int cookieSmall = 21;
-    public static int pacman = 22;
+    public static final int pacman = 22;
 
     public static int[][] generateMap() {
         int[][] map = new int[rows][columns];

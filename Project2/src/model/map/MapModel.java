@@ -20,7 +20,7 @@ public class MapModel extends AbstractTableModel {
     public static ArrayList<Enemy> enemies = new ArrayList<>();
 
     public PACMANGame pacmanGame;
-    public int[][] map;
+    public static int[][] map;
 
     int pacman = 22;
 
@@ -44,7 +44,7 @@ public class MapModel extends AbstractTableModel {
         showModel();
     }
 
-    private void showModel() { // do debuggingu
+    public static void showModel() { // do debuggingu
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
                 if (map[i][j] < 10) {

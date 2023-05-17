@@ -28,7 +28,7 @@ public class BackToMenuShortCut implements KeyEventDispatcher {
         if (e.getKeyCode() == KeyEvent.VK_Q && e.isControlDown() && e.isShiftDown()) {
             if (CurrentStats.timeThread == null) return false;
             System.out.println("Pressed Ctrl + Shift + Q");
-
+            GameThread.isReady.set(false);
             GameThread.isGameViewReady.set(false);
 
             CardLayout cl = (CardLayout) (pacmanGame.viewsCardPanel.getLayout());

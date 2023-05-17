@@ -1,5 +1,7 @@
 package model.highScore;
 
+import model.NumberFormatter;
+
 import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
@@ -40,9 +42,15 @@ public class RankingModel extends AbstractListModel implements Serializable {
     }
 
     public void saveToFile() {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(rankingFile))) {
-            oos.writeObject(entries);
-            System.out.println("Ranking zapisany do pliku: " + rankingFile);
+        FileWriter fw = null;
+        try {
+            fw = new FileWriter(new File(rankingFile));
+
+            for (int i = 0; i < entries.size(); i++) {
+                fw.write((i + 1) + ". " + entries.get(i).score + " " + entries.get(i).nickname +
+                        " " + entries.get(i).time + "\n");
+            }
+
         } catch (IOException e) {
             System.out.println("Błąd podczas zapisywania rankingu do pliku: " + rankingFile);
             e.printStackTrace();
@@ -50,14 +58,56 @@ public class RankingModel extends AbstractListModel implements Serializable {
     }
 
     public void loadFromFile() {
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(rankingFile))) {
-            entries = (List<RankingEntry>) ois.readObject();
-            System.out.println("Ranking wczytany z pliku: " + rankingFile);
-        } catch (IOException | ClassNotFoundException e) {
+        FileReader fr = null;
+        try {
+            fr = new FileReader(rankingFile);
+            BufferedReader br = new BufferedReader(fr);
+
+            String line = br.readLine();
+            while (line != null) {
+                String[] tab = line.split(" ");
+                int score = Integer.parseInt(tab[1]);
+                String nickname = tab[2];
+                String time = tab[3];
+                addEntryWithSorting(new RankingEntry(nickname, score, time));
+            }
+
+            for (RankingEntry entry : entries) {
+                System.out.println(entry.nickname + ' ' +
+                        NumberFormatter.changeScoreToString(entry.score) + ' ' + entry.time);
+            }
+
+        } catch (IOException e) {
             System.out.println("Błąd podczas wczytywania rankingu z pliku: " + rankingFile);
             e.printStackTrace();
         }
     }
+
+//    public void saveToFile() {
+//        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(rankingFile))) {
+//            oos.writeObject(entries);
+//            System.out.println("Ranking zapisany do pliku: " + rankingFile);
+//        } catch (IOException e) {
+//            System.out.println("Błąd podczas zapisywania rankingu do pliku: " + rankingFile);
+//            e.printStackTrace();
+//        }
+//    }
+
+//    public void loadFromFile() {
+//        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(rankingFile))) {
+//            entries = (List<RankingEntry>) ois.readObject();
+//            System.out.println("Ranking wczytany z pliku: " + rankingFile);
+//
+//            for (RankingEntry entry : entries){
+//                System.out.println(entry.nickname + ' ' +
+//                        NumberFormatter.changeScoreToString(entry.score) + ' ' + entry.time);
+//            }
+//
+//        } catch (IOException | ClassNotFoundException e) {
+//            System.out.println("Błąd podczas wczytywania rankingu z pliku: " + rankingFile);
+//            e.printStackTrace();
+//        }
+//    }
 
 
 }

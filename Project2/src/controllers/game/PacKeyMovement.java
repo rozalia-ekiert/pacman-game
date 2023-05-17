@@ -42,6 +42,7 @@ public class PacKeyMovement implements KeyListener {
             if (CurrentStats.timeThread == null) return;
             System.out.println("Pressed Ctrl + Shift + Q");
 
+            GameThread.isReady.set(false);
             GameThread.isGameViewReady.set(false);
 
             CardLayout cl = (CardLayout) (PACMANGame.viewsCardPanel.getLayout());

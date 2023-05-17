@@ -10,8 +10,8 @@ import model.highScore.RankingEntry;
 import model.map.MapGenerator;
 import model.map.MapModel;
 import views.game.Game;
+import views.game.components.EndGameViewChange;
 import views.game.components.GameCardPanel;
-import views.game.components.panels.EndGameViewChange;
 import views.game.components.panels.gameWindow.Comments;
 import views.game.components.panels.gameWindow.CurrentStats;
 import views.menu.components.middlePanels.HighScores;
@@ -181,7 +181,7 @@ public class Player extends Character implements MapTile {
         if (cookiesCounter == 0) {
             mapModel.map = MapGenerator.generateMap();
             mapModel.setValueAt(getMapCode(), rows - rows / 4, columns / 2);
-            spawnEnemies(mapModel);
+//            spawnEnemies(mapModel);
             isThisNewMap = true;
             mapModel.pacmanGame.repaint();
             Comments.message.setText(Comments.messageCookiesEaten);

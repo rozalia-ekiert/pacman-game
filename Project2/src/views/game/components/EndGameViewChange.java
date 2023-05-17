@@ -1,9 +1,8 @@
-package views.game.components.panels;
+package views.game.components;
 
 import views.GameColors;
 import views.PACMANGame;
 import views.ViewCardPanel;
-import views.game.components.GameCardPanel;
 import views.menu.MenuStart;
 import views.menu.components.MenuCardPanel;
 import views.menu.components.upperPanels.Buttons;

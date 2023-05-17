@@ -90,10 +90,9 @@ public class Enemy extends Character implements MapTile {
         return values[index];
     }
 
-    public void updateAI(Enemy e) {
-
-        setNewDestination(e);
-        isGhostChased(e);
+    public void updateAI() {
+        setNewDestination();
+        isGhostChased();
     }
 
     public void updateEnemyAnimation(Enemy e) {
@@ -109,9 +108,8 @@ public class Enemy extends Character implements MapTile {
         }
     }
 
-    public boolean isGhostChased(Enemy enemy) {
-        if (enemy.ghostChasingState == GhostChasingState.GhostsSCARED) return true;
-        return false;
+    public boolean isGhostChased() {
+        return this.ghostChasingState == GhostChasingState.GhostsSCARED;
     }
 
     public void spawnBonuses() { //todo
@@ -135,10 +133,9 @@ public class Enemy extends Character implements MapTile {
         }
     }
 
-    private void setNewDestination(Enemy e) {
+    private void setNewDestination() {
 
-        ArrayList<Integer> possibleDestinations = new ArrayList<>();
-        possibleDestinations = checkDestinations(e);
+        ArrayList<Integer> possibleDestinations = checkDestinations(this);
 
         //jeśli nie ma żadnej drogi, zostań w miejscu
         if (possibleDestinations.size() == 0) {
@@ -150,115 +147,114 @@ public class Enemy extends Character implements MapTile {
         int randomIndex = random.nextInt(possibleDestinations.size());
         int chosenDestination = possibleDestinations.get(randomIndex);
 
-        if (e.valueUnderWhereIsStanding == gate) chosenDestination = 0;
+        if (this.valueUnderWhereIsStanding == gate) chosenDestination = 0;
 
-        if (e.valueUnderWhereIsStanding == 40 || e.valueUnderWhereIsStanding == 41
-                || e.valueUnderWhereIsStanding == 42 || e.valueUnderWhereIsStanding == 43) {
-            e.valueUnderWhereIsStanding = pustePole;
+        if (this.valueUnderWhereIsStanding == 40 || this.valueUnderWhereIsStanding == 41 || this.valueUnderWhereIsStanding == 42 || this.valueUnderWhereIsStanding == 43) {
+            this.valueUnderWhereIsStanding = pustePole;
         }
 
         switch (chosenDestination) {
 
             case 0 -> { //do góry
 
-                if (((int) mapModel.getValueAt(e.currentRow - 1, e.currentColumn) == pacman)) {
-                    if (e.ghostChasingState == GhostChasingState.GhostsCHASE) {
+                if (((int) mapModel.getValueAt(this.currentRow - 1, this.currentColumn) == pacman)) {
+                    if (this.ghostChasingState == GhostChasingState.GhostsCHASE) {
                         player.eatenByGhosts();
                         setDefaultGhostsLocalization();
                     }
-                    if (e.ghostChasingState == GhostChasingState.GhostsSCARED) {
+                    if (this.ghostChasingState == GhostChasingState.GhostsSCARED) {
                         return;
                     }
                     possibleDestinations = null;
                     return;
                 }
-                if (((int) mapModel.getValueAt(e.currentRow - 1, e.currentColumn) == gate)) {
-                    if (!e.passedTheGate) {
-                        e.passedTheGate = true;
+                if (((int) mapModel.getValueAt(this.currentRow - 1, this.currentColumn) == gate)) {
+                    if (!this.passedTheGate) {
+                        this.passedTheGate = true;
                     } else {
                         return;
                     }
                 }
-                if (e.valueUnderWhereIsStanding != 1000) {
-                    mapModel.setValueAt(e.valueUnderWhereIsStanding, e.currentRow, e.currentColumn);
+                if (this.valueUnderWhereIsStanding != 1000) {
+                    mapModel.setValueAt(this.valueUnderWhereIsStanding, this.currentRow, this.currentColumn);
                 } else {
-                    mapModel.setValueAt(pustePole, e.currentRow, e.currentColumn);
+                    mapModel.setValueAt(pustePole, this.currentRow, this.currentColumn);
                 }
-                e.valueUnderWhereIsStanding = (int) mapModel.getValueAt(e.currentRow - 1, e.currentColumn);
-                e.setCurrentRow(e.currentRow - 1);
-                mapModel.setValueAt(e.currentColorCode, e.currentRow, e.currentColumn);
+                this.valueUnderWhereIsStanding = (int) mapModel.getValueAt(this.currentRow - 1, this.currentColumn);
+                this.setCurrentRow(this.currentRow - 1);
+                mapModel.setValueAt(this.currentColorCode, this.currentRow, this.currentColumn);
                 possibleDestinations = null;
             }
 
             case 1 -> { //w dół
-                if (((int) mapModel.getValueAt(e.currentRow + 1, e.currentColumn) == pacman)) {
-                    if (e.ghostChasingState == GhostChasingState.GhostsCHASE) {
+                if (((int) mapModel.getValueAt(this.currentRow + 1, this.currentColumn) == pacman)) {
+                    if (this.ghostChasingState == GhostChasingState.GhostsCHASE) {
                         player.eatenByGhosts();
                         setDefaultGhostsLocalization();
                     }
-                    if (e.ghostChasingState == GhostChasingState.GhostsSCARED) {
+                    if (this.ghostChasingState == GhostChasingState.GhostsSCARED) {
                         return;
                     }
                     possibleDestinations = null;
                     return;
                 }
-                if (((int) mapModel.getValueAt(e.currentRow + 1, e.currentColumn) == gate)) {
+                if (((int) mapModel.getValueAt(this.currentRow + 1, this.currentColumn) == gate)) {
                     return;
                 }
-                if (e.valueUnderWhereIsStanding != 1000) {
-                    mapModel.setValueAt(e.valueUnderWhereIsStanding, e.currentRow, e.currentColumn);
+                if (this.valueUnderWhereIsStanding != 1000) {
+                    mapModel.setValueAt(this.valueUnderWhereIsStanding, this.currentRow, this.currentColumn);
                 } else {
-                    mapModel.setValueAt(pustePole, e.currentRow, e.currentColumn);
+                    mapModel.setValueAt(pustePole, this.currentRow, this.currentColumn);
                 }
-                e.valueUnderWhereIsStanding = (int) mapModel.getValueAt(e.currentRow + 1, e.currentColumn);
-                e.setCurrentRow(e.currentRow + 1);
-                mapModel.setValueAt(e.currentColorCode, e.currentRow, e.currentColumn);
+                this.valueUnderWhereIsStanding = (int) mapModel.getValueAt(this.currentRow + 1, this.currentColumn);
+                this.setCurrentRow(this.currentRow + 1);
+                mapModel.setValueAt(this.currentColorCode, this.currentRow, this.currentColumn);
                 possibleDestinations = null;
             }
 
             case 2 -> { //w prawo
-                if (((int) mapModel.getValueAt(e.currentRow, e.currentColumn + 1) == pacman)) {
-                    if (e.ghostChasingState == GhostChasingState.GhostsCHASE) {
+                if (((int) mapModel.getValueAt(this.currentRow, this.currentColumn + 1) == pacman)) {
+                    if (this.ghostChasingState == GhostChasingState.GhostsCHASE) {
                         player.eatenByGhosts();
                         setDefaultGhostsLocalization();
                     }
-                    if (e.ghostChasingState == GhostChasingState.GhostsSCARED) {
+                    if (this.ghostChasingState == GhostChasingState.GhostsSCARED) {
                         return;
                     }
                     possibleDestinations = null;
                     return;
                 }
-                if (e.valueUnderWhereIsStanding != 1000) {
-                    mapModel.setValueAt(e.valueUnderWhereIsStanding, e.currentRow, e.currentColumn);
+                if (this.valueUnderWhereIsStanding != 1000) {
+                    mapModel.setValueAt(this.valueUnderWhereIsStanding, this.currentRow, this.currentColumn);
                 } else {
-                    mapModel.setValueAt(pustePole, e.currentRow, e.currentColumn);
+                    mapModel.setValueAt(pustePole, this.currentRow, this.currentColumn);
                 }
-                e.valueUnderWhereIsStanding = (int) mapModel.getValueAt(e.currentRow, e.currentColumn + 1);
-                e.setCurrentColumn(e.currentColumn + 1);
-                mapModel.setValueAt(e.currentColorCode, e.currentRow, e.currentColumn);
+                this.valueUnderWhereIsStanding = (int) mapModel.getValueAt(this.currentRow, this.currentColumn + 1);
+                this.setCurrentColumn(this.currentColumn + 1);
+                mapModel.setValueAt(this.currentColorCode, this.currentRow, this.currentColumn);
                 possibleDestinations = null;
             }
 
             case 3 -> { //w lewo
-                if (((int) mapModel.getValueAt(e.currentRow, e.currentColumn - 1) == pacman)) {
-                    if (e.ghostChasingState == GhostChasingState.GhostsCHASE) {
+                if (((int) mapModel.getValueAt(this.currentRow, this.currentColumn - 1) == pacman)) {
+                    if (this.ghostChasingState == GhostChasingState.GhostsCHASE) {
                         player.eatenByGhosts();
                         setDefaultGhostsLocalization();
                     }
-                    if (e.ghostChasingState == GhostChasingState.GhostsSCARED) {
+                    if (this.ghostChasingState == GhostChasingState.GhostsSCARED) {
                         return;
                     }
                     possibleDestinations = null;
                     return;
                 }
-                if (e.valueUnderWhereIsStanding != 1000) {
-                    mapModel.setValueAt(e.valueUnderWhereIsStanding, e.currentRow, e.currentColumn);
+                if (this.valueUnderWhereIsStanding != 1000) {
+                    mapModel.setValueAt(this.valueUnderWhereIsStanding, this.currentRow, this.currentColumn);
                 } else {
-                    mapModel.setValueAt(pustePole, e.currentRow, e.currentColumn);
+                    mapModel.setValueAt(pustePole, this.currentRow, this.currentColumn);
                 }
-                e.valueUnderWhereIsStanding = (int) mapModel.getValueAt(e.currentRow, e.currentColumn - 1);
-                e.setCurrentColumn(e.currentColumn - 1);
-                mapModel.setValueAt(e.currentColorCode, e.currentRow, e.currentColumn);
+                this.valueUnderWhereIsStanding = (int) mapModel.getValueAt(this.currentRow, this.currentColumn - 1);
+                this.setCurrentColumn(this.currentColumn - 1);
+                mapModel.setValueAt(this.currentColorCode, this.currentRow, this.currentColumn);
                 possibleDestinations = null;
             }
         }
@@ -280,10 +276,7 @@ public class Enemy extends Character implements MapTile {
         currentOptions[3] = currentValueLeft;
 
         //sprawdzam czy jest możliwość ruchu
-        if ((currentValueUp <= 15 || currentValueUp >= 40)
-                && (currentValueDown <= 16 || currentValueDown >= 40)
-                && (currentValueRight <= 15 || currentValueRight >= 40)
-                && (currentValueLeft <= 15 || currentValueLeft >= 40)) { // 16 - bramka
+        if ((currentValueUp <= 15 || currentValueUp >= 40) && (currentValueDown <= 16 || currentValueDown >= 40) && (currentValueRight <= 15 || currentValueRight >= 40) && (currentValueLeft <= 15 || currentValueLeft >= 40)) { // 16 - bramka
             return destinations;
         }
 
