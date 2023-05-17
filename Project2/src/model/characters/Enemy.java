@@ -1,7 +1,10 @@
 package model.characters;
 
+import model.characters.components.GhostChasingState;
 import model.characters.components.GhostsColors;
 import model.characters.components.MapTile;
+import model.game.Bonuses;
+import views.game.components.panels.gameWindow.CurrentStats;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -20,14 +23,19 @@ public class Enemy extends Character implements MapTile {
     public final GhostsColors color;
     private Image image;
     public int valueUnderWhereIsStanding;
-    int colorCode;
+    int originalColorCode;
+    int currentColorCode;
     boolean passedTheGate;
+    GhostChasingState ghostChasingState;
+
+    int pointsForEatingGhosts = 200;
 
     public Enemy(int row, int column, GhostsColors color, int colorCode) {
         super(null);
         this.spawnLocationRow = row;
         this.spawnLocationColumn = column;
-        this.colorCode = colorCode;
+        this.originalColorCode = colorCode;
+        this.currentColorCode = colorCode;
 
         this.currentRow = row;
         this.currentColumn = column;
@@ -37,6 +45,7 @@ public class Enemy extends Character implements MapTile {
         this.color = color;
 
         passedTheGate = false;
+        ghostChasingState = GhostChasingState.GhostsCHASE;
 
         try {
             switch (color) {
@@ -74,10 +83,57 @@ public class Enemy extends Character implements MapTile {
         return this.image;
     }
 
-    public void updateAI(Enemy e) {
-            setNewDestination(e);
+    public static <T extends Enum<?>> T getRandomEnumElement(Class<T> enumClass) {
+        Random random = new Random();
+        T[] values = enumClass.getEnumConstants();
+        int index = random.nextInt(values.length);
+        return values[index];
     }
 
+    public void updateAI(Enemy e) {
+
+        setNewDestination(e);
+        isGhostChased(e);
+    }
+
+    public void updateEnemyAnimation(Enemy e) {
+        switch (e.currentColorCode) {
+            case 38 -> {
+                e.currentColorCode = 39;
+                mapModel.setValueAt(e.currentColorCode, e.currentRow, e.currentColumn);
+            }
+            case 39 -> {
+                e.currentColorCode = 38;
+                mapModel.setValueAt(e.currentColorCode, e.currentRow, e.currentColumn);
+            }
+        }
+    }
+
+    public boolean isGhostChased(Enemy enemy) {
+        if (enemy.ghostChasingState == GhostChasingState.GhostsSCARED) return true;
+        return false;
+    }
+
+    public void spawnBonuses() { //todo
+        double rand = Math.random();
+        if (rand > 0.25) return;
+
+        Random random = new Random();
+        Bonuses currentBonus = getRandomEnumElement(Bonuses.class);
+
+        switch (currentBonus) {
+            case LEAF -> {
+            }
+            case CARROT -> {
+            }
+            case AVOCADO -> {
+            }
+            case MUSCHROOM -> {
+            }
+            case PINEAPPLE -> {
+            }
+        }
+    }
 
     private void setNewDestination(Enemy e) {
 
@@ -104,17 +160,24 @@ public class Enemy extends Character implements MapTile {
         switch (chosenDestination) {
 
             case 0 -> { //do góry
+
+                if (((int) mapModel.getValueAt(e.currentRow - 1, e.currentColumn) == pacman)) {
+                    if (e.ghostChasingState == GhostChasingState.GhostsCHASE) {
+                        player.eatenByGhosts();
+                        setDefaultGhostsLocalization();
+                    }
+                    if (e.ghostChasingState == GhostChasingState.GhostsSCARED) {
+                        return;
+                    }
+                    possibleDestinations = null;
+                    return;
+                }
                 if (((int) mapModel.getValueAt(e.currentRow - 1, e.currentColumn) == gate)) {
                     if (!e.passedTheGate) {
                         e.passedTheGate = true;
                     } else {
-                        break;
+                        return;
                     }
-                }
-                if (((int) mapModel.getValueAt(e.currentRow - 1, e.currentColumn) == pacman)) {
-                    player.eatenByGhosts();
-                    setDefaultGhostsLocalization();
-                    return;
                 }
                 if (e.valueUnderWhereIsStanding != 1000) {
                     mapModel.setValueAt(e.valueUnderWhereIsStanding, e.currentRow, e.currentColumn);
@@ -123,21 +186,23 @@ public class Enemy extends Character implements MapTile {
                 }
                 e.valueUnderWhereIsStanding = (int) mapModel.getValueAt(e.currentRow - 1, e.currentColumn);
                 e.setCurrentRow(e.currentRow - 1);
-                mapModel.setValueAt(colorCode, e.currentRow, e.currentColumn);
+                mapModel.setValueAt(e.currentColorCode, e.currentRow, e.currentColumn);
                 possibleDestinations = null;
             }
 
             case 1 -> { //w dół
-                if (((int) mapModel.getValueAt(e.currentRow + 1, e.currentColumn) == gate)) {
-                    if (!e.passedTheGate) {
-                        e.passedTheGate = true;
-                    } else {
-                        break;
-                    }
-                }
                 if (((int) mapModel.getValueAt(e.currentRow + 1, e.currentColumn) == pacman)) {
-                    player.eatenByGhosts();
-                    setDefaultGhostsLocalization();
+                    if (e.ghostChasingState == GhostChasingState.GhostsCHASE) {
+                        player.eatenByGhosts();
+                        setDefaultGhostsLocalization();
+                    }
+                    if (e.ghostChasingState == GhostChasingState.GhostsSCARED) {
+                        return;
+                    }
+                    possibleDestinations = null;
+                    return;
+                }
+                if (((int) mapModel.getValueAt(e.currentRow + 1, e.currentColumn) == gate)) {
                     return;
                 }
                 if (e.valueUnderWhereIsStanding != 1000) {
@@ -147,41 +212,53 @@ public class Enemy extends Character implements MapTile {
                 }
                 e.valueUnderWhereIsStanding = (int) mapModel.getValueAt(e.currentRow + 1, e.currentColumn);
                 e.setCurrentRow(e.currentRow + 1);
-                mapModel.setValueAt(colorCode, e.currentRow, e.currentColumn);
+                mapModel.setValueAt(e.currentColorCode, e.currentRow, e.currentColumn);
                 possibleDestinations = null;
             }
 
             case 2 -> { //w prawo
+                if (((int) mapModel.getValueAt(e.currentRow, e.currentColumn + 1) == pacman)) {
+                    if (e.ghostChasingState == GhostChasingState.GhostsCHASE) {
+                        player.eatenByGhosts();
+                        setDefaultGhostsLocalization();
+                    }
+                    if (e.ghostChasingState == GhostChasingState.GhostsSCARED) {
+                        return;
+                    }
+                    possibleDestinations = null;
+                    return;
+                }
                 if (e.valueUnderWhereIsStanding != 1000) {
                     mapModel.setValueAt(e.valueUnderWhereIsStanding, e.currentRow, e.currentColumn);
                 } else {
                     mapModel.setValueAt(pustePole, e.currentRow, e.currentColumn);
                 }
-                if (((int) mapModel.getValueAt(e.currentRow, e.currentColumn + 1) == pacman)) {
-                    player.eatenByGhosts();
-                    setDefaultGhostsLocalization();
-                    return;
-                }
                 e.valueUnderWhereIsStanding = (int) mapModel.getValueAt(e.currentRow, e.currentColumn + 1);
                 e.setCurrentColumn(e.currentColumn + 1);
-                mapModel.setValueAt(colorCode, e.currentRow, e.currentColumn);
+                mapModel.setValueAt(e.currentColorCode, e.currentRow, e.currentColumn);
                 possibleDestinations = null;
             }
 
             case 3 -> { //w lewo
+                if (((int) mapModel.getValueAt(e.currentRow, e.currentColumn - 1) == pacman)) {
+                    if (e.ghostChasingState == GhostChasingState.GhostsCHASE) {
+                        player.eatenByGhosts();
+                        setDefaultGhostsLocalization();
+                    }
+                    if (e.ghostChasingState == GhostChasingState.GhostsSCARED) {
+                        return;
+                    }
+                    possibleDestinations = null;
+                    return;
+                }
                 if (e.valueUnderWhereIsStanding != 1000) {
                     mapModel.setValueAt(e.valueUnderWhereIsStanding, e.currentRow, e.currentColumn);
                 } else {
                     mapModel.setValueAt(pustePole, e.currentRow, e.currentColumn);
                 }
-                if (((int) mapModel.getValueAt(e.currentRow, e.currentColumn - 1) == pacman)) {
-                    player.eatenByGhosts();
-                    setDefaultGhostsLocalization();
-                    return;
-                }
                 e.valueUnderWhereIsStanding = (int) mapModel.getValueAt(e.currentRow, e.currentColumn - 1);
                 e.setCurrentColumn(e.currentColumn - 1);
-                mapModel.setValueAt(colorCode, e.currentRow, e.currentColumn);
+                mapModel.setValueAt(e.currentColorCode, e.currentRow, e.currentColumn);
                 possibleDestinations = null;
             }
         }
@@ -296,12 +373,26 @@ public class Enemy extends Character implements MapTile {
 
     public void setDefaultGhostsLocalization() {
         for (Enemy e : enemies) {
-            mapModel.setValueAt(e.colorCode, e.spawnLocationRow, e.spawnLocationColumn);
+            mapModel.setValueAt(e.originalColorCode, e.spawnLocationRow, e.spawnLocationColumn);
             mapModel.setValueAt(e.valueUnderWhereIsStanding, e.currentRow, e.currentColumn);
             e.currentRow = e.spawnLocationRow;
             e.currentColumn = e.spawnLocationColumn;
             e.passedTheGate = false;
             e.valueUnderWhereIsStanding = 1000;
         }
+    }
+
+    public void eatenByPacman(Enemy e) {
+        mapModel.setValueAt(e.originalColorCode, e.spawnLocationRow, e.spawnLocationColumn);
+
+        e.currentColorCode = e.originalColorCode;
+        e.currentColumn = e.spawnLocationColumn;
+        e.currentRow = e.spawnLocationRow;
+        e.ghostChasingState = GhostChasingState.GhostsCHASE;
+        e.valueUnderWhereIsStanding = 1000;
+        e.passedTheGate = false;
+
+        CurrentStats.yourScore += pointsForEatingGhosts;
+        pointsForEatingGhosts += 200; //todo jak się skończy ten stan wracamy do 200 a color do original
     }
 }

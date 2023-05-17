@@ -3,6 +3,8 @@ package model.characters;
 import model.DrawableObjects;
 import model.NumberFormatter;
 import model.characters.components.CharacterAnimationState;
+import model.characters.components.Destination;
+import model.characters.components.GhostChasingState;
 import model.characters.components.MapTile;
 import model.game.GameThread;
 import model.map.MapGenerator;
@@ -23,17 +25,21 @@ import static model.map.MapModel.*;
 
 public class Player extends Character implements MapTile {
 
+    //    int counter = 0;
     public static CharacterAnimationState currentState = CharacterAnimationState.PLayerDEFAULT;
+    public Destination destination;
+    int[] pacOpenessState = new int[]{22, 23, 24, 23};
 
     public Player(MapModel mapModel) {
         super(mapModel);
         try {
-            this.image = ImageIO.read(new File("assets/pacman_icons/pac_sredni.png"));
+            this.image = ImageIO.read(new File("assets/pacman_icons/pac_caly.png"));
 
             DrawableObjects.addDrawable(getMapCode(), this);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        destination = Destination.RIGHT;
     }
 
     @Override
@@ -41,30 +47,12 @@ public class Player extends Character implements MapTile {
         return 22;
     }
 
-
-    public void moveHorizontally(int X) {
-        for (Enemy e : enemies) {
-            if (mapModel.getValueAt(X, getCurrentColumn()).equals(e.getMapCode())) {
-                mapModel.setValueAt(pustePole, getCurrentRow(), getCurrentColumn());
-                eatenByGhosts();
-                return;
-            }
+    private static void eatBigCookie() {
+        CurrentStats.yourScore += 50;
+        for (Enemy enemy : enemies) {
+            enemy.ghostChasingState = GhostChasingState.GhostsSCARED;
+            enemy.currentColorCode = 38;
         }
-        if (isWall(X, getCurrentColumn()) || isGate(X, getCurrentColumn())) return;
-        if (mapModel.getValueAt(X, getCurrentColumn()).equals(cookieSmall) || mapModel.getValueAt(X, getCurrentColumn()).equals(cookieBig)) {
-            if (mapModel.getValueAt(X, getCurrentColumn()).equals(cookieSmall)) CurrentStats.yourScore += 10;
-            if (mapModel.getValueAt(X, getCurrentColumn()).equals(cookieBig)) CurrentStats.yourScore += 50;
-            eatCookie();
-            CurrentStats.setYourScore.setText(NumberFormatter.changeScoreToString(CurrentStats.yourScore));
-            Game.gameWindow.currentStats.compareYourAndHighScore();
-            if (isThisNewMap) {
-                isThisNewMap = false;
-                return;
-            }
-        }
-        mapModel.setValueAt(pustePole, getCurrentRow(), getCurrentColumn());
-        mapModel.setValueAt(getMapCode(), X, getCurrentColumn());
-
     }
 
     protected void eatenByGhosts() {
@@ -112,19 +100,59 @@ public class Player extends Character implements MapTile {
         CurrentStats.model.fireTableDataChanged();
     }
 
-    public void moveVertically(int Y) {
-        for (Enemy e : enemies) {
-            if (mapModel.getValueAt(getCurrentRow(), Y).equals(e.getMapCode())) {
-                mapModel.setValueAt(pustePole, getCurrentRow(), getCurrentColumn());
-                eatenByGhosts();
-                return;
+    public void updatePacmanAnimation(int counter) {
+
+//        if (counter==4) counter=0;
+        int currentOpen = pacOpenessState[counter];
+
+        switch (destination) {
+            case UP -> {
+                String tmp = String.valueOf(currentOpen) + String.valueOf(0);
+                int currentState = Integer.parseInt(tmp);
+                mapModel.setValueAt(currentState, player.getCurrentRow(), player.getCurrentColumn());
+            }
+            case DOWN -> {
+                String tmp = String.valueOf(currentOpen) + String.valueOf(1);
+                int currentState = Integer.parseInt(tmp);
+                mapModel.setValueAt(currentState, player.getCurrentRow(), player.getCurrentColumn());
+            }
+            case RIGHT -> {
+                String tmp = String.valueOf(currentOpen) + String.valueOf(2);
+                int currentState = Integer.parseInt(tmp);
+                mapModel.setValueAt(currentState, player.getCurrentRow(), player.getCurrentColumn());
+            }
+            case LEFT -> {
+                String tmp = String.valueOf(currentOpen) + String.valueOf(3);
+                int currentState = Integer.parseInt(tmp);
+                mapModel.setValueAt(currentState, player.getCurrentRow(), player.getCurrentColumn());
+
             }
         }
+    }
 
+    public void moveVertically(int Y) {
+        for (Enemy e : enemies) {
+            if (mapModel.getValueAt(getCurrentRow(), Y).equals(mapModel.getValueAt(e.currentRow, e.currentColumn))) {
+                if (e.ghostChasingState == GhostChasingState.GhostsCHASE) {
+                    mapModel.setValueAt(pustePole, getCurrentRow(), getCurrentColumn());
+                    eatenByGhosts();
+                    return;
+                }
+                if (e.ghostChasingState == GhostChasingState.GhostsSCARED) {
+                    if (e.valueUnderWhereIsStanding == cookieSmall) cookiesCounter--;
+                    e.eatenByPacman(e);
+                    break;
+                }
+            }
+        }
         if (isWall(getCurrentRow(), Y)) return;
         if (mapModel.getValueAt(getCurrentRow(), Y).equals(cookieSmall) || mapModel.getValueAt(getCurrentRow(), Y).equals(cookieBig)) {
-            if (mapModel.getValueAt(getCurrentRow(), Y).equals(cookieSmall)) CurrentStats.yourScore += 10;
-            if (mapModel.getValueAt(getCurrentRow(), Y).equals(cookieBig)) CurrentStats.yourScore += 50;
+            if (mapModel.getValueAt(getCurrentRow(), Y).equals(cookieSmall)) {
+                CurrentStats.yourScore += 10;
+            }
+            if (mapModel.getValueAt(getCurrentRow(), Y).equals(cookieBig)) {
+                eatBigCookie();
+            }
             eatCookie();
             CurrentStats.setYourScore.setText(NumberFormatter.changeScoreToString(CurrentStats.yourScore));
             Game.gameWindow.currentStats.compareYourAndHighScore();
@@ -133,8 +161,42 @@ public class Player extends Character implements MapTile {
                 return;
             }
         }
-        mapModel.setValueAt(pustePole, getCurrentRow(), getCurrentColumn());
-        mapModel.setValueAt(getMapCode(), getCurrentRow(), Y);
+        mapModel.setValueAt(pustePole, player.getCurrentRow(), player.getCurrentColumn());
+        mapModel.setValueAt(player.getMapCode(), player.getCurrentRow(), Y);
+    }
+
+    public void moveHorizontally(int X) {
+        for (Enemy e : enemies) {
+            if (mapModel.getValueAt(X, getCurrentColumn()).equals(mapModel.getValueAt(e.currentRow, e.currentColumn))) {
+                if (e.ghostChasingState == GhostChasingState.GhostsCHASE) {
+                    mapModel.setValueAt(pustePole, getCurrentRow(), getCurrentColumn());
+                    eatenByGhosts();
+                    return;
+                }
+                if (e.ghostChasingState == GhostChasingState.GhostsSCARED) {
+                    if (e.valueUnderWhereIsStanding == cookieSmall) cookiesCounter--;
+                    e.eatenByPacman(e);
+                    break;
+                }
+            }
+        }
+        if (isWall(X, getCurrentColumn()) || isGate(X, getCurrentColumn())) return;
+        if (mapModel.getValueAt(X, getCurrentColumn()).equals(cookieSmall) || mapModel.getValueAt(X, getCurrentColumn()).equals(cookieBig)) {
+            if (mapModel.getValueAt(X, getCurrentColumn()).equals(cookieSmall)) CurrentStats.yourScore += 10;
+
+            if (mapModel.getValueAt(X, getCurrentColumn()).equals(cookieBig)) {
+                eatBigCookie();
+            }
+            eatCookie();
+            CurrentStats.setYourScore.setText(NumberFormatter.changeScoreToString(CurrentStats.yourScore));
+            Game.gameWindow.currentStats.compareYourAndHighScore();
+            if (isThisNewMap) {
+                isThisNewMap = false;
+                return;
+            }
+        }
+        mapModel.setValueAt(pustePole, player.getCurrentRow(), player.getCurrentColumn());
+        mapModel.setValueAt(player.getMapCode(), X, player.getCurrentColumn());
     }
 
     private void eatCookie() {
