@@ -1,7 +1,5 @@
 package model.highScore;
 
-import model.NumberFormatter;
-
 import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
@@ -50,7 +48,8 @@ public class RankingModel extends AbstractListModel implements Serializable {
             fw = new FileWriter(rankingFile);
 
             for (int i = 0; i < entries.size(); i++) {
-                fw.write((i + 1) + ". " + entries.get(i).score + " " + entries.get(i).nickname + " " + entries.get(i).time + "\n");
+                int position = i++;
+                fw.write(position + " " + entries.get(i).score + " " + entries.get(i).nickname + " " + entries.get(i).time + " ");
             }
             fw.flush();
             fw.close();
@@ -69,15 +68,12 @@ public class RankingModel extends AbstractListModel implements Serializable {
             String line = br.readLine();
             while (line != null) {
                 String[] tab = line.split(" ");
+                int position = Integer.parseInt(tab[0]);
                 int score = Integer.parseInt(tab[1]);
                 String nickname = tab[2];
                 String time = tab[3];
-                addEntryWithSorting(new RankingEntry(nickname, score, time));
+                addEntryWithSorting(new RankingEntry(position, nickname, score, time));
                 line = br.readLine();
-            }
-
-            for (RankingEntry entry : entries) {
-                System.out.println(entry.nickname + "    " + NumberFormatter.changeScoreToString(entry.score) + "      " + entry.time);
             }
             fr.close();
         } catch (IOException e) {

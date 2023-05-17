@@ -1,7 +1,5 @@
 package model.highScore;
 
-import model.NumberFormatter;
-
 import java.io.Serializable;
 
 public class RankingEntry implements Serializable {
@@ -11,8 +9,8 @@ public class RankingEntry implements Serializable {
     int score;
     String time;
 
-    public RankingEntry(String nickname, int score, String time) {
-//        this.position = setPosition(score);
+    public RankingEntry(int position, String nickname, int score, String time) {
+        this.position = position;
         this.nickname = nickname;
         this.score = score;
         this.time = time;
@@ -22,17 +20,9 @@ public class RankingEntry implements Serializable {
         return score;
     }
 
-//    public int setPosition(int score) {
-//        int tmp;
-//        int finalPosition = 0;
-//
-//        return finalPosition;
-//    }
 
     @Override
     public String toString() {
-        return nickname + ' ' + NumberFormatter.changeScoreToString(score) + ' ' + time;
+        return position + " ----------- " + score + " ----------- " + nickname + " ----------- " + time;
     }
-
-    //String yourFinalScore = NumberFormatter.changeScoreToString(CurrentStats.yourScore);
 }

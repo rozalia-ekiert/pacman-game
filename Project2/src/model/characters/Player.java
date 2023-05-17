@@ -116,7 +116,7 @@ public class Player extends Character implements MapTile {
         int yourFinalScore = CurrentStats.yourScore;
         String finalTime = CurrentStats.setTime.getText();
 
-        RankingEntry entry = new RankingEntry(nickname, yourFinalScore, finalTime);
+        RankingEntry entry = new RankingEntry(0, nickname, yourFinalScore, finalTime);
         HighScores.rankingModel.addEntryWithSorting(entry);
         HighScores.rankingModel.saveToFile();
 
