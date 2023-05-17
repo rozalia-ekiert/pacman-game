@@ -13,12 +13,12 @@ public class MapGenerator {
     //utility class
 
     static int sciana = 0;
+    public static int gate = 16;
     static final int pustePoleStale = 18;
     public static final int pustePole = 19;
     public static int cookieBig = 20;
     public static final int cookieSmall = 21;
     public static int pacman = 22;
-    public static int gate = 16;
 
     public static int[][] generateMap() {
         int[][] map = new int[rows][columns];
@@ -126,9 +126,7 @@ public class MapGenerator {
     public static void spawnEnemies(MapModel map) {
         for (Enemy e : enemies) {
             int mapCode = e.getMapCode();
-            int spawnLocationClumn = e.getSpawnLocationClumn();
-            int spawnLocationRow = e.getSpawnLocationRow();
-            map.map[spawnLocationRow][spawnLocationClumn] = mapCode;
+            map.map[e.getSpawnLocationRow()][e.getSpawnLocationColumn()] = mapCode;
             e.setMapModel(map);
         }
     }

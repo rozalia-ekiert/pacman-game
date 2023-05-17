@@ -12,7 +12,7 @@ public abstract class Character implements Animated {
 
     protected MapModel mapModel;
     protected int spawnLocationRow;
-    protected int spawnLocationClumn;
+    protected int spawnLocationColumn;
     protected int currentRow;
     protected int currentColumn;
     Map<CharacterAnimationState, List<Image>> animacje;
@@ -55,8 +55,8 @@ public abstract class Character implements Animated {
         return spawnLocationRow;
     }
 
-    public int getSpawnLocationClumn() {
-        return spawnLocationClumn;
+    public int getSpawnLocationColumn() {
+        return spawnLocationColumn;
     }
 
     public abstract int getMapCode();

@@ -38,17 +38,14 @@ public class GameThread extends Thread {
 
     private void update(long l, long tick) {
         timeLabel.setText(NumberFormatter.changeTimeToString(tick * 1000 / updatesPerSecond));
-        int counter = 0;
+
         for (Enemy enemy : enemies) {
-            counter++;
             enemy.updateAI(enemy);
-            if (counter == 4) return;
         }
 //        spawnBonuses();
     }
 
     private void spawnBonuses() {
-
     }
 
 }

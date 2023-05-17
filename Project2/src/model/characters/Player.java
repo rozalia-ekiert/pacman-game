@@ -67,8 +67,9 @@ public class Player extends Character implements MapTile {
 
     }
 
-    private void eatenByGhosts() {
+    protected void eatenByGhosts() {
         CurrentStats.livesNumber--;
+        mapModel.setValueAt(pustePole, getCurrentRow(), getCurrentColumn());
         mapModel.setValueAt(getMapCode(), rows - rows / 4, columns / 2);
 
         Gameplay.message.setText(Gameplay.messageEatenByGhosts);
