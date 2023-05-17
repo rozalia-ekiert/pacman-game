@@ -22,8 +22,6 @@ public class MapComponentsRenderer extends DefaultTableCellRenderer {
             DrawableObjects.addDrawable(38, new Wall(ImageIO.read(new File("assets/enemies_icons/dark_blue/enemy_1.png"))));
             DrawableObjects.addDrawable(39, new Wall(ImageIO.read(new File("assets/enemies_icons/dark_blue/enemy_2.png"))));
 
-
-            DrawableObjects.addDrawable(222, new Wall(ImageIO.read(new File("assets/pacman_icons/pac_caly.png"))));
             //pac up
             DrawableObjects.addDrawable(220, new Wall(ImageIO.read(new File("assets/pacman_icons/pac_up/pac_caly_up.png"))));
             DrawableObjects.addDrawable(230, new Wall(ImageIO.read(new File("assets/pacman_icons/pac_up/pac_sredni_up.png"))));
@@ -33,6 +31,7 @@ public class MapComponentsRenderer extends DefaultTableCellRenderer {
             DrawableObjects.addDrawable(231, new Wall(ImageIO.read(new File("assets/pacman_icons/pac_down/pac_sredni_down.png"))));
             DrawableObjects.addDrawable(241, new Wall(ImageIO.read(new File("assets/pacman_icons/pac_down/pac_otwarty_down.png"))));
             //pac right
+            DrawableObjects.addDrawable(222, new Wall(ImageIO.read(new File("assets/pacman_icons/pac_caly.png"))));
             DrawableObjects.addDrawable(232, new Wall(ImageIO.read(new File("assets/pacman_icons/pac_right/pac_sredni.png"))));
             DrawableObjects.addDrawable(242, new Wall(ImageIO.read(new File("assets/pacman_icons/pac_right/pac_otwarty.png"))));
             //pac left

@@ -2,7 +2,6 @@ package model.characters;
 
 import model.DrawableObjects;
 import model.NumberFormatter;
-import model.characters.components.CharacterAnimationState;
 import model.characters.components.Destination;
 import model.characters.components.GhostChasingState;
 import model.characters.components.MapTile;
@@ -25,8 +24,6 @@ import static model.map.MapModel.*;
 
 public class Player extends Character implements MapTile {
 
-    //    int counter = 0;
-    public static CharacterAnimationState currentState = CharacterAnimationState.PLayerDEFAULT;
     public Destination destination;
     int[] pacOpenessState = new int[]{22, 23, 24, 23};
 
@@ -102,7 +99,6 @@ public class Player extends Character implements MapTile {
 
     public void updatePacmanAnimation(int counter) {
 
-//        if (counter==4) counter=0;
         int currentOpen = pacOpenessState[counter];
 
         switch (destination) {
