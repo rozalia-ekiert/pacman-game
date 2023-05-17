@@ -55,11 +55,6 @@ public class Player extends Character implements MapTile {
         }
     }
 
-    @Override //TODO do zrobienia albo wyjebania
-    public Image getAnimatonFrame(long deltaT) {
-        return null;
-    }
-
     private void removeLife() {
         int counter = CurrentStats.livesNumber;
 
@@ -221,7 +216,6 @@ public class Player extends Character implements MapTile {
 
     private void eatCookie() {
         cookiesCounter--;
-        System.out.println("cookiesCounter: " + cookiesCounter);
         if (cookiesCounter == 0) {
             map = MapGenerator.generateMap();
             mapModel.setValueAt(getMapCode(), rows - rows / 4, columns / 2);
@@ -231,5 +225,10 @@ public class Player extends Character implements MapTile {
             Comments.message.setText(Comments.messageCookiesEaten);
             messageTimer.start();
         }
+    }
+
+    @Override
+    public Image getAnimatonFrame(long deltaT) {
+        return null;
     }
 }

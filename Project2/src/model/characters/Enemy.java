@@ -29,6 +29,7 @@ public class Enemy extends Character implements MapTile {
 
     GhostChasingState ghostChasingState;
     int pointsForEatingGhosts = 200;
+    int[] states = new int[]{1, 2};
 
     public Enemy(int row, int column, GhostsColors color, int colorCode) {
         super(null);
@@ -95,20 +96,40 @@ public class Enemy extends Character implements MapTile {
 //        isGhostChased();
     }
 
-    public void updateEnemyAnimation(Enemy e) {
+    public void updateEnemyAnimation(Enemy e, int counter) {
         if (mapModel == null) return;
 
-
-        switch (e.currentColorCode) {
-            case 38 -> {
-                e.currentColorCode = 39;
-                mapModel.setValueAt(e.currentColorCode, e.currentRow, e.currentColumn);
+        if (e.ghostChasingState == GhostChasingState.GhostsSCARED) {
+            switch (e.currentColorCode) {
+                case 38 -> {
+                    e.currentColorCode = 39;
+                    mapModel.setValueAt(e.currentColorCode, e.currentRow, e.currentColumn);
+                }
+                case 39 -> {
+                    e.currentColorCode = 38;
+                    mapModel.setValueAt(e.currentColorCode, e.currentRow, e.currentColumn);
+                }
             }
-            case 39 -> {
-                e.currentColorCode = 38;
-                mapModel.setValueAt(e.currentColorCode, e.currentRow, e.currentColumn);
-            }
+            return;
         }
+
+        int a = e.originalColorCode;
+
+        int b;
+        if (e.currentColumn > player.currentColumn) {
+            b = 1;
+        } else if (e.currentColumn < player.currentColumn) {
+            b = 3;
+        } else {
+            b = 2;
+        }
+
+        int c = states[counter];
+
+        String value = String.valueOf(a) + String.valueOf(b) + String.valueOf(c);
+        int currentValue = Integer.parseInt(value);
+        e.currentColorCode = currentValue;
+        mapModel.setValueAt(e.currentColorCode, e.currentRow, e.currentColumn);
     }
 
     public boolean isGhostChased() {
@@ -368,6 +389,6 @@ public class Enemy extends Character implements MapTile {
         e.passedTheGate = false;
 
         CurrentStats.yourScore += pointsForEatingGhosts;
-        pointsForEatingGhosts += 200; //todo jak się skończy ten stan wracamy do 200 a color do original
+        pointsForEatingGhosts += 200;
     }
 }

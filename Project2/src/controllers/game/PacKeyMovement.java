@@ -37,7 +37,7 @@ public class PacKeyMovement implements KeyListener {
     }
 
     @Override
-    public void keyPressed(KeyEvent e) { //todo funkcja na reset statystyk
+    public void keyPressed(KeyEvent e) {
 
         if (e.getKeyCode() == KeyEvent.VK_Q && e.isControlDown() && e.isShiftDown()) {
             if (CurrentStats.timeThread == null) return;

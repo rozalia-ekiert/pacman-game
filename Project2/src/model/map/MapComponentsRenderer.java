@@ -39,6 +39,49 @@ public class MapComponentsRenderer extends DefaultTableCellRenderer {
             DrawableObjects.addDrawable(233, new Wall(ImageIO.read(new File("assets/pacman_icons/pac_left/pac_sredni_left.png"))));
             DrawableObjects.addDrawable(243, new Wall(ImageIO.read(new File("assets/pacman_icons/pac_left/pac_otwarty_left.png"))));
 
+            //ghosts
+
+            //blue - left
+            DrawableObjects.addDrawable(4211, new Wall(ImageIO.read(new File("assets/enemies_icons/blue/blue_1_left.png"))));
+            DrawableObjects.addDrawable(4212, new Wall(ImageIO.read(new File("assets/enemies_icons/blue/blue_2_left.png"))));
+            //blue - right
+            DrawableObjects.addDrawable(4221, new Wall(ImageIO.read(new File("assets/enemies_icons/blue/blue_1_right.png"))));
+            DrawableObjects.addDrawable(4222, new Wall(ImageIO.read(new File("assets/enemies_icons/blue/blue_2_right.png"))));
+            //blue - straight
+            DrawableObjects.addDrawable(4231, new Wall(ImageIO.read(new File("assets/enemies_icons/blue/blue_1_straight.png"))));
+            DrawableObjects.addDrawable(4232, new Wall(ImageIO.read(new File("assets/enemies_icons/blue/blue_2_straight.png"))));
+
+            //green - left
+            DrawableObjects.addDrawable(4111, new Wall(ImageIO.read(new File("assets/enemies_icons/green/green_1_left.png"))));
+            DrawableObjects.addDrawable(4112, new Wall(ImageIO.read(new File("assets/enemies_icons/green/green_2_left.png"))));
+            //green - right
+            DrawableObjects.addDrawable(4121, new Wall(ImageIO.read(new File("assets/enemies_icons/green/green_1_right.png"))));
+            DrawableObjects.addDrawable(4122, new Wall(ImageIO.read(new File("assets/enemies_icons/green/green_2_right.png"))));
+            //green - straight
+            DrawableObjects.addDrawable(4131, new Wall(ImageIO.read(new File("assets/enemies_icons/green/green_1_straight.png"))));
+            DrawableObjects.addDrawable(4132, new Wall(ImageIO.read(new File("assets/enemies_icons/green/green_2_straight.png"))));
+
+            //pink - left
+            DrawableObjects.addDrawable(4011, new Wall(ImageIO.read(new File("assets/enemies_icons/pink/pink_1_left.png"))));
+            DrawableObjects.addDrawable(4012, new Wall(ImageIO.read(new File("assets/enemies_icons/pink/pink_2_left.png"))));
+            //pink - right
+            DrawableObjects.addDrawable(4021, new Wall(ImageIO.read(new File("assets/enemies_icons/pink/pink_1_right.png"))));
+            DrawableObjects.addDrawable(4022, new Wall(ImageIO.read(new File("assets/enemies_icons/pink/pink_2_right.png"))));
+            //pink - straight
+            DrawableObjects.addDrawable(4031, new Wall(ImageIO.read(new File("assets/enemies_icons/pink/pink_1_straight.png"))));
+            DrawableObjects.addDrawable(4032, new Wall(ImageIO.read(new File("assets/enemies_icons/pink/pink_2_straight.png"))));
+
+            //purple - left
+            DrawableObjects.addDrawable(4311, new Wall(ImageIO.read(new File("assets/enemies_icons/purple/purple_1_left.png"))));
+            DrawableObjects.addDrawable(4312, new Wall(ImageIO.read(new File("assets/enemies_icons/purple/purple_2_left.png"))));
+            //purple - right
+            DrawableObjects.addDrawable(4321, new Wall(ImageIO.read(new File("assets/enemies_icons/purple/purple_1_right.png"))));
+            DrawableObjects.addDrawable(4322, new Wall(ImageIO.read(new File("assets/enemies_icons/purple/purple_2_right.png"))));
+            //purple - straight
+            DrawableObjects.addDrawable(4331, new Wall(ImageIO.read(new File("assets/enemies_icons/purple/purple_1_straight.png"))));
+            DrawableObjects.addDrawable(4332, new Wall(ImageIO.read(new File("assets/enemies_icons/purple/purple_2_straight.png"))));
+
+
             File dir = new File("assets/walls");
             File[] directoryListing = dir.listFiles();
             for (File file : directoryListing) {

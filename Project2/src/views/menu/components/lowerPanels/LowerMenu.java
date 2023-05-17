@@ -9,7 +9,7 @@ import java.io.IOException;
 public class LowerMenu extends JPanel {
 
 
-    static Image pacmanTEST = null; //todo zmiana na volatileimage
+    static Image pacmanTEST = null;
     static Image blueTEST = null;
     static Image pinkTEST = null;
     static Image greenTEST = null;
@@ -25,7 +25,6 @@ public class LowerMenu extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        // todo to tylko place holder bedzie to zmienione na animacje
         try {
             if (pacmanTEST == null) {
                 pacmanTEST = ImageIO.read(new File("assets/pacman_icons/pac_right/pac_sredni.png"));

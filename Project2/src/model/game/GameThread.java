@@ -18,6 +18,7 @@ public class GameThread extends Thread {
     final int updatesPerSecond = 2;
     final int animationUpdatePerSecond = 6;
     int pacCounter = 0;
+    int enemyCounter = 0;
     public static final AtomicBoolean isReady = new AtomicBoolean(true);
 
     public GameThread(JLabel timeLabel, PACMANGame pacmanGame) {
@@ -57,14 +58,15 @@ public class GameThread extends Thread {
                 enemy.spawnBonuses();
             }
         }
-//        System.out.println();
-//        MapModel.showModel();
     }
 
     private void animationUpdate() {
         for (Enemy enemy : enemies) {
-            enemy.updateEnemyAnimation(enemy);
+            if (enemyCounter == 2) enemyCounter = 0;
+            enemy.updateEnemyAnimation(enemy, enemyCounter);
         }
+        enemyCounter++;
+
         if (pacCounter == 4) pacCounter = 0;
         player.updatePacmanAnimation(pacCounter);
         pacCounter++;

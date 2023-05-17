@@ -53,7 +53,6 @@ public class GameWindow extends JPanel {
                     windowSize = size.width;
                 }
                 int cellSize = getCellSize();
-                System.out.println("getCellSize: " + cellSize + " size: " + size);
                 mapTable.setRowHeight(cellSize);
                 setTableColumnWidth(mapTable, cellSize);
 
