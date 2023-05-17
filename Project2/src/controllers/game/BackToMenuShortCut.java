@@ -13,6 +13,8 @@ import views.menu.components.upperPanels.Buttons;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
+import static model.map.MapModel.cookiesCounter;
+
 
 public class BackToMenuShortCut implements KeyEventDispatcher {
 
@@ -28,12 +30,13 @@ public class BackToMenuShortCut implements KeyEventDispatcher {
         if (e.getKeyCode() == KeyEvent.VK_Q && e.isControlDown() && e.isShiftDown()) {
             if (CurrentStats.timeThread == null) return false;
             System.out.println("Pressed Ctrl + Shift + Q");
+            cookiesCounter = 0;
             GameThread.isReady.set(false);
             GameThread.isGameViewReady.set(false);
 
-            CardLayout cl = (CardLayout) (pacmanGame.viewsCardPanel.getLayout());
-            pacmanGame.viewsCardPanel.currentCardName = ViewCardPanel.MENU_VIEW;
-            cl.show(pacmanGame.viewsCardPanel, pacmanGame.viewsCardPanel.currentCardName);
+            CardLayout cl = (CardLayout) (PACMANGame.viewsCardPanel.getLayout());
+            PACMANGame.viewsCardPanel.currentCardName = ViewCardPanel.MENU_VIEW;
+            cl.show(PACMANGame.viewsCardPanel, PACMANGame.viewsCardPanel.currentCardName);
 
             CardLayout cl2 = (CardLayout) (MenuStart.cardsPanel.getLayout());
             MenuStart.cardsPanel.currentCardName = MenuCardPanel.TEXT;

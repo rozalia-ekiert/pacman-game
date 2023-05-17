@@ -26,8 +26,8 @@ public class Enemy extends Character implements MapTile {
     int originalColorCode;
     int currentColorCode;
     boolean passedTheGate;
-    GhostChasingState ghostChasingState;
 
+    GhostChasingState ghostChasingState;
     int pointsForEatingGhosts = 200;
 
     public Enemy(int row, int column, GhostsColors color, int colorCode) {
@@ -92,11 +92,13 @@ public class Enemy extends Character implements MapTile {
 
     public void updateAI() {
         setNewDestination();
-        isGhostChased();
+//        isGhostChased();
     }
 
     public void updateEnemyAnimation(Enemy e) {
         if (mapModel == null) return;
+
+
         switch (e.currentColorCode) {
             case 38 -> {
                 e.currentColorCode = 39;
@@ -161,12 +163,7 @@ public class Enemy extends Character implements MapTile {
                 if (((int) mapModel.getValueAt(this.currentRow - 1, this.currentColumn) == pacman)) {
                     if (this.ghostChasingState == GhostChasingState.GhostsCHASE) {
                         player.eatenByGhosts();
-                        setDefaultGhostsLocalization();
                     }
-                    if (this.ghostChasingState == GhostChasingState.GhostsSCARED) {
-                        return;
-                    }
-                    possibleDestinations = null;
                     return;
                 }
                 if (((int) mapModel.getValueAt(this.currentRow - 1, this.currentColumn) == gate)) {
@@ -191,12 +188,7 @@ public class Enemy extends Character implements MapTile {
                 if (((int) mapModel.getValueAt(this.currentRow + 1, this.currentColumn) == pacman)) {
                     if (this.ghostChasingState == GhostChasingState.GhostsCHASE) {
                         player.eatenByGhosts();
-                        setDefaultGhostsLocalization();
                     }
-                    if (this.ghostChasingState == GhostChasingState.GhostsSCARED) {
-                        return;
-                    }
-                    possibleDestinations = null;
                     return;
                 }
                 if (((int) mapModel.getValueAt(this.currentRow + 1, this.currentColumn) == gate)) {
@@ -217,12 +209,7 @@ public class Enemy extends Character implements MapTile {
                 if (((int) mapModel.getValueAt(this.currentRow, this.currentColumn + 1) == pacman)) {
                     if (this.ghostChasingState == GhostChasingState.GhostsCHASE) {
                         player.eatenByGhosts();
-                        setDefaultGhostsLocalization();
                     }
-                    if (this.ghostChasingState == GhostChasingState.GhostsSCARED) {
-                        return;
-                    }
-                    possibleDestinations = null;
                     return;
                 }
                 if (this.valueUnderWhereIsStanding != 1000) {
@@ -240,12 +227,7 @@ public class Enemy extends Character implements MapTile {
                 if (((int) mapModel.getValueAt(this.currentRow, this.currentColumn - 1) == pacman)) {
                     if (this.ghostChasingState == GhostChasingState.GhostsCHASE) {
                         player.eatenByGhosts();
-                        setDefaultGhostsLocalization();
                     }
-                    if (this.ghostChasingState == GhostChasingState.GhostsSCARED) {
-                        return;
-                    }
-                    possibleDestinations = null;
                     return;
                 }
                 if (this.valueUnderWhereIsStanding != 1000) {
@@ -260,7 +242,6 @@ public class Enemy extends Character implements MapTile {
             }
         }
     }
-
 
     private ArrayList<Integer> checkDestinations(Enemy e) {
         ArrayList<Integer> destinations = new ArrayList<>();

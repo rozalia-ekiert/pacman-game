@@ -17,6 +17,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import static model.map.MapModel.cookiesCounter;
 import static model.map.MapModel.player;
 
 public class PacKeyMovement implements KeyListener {
@@ -42,6 +43,7 @@ public class PacKeyMovement implements KeyListener {
             if (CurrentStats.timeThread == null) return;
             System.out.println("Pressed Ctrl + Shift + Q");
 
+            cookiesCounter = 0;
             GameThread.isReady.set(false);
             GameThread.isGameViewReady.set(false);
 

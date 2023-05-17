@@ -107,6 +107,26 @@ public class Player extends Character implements MapTile {
         }
     }
 
+    private static void resetStats() {
+        EndGameViewChange endGameViewChange = new EndGameViewChange();
+        GameCardPanel.currentCardName = GameCardPanel.START_SCREEN_1;
+        GameThread.isGameViewReady.set(false);
+
+        String nickname = NewGame.setYourNick;
+        int yourFinalScore = CurrentStats.yourScore;
+        String finalTime = CurrentStats.setTime.getText();
+
+        RankingEntry entry = new RankingEntry(nickname, yourFinalScore, finalTime);
+        HighScores.rankingModel.addEntryWithSorting(entry);
+        HighScores.rankingModel.saveToFile();
+
+        GameThread.isReady.set(false);
+        CurrentStats.livesNumber = 5;
+        CurrentStats.yourScore = 0;
+        enemies = null;
+        cookiesCounter = 0;
+    }
+
     public void moveVertically(int Y) {
         for (Enemy e : enemies) {
             if (mapModel.getValueAt(getCurrentRow(), Y).equals(mapModel.getValueAt(e.currentRow, e.currentColumn))) {
@@ -116,7 +136,8 @@ public class Player extends Character implements MapTile {
                     return;
                 }
                 if (e.ghostChasingState == GhostChasingState.GhostsSCARED) {
-                    if (e.valueUnderWhereIsStanding == cookieSmall) cookiesCounter--;
+                    if (e.valueUnderWhereIsStanding == cookieSmall || e.valueUnderWhereIsStanding == cookieBig)
+                        cookiesCounter--;
                     e.eatenByPacman(e);
                     break;
                 }
@@ -151,7 +172,8 @@ public class Player extends Character implements MapTile {
                     return;
                 }
                 if (e.ghostChasingState == GhostChasingState.GhostsSCARED) {
-                    if (e.valueUnderWhereIsStanding == cookieSmall) cookiesCounter--;
+                    if (e.valueUnderWhereIsStanding == cookieSmall || e.valueUnderWhereIsStanding == cookieBig)
+                        cookiesCounter--;
                     e.eatenByPacman(e);
                     break;
                 }
@@ -174,26 +196,6 @@ public class Player extends Character implements MapTile {
         }
         mapModel.setValueAt(pustePole, player.getCurrentRow(), player.getCurrentColumn());
         mapModel.setValueAt(player.getMapCode(), X, player.getCurrentColumn());
-    }
-
-    private static void resetStats() {
-        EndGameViewChange endGameViewChange = new EndGameViewChange();
-        GameCardPanel.currentCardName = GameCardPanel.START_SCREEN_1;
-        GameThread.isGameViewReady.set(false);
-
-        //position - wylicze w rankingu
-        String nickname = NewGame.setYourNick;
-        int yourFinalScore = CurrentStats.yourScore;
-        String finalTime = CurrentStats.setTime.getText();
-
-        RankingEntry entry = new RankingEntry(nickname, yourFinalScore, finalTime);
-        HighScores.rankingModel.addEntryWithSorting(entry);
-        HighScores.rankingModel.saveToFile();
-
-
-        CurrentStats.livesNumber = 5;
-        CurrentStats.yourScore = 0;
-        enemies = null;
     }
 
     @Override
