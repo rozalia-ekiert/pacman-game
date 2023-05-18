@@ -115,12 +115,13 @@ public class Enemy extends Character implements MapTile {
         int a = e.originalColorCode;
 
         int b;
+
         if (e.currentColumn > player.currentColumn) {
             b = 1;
         } else if (e.currentColumn < player.currentColumn) {
-            b = 3;
-        } else {
             b = 2;
+        } else {
+            b = 3;
         }
 
         int c = states[counter];

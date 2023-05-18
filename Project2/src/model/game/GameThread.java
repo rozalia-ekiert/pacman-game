@@ -16,7 +16,7 @@ public class GameThread extends Thread {
     PACMANGame pacmanGame;
     private final JLabel timeLabel;
     final int updatesPerSecond = 2;
-    final int animationUpdatePerSecond = 6;
+    final int animationUpdatePerSecond = 8;
     int pacCounter = 0;
     int enemyCounter = 0;
     public static final AtomicBoolean isReady = new AtomicBoolean(true);

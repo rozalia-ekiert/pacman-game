@@ -16,12 +16,11 @@ public class GameStartScreen1 extends JPanel {
 
         //==========================================================
 
-        String introText = "Oh, nice to see you, [player_name]. This game is more like .................\n" +
-                "You will see some comments on the right panel of its.\n\n" +
-                "Note: it was not meant to offense you.\n\n" +
+        String introText = "Oh, nice to see you, player.\n" +
+                "Note: you will see some comments on the right panel.\n\n" +
                 "Have fun!";
 
-        JTextArea introTextArea = new JTextArea(introText, 7, 20);
+        JTextArea introTextArea = new JTextArea(introText);
         introTextArea.setFocusable(false);
         introTextArea.setBackground(Color.BLACK);
         introTextArea.setForeground(Color.WHITE);

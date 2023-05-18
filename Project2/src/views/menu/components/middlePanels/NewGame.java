@@ -282,13 +282,11 @@ public class NewGame extends JPanel {
             @Override
             public void focusGained(FocusEvent e) {
                 super.focusGained(e);
-                System.out.println("przycisk ma focus");
             }
 
             @Override
             public void focusLost(FocusEvent e) {
                 super.focusLost(e);
-                System.out.println("przycisk traci focus");
             }
         });
     }
@@ -302,11 +300,14 @@ class GradientText extends JPanel {
         super.paintComponent(g);
 
         String rules = "RULES";
-        String text1 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vitae\n";
-        String text2 = "efficitur ligula, in viverra ipsum. Orci varius natoque penatibus\n";
-        String text3 = "et magnis dis parturient montes, nascetur ridiculus mus. Etiam eu\n";
-        String text4 = "molestie dolor. Vestibulum placerat metus vitae justo rutrum mollis.\n";
-        String text5 = "Nam blandit rhoncus neque molestie vulputate.";
+        String text1 = "The player controls Pac-Man, who must eat all\n";
+        String text2 = "the dots inside an enclosed maze while avoiding\n";
+        String text3 = "four colored ghosts. Eating large flashing dots\n";
+        String text4 = "called \"Power Pellets\" causes the ghosts to\n";
+        String text5 = "temporarily turn blue, allowing Pac-Man to eat\n";
+        String text6 = "them for bonus points.\n";
+        String textBreak = "\n";
+        String text7 = "WIKIPEDIA";
 
         Graphics2D g2d = (Graphics2D) g;
 
@@ -321,13 +322,16 @@ class GradientText extends JPanel {
         g2d.setFont(f1);
         g2d.drawString(rules, 50, (getHeight() / 5) + 30);
 
-        Font f2 = new Font("Arimo", Font.PLAIN, 14);
+        Font f2 = new Font("Consolas", Font.PLAIN, 14);
         g2d.setFont(f2);
-        g2d.drawString(text1, 50, (getHeight() / 5) + 60);
-        g2d.drawString(text2, 50, (getHeight() / 5) + 60 + 16);
-        g2d.drawString(text3, 50, (getHeight() / 5) + 60 + 32);
-        g2d.drawString(text4, 50, (getHeight() / 5) + 60 + 48);
-        g2d.drawString(text5, 50, (getHeight() / 5) + 60 + 64);
+        g2d.drawString(text1, 50, (getHeight() / 5) + 60 + 16);
+        g2d.drawString(text2, 50, (getHeight() / 5) + 60 + 32);
+        g2d.drawString(text3, 50, (getHeight() / 5) + 60 + 48);
+        g2d.drawString(text4, 50, (getHeight() / 5) + 60 + 64);
+        g2d.drawString(text5, 50, (getHeight() / 5) + 60 + 80);
+        g2d.drawString(text6, 50, (getHeight() / 5) + +60 + 96);
+        g2d.drawString(textBreak, 50, (getHeight() / 5) + 60 + 112);
+        g2d.drawString(text7, 50, (getHeight() / 5) + 60 + 128);
     }
 
 }

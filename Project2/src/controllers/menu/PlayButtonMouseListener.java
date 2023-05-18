@@ -54,8 +54,6 @@ public class PlayButtonMouseListener implements MouseListener {
                 NewGame.warningField.setText(NewGame.warningFieldIsNotCorrectSizeDefaut);
                 NewGame.warningNick.setText(NewGame.warningYourNickExistsDefault);
 
-                System.out.println(newGame.play.isFocusOwner());
-
                 Game.gameWindow = new GameWindow(PACMANGame.screenWidth, PACMANGame.screenHeight, pacmanGame, NewGame.setRows, NewGame.setColumns);
                 game.gameCardPanel.add(Game.gameWindow, GameCardPanel.GAME_WINDOW);
                 CardLayout cl1 = (CardLayout) (game.gameCardPanel.getLayout());
