@@ -26,7 +26,7 @@ public class Enemy extends Character implements MapTile {
     int originalColorCode;
     int currentColorCode;
     boolean passedTheGate;
-    public static boolean possibleToMove = false;
+    boolean possibleToMove;
 
     GhostChasingState ghostChasingState;
     int pointsForEatingGhosts = 200;
@@ -46,6 +46,7 @@ public class Enemy extends Character implements MapTile {
 
         this.color = color;
 
+        possibleToMove = true;
         passedTheGate = false;
         ghostChasingState = GhostChasingState.GhostsCHASE;
 
@@ -94,8 +95,10 @@ public class Enemy extends Character implements MapTile {
 
     public void updateAI() {
 
-        if (possibleToMove == false) {
-            return;
+        for (Enemy e : enemies) {
+            if (!possibleToMove) {
+                return;
+            }
         }
         setNewDestination();
     }
@@ -144,7 +147,8 @@ public class Enemy extends Character implements MapTile {
     public void spawnBonuses() {
 
         if (this.ghostChasingState == GhostChasingState.GhostsSCARED) return;
-
+        if (this.currentRow == this.spawnLocationRow && this.currentColumn == this.spawnLocationColumn
+                || mapModel.getValueAt(this.currentRow, this.currentColumn).equals(gate)) return;
         if (player.bonusState != null) player.bonusState = null;
         if (GameThread.updatesPerSecond != 2) GameThread.updatesPerSecond = 2;
 
