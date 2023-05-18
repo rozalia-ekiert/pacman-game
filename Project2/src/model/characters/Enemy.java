@@ -95,6 +95,8 @@ public class Enemy extends Character implements MapTile {
 
     public void updateAI() {
 
+        if (enemies == null) return;
+
         for (Enemy e : enemies) {
             if (!possibleToMove) {
                 return;
@@ -232,6 +234,7 @@ public class Enemy extends Character implements MapTile {
             this.valueUnderWhereIsStanding = pustePole;
         }
 
+        int pacman = (int) mapModel.getValueAt(player.currentRow, player.currentColumn);
         switch (chosenDestination) {
 
             case 0 -> { //do góry
@@ -260,6 +263,7 @@ public class Enemy extends Character implements MapTile {
             }
 
             case 1 -> { //w dół
+                if (((int) mapModel.getValueAt(this.currentRow + 1, this.currentColumn) <= 16)) return;
                 if (((int) mapModel.getValueAt(this.currentRow + 1, this.currentColumn) == pacman)) {
                     if (this.ghostChasingState == GhostChasingState.GhostsCHASE) {
                         player.eatenByGhosts();
@@ -334,10 +338,9 @@ public class Enemy extends Character implements MapTile {
             return destinations;
         }
 
-        //todo jesli na trasie jest pacman to zignoruj inne opcje
-
-//        isPacmanOnWay(destinations, e);
-//        if (destinations.size() != 0) return destinations;
+        //jeśli pacman jest na trasie, zwróć tylko taką możliwość ruchu
+        isPacmanOnWay(destinations, e);
+        if (destinations.size() != 0) return destinations;
 
         //jesli nie ma pacmana, podaj wszystkie możliwe kierunki
         for (int i = 0; i < currentOptions.length; i++) {
@@ -348,75 +351,76 @@ public class Enemy extends Character implements MapTile {
         return destinations;
     }
 
-//todo
-//    private ArrayList<Integer> isPacmanOnWay(ArrayList<Integer> destinations, Enemy e) { // sprawdzić czy da się tam bezposrednio dotrzec
-//        if (player.getCurrentRow() == e.currentRow) {
-//            if (player.getCurrentColumn() < e.currentColumn) {
-//                boolean thereIsSomethingOnWay = false;
-//                for (int i = e.currentColumn - 1; i >= player.currentColumn; i--) {
-//                    if (!mapModel.getValueAt(e.currentRow, i).equals(pustePole) || !mapModel.getValueAt(e.currentRow, i).equals(cookieBig)
-//                            || !mapModel.getValueAt(e.currentRow, i).equals(cookieSmall) || !mapModel.getValueAt(e.currentRow, i).equals(pacman)) {
-//                        thereIsSomethingOnWay = true;
-//                        break;
-//                    }
-//                }
-//                if (!thereIsSomethingOnWay) {
-//                    destinations.add(3);
-//                    return destinations;
-//                }
-//            }
-//            if (player.getCurrentColumn() > e.currentColumn) {
-//
-//                boolean thereIsSomethingOnWay = false;
-//                for (int i = e.currentColumn + 1; i <= player.currentColumn; i++) {
-//                    if (!mapModel.getValueAt(e.currentRow, i).equals(pustePole) || !mapModel.getValueAt(e.currentRow, i).equals(cookieBig)
-//                            || !mapModel.getValueAt(e.currentRow, i).equals(cookieSmall) || !mapModel.getValueAt(e.currentRow, i).equals(pacman)) {
-//                        thereIsSomethingOnWay = true;
-//                        break;
-//                    }
-//                }
-//                if (!thereIsSomethingOnWay) {
-//                    destinations.add(2);
-//                    return destinations;
-//                }
-//            }
-//        }
-//        if (player.getCurrentColumn() == currentColumn) {
-//            if (player.getCurrentRow() < e.currentRow) {
-//                boolean thereIsSomethingOnWay = false;
-//                for (int i = e.currentRow - 1; i >= player.currentColumn; i--) {
-//                    if (!mapModel.getValueAt(i, e.currentColumn).equals(pustePole) || !mapModel.getValueAt(i, e.currentColumn).equals(cookieBig)
-//                            || !mapModel.getValueAt(i, e.currentColumn).equals(cookieSmall) || !mapModel.getValueAt(i, e.currentColumn).equals(pacman)) {
-//                        thereIsSomethingOnWay = true;
-//                        break;
-//                    }
-//                }
-//                if (!thereIsSomethingOnWay) {
-//                    destinations.add(1);
-//                    return destinations;
-//                }
-//            }
-//            if (player.getCurrentRow() > e.currentRow) {
-//                boolean thereIsSomethingOnWay = false;
-//                for (int i = e.currentRow + 1; i <= player.currentColumn; i++) {
-//                    if (!mapModel.getValueAt(i, e.currentColumn).equals(pustePole) || !mapModel.getValueAt(i, e.currentColumn).equals(cookieBig)
-//                            || !mapModel.getValueAt(i, e.currentColumn).equals(cookieSmall) || !mapModel.getValueAt(i, e.currentColumn).equals(pacman)) {
-//                        thereIsSomethingOnWay = true;
-//                        break;
-//                    }
-//                }
-//                if (!thereIsSomethingOnWay) {
-//                    destinations.add(0);
-//                    return destinations;
-//                }
-//            }
-//        }
-//        return destinations;
-//    }
+
+    private ArrayList<Integer> isPacmanOnWay(ArrayList<Integer> destinations, Enemy e) {
+        if (player.getCurrentRow() == e.currentRow) {
+            if (player.getCurrentColumn() < e.currentColumn) {
+                boolean thereIsSomethingOnWay = false;
+                for (int i = e.currentColumn - 1; i >= player.currentColumn + 1; i--) {
+                    if (!mapModel.getValueAt(e.currentRow, i).equals(pustePole) && !mapModel.getValueAt(e.currentRow, i).equals(cookieBig)
+                            && !mapModel.getValueAt(e.currentRow, i).equals(cookieSmall)) {
+                        thereIsSomethingOnWay = true;
+                        break;
+                    }
+                }
+                if (!thereIsSomethingOnWay) {
+                    destinations.add(3);
+                    return destinations;
+                }
+            }
+            if (player.getCurrentColumn() > e.currentColumn) {
+
+                boolean thereIsSomethingOnWay = false;
+                for (int i = e.currentColumn + 1; i <= player.currentColumn - 1; i++) {
+                    if (!mapModel.getValueAt(e.currentRow, i).equals(pustePole) && !mapModel.getValueAt(e.currentRow, i).equals(cookieBig)
+                            && !mapModel.getValueAt(e.currentRow, i).equals(cookieSmall)) {
+                        thereIsSomethingOnWay = true;
+                        break;
+                    }
+                }
+                if (!thereIsSomethingOnWay) {
+                    destinations.add(2);
+                    return destinations;
+                }
+            }
+        }
+        if (player.getCurrentColumn() == currentColumn) {
+            if (player.getCurrentRow() < e.currentRow) {
+                boolean thereIsSomethingOnWay = false;
+                for (int i = e.currentRow - 1; i >= player.currentColumn + 1; i--) {
+                    if (!mapModel.getValueAt(i, e.currentColumn).equals(pustePole) && !mapModel.getValueAt(i, e.currentColumn).equals(cookieBig)
+                            && !mapModel.getValueAt(i, e.currentColumn).equals(cookieSmall)) {
+                        thereIsSomethingOnWay = true;
+                        break;
+                    }
+                }
+                if (!thereIsSomethingOnWay) {
+                    destinations.add(0);
+                    return destinations;
+                }
+            }
+            if (player.getCurrentRow() > e.currentRow) {
+                boolean thereIsSomethingOnWay = false;
+                for (int i = e.currentRow + 1; i <= player.currentColumn - 1; i++) {
+                    if (!mapModel.getValueAt(i, e.currentColumn).equals(pustePole) && !mapModel.getValueAt(i, e.currentColumn).equals(cookieBig)
+                            && !mapModel.getValueAt(i, e.currentColumn).equals(cookieSmall)) {
+                        thereIsSomethingOnWay = true;
+                        break;
+                    }
+                }
+                if (!thereIsSomethingOnWay) {
+                    destinations.add(1);
+                    return destinations;
+                }
+            }
+        }
+        return destinations;
+    }
 
     private boolean isDestinationFreeToGo(int[] currentOptions, int i) {
 
-        return currentOptions[i] == pustePole || currentOptions[i] == cookieSmall || currentOptions[i] == cookieBig || currentOptions[i] == gate || currentOptions[i] == pacman;
+        return currentOptions[i] == pustePole || currentOptions[i] == cookieSmall || currentOptions[i] == cookieBig
+                || currentOptions[i] == gate || mapModel.getValueAt(player.currentRow, player.currentColumn).equals(currentOptions[i]);
     }
 
     public void eatenByPacman(Enemy e) {
