@@ -54,7 +54,7 @@ public class GameThread extends Thread {
 
         for (Enemy enemy : enemies) {
             enemy.updateAI();
-            if (tick % 5 == 0) {
+            if (tick % 10 == 0) {
                 enemy.spawnBonuses();
             }
         }

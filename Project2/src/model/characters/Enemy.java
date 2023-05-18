@@ -15,8 +15,7 @@ import java.util.Random;
 
 import static model.DrawableObjects.addDrawable;
 import static model.map.MapGenerator.*;
-import static model.map.MapModel.enemies;
-import static model.map.MapModel.player;
+import static model.map.MapModel.*;
 
 public class Enemy extends Character implements MapTile {
 
@@ -137,22 +136,62 @@ public class Enemy extends Character implements MapTile {
     }
 
     public void spawnBonuses() {
-        double rand = Math.random();
-        if (rand > 0.25) return;
 
-        Random random = new Random();
+        if (this.ghostChasingState == GhostChasingState.GhostsSCARED) return;
+
+        double rand = Math.random();
+        if (rand > 0.2) return;
+
         Bonuses currentBonus = getRandomEnumElement(Bonuses.class);
 
         switch (currentBonus) {
-            case LEAF -> {
+            case LEAF -> { //60
+                if (valueUnderWhereIsStanding == cookieSmall || valueUnderWhereIsStanding == cookieBig) {
+                    cookiesCounter--;
+                }
+                this.valueUnderWhereIsStanding = 60;
             }
-            case CARROT -> {
+            case CARROT -> { //61
+                if (valueUnderWhereIsStanding == cookieSmall || valueUnderWhereIsStanding == cookieBig) {
+                    cookiesCounter--;
+                }
+                this.valueUnderWhereIsStanding = 61;
             }
-            case AVOCADO -> {
+            case AVOCADO -> { //62
+                if (valueUnderWhereIsStanding == cookieSmall || valueUnderWhereIsStanding == cookieBig) {
+                    cookiesCounter--;
+                }
+                this.valueUnderWhereIsStanding = 62;
             }
-            case MUSCHROOM -> {
+            case MUSCHROOM -> { //63
+                if (valueUnderWhereIsStanding == cookieSmall || valueUnderWhereIsStanding == cookieBig) {
+                    cookiesCounter--;
+                }
+                this.valueUnderWhereIsStanding = 63;
             }
-            case PINEAPPLE -> {
+            case PINEAPPLE -> { //64
+                if (valueUnderWhereIsStanding == cookieSmall || valueUnderWhereIsStanding == cookieBig) {
+                    cookiesCounter--;
+                }
+                this.valueUnderWhereIsStanding = 64;
+            }
+            case STRAWBERRY -> { //65
+                if (valueUnderWhereIsStanding == cookieSmall || valueUnderWhereIsStanding == cookieBig) {
+                    cookiesCounter--;
+                }
+                this.valueUnderWhereIsStanding = 65;
+            }
+            case DONUT -> { //66
+                if (valueUnderWhereIsStanding == cookieSmall || valueUnderWhereIsStanding == cookieBig) {
+                    cookiesCounter--;
+                }
+                this.valueUnderWhereIsStanding = 66;
+            }
+            case APPLE -> { //67
+                if (valueUnderWhereIsStanding == cookieSmall || valueUnderWhereIsStanding == cookieBig) {
+                    cookiesCounter--;
+                }
+                this.valueUnderWhereIsStanding = 67;
             }
         }
     }

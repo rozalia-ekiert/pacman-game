@@ -81,6 +81,15 @@ public class MapComponentsRenderer extends DefaultTableCellRenderer {
             DrawableObjects.addDrawable(4331, new Wall(ImageIO.read(new File("assets/enemies_icons/purple/purple_1_straight.png"))));
             DrawableObjects.addDrawable(4332, new Wall(ImageIO.read(new File("assets/enemies_icons/purple/purple_2_straight.png"))));
 
+            //food bonuses
+            DrawableObjects.addDrawable(60, new Wall(ImageIO.read(new File("assets/food_bonus_icons/leaf.png"))));
+            DrawableObjects.addDrawable(61, new Wall(ImageIO.read(new File("assets/food_bonus_icons/carrot.png"))));
+            DrawableObjects.addDrawable(62, new Wall(ImageIO.read(new File("assets/food_bonus_icons/avocado.png"))));
+            DrawableObjects.addDrawable(63, new Wall(ImageIO.read(new File("assets/food_bonus_icons/mushroom.png"))));
+            DrawableObjects.addDrawable(64, new Wall(ImageIO.read(new File("assets/food_bonus_icons/pineapple.png"))));
+            DrawableObjects.addDrawable(65, new Wall(ImageIO.read(new File("assets/food_bonus_icons/strawberry.png"))));
+            DrawableObjects.addDrawable(66, new Wall(ImageIO.read(new File("assets/food_bonus_icons/donut.png"))));
+            DrawableObjects.addDrawable(67, new Wall(ImageIO.read(new File("assets/food_bonus_icons/apple.png"))));
 
             File dir = new File("assets/walls");
             File[] directoryListing = dir.listFiles();

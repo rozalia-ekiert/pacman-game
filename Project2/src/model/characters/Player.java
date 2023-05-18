@@ -139,6 +139,11 @@ public class Player extends Character implements MapTile {
             }
         }
         if (isWall(getCurrentRow(), Y)) return;
+        if (isFood(getCurrentRow(), Y)) {
+            mapModel.setValueAt(pustePole, player.getCurrentRow(), player.getCurrentColumn());
+            mapModel.setValueAt(player.getMapCode(), player.getCurrentRow(), Y);
+            return;
+        }
         if (mapModel.getValueAt(getCurrentRow(), Y).equals(cookieSmall) || mapModel.getValueAt(getCurrentRow(), Y).equals(cookieBig)) {
             if (mapModel.getValueAt(getCurrentRow(), Y).equals(cookieSmall)) {
                 CurrentStats.yourScore += 10;
@@ -175,6 +180,11 @@ public class Player extends Character implements MapTile {
             }
         }
         if (isWall(X, getCurrentColumn()) || isGate(X, getCurrentColumn())) return;
+        if (isFood(X, getCurrentColumn())) {
+            mapModel.setValueAt(pustePole, player.getCurrentRow(), player.getCurrentColumn());
+            mapModel.setValueAt(player.getMapCode(), X, player.getCurrentColumn());
+            return;
+        }
         if (mapModel.getValueAt(X, getCurrentColumn()).equals(cookieSmall) || mapModel.getValueAt(X, getCurrentColumn()).equals(cookieBig)) {
             if (mapModel.getValueAt(X, getCurrentColumn()).equals(cookieSmall)) CurrentStats.yourScore += 10;
 
@@ -191,6 +201,33 @@ public class Player extends Character implements MapTile {
         }
         mapModel.setValueAt(pustePole, player.getCurrentRow(), player.getCurrentColumn());
         mapModel.setValueAt(player.getMapCode(), X, player.getCurrentColumn());
+    }
+
+    private boolean isFood(int x, int y) {
+
+        if (mapModel.getValueAt(x, y).equals(60)) {
+            return true;
+        }
+        if (mapModel.getValueAt(x, y).equals(61)) {
+            return true;
+        }
+        if (mapModel.getValueAt(x, y).equals(62)) {
+            return true;
+        }
+        if (mapModel.getValueAt(x, y).equals(63)) {
+            return true;
+        }
+        if (mapModel.getValueAt(x, y).equals(64)) {
+            return true;
+        }
+
+        if (mapModel.getValueAt(x, y).equals(65) || mapModel.getValueAt(x, y).equals(66) || mapModel.getValueAt(x, y).equals(67)) {
+            CurrentStats.yourScore += 200;
+            CurrentStats.setYourScore.setText(NumberFormatter.changeScoreToString(CurrentStats.yourScore));
+            Game.gameWindow.currentStats.compareYourAndHighScore();
+            return true;
+        }
+        return false;
     }
 
     @Override
