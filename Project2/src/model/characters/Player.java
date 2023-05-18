@@ -73,6 +73,21 @@ public class Player extends Character implements MapTile {
         CurrentStats.model.fireTableDataChanged();
     }
 
+    private void addLife() {
+        int counter = 0;
+
+        for (int i = 0; i < CurrentStats.livesRows; i++) {
+            for (int j = 0; j < 5; j++) {
+                counter++;
+                if (CurrentStats.livesTable.getValueAt(i, j).equals(19)) {
+                    CurrentStats.livesTable.setValueAt(33, i, j);
+                    CurrentStats.model.fireTableDataChanged();
+                    return;
+                }
+            }
+        }
+    }
+
     public void updatePacmanAnimation(int counter) {
 
         int currentOpen = pacOpenessState[counter];
@@ -206,12 +221,14 @@ public class Player extends Character implements MapTile {
     private boolean isFood(int x, int y) {
 
         if (mapModel.getValueAt(x, y).equals(60)) {
+
             return true;
         }
         if (mapModel.getValueAt(x, y).equals(61)) {
             return true;
         }
         if (mapModel.getValueAt(x, y).equals(62)) {
+            if (CurrentStats.livesNumber < 5) addLife();
             return true;
         }
         if (mapModel.getValueAt(x, y).equals(63)) {

@@ -34,6 +34,7 @@ public class CurrentStats extends JPanel {
     public static int lifeCellSize;
     JLabel livesArea;
     public static GameThread timeThread;
+    Font currentButterbelly;
 
     public CurrentStats(int width, int height, PACMANGame pacmanGame) {
 
@@ -48,7 +49,7 @@ public class CurrentStats extends JPanel {
 
         this.setLayout(new GridBagLayout());
 
-        Font currentButterbelly = new Font("Butterbelly", Font.PLAIN, 40);
+        currentButterbelly = new Font("Butterbelly", Font.PLAIN, 40);
 
         //======================================================================
 
@@ -87,14 +88,14 @@ public class CurrentStats extends JPanel {
         setTime.setFont(currentButterbelly);
 
         //===========================================
-        setLivesTable(currentButterbelly);
+        setLivesTable();
         setLayout();
 
         timeThread = new GameThread(setTime, pacmanGame);
         timeThread.start();
     }
 
-    private void setLivesTable(Font currentButterbelly) {
+    private void setLivesTable() {
         this.livesArea = new JLabel("lives:");
         livesArea.setBackground(Color.BLACK);
         livesArea.setForeground(Color.WHITE);
