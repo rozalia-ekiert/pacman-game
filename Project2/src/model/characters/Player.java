@@ -234,7 +234,6 @@ public class Player extends Character implements MapTile {
 
         if (mapModel.getValueAt(x, y).equals(60)) {
             this.bonusState = Bonuses.LEAF;
-
             Comments.message.setText(Comments.messageLeafBonus);
             messageTimer.start();
             return true;
@@ -242,14 +241,23 @@ public class Player extends Character implements MapTile {
         if (mapModel.getValueAt(x, y).equals(61)) {
             return true;
         }
-        if (mapModel.getValueAt(x, y).equals(62)) { //done
+        if (mapModel.getValueAt(x, y).equals(62)) {
             if (CurrentStats.livesNumber < 5) addLife();
             return true;
         }
         if (mapModel.getValueAt(x, y).equals(63)) {
+            GameThread.updatesPerSecond = 1;
+            this.bonusState = Bonuses.MUSCHROOM;
             return true;
         }
         if (mapModel.getValueAt(x, y).equals(64)) {
+            for (Enemy e : enemies) {
+                mapModel.setValueAt(e.valueUnderWhereIsStanding, e.currentRow, e.currentColumn);
+                e.setCurrentColumn(e.spawnLocationColumn);
+                e.setCurrentRow(e.spawnLocationRow);
+                e.currentColorCode = 19;
+                Enemy.possibleToMove = false;
+            }
             return true;
         }
 
@@ -297,6 +305,10 @@ public class Player extends Character implements MapTile {
     }
 
     public void resetBonusesState() {
+        if (!Enemy.possibleToMove) Enemy.possibleToMove = true;
+        for (Enemy e : enemies) {
+            if (e.currentColorCode == 18) e.currentColorCode = e.originalColorCode;
+        }
         this.bonusState = null;
     }
 

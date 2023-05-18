@@ -4,6 +4,7 @@ import model.characters.components.GhostChasingState;
 import model.characters.components.GhostsColors;
 import model.characters.components.MapTile;
 import model.game.Bonuses;
+import model.game.GameThread;
 import views.game.components.panels.gameWindow.CurrentStats;
 
 import javax.imageio.ImageIO;
@@ -25,6 +26,7 @@ public class Enemy extends Character implements MapTile {
     int originalColorCode;
     int currentColorCode;
     boolean passedTheGate;
+    public static boolean possibleToMove = false;
 
     GhostChasingState ghostChasingState;
     int pointsForEatingGhosts = 200;
@@ -91,6 +93,10 @@ public class Enemy extends Character implements MapTile {
     }
 
     public void updateAI() {
+
+        if (possibleToMove == false) {
+            return;
+        }
         setNewDestination();
     }
 
@@ -138,6 +144,9 @@ public class Enemy extends Character implements MapTile {
     public void spawnBonuses() {
 
         if (this.ghostChasingState == GhostChasingState.GhostsSCARED) return;
+
+        if (player.bonusState != null) player.bonusState = null;
+        if (GameThread.updatesPerSecond != 2) GameThread.updatesPerSecond = 2;
 
         double rand = Math.random();
         if (rand > 0.2) return;

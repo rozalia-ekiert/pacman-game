@@ -15,7 +15,7 @@ public class GameThread extends Thread {
     public static final AtomicBoolean isGameViewReady = new AtomicBoolean(false);
     PACMANGame pacmanGame;
     private final JLabel timeLabel;
-    final int updatesPerSecond = 2;
+    public static int updatesPerSecond = 2;
     final int animationUpdatePerSecond = 8;
     int pacCounter = 0;
     int enemyCounter = 0;
@@ -55,10 +55,8 @@ public class GameThread extends Thread {
         for (Enemy enemy : enemies) {
             enemy.updateAI();
             if (tick % 10 == 0) {
-                enemy.spawnBonuses();
-            }
-            if (tick % 20 == 0) {
                 player.resetBonusesState();
+                enemy.spawnBonuses();
             }
         }
     }
