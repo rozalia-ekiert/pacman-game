@@ -33,6 +33,8 @@ public class Player extends Character implements MapTile {
     public Destination destination;
     int[] pacOpenessState = new int[]{22, 23, 24, 23};
     public Bonuses bonusState;
+    public static int numberOfBonusesOnMap = 0;
+
 
     public Player(MapModel mapModel) {
         super(mapModel);
@@ -169,6 +171,7 @@ public class Player extends Character implements MapTile {
         if (isFood(getCurrentRow(), Y)) {
             mapModel.setValueAt(pustePole, player.getCurrentRow(), player.getCurrentColumn());
             mapModel.setValueAt(player.getMapCode(), player.getCurrentRow(), Y);
+            numberOfBonusesOnMap--;
             return;
         }
         if (mapModel.getValueAt(getCurrentRow(), Y).equals(cookieSmall) || mapModel.getValueAt(getCurrentRow(), Y).equals(cookieBig)) {
@@ -206,10 +209,17 @@ public class Player extends Character implements MapTile {
                 }
             }
         }
-        if (isWall(X, getCurrentColumn()) || isGate(X, getCurrentColumn())) return;
+        if (isWall(X, getCurrentColumn()) || isGate(X, getCurrentColumn())) {
+//            if (bonusState==Bonuses.CARROT){
+//                mapModel.setValueAt(pustePole, player.getCurrentRow(), player.getCurrentColumn());
+//                mapModel.setValueAt(player.getMapCode(), X, player.getCurrentColumn());
+//            }
+            return;
+        }
         if (isFood(X, getCurrentColumn())) {
             mapModel.setValueAt(pustePole, player.getCurrentRow(), player.getCurrentColumn());
             mapModel.setValueAt(player.getMapCode(), X, player.getCurrentColumn());
+            numberOfBonusesOnMap--;
             return;
         }
         if (mapModel.getValueAt(X, getCurrentColumn()).equals(cookieSmall) || mapModel.getValueAt(X, getCurrentColumn()).equals(cookieBig)) {
@@ -239,6 +249,9 @@ public class Player extends Character implements MapTile {
             return true;
         }
         if (mapModel.getValueAt(x, y).equals(61)) {
+            this.bonusState = Bonuses.CARROT;
+            Comments.message.setText(Comments.messageCarrotBonus);
+            messageTimer.start();
             return true;
         }
         if (mapModel.getValueAt(x, y).equals(62)) {

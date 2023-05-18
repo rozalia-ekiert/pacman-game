@@ -146,14 +146,17 @@ public class Enemy extends Character implements MapTile {
 
     public void spawnBonuses() {
 
+        if (GameThread.updatesPerSecond != 2) GameThread.updatesPerSecond = 2;
+        if (player.bonusState != null) player.bonusState = null;
         if (this.ghostChasingState == GhostChasingState.GhostsSCARED) return;
         if (this.currentRow == this.spawnLocationRow && this.currentColumn == this.spawnLocationColumn
                 || mapModel.getValueAt(this.currentRow, this.currentColumn).equals(gate)) return;
-        if (player.bonusState != null) player.bonusState = null;
-        if (GameThread.updatesPerSecond != 2) GameThread.updatesPerSecond = 2;
+        if (Player.numberOfBonusesOnMap > 5) return;
 
         double rand = Math.random();
         if (rand > 0.2) return;
+
+        Player.numberOfBonusesOnMap++;
 
         Bonuses currentBonus = getRandomEnumElement(Bonuses.class);
 
@@ -206,8 +209,6 @@ public class Enemy extends Character implements MapTile {
                 }
                 this.valueUnderWhereIsStanding = 67;
             }
-
-            //todo niemoga sie generowac w pudelku
         }
     }
 
@@ -256,7 +257,6 @@ public class Enemy extends Character implements MapTile {
                 this.valueUnderWhereIsStanding = (int) mapModel.getValueAt(this.currentRow - 1, this.currentColumn);
                 this.setCurrentRow(this.currentRow - 1);
                 mapModel.setValueAt(this.currentColorCode, this.currentRow, this.currentColumn);
-                possibleDestinations = null;
             }
 
             case 1 -> { //w dół
@@ -277,7 +277,6 @@ public class Enemy extends Character implements MapTile {
                 this.valueUnderWhereIsStanding = (int) mapModel.getValueAt(this.currentRow + 1, this.currentColumn);
                 this.setCurrentRow(this.currentRow + 1);
                 mapModel.setValueAt(this.currentColorCode, this.currentRow, this.currentColumn);
-                possibleDestinations = null;
             }
 
             case 2 -> { //w prawo
@@ -295,7 +294,6 @@ public class Enemy extends Character implements MapTile {
                 this.valueUnderWhereIsStanding = (int) mapModel.getValueAt(this.currentRow, this.currentColumn + 1);
                 this.setCurrentColumn(this.currentColumn + 1);
                 mapModel.setValueAt(this.currentColorCode, this.currentRow, this.currentColumn);
-                possibleDestinations = null;
             }
 
             case 3 -> { //w lewo
@@ -313,7 +311,6 @@ public class Enemy extends Character implements MapTile {
                 this.valueUnderWhereIsStanding = (int) mapModel.getValueAt(this.currentRow, this.currentColumn - 1);
                 this.setCurrentColumn(this.currentColumn - 1);
                 mapModel.setValueAt(this.currentColorCode, this.currentRow, this.currentColumn);
-                possibleDestinations = null;
             }
         }
     }
@@ -420,17 +417,6 @@ public class Enemy extends Character implements MapTile {
     private boolean isDestinationFreeToGo(int[] currentOptions, int i) {
 
         return currentOptions[i] == pustePole || currentOptions[i] == cookieSmall || currentOptions[i] == cookieBig || currentOptions[i] == gate || currentOptions[i] == pacman;
-    }
-
-    public void setDefaultGhostsLocalization() {
-        for (Enemy e : enemies) {
-            mapModel.setValueAt(e.originalColorCode, e.spawnLocationRow, e.spawnLocationColumn);
-            mapModel.setValueAt(e.valueUnderWhereIsStanding, e.currentRow, e.currentColumn);
-            e.currentRow = e.spawnLocationRow;
-            e.currentColumn = e.spawnLocationColumn;
-            e.passedTheGate = false;
-            e.valueUnderWhereIsStanding = 1000;
-        }
     }
 
     public void eatenByPacman(Enemy e) {
