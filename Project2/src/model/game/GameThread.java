@@ -57,6 +57,9 @@ public class GameThread extends Thread {
             if (tick % 10 == 0) {
                 enemy.spawnBonuses();
             }
+            if (tick % 20 == 0) {
+                player.resetBonusesState();
+            }
         }
     }
 

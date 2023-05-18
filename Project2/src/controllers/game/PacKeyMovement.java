@@ -1,6 +1,7 @@
 package controllers.game;
 
 import model.characters.components.Destination;
+import model.game.Bonuses;
 import model.game.GameThread;
 import model.map.MapModel;
 import views.GameColors;
@@ -61,6 +62,39 @@ public class PacKeyMovement implements KeyListener {
 
             CurrentStats.livesNumber = 5;
             CurrentStats.yourScore = 0;
+            return;
+        }
+
+        if (player.bonusState == Bonuses.LEAF) {
+            switch (e.getKeyCode()) {
+                case KeyEvent.VK_S, KeyEvent.VK_DOWN -> {
+                    player.destination = Destination.UP;
+                    player.moveHorizontally(player.getCurrentRow() - 1);
+                }
+
+                case KeyEvent.VK_A, KeyEvent.VK_LEFT -> {
+                    player.destination = Destination.LEFT;
+                    if (player.getCurrentColumn() - 1 < 0) {
+                        player.moveVertically(mapModel.getColumnCount() - 1);
+                        return;
+                    }
+                    player.moveVertically(player.getCurrentColumn() - 1);
+                }
+
+                case KeyEvent.VK_W, KeyEvent.VK_UP -> {
+                    player.destination = Destination.DOWN;
+                    player.moveHorizontally(player.getCurrentRow() + 1);
+                }
+
+                case KeyEvent.VK_D, KeyEvent.VK_RIGHT -> {
+                    player.destination = Destination.RIGHT;
+                    if (player.getCurrentColumn() + 1 > mapModel.getColumnCount() - 1) {
+                        player.moveVertically(0);
+                        return;
+                    }
+                    player.moveVertically(player.getCurrentColumn() + 1);
+                }
+            }
             return;
         }
 

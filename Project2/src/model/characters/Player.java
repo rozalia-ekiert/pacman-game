@@ -5,6 +5,7 @@ import model.NumberFormatter;
 import model.characters.components.Destination;
 import model.characters.components.GhostChasingState;
 import model.characters.components.MapTile;
+import model.game.Bonuses;
 import model.game.GameThread;
 import model.highScore.RankingEntry;
 import model.map.MapGenerator;
@@ -29,6 +30,7 @@ public class Player extends Character implements MapTile {
 
     public Destination destination;
     int[] pacOpenessState = new int[]{22, 23, 24, 23};
+    public Bonuses bonusState;
 
     public Player(MapModel mapModel) {
         super(mapModel);
@@ -40,6 +42,7 @@ public class Player extends Character implements MapTile {
             throw new RuntimeException(e);
         }
         destination = Destination.RIGHT;
+        bonusState = null;
     }
 
     @Override
@@ -75,6 +78,7 @@ public class Player extends Character implements MapTile {
 
     private void addLife() {
         int counter = 0;
+        CurrentStats.livesNumber += 1;
 
         for (int i = 0; i < CurrentStats.livesRows; i++) {
             for (int j = 0; j < 5; j++) {
@@ -221,13 +225,13 @@ public class Player extends Character implements MapTile {
     private boolean isFood(int x, int y) {
 
         if (mapModel.getValueAt(x, y).equals(60)) {
-
+            this.bonusState = Bonuses.LEAF;
             return true;
         }
         if (mapModel.getValueAt(x, y).equals(61)) {
             return true;
         }
-        if (mapModel.getValueAt(x, y).equals(62)) {
+        if (mapModel.getValueAt(x, y).equals(62)) { //done
             if (CurrentStats.livesNumber < 5) addLife();
             return true;
         }
@@ -279,6 +283,10 @@ public class Player extends Character implements MapTile {
             Comments.message.setText(Comments.messageCookiesEaten);
             messageTimer.start();
         }
+    }
+
+    public void resetBonusesState() {
+        this.bonusState = null;
     }
 
     @Override
