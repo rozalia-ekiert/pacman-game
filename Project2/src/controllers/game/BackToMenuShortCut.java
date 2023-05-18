@@ -1,5 +1,6 @@
 package controllers.game;
 
+import model.characters.Player;
 import model.game.GameThread;
 import views.GameColors;
 import views.PACMANGame;
@@ -46,6 +47,7 @@ public class BackToMenuShortCut implements KeyEventDispatcher {
 
             GameCardPanel.currentCardName = GameCardPanel.START_SCREEN_1;
 
+            Player.numberOfBonusesOnMap = 0;
             CurrentStats.livesNumber = 5;
             CurrentStats.yourScore = 0;
             return true;

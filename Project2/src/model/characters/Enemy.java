@@ -154,7 +154,7 @@ public class Enemy extends Character implements MapTile {
         if (Player.numberOfBonusesOnMap > 5) return;
 
         double rand = Math.random();
-        if (rand > 0.2) return;
+        if (rand > 0.25) return;
 
         Player.numberOfBonusesOnMap++;
 

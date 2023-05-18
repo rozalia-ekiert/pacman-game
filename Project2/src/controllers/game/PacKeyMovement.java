@@ -1,5 +1,6 @@
 package controllers.game;
 
+import model.characters.Player;
 import model.characters.components.Destination;
 import model.game.Bonuses;
 import model.game.GameThread;
@@ -60,6 +61,7 @@ public class PacKeyMovement implements KeyListener {
 
             GameCardPanel.currentCardName = GameCardPanel.START_SCREEN_1;
 
+            Player.numberOfBonusesOnMap = 0;
             CurrentStats.livesNumber = 5;
             CurrentStats.yourScore = 0;
             return;

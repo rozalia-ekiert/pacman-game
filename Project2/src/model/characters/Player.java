@@ -34,6 +34,7 @@ public class Player extends Character implements MapTile {
     int[] pacOpenessState = new int[]{22, 23, 24, 23};
     public Bonuses bonusState;
     public static int numberOfBonusesOnMap = 0;
+    private int lastStepValue = pustePole;
 
 
     public Player(MapModel mapModel) {
@@ -145,6 +146,7 @@ public class Player extends Character implements MapTile {
         HighScores.ranking = new JList(HighScores.rankingModel);
 
         GameThread.isReady.set(false);
+        Player.numberOfBonusesOnMap = 0;
         CurrentStats.livesNumber = 5;
         CurrentStats.yourScore = 0;
         enemies = null;
@@ -167,7 +169,18 @@ public class Player extends Character implements MapTile {
                 }
             }
         }
-        if (isWall(getCurrentRow(), Y)) return;
+
+        if (isWall(getCurrentRow(), Y)) {
+            if (bonusState == Bonuses.CARROT) {
+                mapModel.setValueAt(lastStepValue, player.getCurrentRow(), player.getCurrentColumn());
+
+                lastStepValue = (int) mapModel.getValueAt(player.getCurrentRow(), Y);
+                if (lastStepValue == cookieBig || lastStepValue == cookieSmall) lastStepValue = pustePole;
+
+                mapModel.setValueAt(player.getMapCode(), getCurrentRow(), Y);
+            }
+            return;
+        }
         if (isFood(getCurrentRow(), Y)) {
             mapModel.setValueAt(pustePole, player.getCurrentRow(), player.getCurrentColumn());
             mapModel.setValueAt(player.getMapCode(), player.getCurrentRow(), Y);
@@ -189,7 +202,12 @@ public class Player extends Character implements MapTile {
                 return;
             }
         }
-        mapModel.setValueAt(pustePole, player.getCurrentRow(), player.getCurrentColumn());
+        if (lastStepValue <= 16) {
+            mapModel.setValueAt(lastStepValue, player.getCurrentRow(), player.getCurrentColumn());
+            lastStepValue = pustePole;
+        } else {
+            mapModel.setValueAt(pustePole, player.getCurrentRow(), player.getCurrentColumn());
+        }
         mapModel.setValueAt(player.getMapCode(), player.getCurrentRow(), Y);
     }
 
@@ -210,10 +228,14 @@ public class Player extends Character implements MapTile {
             }
         }
         if (isWall(X, getCurrentColumn()) || isGate(X, getCurrentColumn())) {
-//            if (bonusState==Bonuses.CARROT){
-//                mapModel.setValueAt(pustePole, player.getCurrentRow(), player.getCurrentColumn());
-//                mapModel.setValueAt(player.getMapCode(), X, player.getCurrentColumn());
-//            }
+            if (bonusState == Bonuses.CARROT) {
+                mapModel.setValueAt(lastStepValue, player.getCurrentRow(), player.getCurrentColumn());
+
+                lastStepValue = (int) mapModel.getValueAt(X, player.getCurrentColumn());
+                if (lastStepValue == cookieBig || lastStepValue == cookieSmall) lastStepValue = pustePole;
+
+                mapModel.setValueAt(player.getMapCode(), X, player.getCurrentColumn());
+            }
             return;
         }
         if (isFood(X, getCurrentColumn())) {
@@ -236,7 +258,12 @@ public class Player extends Character implements MapTile {
                 return;
             }
         }
-        mapModel.setValueAt(pustePole, player.getCurrentRow(), player.getCurrentColumn());
+        if (lastStepValue <= 16) {
+            mapModel.setValueAt(lastStepValue, player.getCurrentRow(), player.getCurrentColumn());
+            lastStepValue = pustePole;
+        } else {
+            mapModel.setValueAt(pustePole, player.getCurrentRow(), player.getCurrentColumn());
+        }
         mapModel.setValueAt(player.getMapCode(), X, player.getCurrentColumn());
     }
 
