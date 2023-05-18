@@ -25,7 +25,6 @@ public class Comments extends JPanel {
 
         message = new JLabel();
         message.setText(messageDefault);
-//        message.setSize(new Dimension(getSize().width, (int) (height * 0.15)));
         message.setFont(pacmanGame.Butterbelly);
 
         gbc.gridx = 0;

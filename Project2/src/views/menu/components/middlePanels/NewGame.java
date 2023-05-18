@@ -22,10 +22,10 @@ public class NewGame extends JPanel {
             "Vestibulum placerat metus vitae justo rutrum mollis. Nam blandit<br>" +
             "rhoncus neque molestie vulputate.</html>";
     public JButton play;
-    private String windowGameSize = "SET WINDOW GAME SIZE";
+    private String windowGameSize = "SET GAME SIZE";
     private int width;
     private int height;
-    private String yourNick = "SET YOUR NICKNAME";
+    private String yourNick = "SET NICKNAME";
 
     public static final String warningFieldIsNotCorrectSize = "<html><font color=#A60909>Please set the size between 10x10 and 100x100.</font></html>";
     public static final String warningYourNickExists = "<html><font color=#A60909>Nick is blank or already exists. Please choose new nick.</font></html>";
@@ -73,7 +73,7 @@ public class NewGame extends JPanel {
         columns.setFont(font2);
         columns.setEditable(false);
 
-        GradientText gradientText = new GradientText(this.text, pacmanGame);
+        GradientText gradientText = new GradientText();
 
         //------------------------------------------ wiersz 2
         warningField = new JLabel(warningFieldIsNotCorrectSizeDefaut);
@@ -268,9 +268,9 @@ public class NewGame extends JPanel {
 
         gbc.gridx = 3;
         gbc.gridy = 0;
-        gbc.gridheight = 8;
+        gbc.gridheight = 6;
         gbc.gridwidth = 1;
-        gbc.insets = new Insets(20, 80, 20, 0); // 40 x 40
+        gbc.insets = new Insets(20, 80, 20, 0);
         gbc.weightx = 0.0;
         gbc.weighty = 1.0;
         gbc.ipadx = 500;
@@ -296,24 +296,6 @@ public class NewGame extends JPanel {
 
 
 class GradientText extends JPanel {
-
-    public GradientText(String text, PACMANGame pacmanGame) {
-
-//        this.setLayout(new GridBagLayout());
-//
-//        String rules = "RULES";
-//        JLabel rulesLabel = new JLabel(text);
-//        rulesLabel.setForeground(Color.BLACK);
-//        rulesLabel.setFont(pacmanGame.Butterbelly);
-//
-//        Font f2 = new Font("Arimo", Font.PLAIN, 14);
-//        JLabel textLabel = new JLabel(text);
-//        textLabel.setForeground(Color.BLACK);
-//        textLabel.setFont(f2);
-//
-//        this.add(rulesLabel);
-//        this.add(textLabel);
-    }
 
     @Override
     protected void paintComponent(Graphics g) {

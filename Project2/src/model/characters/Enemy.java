@@ -93,7 +93,6 @@ public class Enemy extends Character implements MapTile {
 
     public void updateAI() {
         setNewDestination();
-//        isGhostChased();
     }
 
     public void updateEnemyAnimation(Enemy e, int counter) {
@@ -136,7 +135,7 @@ public class Enemy extends Character implements MapTile {
         return this.ghostChasingState == GhostChasingState.GhostsSCARED;
     }
 
-    public void spawnBonuses() { //todo
+    public void spawnBonuses() {
         double rand = Math.random();
         if (rand > 0.25) return;
 
@@ -283,7 +282,7 @@ public class Enemy extends Character implements MapTile {
             return destinations;
         }
 
-        //jesli na trasie jest pacman to zignoruj inne opcje
+        //todo jesli na trasie jest pacman to zignoruj inne opcje
 
 //        isPacmanOnWay(destinations, e);
 //        if (destinations.size() != 0) return destinations;
@@ -297,6 +296,7 @@ public class Enemy extends Character implements MapTile {
         return destinations;
     }
 
+//todo
 //    private ArrayList<Integer> isPacmanOnWay(ArrayList<Integer> destinations, Enemy e) { // sprawdzić czy da się tam bezposrednio dotrzec
 //        if (player.getCurrentRow() == e.currentRow) {
 //            if (player.getCurrentColumn() < e.currentColumn) {

@@ -1,4 +1,3 @@
-//import model.Map.MapGenerator;
 
 import views.PACMANGame;
 

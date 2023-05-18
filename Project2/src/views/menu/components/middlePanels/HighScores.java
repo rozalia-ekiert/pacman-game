@@ -28,9 +28,11 @@ public class HighScores extends JPanel {
             rankingModel.loadFromFile();
         }
         ranking = new JList(rankingModel);
-        this.add(ranking);
+        DefaultListCellRenderer renderer = (DefaultListCellRenderer) ranking.getCellRenderer();
+        renderer.setHorizontalAlignment(JLabel.CENTER);
         ranking.setFont(currentButterbelly);
         JScrollPane scrollPane = new JScrollPane(ranking);
+        scrollPane.setPreferredSize(new Dimension(800, 250));
 
 
         GridBagConstraints gbc = new GridBagConstraints();

@@ -23,7 +23,6 @@ public class GameStartScreen1 extends JPanel {
 
         JTextArea introTextArea = new JTextArea(introText, 7, 20);
         introTextArea.setFocusable(false);
-//        introTextArea.setFocusTraversalKeysEnabled(false);
         introTextArea.setBackground(Color.BLACK);
         introTextArea.setForeground(Color.WHITE);
         introTextArea.setFont(pacmanGameFrame.Butterbelly);

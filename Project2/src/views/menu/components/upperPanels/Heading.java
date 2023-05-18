@@ -17,7 +17,7 @@ public class Heading extends JPanel {
 
         this.setPreferredSize(new Dimension(width, height));
         this.setBackground(Color.BLACK);
-        this.setMinimumSize(new Dimension(330, 180));
+        this.setMinimumSize(new Dimension(330, 130));
 
     }
 
