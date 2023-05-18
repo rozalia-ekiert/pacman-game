@@ -193,6 +193,8 @@ public class Enemy extends Character implements MapTile {
                 }
                 this.valueUnderWhereIsStanding = 67;
             }
+
+            //todo niemoga sie generowac w pudelku
         }
     }
 

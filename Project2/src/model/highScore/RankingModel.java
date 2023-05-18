@@ -11,8 +11,6 @@ public class RankingModel extends AbstractListModel implements Serializable {
 
     public static final String rankingFile = "Project2/ranking.txt";
     public List<RankingEntry> entries;
-    private final String[] columnNames = {"POSITION", "NICKNAME", "SCORE", "TIME"};
-
     public RankingModel() {
         entries = new ArrayList<>();
     }
@@ -60,7 +58,7 @@ public class RankingModel extends AbstractListModel implements Serializable {
     }
 
     public void loadFromFile() {
-        FileReader fr = null;
+        FileReader fr;
         try {
             fr = new FileReader(rankingFile);
             BufferedReader br = new BufferedReader(fr);

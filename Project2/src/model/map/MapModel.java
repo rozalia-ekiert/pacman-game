@@ -26,7 +26,7 @@ public class MapModel extends AbstractTableModel {
 
     public static boolean isThisNewMap = false;
 
-    public static Timer messageTimer = new Timer(3000, e -> {
+    public static Timer messageTimer = new Timer(4000, e -> {
         Comments.message.setText(Comments.messageDefault);
     });
 

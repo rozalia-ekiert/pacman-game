@@ -8,6 +8,7 @@ import model.characters.components.MapTile;
 import model.game.Bonuses;
 import model.game.GameThread;
 import model.highScore.RankingEntry;
+import model.highScore.RankingModel;
 import model.map.MapGenerator;
 import model.map.MapModel;
 import views.game.Game;
@@ -19,6 +20,7 @@ import views.menu.components.middlePanels.HighScores;
 import views.menu.components.middlePanels.NewGame;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -132,7 +134,13 @@ public class Player extends Character implements MapTile {
 
         RankingEntry entry = new RankingEntry(0, nickname, yourFinalScore, finalTime);
         HighScores.rankingModel.addEntryWithSorting(entry);
+
         HighScores.rankingModel.saveToFile();
+        HighScores.ranking = null;
+        HighScores.rankingModel = null;
+        HighScores.rankingModel = new RankingModel();
+        HighScores.rankingModel.loadFromFile();
+        HighScores.ranking = new JList(HighScores.rankingModel);
 
         GameThread.isReady.set(false);
         CurrentStats.livesNumber = 5;
@@ -226,6 +234,9 @@ public class Player extends Character implements MapTile {
 
         if (mapModel.getValueAt(x, y).equals(60)) {
             this.bonusState = Bonuses.LEAF;
+
+            Comments.message.setText(Comments.messageLeafBonus);
+            messageTimer.start();
             return true;
         }
         if (mapModel.getValueAt(x, y).equals(61)) {
